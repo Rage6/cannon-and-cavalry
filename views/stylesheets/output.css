@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: green;
+  background-size: cover; }
+
+div.title {
+  text-align: center; }
+
+#mainTitle {
+  margin: 20px 10% 40px 10%;
+  font-size: 4.5em;
+  background-color: lightgrey;
+  -webkit-width: 80%;
+  -moz-width: 80%;
+  -ms-width: 80%;
+  width: 80%; }
+
+#terrain {
+  margin: 50px auto;
+  padding: 20px;
+  background-color: grey;
+  -webkit-width: 700px;
+  -moz-width: 700px;
+  -ms-width: 700px;
+  width: 700px;
+  -webkit-height: 700px;
+  -moz-height: 700px;
+  -ms-height: 700px;
+  height: 700px; }
+
+#ground {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  background-color: black;
+  -webkit-width: 100%;
+  -moz-width: 100%;
+  -ms-width: 100%;
+  width: 100%;
+  -webkit-height: 100%;
+  -moz-height: 100%;
+  -ms-height: 100%;
+  height: 100%; }
+
+.gridSquare {
+  margin: auto;
+  border: solid black 1px;
+  text-align: center;
+  font-size: 2em;
+  background-color: lightgreen;
+  -webkit-width: 24%;
+  -moz-width: 24%;
+  -ms-width: 24%;
+  width: 24%;
+  -webkit-height: 24%;
+  -moz-height: 24%;
+  -ms-height: 24%;
+  height: 24%; }
+
+#allOptions {
+  margin: 50px auto;
+  background-color: grey;
+  -webkit-width: 90%;
+  -moz-width: 90%;
+  -ms-width: 90%;
+  width: 90%; }
+  #allOptions .turnBoxes {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    -webkit-width: 90%;
+    -moz-width: 90%;
+    -ms-width: 90%;
+    width: 90%; }
+    #allOptions .turnBoxes .indivBox {
+      margin: 20px 0;
+      background-color: white;
+      -webkit-width: 48%;
+      -moz-width: 48%;
+      -ms-width: 48%;
+      width: 48%;
+      -webkit-height: 360px;
+      -moz-height: 360px;
+      -ms-height: 360px;
+      height: 360px; }
+      #allOptions .turnBoxes .indivBox .title {
+        margin-bottom: 20px;
+        display: block;
+        font-size: 3em;
+        text-align: center; }
+      #allOptions .turnBoxes .indivBox #attackDefendBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; }
+        #allOptions .turnBoxes .indivBox #attackDefendBox .attackDefendButton {
+          border: 2px solid black;
+          font-size: 2.5em;
+          text-align: center;
+          -webkit-width: 45%;
+          -moz-width: 45%;
+          -ms-width: 45%;
+          width: 45%; }
+        #allOptions .turnBoxes .indivBox #attackDefendBox #attackButton {
+          color: black;
+          background-color: none; }
+        #allOptions .turnBoxes .indivBox #attackDefendBox #defendButton {
+          color: black;
+          background-color: none; }
+      #allOptions .turnBoxes .indivBox #unitName {
+        margin: 20px 0;
+        font-size: 2em;
+        text-align: center; }
+      #allOptions .turnBoxes .indivBox #healthAndArrowBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; }
+        #allOptions .turnBoxes .indivBox #healthAndArrowBox #health {
+          border: 2px solid green;
+          font-size: 2.2em;
+          text-align: center;
+          -webkit-width: 48%;
+          -moz-width: 48%;
+          -ms-width: 48%;
+          width: 48%; }
+        #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows {
+          display: flex;
+          flex-wrap: wrap;
+          -webkit-width: 48%;
+          -moz-width: 48%;
+          -ms-width: 48%;
+          width: 48%; }
+          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows .arrowBox {
+            font-size: 2.5em;
+            text-align: center;
+            -webkit-width: 30%;
+            -moz-width: 30%;
+            -ms-width: 30%;
+            width: 30%; }
+          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #north {
+            border: 1px solid black;
+            color: none; }
+          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #east {
+            border: 1px solid black; }
+          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #south {
+            border: 1px solid black; }
+          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #west {
+            border: 1px solid black; }
+      #allOptions .turnBoxes .indivBox .allUnitColumns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; }
+        #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn {
+          margin: 0;
+          font-size: 2.5em;
+          text-align: center;
+          -webkit-width: 30%;
+          -moz-width: 30%;
+          -ms-width: 30%;
+          width: 30%; }
+      #allOptions .turnBoxes .indivBox #teamOne {
+        background-color: lightblue; }
+      #allOptions .turnBoxes .indivBox #teamTwo {
+        background-color: red; }
+
+/*# sourceMappingURL=output.css.map */

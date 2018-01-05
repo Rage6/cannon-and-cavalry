@@ -1,0 +1,194 @@
+// VARIABLES
+
+
+
+// MIXINS
+
+@mixin divWidth($width) {
+  -webkit-width: $width;
+  -moz-width: $width;
+  -ms-width: $width;
+  width: $width;
+}
+
+@mixin divHeight($height) {
+  -webkit-height: $height;
+  -moz-height: $height;
+  -ms-height: $height;
+  height: $height;
+}
+
+// MAIN CODE
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: green;
+  background-size: cover;
+}
+
+div.title {
+  text-align: center;
+}
+
+#mainTitle {
+  margin: 20px 10% 40px 10%;
+  font-size: 4.5em;
+  background-color: lightgrey;
+  @include divWidth(80%);
+}
+
+#terrain {
+  margin: 50px auto;
+  padding: 20px;
+  background-color: grey;
+  @include divWidth(700px);
+  @include divHeight(700px);
+}
+
+#ground {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  background-color: black;
+  @include divWidth(100%);
+  @include divHeight(100%);
+}
+
+.gridSquare {
+  margin: auto;
+  border: solid black 1px;
+  text-align: center;
+  font-size: 2em;
+  background-color: lightgreen;
+  @include divWidth(24%);
+  @include divHeight(24%);
+}
+
+#allOptions {
+  margin: 50px auto;
+  background-color: grey;
+  @include divWidth(90%);
+
+  .turnBoxes {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    @include divWidth(90%);
+
+    .indivBox {
+      margin: 20px 0;
+      background-color: white;
+      @include divWidth(48%);
+      @include divHeight(360px);
+
+      .title {
+        margin-bottom: 20px;
+        display: block;
+        font-size: 3em;
+        text-align: center;
+      }
+
+      #attackDefendBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        .attackDefendButton {
+          border: 2px solid black;
+          font-size: 2.5em;
+          text-align: center;
+          @include divWidth(45%);
+        }
+
+        #attackButton {
+          color: black;
+          background-color: none;
+        }
+
+        #defendButton {
+          color: black;
+          background-color: none;
+        }
+
+      }
+
+      #unitName {
+        margin: 20px 0;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      #healthAndArrowBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        #health {
+          border: 2px solid green;
+          font-size: 2.2em;
+          text-align: center;
+          @include divWidth(48%);
+        }
+
+        #arrows {
+          display: flex;
+          flex-wrap: wrap;
+          @include divWidth(48%);
+
+          .arrowBox {
+            font-size: 2.5em;
+            text-align: center;
+            @include divWidth(30%);
+          }
+
+          #north {
+            border: 1px solid black;
+            color: none;
+          }
+
+          #east {
+            border: 1px solid black;
+          }
+
+          #south {
+            border: 1px solid black;
+          }
+
+          #west {
+            border: 1px solid black;
+          }
+
+        }
+
+      }
+
+      .allUnitColumns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        .unitColumn {
+          margin: 0;
+          font-size: 2.5em;
+          text-align: center;
+          @include divWidth(30%);
+        }
+      }
+
+      #unitBox {}
+
+      #repBox {}
+
+      #teamOne {
+        background-color: lightblue;
+      }
+
+      #teamTwo {
+        background-color: red;
+      }
+    }
+  }
+}
