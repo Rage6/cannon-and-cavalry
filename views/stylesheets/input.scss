@@ -64,6 +64,39 @@ div.title {
   background-color: lightgreen;
   @include divWidth(24%);
   @include divHeight(24%);
+
+  .topLine {
+    margin: 0;
+    border: 1px solid red;
+    height: 20%;
+  }
+
+  .centerLine {
+    margin: 0;
+    border: 1px solid blue;
+    display: inline-block;
+    height: 60%;
+
+    .centerLeft {
+      
+    }
+
+    .centerMiddle {
+
+    }
+
+    .centerRight {
+
+    }
+
+  }
+
+  .bottomLine {
+    margin: 0;
+    border: 1px solid yellow;
+    height: 20%;
+  }
+
 }
 
 #allOptions {

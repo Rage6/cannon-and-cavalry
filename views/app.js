@@ -8,150 +8,267 @@ $(()=>{
       yValue: 1,
       terrain: null,
       elevation: null,
-      bluePresent: false,
-      redPresent: false
+      bluePresent: [],
+      redPresent: []
     },
     // rowOneColumnTwo
     {
       xValue: 2,
       yValue: 1,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowOneColumnThree
     {
       xValue: 3,
       yValue: 1,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowOneColumnFour
     {
       xValue: 4,
       yValue: 1,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowTwoColumnOne
     {
       xValue: 1,
       yValue: 2,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowTwoColumnTwo
     {
       xValue: 2,
       yValue: 2,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowTwoColumnThree
     {
       xValue: 3,
       yValue: 2,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowTwoColumnFour
     {
       xValue: 4,
       yValue: 2,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowThreeColumnOne
     {
       xValue: 1,
       yValue: 3,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowThreeColumnTwo
     {
       xValue: 2,
       yValue: 3,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowThreeColumnThree
     {
       xValue: 3,
       yValue: 3,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowThreeColumnFour
     {
       xValue: 4,
       yValue: 3,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowFourColumnOne
     {
       xValue: 1,
       yValue: 4,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowFourColumnTwo
     {
       xValue: 2,
       yValue: 4,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowFourColumnThree
     {
       xValue: 3,
       yValue: 4,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     },
     // rowFourColumnFour
     {
       xValue: 4,
       yValue: 4,
       terrain: null,
-      elevation: null
+      elevation: null,
+      bluePresent: [],
+      redPresent: []
     }
   ]
 
   // Here are the starting values of the blueTeam
   const blueTeam = {
-    teamName: "Blue",
+    playerName: "Player 1",
+    teamName: "blue",
     infantry: [
       {
         name: "1-5 BN",
         type: "IN",
+        active: true,
         health: 10,
         attack: false,
-        direction: "north",
-        location:[1,1]
+        direction: "south",
+        xValue: 1,
+        yValue: 1
       }
     ],
     cavalry: [
       {
         name: "2ND RGT",
         type: "CAV",
+        active: true,
         health: 10,
         attack: false,
-        direction: null,
-        location:[2,1]
+        direction: "south",
+        xValue: 2,
+        yValue: 1
       }
     ],
     artillery: [
       {
         name: "2-6 BN",
         type: "AR",
+        active: true,
         health: 10,
         attack: false,
-        direction: null,
-        location:[3,1]
+        direction: "south",
+        xValue: 3,
+        yValue: 1
       }
     ]
   };
+
+  // Here are the starting values of the blueTeam
+  const redTeam = {
+    playerName: "Player 2",
+    teamName: "red",
+    infantry: [
+      {
+        name: "1-5 BN",
+        type: "IN",
+        active: true,
+        health: 10,
+        attack: false,
+        direction: "north",
+        xValue: 1,
+        yValue: 4
+      }
+    ],
+    cavalry: [
+      {
+        name: "2ND RGT",
+        type: "CAV",
+        active: true,
+        health: 10,
+        attack: false,
+        direction: "north",
+        xValue: 2,
+        yValue: 4
+      }
+    ],
+    artillery: [
+      {
+        name: "2-6 BN",
+        type: "AR",
+        active: true,
+        health: 10,
+        attack: false,
+        direction: "north",
+        xValue: 3,
+        yValue: 4
+      }
+    ]
+  };
+
+  // This will compare a single grid to a all of a team's units IOT see if any of those units should be added to the grid's bluePresent or redPresent arrays
+  const ifTeamPresent = (gridNumber,oneTeam) => {
+    if (oneTeam == blueTeam) {
+      for (var i = 0; i < blueTeam.infantry.length; i++) {
+        if (allGrids[gridNumber].xValue == blueTeam.infantry[i].xValue && allGrids[gridNumber].yValue == blueTeam.infantry[i].yValue) {
+          allGrids[gridNumber].bluePresent.push(blueTeam.infantry[i]);
+        } else if (allGrids[gridNumber].xValue == blueTeam.cavalry[i].xValue && allGrids[gridNumber].yValue == blueTeam.cavalry[i].yValue) {
+          allGrids[gridNumber].bluePresent.push(blueTeam.cavalry[i]);
+        } else if (allGrids[gridNumber].xValue == blueTeam.artillery[i].xValue && allGrids[gridNumber].yValue == blueTeam.artillery[i].yValue) {
+          allGrids[gridNumber].bluePresent.push(blueTeam.artillery[i]);
+        };
+        //add something here that will REMOVE that unit if moved OUT of that grid
+      }
+    } else if (oneTeam == redTeam) {
+      for (var i = 0; i < redTeam.infantry.length; i++) {
+        if (allGrids[gridNumber].xValue == redTeam.infantry[i].xValue && allGrids[gridNumber].yValue == redTeam.infantry[i].yValue) {
+          allGrids[gridNumber].redPresent.push(redTeam.infantry[i]);
+        } else if (allGrids[gridNumber].xValue == redTeam.cavalry[i].xValue && allGrids[gridNumber].yValue == redTeam.cavalry[i].yValue) {
+          allGrids[gridNumber].redPresent.push(redTeam.cavalry[i]);
+        } else if (allGrids[gridNumber].xValue == redTeam.artillery[i].xValue && allGrids[gridNumber].yValue == redTeam.artillery[i].yValue) {
+          allGrids[gridNumber].redPresent.push(redTeam.artillery[i]);
+        };
+        //add something here that will REMOVE that unit if moved OUT of that grid
+      }
+    }
+  };
+
+  // Now that one grid can recieve an present units, this function can carry that out for ALL of the grids
+  const unitsInAllGrids = () =>{
+    for (var i = 0; i < allGrids.length; i++) {
+      ifTeamPresent(i,blueTeam);
+      ifTeamPresent(i,redTeam);
+    }
+  };
+
+  unitsInAllGrids();
+  console.log(allGrids)
 
   // The blueTeam starts by default
   const currentPlayer = blueTeam;
@@ -302,28 +419,10 @@ $(()=>{
   const makeAllGrids = (howMany) => {
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
-      console.log(allGrids[i]);
+      // console.log(allGrids[i]);
     }
   };
   makeAllGrids(16);
-
-  // These display the terrain on the grid squares
-  // $('#x1y1').text(allGrids[0].terrain);
-  // $('#x2y1').text(allGrids[1].terrain);
-  // $('#x3y1').text(allGrids[2].terrain);
-  // $('#x4y1').text(allGrids[3].terrain);
-  // $('#x1y2').text(allGrids[4].terrain);
-  // $('#x2y2').text(allGrids[5].terrain);
-  // $('#x3y2').text(allGrids[6].terrain);
-  // $('#x4y2').text(allGrids[7].terrain);
-  // $('#x1y3').text(allGrids[8].terrain);
-  // $('#x2y3').text(allGrids[9].terrain);
-  // $('#x3y3').text(allGrids[10].terrain);
-  // $('#x4y3').text(allGrids[11].terrain);
-  // $('#x1y4').text(allGrids[12].terrain);
-  // $('#x2y4').text(allGrids[13].terrain);
-  // $('#x3y4').text(allGrids[14].terrain);
-  // $('#x4y4').text(allGrids[15].terrain);
 
   // These display the terrain on the grid squares
   // $('#x1y1').text(allGrids[0].elevation);
