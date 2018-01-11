@@ -69,8 +69,7 @@ div.title {
     height: 60%; }
   .gridSquare .bottomLine {
     margin: 0;
-    border: 1px solid yellow;
-    height: 20%; }
+    border: 1px solid yellow; }
 
 #allOptions {
   margin: 50px auto;

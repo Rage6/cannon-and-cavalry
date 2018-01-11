@@ -60,20 +60,16 @@ div.title {
   height: 24%; }
   .gridSquare .topLine {
     margin: 0;
+    border: 1px solid red;
     height: 20%; }
   .gridSquare .centerLine {
     margin: 0;
-    display: flex;
+    border: 1px solid blue;
+    display: inline-block;
     height: 60%; }
-    .gridSquare .centerLine .centerLeft {
-      width: 20%; }
-    .gridSquare .centerLine .centerMiddle {
-      width: 60%;
-      background-size: 100% 100%; }
-    .gridSquare .centerLine .centerRight {
-      width: 20%; }
   .gridSquare .bottomLine {
-    margin: 0; }
+    margin: 0;
+    border: 1px solid yellow; }
 
 #allOptions {
   margin: 50px auto;
@@ -180,4 +176,4 @@ div.title {
       #allOptions .turnBoxes .indivBox #teamTwo {
         background-color: red; }
 
-/*# sourceMappingURL=output.css.map */
+/*# sourceMappingURL=input.css.map */

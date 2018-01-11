@@ -7,7 +7,7 @@ $(()=>{
       xValue: 1,
       yValue: 1,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -16,7 +16,7 @@ $(()=>{
       xValue: 2,
       yValue: 1,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -25,7 +25,7 @@ $(()=>{
       xValue: 3,
       yValue: 1,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -34,7 +34,7 @@ $(()=>{
       xValue: 4,
       yValue: 1,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -43,7 +43,7 @@ $(()=>{
       xValue: 1,
       yValue: 2,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -52,7 +52,7 @@ $(()=>{
       xValue: 2,
       yValue: 2,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -61,7 +61,7 @@ $(()=>{
       xValue: 3,
       yValue: 2,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -70,7 +70,7 @@ $(()=>{
       xValue: 4,
       yValue: 2,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -79,7 +79,7 @@ $(()=>{
       xValue: 1,
       yValue: 3,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -88,7 +88,7 @@ $(()=>{
       xValue: 2,
       yValue: 3,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -97,7 +97,7 @@ $(()=>{
       xValue: 3,
       yValue: 3,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -106,7 +106,7 @@ $(()=>{
       xValue: 4,
       yValue: 3,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -115,7 +115,7 @@ $(()=>{
       xValue: 1,
       yValue: 4,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -124,7 +124,7 @@ $(()=>{
       xValue: 2,
       yValue: 4,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -133,7 +133,7 @@ $(()=>{
       xValue: 3,
       yValue: 4,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     },
@@ -142,7 +142,7 @@ $(()=>{
       xValue: 4,
       yValue: 4,
       terrain: null,
-      elevation: null,
+      cover: null,
       bluePresent: [],
       redPresent: []
     }
@@ -389,30 +389,56 @@ $(()=>{
   // To move a unit
 
 
-  // This function will generate random values for a grid
+  // This function will generate random values for a grid and give it the correct CSS settings
   const makeOneGrid = (gridNumber) => {
     const pickTerrain = () => {
       const pickValue = Math.random();
-      if (pickValue < 0.4) {
+      if (pickValue < 0.3) {
         allGrids[gridNumber].terrain = "woods"
+      } else if (pickValue >= 0.3 && pickValue < 0.4) {
+        allGrids[gridNumber].terrain = "hill"
       } else if (pickValue >= 0.4 && pickValue < 0.5) {
         allGrids[gridNumber].terrain = "water"
       } else {
         allGrids[gridNumber].terrain = "field"
       }
-    }
+    };
     pickTerrain();
-    const pickElevation = () => {
+    const pickCover = () => {
       const pickValue = Math.random();
       if (pickValue < 0.2) {
-        allGrids[gridNumber].elevation = "high ground"
+        allGrids[gridNumber].cover = "heavy"
       } else if (pickValue >= 0.2 && pickValue < 0.8) {
-        allGrids[gridNumber].elevation = "flat ground"
+        allGrids[gridNumber].cover = "light"
       } else {
-        allGrids[gridNumber].elevation = "low ground"
+        allGrids[gridNumber].cover = "none"
       }
-    }
-    pickElevation();
+    };
+    pickCover();
+    var gridID = "#x" + allGrids[gridNumber].xValue + "y" + allGrids[gridNumber].yValue;
+    const coverColor = () => {
+      if (allGrids[gridNumber].cover == "heavy") {
+        $(gridID).css('background-color','green')
+      } else if (allGrids[gridNumber].cover == "light") {
+        $(gridID).css('background-color','lightgreen')
+      } else if (allGrids[gridNumber].cover == "none") {
+        $(gridID).css('background-color','orange')
+      } else {
+        console.log("coverColor error")
+      }
+    };
+    coverColor();
+    const terrainImage = () => {
+      var gridIDcenter = gridID + "_center";
+      if (allGrids[gridNumber].terrain == "woods") {
+        $(gridIDcenter).css('background-image','url("stylesheets/images/forest.png")')
+      } else if (allGrids[gridNumber].terrain == "hill") {
+        $(gridIDcenter).css('background-image','url("stylesheets/images/hill_noBackground.png")')
+      } else if (allGrids[gridNumber].terrain == "water") {
+        $(gridIDcenter).css('background-image','url("stylesheets/images/pond_noBackground.png")')
+      }
+    };
+    terrainImage();
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
@@ -423,23 +449,5 @@ $(()=>{
     }
   };
   makeAllGrids(16);
-
-  // These display the terrain on the grid squares
-  // $('#x1y1').text(allGrids[0].elevation);
-  // $('#x2y1').text(allGrids[1].elevation);
-  // $('#x3y1').text(allGrids[2].elevation);
-  // $('#x4y1').text(allGrids[3].elevation);
-  // $('#x1y2').text(allGrids[4].elevation);
-  // $('#x2y2').text(allGrids[5].elevation);
-  // $('#x3y2').text(allGrids[6].elevation);
-  // $('#x4y2').text(allGrids[7].elevation);
-  // $('#x1y3').text(allGrids[8].elevation);
-  // $('#x2y3').text(allGrids[9].elevation);
-  // $('#x3y3').text(allGrids[10].elevation);
-  // $('#x4y3').text(allGrids[11].elevation);
-  // $('#x1y4').text(allGrids[12].elevation);
-  // $('#x2y4').text(allGrids[13].elevation);
-  // $('#x3y4').text(allGrids[14].elevation);
-  // $('#x4y4').text(allGrids[15].elevation);
 
 })

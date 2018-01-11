@@ -67,34 +67,35 @@ div.title {
 
   .topLine {
     margin: 0;
-    border: 1px solid red;
+    // border: 1px solid red;
     height: 20%;
   }
 
   .centerLine {
     margin: 0;
-    border: 1px solid blue;
-    display: inline-block;
+    // border: 1px solid blue;
+    display: flex;
     height: 60%;
 
     .centerLeft {
-      
+      width: 20%;
     }
 
     .centerMiddle {
-
+      // border: 1px solid red;
+      width: 60%;
+      background-size: 100% 100%;
     }
 
     .centerRight {
-
+      width: 20%;
     }
 
   }
 
   .bottomLine {
     margin: 0;
-    border: 1px solid yellow;
-    height: 20%;
+    // border: 1px solid yellow;
   }
 
 }
