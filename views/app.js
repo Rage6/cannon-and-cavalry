@@ -439,6 +439,59 @@ $(()=>{
       }
     };
     terrainImage();
+    const showGridUnits = (oneTeam) => {
+      var gridIDnorth = gridID + "_north";
+      var gridIDeast = gridID + "_east";
+      var gridIDsouth = gridID + "_south";
+      var gridIDwest = gridID + "_west";
+      for (var i = 0; i < oneTeam.infantry.length; i++) {
+        if (oneTeam.infantry[i].xValue == allGrids[gridNumber].xValue && oneTeam.infantry[i].yValue == allGrids[gridNumber].yValue) {
+          if (oneTeam.infantry[i].direction == "north") {
+            $(gridIDnorth).text("IN");
+          } else if (oneTeam.infantry[i].direction == "east") {
+            $(gridIDeast).text("IN");
+          } else if (oneTeam.infantry[i].direction == "south") {
+            $(gridIDsouth).text("IN");
+          } else if (oneTeam.infantry[i].direction == "west") {
+            $(gridIDwest).text("IN");
+          } else {
+            console.log("No direction")
+          }
+        }
+      };
+      for (var i = 0; i < oneTeam.cavalry.length; i++) {
+        if (oneTeam.cavalry[i].xValue == allGrids[gridNumber].xValue && oneTeam.cavalry[i].yValue == allGrids[gridNumber].yValue) {
+          if (oneTeam.cavalry[i].direction == "north") {
+            $(gridIDnorth).text("CAV");
+          } else if (oneTeam.cavalry[i].direction == "east") {
+            $(gridIDeast).text("CAV");
+          } else if (oneTeam.cavalry[i].direction == "south") {
+            $(gridIDsouth).text("CAV");
+          } else if (oneTeam.cavalry[i].direction == "west") {
+            $(gridIDwest).text("CAV");
+          } else {
+            console.log("No direction")
+          }
+        }
+      };
+      for (var i = 0; i < oneTeam.artillery.length; i++) {
+        if (oneTeam.artillery[i].xValue == allGrids[gridNumber].xValue && oneTeam.artillery[i].yValue == allGrids[gridNumber].yValue) {
+          if (oneTeam.artillery[i].direction == "north") {
+            $(gridIDnorth).text("AR");
+          } else if (oneTeam.artillery[i].direction == "east") {
+            $(gridIDeast).text("AR");
+          } else if (oneTeam.artillery[i].direction == "south") {
+            $(gridIDsouth).text("AR");
+          } else if (oneTeam.artillery[i].direction == "west") {
+            $(gridIDwest).text("AR");
+          } else {
+            console.log("No direction")
+          }
+        }
+      };
+    };
+    showGridUnits(blueTeam);
+    showGridUnits(redTeam);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
