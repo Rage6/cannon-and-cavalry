@@ -1,5 +1,5 @@
 $(()=>{
-
+  console.log("app.js is functioning.")
   // This array contains all of the grids and their values
   const gridNumber = 16;
 
@@ -570,13 +570,7 @@ $(()=>{
   $("#blueIn4").click(blueIn0Select);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
-  const showGridUnits = (oneTeam,gridNumber) => {
-    // var gridID = "#x" + allGrids[gridNumber].xValue + "y" + allGrids[gridNumber].yValue;
-    // var gridIDnorth = gridID + "_north";
-    // var gridIDeast = gridID + "_east";
-    // var gridIDsouth = gridID + "_south";
-    // var gridIDwest = gridID + "_west";
-    // var gridIDcenter = gridID + "_center";
+  const showGridUnits = (oneTeam) => {
     for (var i = 0; i < gridNumber; i++) {
       var iLoop = i;
       var gridID = "#x" + allGrids[iLoop].xValue + "y" + allGrids[iLoop].yValue;
@@ -689,8 +683,8 @@ $(()=>{
       }
     };
     terrainImage();
-    showGridUnits(blueTeam,gridNumber);
-    showGridUnits(redTeam,gridNumber);
+    showGridUnits(blueTeam);
+    showGridUnits(redTeam);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
