@@ -77,6 +77,7 @@ div.title {
 
 #allOptions {
   margin: 50px auto;
+  padding-bottom: 20px;
   background-color: grey;
   -webkit-width: 90%;
   -moz-width: 90%;
@@ -155,6 +156,10 @@ div.title {
             -moz-width: 30%;
             -ms-width: 30%;
             width: 30%; }
+            #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows .arrowBox img {
+              margin-top: 10%;
+              height: 80%;
+              width: 80%; }
           #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #north {
             border: 1px solid black; }
           #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #east {
@@ -179,5 +184,13 @@ div.title {
         background-color: lightblue; }
       #allOptions .turnBoxes .indivBox #teamTwo {
         background-color: red; }
+  #allOptions #ordersButton {
+    margin: 0px auto;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    background-color: orange;
+    width: 50%; }
 
 /*# sourceMappingURL=output.css.map */
