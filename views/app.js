@@ -1,8 +1,12 @@
 $(()=>{
-  console.log("app.js is functioning.")
-  // This array contains all of the grids and their values
-  const gridNumber = 16;
+  console.log("app.js is functioning.");
 
+  const totalGrids = 16;
+  const maxXvalue = 4;
+  const maxYvalue = 4;
+  var errorPresent = [];
+
+  // This array contains all of the grids and their values
   const allGrids = [
     // rowOneColumnOne
     {
@@ -149,10 +153,6 @@ $(()=>{
       redPresent: []
     }
   ]
-
-  const maxXvalue = 4;
-  const maxYvalue = 4;
-  var errorPresent = [];
 
   // Here are the starting values of the blueTeam
   const blueTeam = {
@@ -510,7 +510,7 @@ $(()=>{
         changeCurrentValues();
       };
       // console.log(currentPlayer);
-      showGridUnits(currentPlayer,gridNumber);
+      showGridUnits(currentPlayer,totalGrids);
       currentPlayer = redTeam;
       console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     } else {
@@ -571,7 +571,7 @@ $(()=>{
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
   const showGridUnits = (oneTeam) => {
-    for (var i = 0; i < gridNumber; i++) {
+    for (var i = 0; i < totalGrids; i++) {
       var iLoop = i;
       var gridID = "#x" + allGrids[iLoop].xValue + "y" + allGrids[iLoop].yValue;
       var gridIDnorth = gridID + "_north";
@@ -635,6 +635,7 @@ $(()=>{
 
   // This function will generate random values for a grid and give it the correct CSS settings
   const makeOneGrid = (gridNumber) => {
+    console.log("makeOneGrid function");
     const pickTerrain = () => {
       const pickValue = Math.random();
       if (pickValue < 0.3) {
@@ -689,12 +690,12 @@ $(()=>{
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
   const makeAllGrids = (howMany) => {
-    console.log("makeAllGrids");
+    console.log("makeAllGrids function");
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
       // console.log(allGrids[i]);
     }
   };
-  makeAllGrids(gridNumber);
+  makeAllGrids(totalGrids);
 
 })
