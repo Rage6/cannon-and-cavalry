@@ -1,5 +1,4 @@
 $(()=>{
-  console.log("app.js is functioning.");
 
   const totalGrids = 16;
   const maxXvalue = 4;
@@ -510,7 +509,7 @@ $(()=>{
         changeCurrentValues();
       };
       // console.log(currentPlayer);
-      showGridUnits(currentPlayer,totalGrids);
+      showGridUnits(currentPlayer);
       currentPlayer = redTeam;
       console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     } else {
@@ -647,6 +646,7 @@ $(()=>{
       } else {
         allGrids[gridNumber].terrain = "field"
       }
+      console.log("Terrain: " + allGrids[gridNumber].terrain)
     };
     pickTerrain();
     const pickCover = () => {
@@ -693,7 +693,7 @@ $(()=>{
     console.log("makeAllGrids function");
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
-      // console.log(allGrids[i]);
+      console.log(allGrids[i]);
     }
   };
   makeAllGrids(totalGrids);
