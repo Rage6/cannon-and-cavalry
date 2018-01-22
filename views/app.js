@@ -1,5 +1,7 @@
 $(()=>{
 
+  console.log("app.js is functioning.")
+
   const totalGrids = 16;
   const maxXvalue = 4;
   const maxYvalue = 4;
@@ -570,16 +572,20 @@ $(()=>{
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
   const showGridUnits = (oneTeam) => {
-    for (var i = 0; i < totalGrids; i++) {
-      var iLoop = i;
-      var gridID = "#x" + allGrids[iLoop].xValue + "y" + allGrids[iLoop].yValue;
+    console.log("Start showGridUnits function");
+    for (var x = 0; x < totalGrids; x++) {
+      console.log("1st for loop: " + x);
+      var currentGrid = x;
+      console.log("currentGrid: " + currentGrid);
+      var gridID = "#x" + allGrids[currentGrid].xValue + "y" + allGrids[currentGrid].yValue;
       var gridIDnorth = gridID + "_north";
       var gridIDeast = gridID + "_east";
       var gridIDsouth = gridID + "_south";
       var gridIDwest = gridID + "_west";
       var gridIDcenter = gridID + "_center";
       for (var i = 0; i < oneTeam.infantry.length; i++) {
-        if (oneTeam.infantry[i].xValue == allGrids[iLoop].xValue && oneTeam.infantry[i].yValue == allGrids[iLoop].yValue) {
+        console.log("infantry for loop: " + i);
+        if (oneTeam.infantry[i].xValue == allGrids[currentGrid].xValue && oneTeam.infantry[i].yValue == allGrids[currentGrid].yValue) {
           if (oneTeam.infantry[i].direction == "north") {
             $(gridIDnorth).text("IN");
           } else if (oneTeam.infantry[i].direction == "east") {
@@ -596,7 +602,8 @@ $(()=>{
         }
       };
       for (var i = 0; i < oneTeam.cavalry.length; i++) {
-        if (oneTeam.cavalry[i].xValue == allGrids[iLoop].xValue && oneTeam.cavalry[i].yValue == allGrids[iLoop].yValue) {
+        console.log("cavalry for loop: " + i);
+        if (oneTeam.cavalry[i].xValue == allGrids[currentGrid].xValue && oneTeam.cavalry[i].yValue == allGrids[currentGrid].yValue) {
           if (oneTeam.cavalry[i].direction == "north") {
             $(gridIDnorth).text("CAV");
           } else if (oneTeam.cavalry[i].direction == "east") {
@@ -613,7 +620,8 @@ $(()=>{
         }
       };
       for (var i = 0; i < oneTeam.artillery.length; i++) {
-        if (oneTeam.artillery[i].xValue == allGrids[iLoop].xValue && oneTeam.artillery[i].yValue == allGrids[iLoop].yValue) {
+        console.log("artillery for loop: " + i);
+        if (oneTeam.artillery[i].xValue == allGrids[currentGrid].xValue && oneTeam.artillery[i].yValue == allGrids[currentGrid].yValue) {
           if (oneTeam.artillery[i].direction == "north") {
             $(gridIDnorth).text("AR");
           } else if (oneTeam.artillery[i].direction == "east") {
@@ -629,12 +637,13 @@ $(()=>{
           }
         }
       };
-    }
+    };
+    console.log("End showGridUnits function");
   };
 
   // This function will generate random values for a grid and give it the correct CSS settings
   const makeOneGrid = (gridNumber) => {
-    console.log("makeOneGrid function");
+    console.log("start makeOneGrid function: " + gridNumber);
     const pickTerrain = () => {
       const pickValue = Math.random();
       if (pickValue < 0.3) {
@@ -643,10 +652,12 @@ $(()=>{
         allGrids[gridNumber].terrain = "hill"
       } else if (pickValue >= 0.4 && pickValue < 0.5) {
         allGrids[gridNumber].terrain = "water"
-      } else {
+      } else if (pickValue >= 0.5 && pickValue < 1) {
         allGrids[gridNumber].terrain = "field"
-      }
-      console.log("Terrain: " + allGrids[gridNumber].terrain)
+      } else {
+        console.log("Error in pickTerrain's pickValue")
+      };
+      console.log("pickTerrain is functioning.");
     };
     pickTerrain();
     const pickCover = () => {
@@ -655,9 +666,12 @@ $(()=>{
         allGrids[gridNumber].cover = "heavy"
       } else if (pickValue >= 0.2 && pickValue < 0.8) {
         allGrids[gridNumber].cover = "light"
-      } else {
+      } else if (pickValue >= 0.8 && pickValue < 1) {
         allGrids[gridNumber].cover = "none"
-      }
+      } else {
+        console.log("Error in pickCover's pickValue")
+      };
+      console.log("pickCover is functioning.");
     };
     pickCover();
     var gridID = "#x" + allGrids[gridNumber].xValue + "y" + allGrids[gridNumber].yValue;
@@ -670,7 +684,8 @@ $(()=>{
         $(gridID).css('background-color','orange')
       } else {
         console.log("coverColor error")
-      }
+      };
+      console.log("coverColor is functioning.");
     };
     coverColor();
     const terrainImage = () => {
@@ -681,20 +696,25 @@ $(()=>{
         $(gridIDcenter).css('background-image','url("stylesheets/images/hill_noBackground.png")')
       } else if (allGrids[gridNumber].terrain == "water") {
         $(gridIDcenter).css('background-image','url("stylesheets/images/pond_noBackground.png")')
-      }
+      } else {
+        console.log("Error in terrainImage function.")
+      };
+      console.log("terrainImage is functioning.");
     };
     terrainImage();
     showGridUnits(blueTeam);
     showGridUnits(redTeam);
+    console.log("End makeOneGrid function: " + gridNumber);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
   const makeAllGrids = (howMany) => {
-    console.log("makeAllGrids function");
+    console.log("Start makeAllGrids function");
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
       console.log(allGrids[i]);
-    }
+    };
+    console.log("End makeAllGrids function");
   };
   makeAllGrids(totalGrids);
 
