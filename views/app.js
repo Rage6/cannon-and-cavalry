@@ -5,7 +5,7 @@ $(()=>{
   const totalGrids = 16;
   const maxXvalue = 4;
   const maxYvalue = 4;
-  var errorPresent = [];
+  var errorPresent = []
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -444,21 +444,41 @@ $(()=>{
     showUnitNextDirection();
   });
 
+// To be used within issueOneOrder below, this determines the grid where the unit will be moved to. It's important because both the unit and the grid square need to know that the unit is in a new grid square.
+  const findNextStop = () => {
+    for (var a = 0; a < totalGrids; a++) {
+      // console.log(allGrids[a].xValue + ", " + allGrids[a].yValue);
+      // console.log(selectedUnit.nextXvalue + ", " + selectedUnit.nextYvalue);
+      if (selectedUnit.nextXvalue == allGrids[a].xValue && selectedUnit.nextYvalue == allGrids[a].yValue) {
+        nextGrid = allGrids[a];
+        return nextGrid
+      }
+    }
+  }
+
 // This determines a) if a unit is going to move and b) where it's new location will be
   const issueOneOrder = () => {
     if (selectedUnit.attack == true) {
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+        var nextGrid = findNextStop();
+        nextGrid.bluePresent.push(selectedUnit);
       } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
         selectedUnit.nextXvalue = selectedUnit.xValue + 1;
         selectedUnit.nextYvalue = selectedUnit.yValue;
+        var nextGrid = findNextStop();
+        nextGrid.bluePresent.push(selectedUnit);
       } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue + 1;
+        var nextGrid = findNextStop();
+        nextGrid.bluePresent.push(selectedUnit);
       } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
         selectedUnit.nextXvalue = selectedUnit.xValue - 1;
         selectedUnit.nextYvalue = selectedUnit.yValue;
+        var nextGrid = findNextStop();
+        nextGrid.bluePresent.push(selectedUnit);
       } else {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
@@ -478,7 +498,7 @@ $(()=>{
     selectedUnit.yValue = selectedUnit.nextYvalue;
     selectedUnit.nextYvalue = null;
     selectedUnit.direction = selectedUnit.nextDirection;
-    selectedUnit.nextDirection.null;
+    selectedUnit.nextDirection = null;
   };
 
   const issueAllOrders = () => {
@@ -510,7 +530,8 @@ $(()=>{
         selectedUnit = currentPlayer.artillery[i];
         changeCurrentValues();
       };
-      // console.log(currentPlayer);
+      console.log(currentPlayer);
+      // unitsInAllGrids();
       showGridUnits(currentPlayer);
       currentPlayer = redTeam;
       console.log("It is now the " + currentPlayer.teamName + " team's turn.");
@@ -520,6 +541,7 @@ $(()=>{
       };
       errorPresent = [];
     };
+    console.log(allGrids);
   };
 
   $('#ordersButton').click(issueAllOrders);
