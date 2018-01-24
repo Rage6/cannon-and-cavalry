@@ -342,7 +342,7 @@ $(()=>{
     selectedUnit.attack = true;
     $('#attackButton').css('background-color','blue').css('color','white');
     $('#defendButton').css('background-color','white').css('color','black');
-    console.log(selectedUnit);
+    console.log("Attack mode");
   });
 
   // This connects the defendButton in HTML with the selectedUnit's attack mode
@@ -350,7 +350,7 @@ $(()=>{
     selectedUnit.attack = false;
     $('#attackButton').css('background-color','white').css('color','black');
     $('#defendButton').css('background-color','red').css('color','white');
-    console.log(selectedUnit);
+    console.log("Defense mode");
   })
 
   //This function makes the arrows show the selectedUnit's NEXT direction
@@ -427,7 +427,7 @@ $(()=>{
   });
   $('#south').click( ()=> {
     selectedUnit.nextDirection = "south";
-    console.log("nextDirection: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection)
     showUnitDirection();
     showUnitNextDirection();
   });
@@ -445,10 +445,8 @@ $(()=>{
   });
 
 // To be used within issueOneOrder below, this determines the grid where the unit will be moved to. It's important because both the unit and the grid square need to know that the unit is in a new grid square.
-  const findNextStop = () => {
+  const findNextGrid = () => {
     for (var a = 0; a < totalGrids; a++) {
-      // console.log(allGrids[a].xValue + ", " + allGrids[a].yValue);
-      // console.log(selectedUnit.nextXvalue + ", " + selectedUnit.nextYvalue);
       if (selectedUnit.nextXvalue == allGrids[a].xValue && selectedUnit.nextYvalue == allGrids[a].yValue) {
         nextGrid = allGrids[a];
         return nextGrid
@@ -456,29 +454,94 @@ $(()=>{
     }
   }
 
+  // Like findCurrentGrid, this finds the old grid so that the unit can be REMOVED from it's bluePresent or redPresent
+  const findCurrentGrid = () => {
+    for (var b = 0; b < totalGrids; b++) {
+      if (selectedUnit.xValue == allGrids[b].xValue && selectedUnit.yValue == allGrids[b].yValue) {
+        currentGrid = allGrids[b];
+        return currentGrid
+      }
+    }
+  }
+
+  // After the moved unit is added to the nextGrid, this function removes it from the currentGrid.
+  const removeAbsentUnit = () =>{
+    if (currentPlayer == blueTeam) {
+      for (var c = 0; c < currentGrid.bluePresent.length; c++) {
+        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue) {
+          var removedUnit = currentGrid.bluePresent[c];
+          console.log(removedUnit.direction);
+          var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
+          // console.log(removedID);
+          if (removedUnit.direction == "north") {
+            removedIDnorth = removedID + "_north";
+            $(removedIDnorth).text("");
+          } else if (removedUnit.direction == "east") {
+            removedIDeast = removedID + "_east";
+            $(removedIDeast).text("");
+          } else if (removedUnit.direction == "south") {
+            removedIDsouth = removedID + "_south";
+            $(removedIDsouth).text("");
+          } else if (removedUnit.direction == "west") {
+            removedIDwest = removedID + "_west";
+            $(removedIDwest).text("");
+          } else if (removedUnit.direction == "circleCenter") {
+            removedIDcenter = removedID + "_center";
+            $(removedIDcenter).text("");
+          } else {
+            console.log("Error in direction if loop")
+          };
+          currentGrid.bluePresent.splice(c, 1);
+        } else {
+          console.log("Error in removeAbsentUnit's blueTeam")
+        }
+      }
+    } else if (currentPlayer == redTeam) {
+      for (var c = 0; c < currentGrid.redPresent.length; c++) {
+        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue) {
+          currentGrid.redPresent.splice(c, 1)
+        } else {
+          console.log("Error in removeAbsentUnit's redTeam")
+        }
+      }
+    } else {
+      console.log("removeAbsentUnit couldn't find the currentPlayer")
+    }
+  };
+
 // This determines a) if a unit is going to move and b) where it's new location will be
   const issueOneOrder = () => {
     if (selectedUnit.attack == true) {
+      // something will be needed here to checks for water @ next grid
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue - 1;
-        var nextGrid = findNextStop();
+        var nextGrid = findNextGrid();
+        var currentGrid = findCurrentGrid();
         nextGrid.bluePresent.push(selectedUnit);
+        removeAbsentUnit();
+        // this will make the "next" location the "current" location and make the "next" location null.
       } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
         selectedUnit.nextXvalue = selectedUnit.xValue + 1;
         selectedUnit.nextYvalue = selectedUnit.yValue;
-        var nextGrid = findNextStop();
+        var nextGrid = findNextGrid();
+        var currentGrid = findCurrentGrid();
         nextGrid.bluePresent.push(selectedUnit);
+        removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue + 1;
-        var nextGrid = findNextStop();
+        var nextGrid = findNextGrid();
+        var currentGrid = findCurrentGrid();
         nextGrid.bluePresent.push(selectedUnit);
+        removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
         selectedUnit.nextXvalue = selectedUnit.xValue - 1;
         selectedUnit.nextYvalue = selectedUnit.yValue;
-        var nextGrid = findNextStop();
+        var nextGrid = findNextGrid();
+        var currentGrid = findCurrentGrid();
         nextGrid.bluePresent.push(selectedUnit);
+        removeAbsentUnit();
       } else {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
@@ -530,8 +593,6 @@ $(()=>{
         selectedUnit = currentPlayer.artillery[i];
         changeCurrentValues();
       };
-      console.log(currentPlayer);
-      // unitsInAllGrids();
       showGridUnits(currentPlayer);
       currentPlayer = redTeam;
       console.log("It is now the " + currentPlayer.teamName + " team's turn.");
@@ -548,7 +609,7 @@ $(()=>{
 
   // This displays the selected unit's values
   const selectedValues = () =>{
-    console.log(selectedUnit);
+    console.log("Unit: " + selectedUnit.name);
     $("#unitName").text(selectedUnit.name);
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','green');
@@ -594,11 +655,8 @@ $(()=>{
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
   const showGridUnits = (oneTeam) => {
-    // console.log("Start showGridUnits function");
     for (var x = 0; x < totalGrids; x++) {
-      // console.log("1st for loop: " + x);
       var currentGrid = x;
-      // console.log("currentGrid: " + currentGrid);
       var gridID = "#x" + allGrids[currentGrid].xValue + "y" + allGrids[currentGrid].yValue;
       var gridIDnorth = gridID + "_north";
       var gridIDeast = gridID + "_east";
@@ -606,7 +664,6 @@ $(()=>{
       var gridIDwest = gridID + "_west";
       var gridIDcenter = gridID + "_center";
       for (var i = 0; i < oneTeam.infantry.length; i++) {
-        // console.log("infantry for loop: " + i);
         if (oneTeam.infantry[i].xValue == allGrids[currentGrid].xValue && oneTeam.infantry[i].yValue == allGrids[currentGrid].yValue) {
           if (oneTeam.infantry[i].direction == "north") {
             $(gridIDnorth).text("IN");
