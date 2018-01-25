@@ -468,9 +468,8 @@ $(()=>{
   const removeAbsentUnit = () =>{
     if (currentPlayer == blueTeam) {
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
-        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue) {
+        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.redPresent.length == 0) {
           var removedUnit = currentGrid.bluePresent[c];
-          console.log(removedUnit.direction);
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           // console.log(removedID);
           if (removedUnit.direction == "north") {
@@ -498,7 +497,7 @@ $(()=>{
       }
     } else if (currentPlayer == redTeam) {
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
-        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue) {
+        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.bluePresent.length == 0) {
           currentGrid.redPresent.splice(c, 1)
         } else {
           console.log("Error in removeAbsentUnit's redTeam")
@@ -548,7 +547,17 @@ $(()=>{
         errorPresent.push(selectedUnit.name);
       };
     } else if (selectedUnit.attack == false) {
+      var currentGrid = findCurrentGrid();
+      var currentDirection = selectedUnit.direction;
+      if (currentDirection == "circleCenter") {
+        currentDirection = "center"
+      };
+      var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
+      $(currentID).text("");
       selectedUnit.direction = selectedUnit.nextDirection;
+      selectedUnit.nextXvalue = currentGrid.xValue;
+      selectedUnit.nextYvalue = currentGrid.yValue;
+      removeAbsentUnit();
     } else {
       console.log("An error occurred in issueOneOrder.");
     };
