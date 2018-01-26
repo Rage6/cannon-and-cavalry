@@ -73,7 +73,7 @@ div.title {
     .gridSquare .centerLine .centerRight {
       width: 20%; }
   .gridSquare .bottomLine {
-    margin: 0; }
+    margin: 0 20%; }
 
 #allOptions {
   margin: 50px auto;

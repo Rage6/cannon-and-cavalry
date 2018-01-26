@@ -415,13 +415,13 @@ $(()=>{
 
   $('#north').click( ()=> {
     selectedUnit.nextDirection = "north";
-    console.log("nextDirection: " + selectedUnit.nextDirection);
+    console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
   $('#east').click( ()=> {
     selectedUnit.nextDirection = "east";
-    console.log("nextDirection: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection)
     showUnitDirection();
     showUnitNextDirection();
   });
@@ -433,13 +433,13 @@ $(()=>{
   });
   $('#west').click( ()=> {
     selectedUnit.nextDirection = "west";
-    console.log("nextDirection: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection)
     showUnitDirection();
     showUnitNextDirection();
   });
   $('#circleCenter').click( ()=> {
     selectedUnit.nextDirection = "circleCenter";
-    console.log("nextDirection: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection)
     showUnitDirection();
     showUnitNextDirection();
   });
@@ -470,23 +470,24 @@ $(()=>{
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
         if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.redPresent.length == 0) {
           var removedUnit = currentGrid.bluePresent[c];
+          // console.log(removedUnit);
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           // console.log(removedID);
           if (removedUnit.direction == "north") {
             removedIDnorth = removedID + "_north";
-            $(removedIDnorth).text("");
+            $(removedIDnorth).text("").css('background-color','transparent');
           } else if (removedUnit.direction == "east") {
             removedIDeast = removedID + "_east";
-            $(removedIDeast).text("");
+            $(removedIDeast).text("").css('background-color','transparent');
           } else if (removedUnit.direction == "south") {
             removedIDsouth = removedID + "_south";
-            $(removedIDsouth).text("");
+            $(removedIDsouth).text("").css('background-color','transparent');
           } else if (removedUnit.direction == "west") {
             removedIDwest = removedID + "_west";
-            $(removedIDwest).text("");
+            $(removedIDwest).text("").css('background-color','transparent');
           } else if (removedUnit.direction == "circleCenter") {
             removedIDcenter = removedID + "_center";
-            $(removedIDcenter).text("");
+            $(removedIDcenter).text("").css('background-color','transparent');
           } else {
             console.log("Error in direction if loop")
           };
@@ -512,6 +513,7 @@ $(()=>{
   const issueOneOrder = () => {
     if (selectedUnit.attack == true) {
       // something will be needed here to checks for water @ next grid
+      // something here will block this unit from moving if the nextGrid already has a friend unit there
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue - 1;
@@ -544,20 +546,21 @@ $(()=>{
       } else {
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
-        errorPresent.push(selectedUnit.name);
+        errorPresent.push(selectedUnit);
       };
     } else if (selectedUnit.attack == false) {
       var currentGrid = findCurrentGrid();
+      var nextGrid = currentGrid;
       var currentDirection = selectedUnit.direction;
       if (currentDirection == "circleCenter") {
         currentDirection = "center"
       };
       var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
-      $(currentID).text("");
+      $(currentID).text("").css("background-color","transparent");
       selectedUnit.direction = selectedUnit.nextDirection;
       selectedUnit.nextXvalue = currentGrid.xValue;
       selectedUnit.nextYvalue = currentGrid.yValue;
-      removeAbsentUnit();
+      // console.log(selectedUnit);
     } else {
       console.log("An error occurred in issueOneOrder.");
     };
@@ -607,7 +610,10 @@ $(()=>{
       console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     } else {
       for (var i = 0; i < errorPresent.length; i++) {
-        console.log("The order for " + errorPresent[i] + " cannot be carried out. Change their order before they recieve them.")
+        console.log("The order for " + errorPresent[i].name + " could not be carried out.")
+        errorPresent[i].nextDirection = null;
+        errorPresent[i].nextXvalue = null;
+        errorPresent[i].nextYvalue = null;
       };
       errorPresent = [];
     };
@@ -634,6 +640,13 @@ $(()=>{
   // How to select a blueTeam infantry unit
   const blueIn0Select = () =>{
     selectedUnit = blueTeam.infantry[0];
+    console.log(selectedUnit.name);
+    if (selectedUnit.direction != "circleCenter") {
+      var gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
+    } else if (selectedUnit.direction == "circleCenter") {
+      var gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_center";
+    }
+    console.log(gridAndDirection);
     selectedValues();
   };
   $("#blueIn0").click(blueIn0Select);
@@ -676,14 +689,49 @@ $(()=>{
         if (oneTeam.infantry[i].xValue == allGrids[currentGrid].xValue && oneTeam.infantry[i].yValue == allGrids[currentGrid].yValue) {
           if (oneTeam.infantry[i].direction == "north") {
             $(gridIDnorth).text("IN");
+            if (oneTeam == blueTeam) {
+              $(gridIDnorth).css('color','white').css('background-color','blue');
+            } else if (oneTeam == redTeam) {
+              $(gridIDnorth).css('color','black').css('background-color','red');
+            } else {
+              console.log("Error ")
+            };
           } else if (oneTeam.infantry[i].direction == "east") {
             $(gridIDeast).text("IN");
+            if (oneTeam == blueTeam) {
+              $(gridIDeast).css('color','white').css('background-color','blue');
+            } else if (oneTeam == redTeam) {
+              $(gridIDeast).css('color','black').css('background-color','red');
+            } else {
+              console.log("Error ")
+            };
           } else if (oneTeam.infantry[i].direction == "south") {
             $(gridIDsouth).text("IN");
+            if (oneTeam == blueTeam) {
+              $(gridIDsouth).css('color','white').css('background-color','blue');
+            } else if (oneTeam == redTeam) {
+              $(gridIDsouth).css('color','black').css('background-color','red');
+            } else {
+              console.log("Error ")
+            };
           } else if (oneTeam.infantry[i].direction == "west") {
             $(gridIDwest).text("IN");
+            if (oneTeam == blueTeam) {
+              $(gridIDwest).css('color','white').css('background-color','blue');
+            } else if (oneTeam == redTeam) {
+              $(gridIDwest).css('color','black').css('background-color','red');
+            } else {
+              console.log("Error ")
+            };
           } else if (oneTeam.infantry[i].direction == "circleCenter") {
             $(gridIDcenter).text("IN");
+            if (oneTeam == blueTeam) {
+              $(gridIDcenter).css('color','white').css('background-color','blue');
+            } else if (oneTeam == redTeam) {
+              $(gridIDcenter).css('color','black').css('background-color','red');
+            } else {
+              console.log("Error ")
+            };
           } else {
             console.log("No direction")
           }
