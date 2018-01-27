@@ -166,8 +166,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 1,
         yValue: 1,
         nextXvalue: null,
@@ -181,8 +181,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 2,
         yValue: 1,
         nextXvalue: null,
@@ -196,8 +196,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 3,
         yValue: 1,
         nextXvalue: null,
@@ -217,8 +217,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 1,
         yValue: 4
       }
@@ -230,8 +230,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 2,
         yValue: 4
       }
@@ -243,8 +243,8 @@ $(()=>{
         active: true,
         health: 10,
         attack: false,
-        direction: "circleCenter",
-        nextDirection: "circleCenter",
+        direction: "center",
+        nextDirection: "center",
         xValue: 3,
         yValue: 4
       }
@@ -360,37 +360,37 @@ $(()=>{
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
-      $("#circleCenter").css('background-color','white');
+      $("#center").css('background-color','white');
     } else if (selectedUnit.direction == "east") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','grey');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
-      $("#circleCenter").css('background-color','white');
+      $("#center").css('background-color','white');
     } else if (selectedUnit.direction == "south") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','grey');
       $("#west").css('background-color','white');
-      $("#circleCenter").css('background-color','white');
+      $("#center").css('background-color','white');
     } else if (selectedUnit.direction == "west") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','grey');
-      $("#circleCenter").css('background-color','white');
-    } else if (selectedUnit.direction == "circleCenter") {
+      $("#center").css('background-color','white');
+    } else if (selectedUnit.direction == "center") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
-      $("#circleCenter").css('background-color','grey');
+      $("#center").css('background-color','grey');
     } else {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
-      $("#circleCenter").css('background-color','white');
+      $("#center").css('background-color','white');
     };
   }
 
@@ -404,8 +404,8 @@ $(()=>{
       $("#south").css('background-color','yellow');
     } else if (selectedUnit.nextDirection == "west") {
       $("#west").css('background-color','yellow');
-    } else if (selectedUnit.nextDirection == "circleCenter") {
-      $("#circleCenter").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "center") {
+      $("#center").css('background-color','yellow');
     }  else {
       console.log("error in showUnitDirection function.")
     }
@@ -437,8 +437,8 @@ $(()=>{
     showUnitDirection();
     showUnitNextDirection();
   });
-  $('#circleCenter').click( ()=> {
-    selectedUnit.nextDirection = "circleCenter";
+  $('#center').click( ()=> {
+    selectedUnit.nextDirection = "center";
     console.log("Direction: " + selectedUnit.nextDirection)
     showUnitDirection();
     showUnitNextDirection();
@@ -470,24 +470,24 @@ $(()=>{
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
         if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.redPresent.length == 0) {
           var removedUnit = currentGrid.bluePresent[c];
-          // console.log(removedUnit);
+          console.log("Direction: " + removedUnit.direction);
+          console.log("Next Direction: " + removedUnit.nextDirection);
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
-          // console.log(removedID);
           if (removedUnit.direction == "north") {
             removedIDnorth = removedID + "_north";
-            $(removedIDnorth).text("").css('background-color','transparent');
+            $(removedIDnorth).text("").css('background-color','transparent').css('color','transparent');
           } else if (removedUnit.direction == "east") {
             removedIDeast = removedID + "_east";
-            $(removedIDeast).text("").css('background-color','transparent');
+            $(removedIDeast).text("").css('background-color','transparent').css('color','transparent');
           } else if (removedUnit.direction == "south") {
             removedIDsouth = removedID + "_south";
-            $(removedIDsouth).text("").css('background-color','transparent');
+            $(removedIDsouth).text("").css('background-color','transparent').css('color','transparent');
           } else if (removedUnit.direction == "west") {
             removedIDwest = removedID + "_west";
-            $(removedIDwest).text("").css('background-color','transparent');
-          } else if (removedUnit.direction == "circleCenter") {
+            $(removedIDwest).text("").css('background-color','transparent').css('color','transparent');
+          } else if (removedUnit.direction == "center") {
             removedIDcenter = removedID + "_center";
-            $(removedIDcenter).text("").css('background-color','transparent');
+            $(removedIDcenter).text("").css('background-color','transparent').css('color','transparent');
           } else {
             console.log("Error in direction if loop")
           };
@@ -552,9 +552,6 @@ $(()=>{
       var currentGrid = findCurrentGrid();
       var nextGrid = currentGrid;
       var currentDirection = selectedUnit.direction;
-      if (currentDirection == "circleCenter") {
-        currentDirection = "center"
-      };
       var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
       $(currentID).text("").css("background-color","transparent");
       selectedUnit.direction = selectedUnit.nextDirection;
@@ -572,7 +569,7 @@ $(()=>{
     selectedUnit.nextXvalue = null;
     selectedUnit.yValue = selectedUnit.nextYvalue;
     selectedUnit.nextYvalue = null;
-    selectedUnit.direction = selectedUnit.nextDirection;
+    selectedUnit.direction = "center";
     selectedUnit.nextDirection = null;
   };
 
@@ -617,6 +614,7 @@ $(()=>{
       };
       errorPresent = [];
     };
+    removeAllColors();
     console.log(allGrids);
   };
 
@@ -637,16 +635,32 @@ $(()=>{
     showUnitDirection();
   };
 
+  var gridAndDirection = null;
+  const allDirections = ["_north", "_east", "_south", "_west", "_center"];
+
+  // This will reset all of the text color after a) a new unit is selected or b) all of the orders have been issued
+  const removeAllColors = () => {
+    for (var d = 0; d < allGrids.length; d++) {
+      var coordinates = "#x" + allGrids[d].xValue + "y" + allGrids[d].yValue;
+      for (var e = 0; e < allDirections.length; e++) {
+        var removeColorHere = coordinates + allDirections[e];
+        if (allGrids[d].bluePresent.length > 0) {
+          $(removeColorHere).css('color','white');
+        } else if (allGrids[d].redPresent.length > 0) {
+          $(removeColorHere).css('color','black');
+        } else {
+          $(removeColorHere).css('color','transparent');
+        }
+      }
+    }
+  };
+
   // How to select a blueTeam infantry unit
   const blueIn0Select = () =>{
     selectedUnit = blueTeam.infantry[0];
-    console.log(selectedUnit.name);
-    if (selectedUnit.direction != "circleCenter") {
-      var gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    } else if (selectedUnit.direction == "circleCenter") {
-      var gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_center";
-    }
-    console.log(gridAndDirection);
+    removeAllColors();
+    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
+    $(gridAndDirection).css('color','orange');
     selectedValues();
   };
   $("#blueIn0").click(blueIn0Select);
@@ -723,7 +737,7 @@ $(()=>{
             } else {
               console.log("Error ")
             };
-          } else if (oneTeam.infantry[i].direction == "circleCenter") {
+          } else if (oneTeam.infantry[i].direction == "center") {
             $(gridIDcenter).text("IN");
             if (oneTeam == blueTeam) {
               $(gridIDcenter).css('color','white').css('background-color','blue');
@@ -748,7 +762,7 @@ $(()=>{
             $(gridIDsouth).text("CAV");
           } else if (oneTeam.cavalry[i].direction == "west") {
             $(gridIDwest).text("CAV");
-          } else if (oneTeam.cavalry[i].direction == "circleCenter") {
+          } else if (oneTeam.cavalry[i].direction == "center") {
             $(gridIDcenter).text("CAV");
           } else {
             console.log("No direction")
@@ -766,13 +780,13 @@ $(()=>{
             $(gridIDsouth).text("AR");
           } else if (oneTeam.artillery[i].direction == "west") {
             $(gridIDwest).text("AR");
-          } else if (oneTeam.artillery[i].direction == "circleCenter") {
+          } else if (oneTeam.artillery[i].direction == "center") {
             $(gridIDcenter).text("AR");
           } else {
             console.log("No direction")
           }
         }
-      };
+      }
     };
     // console.log("End showGridUnits function");
   };
