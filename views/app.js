@@ -577,7 +577,6 @@ $(()=>{
         nextGrid.bluePresent.push(selectedUnit);
         removeAbsentUnit();
       } else {
-        console.log("uses else section")
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
         errorPresent.push(selectedUnit);
@@ -594,6 +593,18 @@ $(()=>{
     } else {
       console.log("An error occurred in issueOneOrder.");
     };
+  };
+
+  // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
+  const checkIfError = (unitToCheck) => {
+    for (var i = 0; i < errorPresent.length; i++) {
+      if (unitToCheck == errorPresent[i]) {
+        console.log("The order for " + errorPresent[i].name + " could not be carried out.");
+        errorPresent[i].nextDirection = "center";
+        errorPresent[i].nextXvalue = null;
+        errorPresent[i].nextYvalue = null;
+      }
+    }
   };
 
   // In this, a unit's the values of "xValue", "yValue", and "direction" are all changed to their "next" partner's values, and the "nextValues" are now null.
@@ -627,41 +638,35 @@ $(()=>{
       selectedUnit = currentPlayer.artillery[i];
       issueOneOrder();
     };
-    if (errorPresent.length == 0) {
 
-      // Insert the battle function here
+    // Insert the battle function here
 
-      for (var i = 0; i < selectedInfantry.length; i++) {
-        selectedUnit = selectedInfantry[i];
-        changeCurrentValues();
-      };
-      for (var i = 0; i < selectedCavalry.length; i++) {
-        selectedUnit = selectedCavalry[i];
-        changeCurrentValues();
-      };
-      for (var i = 0; i < currentPlayer.artillery.length; i++) {
-        selectedUnit = selectedArtillery[i];
-        changeCurrentValues();
-      };
-      showGridUnits(currentPlayer, selectedInfantry);
-      showGridUnits(currentPlayer, selectedCavalry);
-      showGridUnits(currentPlayer, selectedArtillery);
-      if (currentPlayer == blueTeam) {
-        currentPlayer = redTeam;
-      } else if (currentPlayer == redTeam) {
-        currentPlayer = blueTeam;
-      };
-      // here is where a border should be added to the new currentPlayer's box
-      console.log("It is now the " + currentPlayer.teamName + " team's turn.");
-    } else {
-      for (var i = 0; i < errorPresent.length; i++) {
-        console.log("The order for " + errorPresent[i].name + " could not be carried out.");
-        errorPresent[i].nextDirection = "center";
-        errorPresent[i].nextXvalue = null;
-        errorPresent[i].nextYvalue = null;
-      };
-      errorPresent = [];
+    for (var i = 0; i < selectedInfantry.length; i++) {
+      selectedUnit = selectedInfantry[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
     };
+    for (var i = 0; i < selectedCavalry.length; i++) {
+      selectedUnit = selectedCavalry[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
+    };
+    for (var i = 0; i < currentPlayer.artillery.length; i++) {
+      selectedUnit = selectedArtillery[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
+    };
+    // here is where a border should be added to the new currentPlayer's box
+    errorPresent = [];
+    showGridUnits(currentPlayer, selectedInfantry);
+    showGridUnits(currentPlayer, selectedCavalry);
+    showGridUnits(currentPlayer, selectedArtillery);
+    if (currentPlayer == blueTeam) {
+      currentPlayer = redTeam;
+    } else if (currentPlayer == redTeam) {
+      currentPlayer = blueTeam;
+    };
+    console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     removeAllColors();
     console.log(allGrids);
   };
