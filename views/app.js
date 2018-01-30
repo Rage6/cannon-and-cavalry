@@ -210,7 +210,7 @@ $(()=>{
     teamName: "red",
     infantry: [
       {
-        name: "1-5 BN",
+        name: "2-5 BN",
         type: "IN",
         active: true,
         health: 10,
@@ -223,7 +223,7 @@ $(()=>{
     ],
     cavalry: [
       {
-        name: "2ND RGT",
+        name: "3RD RGT",
         type: "CAV",
         active: true,
         health: 10,
@@ -236,7 +236,7 @@ $(()=>{
     ],
     artillery: [
       {
-        name: "2-6 BN",
+        name: "2-7 BN",
         type: "AR",
         active: true,
         health: 10,
@@ -260,7 +260,6 @@ $(()=>{
         } else if (allGrids[gridNumber].xValue == blueTeam.artillery[i].xValue && allGrids[gridNumber].yValue == blueTeam.artillery[i].yValue) {
           allGrids[gridNumber].bluePresent.push(blueTeam.artillery[i]);
         };
-        //add something here that will REMOVE that unit if moved OUT of that grid
       }
     } else if (oneTeam == redTeam) {
       for (var i = 0; i < redTeam.infantry.length; i++) {
@@ -271,7 +270,6 @@ $(()=>{
         } else if (allGrids[gridNumber].xValue == redTeam.artillery[i].xValue && allGrids[gridNumber].yValue == redTeam.artillery[i].yValue) {
           allGrids[gridNumber].redPresent.push(redTeam.artillery[i]);
         };
-        //add something here that will REMOVE that unit if moved OUT of that grid
       }
     }
   };
@@ -300,37 +298,50 @@ $(()=>{
         displayTeam.infantry[i].columnNum = i
       } else {
         var box = "#redIn" + i;
-        $(box).css('background-color','red');
+        var unitName = redTeam.infantry[i].name;
+        $(box).css('background-color','red').text(unitName);
+        displayTeam.infantry[i].columnNum = i
       };
     };
   };
   infantryColumn(blueTeam);
+  infantryColumn(redTeam);
 
   const artilleryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.artillery.length; i++) {
       if (displayTeam == blueTeam) {
         var box = "#blueAr" + i;
-        $(box).css('background-color','blue').text('A');
+        var unitName = blueTeam.artillery[i].name;
+        $(box).css('background-color','blue').text(unitName);
+        displayTeam.artillery[i].columnNum = i
       } else {
         var box = "#redAr" + i;
-        $(box).css('background-color','red');
+        var unitName = redTeam.artillery[i].name;
+        $(box).css('background-color','red').text(unitName);
+        displayTeam.artillery[i].columnNum = i
       };
     };
   };
   artilleryColumn(blueTeam);
+  artilleryColumn(redTeam);
 
   const cavalryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.cavalry.length; i++) {
       if (displayTeam == blueTeam) {
         var box = "#blueCav" + i;
-        $(box).css('background-color','blue').text('A');
+        var unitName = blueTeam.cavalry[i].name;
+        $(box).css('background-color','blue').text(unitName);
+        displayTeam.cavalry[i].columnNum = i
       } else {
         var box = "#redCav" + i;
-        $(box).css('background-color','red');
+        var unitName = redTeam.cavalry[i].name;
+        $(box).css('background-color','red').text(unitName);
+        displayTeam.cavalry[i].columnNum = i
       };
     };
   };
   cavalryColumn(blueTeam);
+  cavalryColumn(redTeam);
 
   // The default settings for a selectedUnit
   var selectedUnit = null;
@@ -499,6 +510,28 @@ $(()=>{
     } else if (currentPlayer == redTeam) {
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
         if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.bluePresent.length == 0) {
+          var removedUnit = currentGrid.redPresent[c];
+          console.log("Direction: " + removedUnit.direction);
+          console.log("Next Direction: " + removedUnit.nextDirection);
+          var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
+          if (removedUnit.direction == "north") {
+            removedIDnorth = removedID + "_north";
+            $(removedIDnorth).text("").css('background-color','transparent').css('color','transparent');
+          } else if (removedUnit.direction == "east") {
+            removedIDeast = removedID + "_east";
+            $(removedIDeast).text("").css('background-color','transparent').css('color','transparent');
+          } else if (removedUnit.direction == "south") {
+            removedIDsouth = removedID + "_south";
+            $(removedIDsouth).text("").css('background-color','transparent').css('color','transparent');
+          } else if (removedUnit.direction == "west") {
+            removedIDwest = removedID + "_west";
+            $(removedIDwest).text("").css('background-color','transparent').css('color','transparent');
+          } else if (removedUnit.direction == "center") {
+            removedIDcenter = removedID + "_center";
+            $(removedIDcenter).text("").css('background-color','transparent').css('color','transparent');
+          } else {
+            console.log("Error in direction if loop")
+          };
           currentGrid.redPresent.splice(c, 1)
         } else {
           console.log("Error in removeAbsentUnit's redTeam")
@@ -562,16 +595,31 @@ $(()=>{
     };
   };
 
+  // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
+  const checkIfError = (unitToCheck) => {
+    for (var i = 0; i < errorPresent.length; i++) {
+      if (unitToCheck == errorPresent[i]) {
+        console.log("The order for " + errorPresent[i].name + " could not be carried out.");
+        errorPresent[i].nextDirection = "center";
+        errorPresent[i].nextXvalue = null;
+        errorPresent[i].nextYvalue = null;
+      }
+    }
+  };
+
   // In this, a unit's the values of "xValue", "yValue", and "direction" are all changed to their "next" partner's values, and the "nextValues" are now null.
   const changeCurrentValues = () => {
-    selectedUnit.xValue = selectedUnit.nextXvalue;
+    if (selectedUnit.nextXvalue != null && selectedUnit.nextYvalue != null) {
+      selectedUnit.xValue = selectedUnit.nextXvalue;
+      selectedUnit.yValue = selectedUnit.nextYvalue;
+    };
     selectedUnit.nextXvalue = null;
-    selectedUnit.yValue = selectedUnit.nextYvalue;
     selectedUnit.nextYvalue = null;
     if (selectedUnit.attack == true) {
-      selectedUnit.direction = "center"
+      selectedUnit.direction = "center";
+      selectedUnit.nextDirection = "center";
+      selectedUnit.attack = false;
     };
-    selectedUnit.nextDirection = null;
   };
 
   const issueAllOrders = () => {
@@ -590,36 +638,35 @@ $(()=>{
       selectedUnit = currentPlayer.artillery[i];
       issueOneOrder();
     };
-    if (errorPresent.length == 0) {
 
-      // Insert the battle function here
+    // Insert the battle function here
 
-      for (var i = 0; i < selectedInfantry.length; i++) {
-        selectedUnit = selectedInfantry[i];
-        changeCurrentValues();
-      };
-      for (var i = 0; i < selectedCavalry.length; i++) {
-        selectedUnit = selectedCavalry[i];
-        changeCurrentValues();
-      };
-      for (var i = 0; i < currentPlayer.artillery.length; i++) {
-        selectedUnit = selectedArtillery[i];
-        changeCurrentValues();
-      };
-      showGridUnits(currentPlayer, selectedInfantry);
-      showGridUnits(currentPlayer, selectedCavalry);
-      showGridUnits(currentPlayer, selectedArtillery);
-      currentPlayer = redTeam;
-      console.log("It is now the " + currentPlayer.teamName + " team's turn.");
-    } else {
-      for (var i = 0; i < errorPresent.length; i++) {
-        console.log("The order for " + errorPresent[i].name + " could not be carried out.")
-        errorPresent[i].nextDirection = null;
-        errorPresent[i].nextXvalue = null;
-        errorPresent[i].nextYvalue = null;
-      };
-      errorPresent = [];
+    for (var i = 0; i < selectedInfantry.length; i++) {
+      selectedUnit = selectedInfantry[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
     };
+    for (var i = 0; i < selectedCavalry.length; i++) {
+      selectedUnit = selectedCavalry[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
+    };
+    for (var i = 0; i < currentPlayer.artillery.length; i++) {
+      selectedUnit = selectedArtillery[i];
+      checkIfError(selectedUnit);
+      changeCurrentValues();
+    };
+    // here is where a border should be added to the new currentPlayer's box
+    errorPresent = [];
+    showGridUnits(currentPlayer, selectedInfantry);
+    showGridUnits(currentPlayer, selectedCavalry);
+    showGridUnits(currentPlayer, selectedArtillery);
+    if (currentPlayer == blueTeam) {
+      currentPlayer = redTeam;
+    } else if (currentPlayer == redTeam) {
+      currentPlayer = blueTeam;
+    };
+    console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     removeAllColors();
     console.log(allGrids);
   };
@@ -631,7 +678,7 @@ $(()=>{
     console.log("Unit: " + selectedUnit.name);
     $("#unitName").text(selectedUnit.name);
     if (selectedUnit.attack == true) {
-      $("#attackButton").css('color','white').css('background-color','green');
+      $("#attackButton").css('color','white').css('background-color','blue');
       $("#defendButton").css('color','black').css('background-color','white');
     } else {
       $("#attackButton").css('color','black').css('background-color','white');
@@ -661,143 +708,74 @@ $(()=>{
     }
   };
 
-  // How to select a blueTeam infantry unit
-  const blueIn0Select = () =>{
-    selectedUnit = blueTeam.infantry[0];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueIn0").click(blueIn0Select);
+  // This is where you start to select a unit
+  var clickNum = null;
 
-  const blueIn1Select = () =>{
-    selectedUnit = blueTeam.infantry[1];
+  const newClickNum = (num) => {
+    clickNum = num.data;
+  }
+  // ------ INFANTRY --------
+  const infantryNumSelect = () =>{
+    selectedUnit = currentPlayer.infantry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
     $(gridAndDirection).css('color','orange');
     selectedValues();
   };
-  $("#blueIn1").click(blueIn0Select);
 
-  const blueIn2Select = () =>{
-    selectedUnit = blueTeam.infantry[2];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueIn2").click(blueIn0Select);
+  $("#blueIn0").click(0, newClickNum).click(infantryNumSelect);
+  $("#blueIn1").click(1, newClickNum).click(infantryNumSelect);
+  $("#blueIn2").click(2, newClickNum).click(infantryNumSelect);
+  $("#blueIn3").click(3, newClickNum).click(infantryNumSelect);
+  $("#blueIn4").click(4, newClickNum).click(infantryNumSelect);
 
-  const blueIn3Select = () =>{
-    selectedUnit = blueTeam.infantry[3];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueIn3").click(blueIn0Select);
+  $("#redIn0").click(0, newClickNum).click(infantryNumSelect);
+  $("#redIn1").click(1, newClickNum).click(infantryNumSelect);
+  $("#redIn2").click(2, newClickNum).click(infantryNumSelect);
+  $("#redIn3").click(3, newClickNum).click(infantryNumSelect);
+  $("#redIn4").click(4, newClickNum).click(infantryNumSelect);
 
-  const blueIn4Select = () =>{
-    selectedUnit = blueTeam.infantry[4];
+  // ------ CAVALRY --------
+  const cavalryNumSelect = () =>{
+    selectedUnit = currentPlayer.cavalry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
     $(gridAndDirection).css('color','orange');
     selectedValues();
   };
-  $("#blueIn4").click(blueIn0Select);
 
-  // How to choose a blueTeam cavalry unit
-  const blueCav0Select = () =>{
-    selectedUnit = blueTeam.cavalry[0];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueCav0").click(blueCav0Select);
+  $("#blueCav0").click(0, newClickNum).click(cavalryNumSelect);
+  $("#blueCav1").click(1, newClickNum).click(cavalryNumSelect);
+  $("#blueCav2").click(2, newClickNum).click(cavalryNumSelect);
+  $("#blueCav3").click(3, newClickNum).click(cavalryNumSelect);
+  $("#blueCav4").click(4, newClickNum).click(cavalryNumSelect);
 
-  const blueCav1Select = () =>{
-    selectedUnit = blueTeam.cavalry[1];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueCav1").click(blueCav1Select);
+  $("#redCav0").click(0, newClickNum).click(cavalryNumSelect);
+  $("#redCav1").click(1, newClickNum).click(cavalryNumSelect);
+  $("#redCav2").click(2, newClickNum).click(cavalryNumSelect);
+  $("#redCav3").click(3, newClickNum).click(cavalryNumSelect);
+  $("#redCav4").click(4, newClickNum).click(cavalryNumSelect);
 
-  const blueCav2Select = () =>{
-    selectedUnit = blueTeam.cavalry[2];
+  // ------ ARTILLERY --------
+  const artilleryNumSelect = () =>{
+    selectedUnit = currentPlayer.artillery[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
     $(gridAndDirection).css('color','orange');
     selectedValues();
   };
-  $("#blueCav2").click(blueCav2Select);
 
-  const blueCav3Select = () =>{
-    selectedUnit = blueTeam.cavalry[3];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueCav3").click(blueCav3Select);
+  $("#blueAr0").click(0, newClickNum).click(artilleryNumSelect);
+  $("#blueAr1").click(1, newClickNum).click(artilleryNumSelect);
+  $("#blueAr2").click(2, newClickNum).click(artilleryNumSelect);
+  $("#blueAr3").click(3, newClickNum).click(artilleryNumSelect);
+  $("#blueAr4").click(4, newClickNum).click(artilleryNumSelect);
 
-  const blueCav4Select = () =>{
-    selectedUnit = blueTeam.cavalry[4];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueCav4").click(blueCav4Select);
-
-  // How to choose a blueTeam cavalry unit
-  const blueAr0Select = () =>{
-    selectedUnit = blueTeam.artillery[0];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueAr0").click(blueAr0Select);
-
-  const blueAr1Select = () =>{
-    selectedUnit = blueTeam.artillery[1];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueAr1").click(blueAr1Select);
-
-  const blueAr2Select = () =>{
-    selectedUnit = blueTeam.artillery[2];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueAr2").click(blueAr2Select);
-
-  const blueAr3Select = () =>{
-    selectedUnit = blueTeam.artillery[3];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueAr3").click(blueAr3Select);
-
-  const blueAr4Select = () =>{
-    selectedUnit = blueTeam.artillery[4];
-    removeAllColors();
-    gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
-    selectedValues();
-  };
-  $("#blueAr4").click(blueAr4Select);
+  $("#redAr0").click(0, newClickNum).click(artilleryNumSelect);
+  $("#redAr1").click(1, newClickNum).click(artilleryNumSelect);
+  $("#redAr2").click(2, newClickNum).click(artilleryNumSelect);
+  $("#redAr3").click(3, newClickNum).click(artilleryNumSelect);
+  $("#redAr4").click(4, newClickNum).click(artilleryNumSelect);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
   const showGridUnits = (oneTeam, unitType) => {
@@ -968,6 +946,8 @@ $(()=>{
     showGridUnits(blueTeam, blueTeam.cavalry);
     showGridUnits(blueTeam, blueTeam.artillery);
     showGridUnits(redTeam, redTeam.infantry);
+    showGridUnits(redTeam, redTeam.cavalry);
+    showGridUnits(redTeam, redTeam.artillery);
     // console.log("End makeOneGrid function: " + gridNumber);
   };
 
