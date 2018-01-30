@@ -180,6 +180,9 @@ div.title {
           -moz-width: 30%;
           -ms-width: 30%;
           width: 30%; }
+      #allOptions .turnBoxes .indivBox #repBox #completeReport {
+        padding: 5%;
+        font-size: 2em; }
       #allOptions .turnBoxes .indivBox #teamOne {
         background-color: lightblue; }
       #allOptions .turnBoxes .indivBox #teamTwo {

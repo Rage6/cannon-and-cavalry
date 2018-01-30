@@ -5,6 +5,7 @@ $(()=>{
   const maxYvalue = 4;
   var errorPresent = [];
   var battleReport = [];
+  var completeStatement = null;
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -482,8 +483,6 @@ $(()=>{
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
         if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.redPresent.length == 0) {
           var removedUnit = currentGrid.bluePresent[c];
-          console.log("Direction: " + removedUnit.direction);
-          console.log("Next Direction: " + removedUnit.nextDirection);
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           if (removedUnit.direction == "north") {
             removedIDnorth = removedID + "_north";
@@ -512,8 +511,6 @@ $(()=>{
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
         if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.bluePresent.length == 0) {
           var removedUnit = currentGrid.redPresent[c];
-          console.log("Direction: " + removedUnit.direction);
-          console.log("Next Direction: " + removedUnit.nextDirection);
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           if (removedUnit.direction == "north") {
             removedIDnorth = removedID + "_north";
@@ -545,8 +542,6 @@ $(()=>{
 
 // This determines a) if a unit is going to move and b) where it's new location will be
   const issueOneOrder = () => {
-    console.log("currentPlayer: " + currentPlayer.teamName);
-    console.log("selectedUnit: " + selectedUnit.name);
     if (selectedUnit.attack == true) {
       // something will be needed here to checks for water @ next grid
       // something here will block this unit from moving if the nextGrid already has a friend unit there
@@ -556,7 +551,11 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue - 1;
         var nextGrid = findNextGrid();
         var currentGrid = findCurrentGrid();
-        nextGrid.bluePresent.push(selectedUnit);
+        if (currentPlayer == blueTeam) {
+          nextGrid.bluePresent.push(selectedUnit);
+        } else if (currentPlayer == redTeam) {
+          nextGrid.redPresent.push(selectedUnit);
+        };
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
         showBattleReport(selectedUnit);
@@ -564,7 +563,11 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue;
         var nextGrid = findNextGrid();
         var currentGrid = findCurrentGrid();
-        nextGrid.bluePresent.push(selectedUnit);
+        if (currentPlayer == blueTeam) {
+          nextGrid.bluePresent.push(selectedUnit);
+        } else if (currentPlayer == redTeam) {
+          nextGrid.redPresent.push(selectedUnit);
+        };
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
         showBattleReport(selectedUnit);
@@ -572,7 +575,11 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue + 1;
         var nextGrid = findNextGrid();
         var currentGrid = findCurrentGrid();
-        nextGrid.bluePresent.push(selectedUnit);
+        if (currentPlayer == blueTeam) {
+          nextGrid.bluePresent.push(selectedUnit);
+        } else if (currentPlayer == redTeam) {
+          nextGrid.redPresent.push(selectedUnit);
+        };
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
         showBattleReport(selectedUnit);
@@ -580,7 +587,11 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue;
         var nextGrid = findNextGrid();
         var currentGrid = findCurrentGrid();
-        nextGrid.bluePresent.push(selectedUnit);
+        if (currentPlayer == blueTeam) {
+          nextGrid.bluePresent.push(selectedUnit);
+        } else if (currentPlayer == redTeam) {
+          nextGrid.redPresent.push(selectedUnit);
+        };
         removeAbsentUnit();
       } else {
         showBattleReport(selectedUnit);
@@ -632,11 +643,21 @@ $(()=>{
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
-      console.log("The " + unitReport.name + " marched to the " + unitReport.nextDirection + " as you ordered.");
+      var attackOrder = "The " + unitReport.name + " marches to the " + unitReport.nextDirection + ". ";
+      battleReport.push(attackOrder);
     } else {
-      console.log(unitReport.name + " is has taken a defensive position to the " + unitReport.direction + ".")
-    }
+      var defendOrder = "The " + unitReport.name + " defends to the " + unitReport.direction + ". "
+      battleReport.push(defendOrder);
+    };
   };
+
+  const completeReport = () => {
+    completeStatement = battleReport[0];
+    for (var i = 1; i < battleReport.length; i++) {
+      completeStatement += battleReport[i];
+    };
+    // console.log(completeStatement);
+  }
 
   const issueAllOrders = () => {
     selectedInfantry = currentPlayer.infantry;
@@ -657,6 +678,10 @@ $(()=>{
 
     // Insert the battle function here
 
+    // console.log(battleReport);
+    completeReport();
+    $("#completeReport").text(completeStatement);
+    console.log("If any of your orders could not be carried it, they will be reported below: ");
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       checkIfError(selectedUnit);
@@ -677,6 +702,7 @@ $(()=>{
     showGridUnits(currentPlayer, selectedInfantry);
     showGridUnits(currentPlayer, selectedCavalry);
     showGridUnits(currentPlayer, selectedArtillery);
+    battleReport = [];
     if (currentPlayer == blueTeam) {
       currentPlayer = redTeam;
     } else if (currentPlayer == redTeam) {

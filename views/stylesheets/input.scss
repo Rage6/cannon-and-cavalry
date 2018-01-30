@@ -220,7 +220,14 @@ div.title {
 
       #unitBox {}
 
-      #repBox {}
+      #repBox {
+
+        #completeReport {
+          padding: 5%;
+          font-size: 2em;
+        }
+
+      }
 
       #teamOne {
         background-color: lightblue;
