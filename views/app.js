@@ -289,6 +289,7 @@ $(()=>{
 
   // The blueTeam starts by default
   var currentPlayer = blueTeam;
+  var oppositePlayer = redTeam;
 
   // To display all of a team's units
   const infantryColumn = (displayTeam) =>{
@@ -594,10 +595,10 @@ $(()=>{
         };
         removeAbsentUnit();
       } else {
+        errorPresent.push(selectedUnit);
         showBattleReport(selectedUnit);
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
-        errorPresent.push(selectedUnit);
       };
     } else if (selectedUnit.attack == false) {
       var currentGrid = findCurrentGrid();
@@ -618,7 +619,6 @@ $(()=>{
   const checkIfError = (unitToCheck) => {
     for (var i = 0; i < errorPresent.length; i++) {
       if (unitToCheck == errorPresent[i]) {
-        console.log("The order for " + errorPresent[i].name + " could not be carried out.");
         errorPresent[i].nextDirection = "center";
         errorPresent[i].nextXvalue = null;
         errorPresent[i].nextYvalue = null;
@@ -643,20 +643,25 @@ $(()=>{
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
-      var attackOrder = "The " + unitReport.name + " marches to the " + unitReport.nextDirection + ". ";
+      var attackOrder = " The " + unitReport.name + " will march to the " + unitReport.nextDirection + ".";
       battleReport.push(attackOrder);
     } else {
-      var defendOrder = "The " + unitReport.name + " defends to the " + unitReport.direction + ". "
+      if (unitReport.direction == "center") {
+        var defendOrder = " The " + unitReport.name + " will set a central defense.";
+      } else {
+        var defendOrder = " The " + unitReport.name + " will set a defensive position to the " + unitReport.nextDirection + ".";
+      };
       battleReport.push(defendOrder);
-    };
+    }
   };
 
   const completeReport = () => {
+    var startReport = "** ORDERS ** ";
+    battleReport.splice(0, 0, startReport);
     completeStatement = battleReport[0];
     for (var i = 1; i < battleReport.length; i++) {
       completeStatement += battleReport[i];
     };
-    // console.log(completeStatement);
   }
 
   const issueAllOrders = () => {
@@ -678,10 +683,6 @@ $(()=>{
 
     // Insert the battle function here
 
-    // console.log(battleReport);
-    completeReport();
-    $("#completeReport").text(completeStatement);
-    console.log("If any of your orders could not be carried it, they will be reported below: ");
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       checkIfError(selectedUnit);
@@ -692,11 +693,22 @@ $(()=>{
       checkIfError(selectedUnit);
       changeCurrentValues();
     };
-    for (var i = 0; i < currentPlayer.artillery.length; i++) {
+    for (var i = 0; i < selectedArtillery.length; i++) {
       selectedUnit = selectedArtillery[i];
       checkIfError(selectedUnit);
       changeCurrentValues();
     };
+    if (errorPresent.length > 0) {
+      for (var j = 0; j < errorPresent.length; j++) {
+        var reportError = " ** RESULTS ** The " + errorPresent[j].name + " could not carry out its orders!"
+        battleReport.push(reportError);
+      }
+    } else {
+      var reportError = " ** RESULTS ** All orders carried out."
+      battleReport.push(reportError);
+    };
+    completeReport();
+    $("#completeReport").text(completeStatement);
     // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
     showGridUnits(currentPlayer, selectedInfantry);
@@ -705,8 +717,10 @@ $(()=>{
     battleReport = [];
     if (currentPlayer == blueTeam) {
       currentPlayer = redTeam;
+      oppositePlayer = blueTeam;
     } else if (currentPlayer == redTeam) {
       currentPlayer = blueTeam;
+      oppositePlayer = redTeam;
     };
     console.log("It is now the " + currentPlayer.teamName + " team's turn.");
     removeAllColors();

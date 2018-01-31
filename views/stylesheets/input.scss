@@ -222,10 +222,10 @@ div.title {
 
       #repBox {
 
-        #completeReport {
-          padding: 5%;
-          font-size: 2em;
-        }
+        // #completeReport {
+        //   padding: 5%;
+        //   font-size: 2em;
+        // }
 
       }
 
@@ -248,4 +248,12 @@ div.title {
     background-color: orange;
     width: 50%;
   }
+}
+
+#completeReport {
+  border: 1px solid black;
+  padding: 5%;
+  font-size: 2em;
+  height: 60%;
+  overflow: scroll;
 }
