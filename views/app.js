@@ -435,25 +435,25 @@ $(()=>{
   });
   $('#east').click( ()=> {
     selectedUnit.nextDirection = "east";
-    console.log("Direction: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
   $('#south').click( ()=> {
     selectedUnit.nextDirection = "south";
-    console.log("Direction: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
   $('#west').click( ()=> {
     selectedUnit.nextDirection = "west";
-    console.log("Direction: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
   $('#center').click( ()=> {
     selectedUnit.nextDirection = "center";
-    console.log("Direction: " + selectedUnit.nextDirection)
+    console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
@@ -636,10 +636,85 @@ $(()=>{
     selectedUnit.nextYvalue = null;
     if (selectedUnit.attack == true) {
       selectedUnit.direction = "center";
-      selectedUnit.nextDirection = "center";
+      // I think I set up the below line IOT keep a player's unit from continuing in that direction on its own, but I had to take it off because nextDirection is important for the scores in "battleSequence". Find a different way to prevent them from moving on their own AFTER the battle.
+      // selectedUnit.nextDirection = "center";
       selectedUnit.attack = false;
     };
   };
+
+  const battleSequence = (grid) => {
+    var attackerScore = null;
+    var allAttackers = "test";
+    if (currentPlayer.teamName == "blue") {
+      allAttackers = grid.bluePresent
+    } else {
+      allAttackers = grid.redPresent
+    };
+    var defenderScore = null;
+    var allDefenders = "test";
+    if (currentPlayer.teamName == "blue") {
+      allDefenders = grid.redPresent
+    } else {
+      allDefenders = grid.bluePresent
+    };
+    defenderScore = addPoints(allDefenders,allAttackers,allDefenders);
+    attackerScore = addPoints(allAttackers,allAttackers,allDefenders);
+    console.log("Defender Score: " + defenderScore);
+    console.log("Attacker Score: " + attackerScore);
+  }
+
+  const addPoints = (thosePresent,atkTeam,defTeam) => {
+    var finalScore = 0;
+    var atkDir = [];
+    var defDir = [];
+    // This determines the directions that the two teams' units are facing
+    for (var a = 0; a < atkTeam.length; a++) {
+      atkDir.push(atkTeam[a].nextDirection);
+    };
+    for (var b = 0; b < defTeam.length; b++) {
+      defDir.push(defTeam[b].nextDirection);
+    };
+    console.log(atkDir);
+    console.log(defDir);
+    if (thosePresent == defTeam) {
+      for (var i = 0; i < thosePresent.length; i++) {
+        // add minor points to defender if "attack: false"
+        if (thosePresent[i].attack == false) {
+          finalScore += 10;
+        };
+      }
+    } else if (thosePresent == atkTeam) {
+      for (var i = 0; i < thosePresent.length; i++) {
+        // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
+        var defenseLine = false;
+        for (var j = 0; j < defTeam.length; j++) {
+          if (thosePresent[i].nextDirection == "north" && defTeam[j] == "south") {
+            defenseLine = true;
+          } else if (thosePresent[i].nextDirection == "south" && defTeam[j] == "north") {
+            defenseLine = true;
+          } else if (thosePresent[i].nextDirection == "west" && defTeam[j] == "east") {
+            defenseLine = true;
+          } else if (thosePresent[i].nextDirection == "east" && defTeam[j] == "west") {
+            defenseLine = true;
+          };
+        };
+        if (defenseLine == false) {
+          finalScore += 50
+        };
+      }
+    };
+    // add minor points to defender if "attack: false"
+    // add major points to defender if "direction" opposite of attacker "direction"
+    // add minor points to defender if "direction" is "center"
+    // add major points to attacker if defender "direction" is NOT oppoite OR "center"
+    // add major points to defender if battlefield "terrain" is "hill"
+    // add minor points to defender if battlefield "terrain" is "woods"
+    // add major points to attacker if battlefield "terrain" is "field"
+    // add major points to defender if battlefield "cover" is "heavy"
+    // add minor points to defender if battlefield "cover" is "light"
+    // add major points to attacker if battlefield "cover" is "none"
+    return finalScore
+  }
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
@@ -647,7 +722,7 @@ $(()=>{
       battleReport.push(attackOrder);
     } else {
       if (unitReport.direction == "center") {
-        var defendOrder = " The " + unitReport.name + " will set a central defense.";
+        var defendOrder = " The " + unitReport.name + " will set up a central defense.";
       } else {
         var defendOrder = " The " + unitReport.name + " will set a defensive position to the " + unitReport.nextDirection + ".";
       };
@@ -673,15 +748,21 @@ $(()=>{
       issueOneOrder();
     };
     for (var i = 0; i < selectedCavalry.length; i++) {
-      selectedUnit = currentPlayer.cavalry[i];
+      selectedUnit = selectedCavalry[i];
       issueOneOrder();
     };
     for (var i = 0; i < selectedArtillery.length; i++) {
-      selectedUnit = currentPlayer.artillery[i];
+      selectedUnit = selectedArtillery[i];
       issueOneOrder();
     };
 
-    // Insert the battle function here
+    for (var i = 0; i < allGrids.length; i++) {
+      var battlefield = allGrids[i];
+      if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
+        // console.log(battlefield);
+        battleSequence(battlefield);
+      }
+    };
 
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
@@ -722,7 +803,7 @@ $(()=>{
       currentPlayer = blueTeam;
       oppositePlayer = redTeam;
     };
-    console.log("It is now the " + currentPlayer.teamName + " team's turn.");
+    console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
     removeAllColors();
     console.log(allGrids);
   };
