@@ -639,31 +639,32 @@ $(()=>{
       // I think I set up the below line IOT keep a player's unit from continuing in that direction on its own, but I had to take it off because nextDirection is important for the scores in "battleSequence". Find a different way to prevent them from moving on their own AFTER the battle.
       // selectedUnit.nextDirection = "center";
       selectedUnit.attack = false;
+      console.log(selectedUnit);
     };
   };
 
   const battleSequence = (grid) => {
-    var attackerScore = null;
+    var attackerScore = 0;
     var allAttackers = "test";
     if (currentPlayer.teamName == "blue") {
       allAttackers = grid.bluePresent
     } else {
       allAttackers = grid.redPresent
     };
-    var defenderScore = null;
+    var defenderScore = 0;
     var allDefenders = "test";
     if (currentPlayer.teamName == "blue") {
       allDefenders = grid.redPresent
     } else {
       allDefenders = grid.bluePresent
     };
-    defenderScore = addPoints(allDefenders,allAttackers,allDefenders);
-    attackerScore = addPoints(allAttackers,allAttackers,allDefenders);
+    defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid);
+    attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid);
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
   }
 
-  const addPoints = (thosePresent,atkTeam,defTeam) => {
+  const addPoints = (thosePresent,atkTeam,defTeam,oneGrid) => {
     var finalScore = 0;
     var atkDir = [];
     var defDir = [];
@@ -674,47 +675,95 @@ $(()=>{
     for (var b = 0; b < defTeam.length; b++) {
       defDir.push(defTeam[b].nextDirection);
     };
-    console.log(atkDir);
-    console.log(defDir);
+    // console.log(atkDir);
+    // console.log(defDir);
     if (thosePresent == defTeam) {
+      // console.log(defTeam);
+      // console.log(atkTeam);
       for (var i = 0; i < thosePresent.length; i++) {
+        console.log(thosePresent[i].name);
         // add minor points to defender if "attack: false"
         if (thosePresent[i].attack == false) {
           finalScore += 10;
+          console.log("Prepared defenses: +10");
         };
-      }
-    } else if (thosePresent == atkTeam) {
-      for (var i = 0; i < thosePresent.length; i++) {
-        // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
-        var defenseLine = false;
-        for (var j = 0; j < defTeam.length; j++) {
-          if (thosePresent[i].nextDirection == "north" && defTeam[j] == "south") {
-            defenseLine = true;
-          } else if (thosePresent[i].nextDirection == "south" && defTeam[j] == "north") {
-            defenseLine = true;
-          } else if (thosePresent[i].nextDirection == "west" && defTeam[j] == "east") {
-            defenseLine = true;
-          } else if (thosePresent[i].nextDirection == "east" && defTeam[j] == "west") {
-            defenseLine = true;
+        // add major points to defender if "direction" opposite of attacker "direction"
+        var defenseLine = 0;
+        for (var j = 0; j < atkTeam.length; j++) {
+          if (thosePresent[i].direction == "north" && atkTeam[j].nextDirection == "south") {
+            defenseLine += 1;
+          } else if (thosePresent[i].direction == "south" && atkTeam[j].nextDirection == "north") {
+            defenseLine += 1;
+          } else if (thosePresent[i].direction == "west" && atkTeam[j].nextDirection == "east") {
+            defenseLine += 1;
+          } else if (thosePresent[i].direction == "east" && atkTeam[j].nextDirection == "west") {
+            defenseLine += 1;
+          };
+          if (defenseLine > 0) {
+            finalScore += 40;
+            console.log("Strong defensive line: +40");
           };
         };
-        if (defenseLine == false) {
-          finalScore += 50
+        // add major points to defender if battlefield "terrain" is "hill"
+        // add minor points to defender if battlefield "terrain" is "woods"
+        if (oneGrid.terrain == "hill") {
+          finalScore += 60;
+          console.log("Took the high ground: +60");
+        } else if (oneGrid.terrain == "woods") {
+          finalScore += 20;
+          console.log("Some protection from trees: +20")
         };
+        // add major points to defender if battlefield "cover" is "heavy"
+        // add minor points to defender if battlefield "cover" is "light"
+        if (oneGrid.cover == "heavy") {
+          finalScore += 40;
+          console.log("Thick concealment: +40");
+        } else if (oneGrid.cover == "light") {
+          finalScore += 20;
+          console.log("Some concealment: +20");
+        }
       }
-    };
-    // add minor points to defender if "attack: false"
-    // add major points to defender if "direction" opposite of attacker "direction"
-    // add minor points to defender if "direction" is "center"
-    // add major points to attacker if defender "direction" is NOT oppoite OR "center"
-    // add major points to defender if battlefield "terrain" is "hill"
-    // add minor points to defender if battlefield "terrain" is "woods"
-    // add major points to attacker if battlefield "terrain" is "field"
-    // add major points to defender if battlefield "cover" is "heavy"
-    // add minor points to defender if battlefield "cover" is "light"
-    // add major points to attacker if battlefield "cover" is "none"
+    } else if (thosePresent == atkTeam) {
+      // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
+      // add minor points to attacker if attacker meets "nextDirection: center"
+      for (var i = 0; i < thosePresent.length; i++) {
+        console.log(thosePresent[i].name);
+        var defenseLine = 0;
+        var defenseCenter = 0;
+        for (var j = 0; j < defTeam.length; j++) {
+          if (thosePresent[i].nextDirection == "north" && defTeam[j].direction == "south") {
+            defenseLine += 1;
+          } else if (thosePresent[i].nextDirection == "south" && defTeam[j].direction == "north") {
+            defenseLine += 1;
+          } else if (thosePresent[i].nextDirection == "west" && defTeam[j].direction == "east") {
+            defenseLine += 1;
+          } else if (thosePresent[i].nextDirection == "east" && defTeam[j].direction == "west") {
+            defenseLine += 1;
+          } else if (defTeam[j].direction == "center") {
+            defenseCenter += 1;
+          };
+        };
+        if (defenseLine == 0 && defenseCenter == 0) {
+          finalScore += 60;
+          console.log("Flanked defensive line: +60");
+        } else if (defenseLine == 0 && defenseCenter > 0) {
+          finalScore += 20;
+          console.log("Hit thin defensive line: +20");
+        };
+      };
+      // add major points to attacker if battlefield "terrain" is "field"
+      if (oneGrid.terrain == "field") {
+        finalScore += 30;
+        console.log("Enemy in open field: +30");
+      };
+      // add major points to attacker if battlefield "cover" is "none"
+      if (oneGrid.cover == "none") {
+        finalScore += 30;
+        console.log("Enemy had no concealment: +30")
+      }
+    }
     return finalScore
-  }
+  };
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
