@@ -684,8 +684,10 @@ $(()=>{
         hitArray = allAttackers;
       };
       if (tookHit.health <= 0) {
+        tookHit.active = false;
         hitArray.splice(0,1);
         console.log("The " + tookHit.name + " was defeated!");
+        console.log("tookHit.active: " + tookHit.active)
       }
     }
   }
@@ -834,10 +836,11 @@ $(()=>{
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
-        // console.log(battlefield);
         battleSequence(battlefield);
-      }
+      };
     };
+
+    // This must change the images show that the remaining unit/team is shown in the grid where they won.
 
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
@@ -1001,93 +1004,89 @@ $(()=>{
       var gridIDcenter = gridID + "_center";
       for (var i = 0; i < unitType.length; i++) {
         if (unitType[i].xValue == allGrids[currentGrid].xValue && unitType[i].yValue == allGrids[currentGrid].yValue) {
-          if (unitType[i].direction == "north") {
-            $(gridIDnorth).text("IN");
-            if (oneTeam == blueTeam) {
-              $(gridIDnorth).css('color','white').css('background-color','blue');
-            } else if (oneTeam == redTeam) {
-              $(gridIDnorth).css('color','black').css('background-color','red');
+          if (unitType[i].active == true) {
+            if (unitType[i].direction == "north") {
+              if (unitType[i].type == "IN") {
+                $(gridIDnorth).text("IN");
+              } else if (unitType[i].type == "CAV") {
+                $(gridIDnorth).text("CAV");
+              } else if (unitType[i].type == "AR") {
+                $(gridIDnorth).text("AR");
+              };
+              if (oneTeam == blueTeam) {
+                $(gridIDnorth).css('color','white').css('background-color','blue');
+              } else if (oneTeam == redTeam) {
+                $(gridIDnorth).css('color','black').css('background-color','red');
+              } else {
+                console.log("Error ")
+              };
+            } else if (unitType[i].direction == "east") {
+              if (unitType[i].type == "IN") {
+                $(gridIDeast).text("IN");
+              } else if (unitType[i].type == "CAV") {
+                $(gridIDeast).text("CAV");
+              } else if (unitType[i].type == "AR") {
+                $(gridIDeast).text("AR");
+              };
+              if (oneTeam == blueTeam) {
+                $(gridIDeast).css('color','white').css('background-color','blue');
+              } else if (oneTeam == redTeam) {
+                $(gridIDeast).css('color','black').css('background-color','red');
+              } else {
+                console.log("Error ")
+              };
+            } else if (unitType[i].direction == "south") {
+              if (unitType[i].type == "IN") {
+                $(gridIDsouth).text("IN");
+              } else if (unitType[i].type == "CAV") {
+                $(gridIDsouth).text("CAV");
+              } else if (unitType[i].type == "AR") {
+                $(gridIDsouth).text("AR");
+              };
+              if (oneTeam == blueTeam) {
+                $(gridIDsouth).css('color','white').css('background-color','blue');
+              } else if (oneTeam == redTeam) {
+                $(gridIDsouth).css('color','black').css('background-color','red');
+              } else {
+                console.log("Error ")
+              };
+            } else if (unitType[i].direction == "west") {
+              if (unitType[i].type == "IN") {
+                $(gridIDwest).text("IN");
+              } else if (unitType[i].type == "CAV") {
+                $(gridIDwest).text("CAV");
+              } else if (unitType[i].type == "AR") {
+                $(gridIDwest).text("AR");
+              };
+              if (oneTeam == blueTeam) {
+                $(gridIDwest).css('color','white').css('background-color','blue');
+              } else if (oneTeam == redTeam) {
+                $(gridIDwest).css('color','black').css('background-color','red');
+              } else {
+                console.log("Error ")
+              };
+            } else if (unitType[i].direction == "center") {
+              if (unitType[i].type == "IN") {
+                $(gridIDcenter).text("IN");
+              } else if (unitType[i].type == "CAV") {
+                $(gridIDcenter).text("CAV");
+              } else if (unitType[i].type == "AR") {
+                $(gridIDcenter).text("AR");
+              };
+              if (oneTeam == blueTeam) {
+                $(gridIDcenter).css('color','white').css('background-color','blue');
+              } else if (oneTeam == redTeam) {
+                $(gridIDcenter).css('color','black').css('background-color','red');
+              } else {
+                console.log("Error ")
+              };
             } else {
-              console.log("Error ")
-            };
-          } else if (unitType[i].direction == "east") {
-            $(gridIDeast).text("IN");
-            if (oneTeam == blueTeam) {
-              $(gridIDeast).css('color','white').css('background-color','blue');
-            } else if (oneTeam == redTeam) {
-              $(gridIDeast).css('color','black').css('background-color','red');
-            } else {
-              console.log("Error ")
-            };
-          } else if (unitType[i].direction == "south") {
-            $(gridIDsouth).text("IN");
-            if (oneTeam == blueTeam) {
-              $(gridIDsouth).css('color','white').css('background-color','blue');
-            } else if (oneTeam == redTeam) {
-              $(gridIDsouth).css('color','black').css('background-color','red');
-            } else {
-              console.log("Error ")
-            };
-          } else if (unitType[i].direction == "west") {
-            $(gridIDwest).text("IN");
-            if (oneTeam == blueTeam) {
-              $(gridIDwest).css('color','white').css('background-color','blue');
-            } else if (oneTeam == redTeam) {
-              $(gridIDwest).css('color','black').css('background-color','red');
-            } else {
-              console.log("Error ")
-            };
-          } else if (unitType[i].direction == "center") {
-            $(gridIDcenter).text("IN");
-            if (oneTeam == blueTeam) {
-              $(gridIDcenter).css('color','white').css('background-color','blue');
-            } else if (oneTeam == redTeam) {
-              $(gridIDcenter).css('color','black').css('background-color','red');
-            } else {
-              console.log("Error ")
-            };
-          } else {
-            console.log("No direction")
-          }
-        }
-      };
-      for (var i = 0; i < oneTeam.cavalry.length; i++) {
-        // console.log("cavalry for loop: " + i);
-        if (oneTeam.cavalry[i].xValue == allGrids[currentGrid].xValue && oneTeam.cavalry[i].yValue == allGrids[currentGrid].yValue) {
-          if (oneTeam.cavalry[i].direction == "north") {
-            $(gridIDnorth).text("CAV");
-          } else if (oneTeam.cavalry[i].direction == "east") {
-            $(gridIDeast).text("CAV");
-          } else if (oneTeam.cavalry[i].direction == "south") {
-            $(gridIDsouth).text("CAV");
-          } else if (oneTeam.cavalry[i].direction == "west") {
-            $(gridIDwest).text("CAV");
-          } else if (oneTeam.cavalry[i].direction == "center") {
-            $(gridIDcenter).text("CAV");
-          } else {
-            console.log("No direction")
-          }
-        }
-      };
-      for (var i = 0; i < oneTeam.artillery.length; i++) {
-        // console.log("artillery for loop: " + i);
-        if (oneTeam.artillery[i].xValue == allGrids[currentGrid].xValue && oneTeam.artillery[i].yValue == allGrids[currentGrid].yValue) {
-          if (oneTeam.artillery[i].direction == "north") {
-            $(gridIDnorth).text("AR");
-          } else if (oneTeam.artillery[i].direction == "east") {
-            $(gridIDeast).text("AR");
-          } else if (oneTeam.artillery[i].direction == "south") {
-            $(gridIDsouth).text("AR");
-          } else if (oneTeam.artillery[i].direction == "west") {
-            $(gridIDwest).text("AR");
-          } else if (oneTeam.artillery[i].direction == "center") {
-            $(gridIDcenter).text("AR");
-          } else {
-            console.log("No direction")
+              console.log("No direction")
+            }
           }
         }
       }
-    };
+    }
     // console.log("End showGridUnits function");
   };
 
