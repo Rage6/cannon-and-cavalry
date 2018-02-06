@@ -626,7 +626,7 @@ $(()=>{
     }
   };
 
-  // In this, a unit's the values of "xValue", "yValue", and "direction" are all changed to their "next" partner's values, and the "nextValues" are now null.
+  // In this, a unit's values of "xValue", "yValue", and "direction" are all changed to their "next" partner's values, and the "nextValues" are now null.
   const changeCurrentValues = () => {
     if (selectedUnit.nextXvalue != null && selectedUnit.nextYvalue != null) {
       selectedUnit.xValue = selectedUnit.nextXvalue;
@@ -639,7 +639,6 @@ $(()=>{
       // I think I set up the below line IOT keep a player's unit from continuing in that direction on its own, but I had to take it off because nextDirection is important for the scores in "battleSequence". Find a different way to prevent them from moving on their own AFTER the battle.
       // selectedUnit.nextDirection = "center";
       selectedUnit.attack = false;
-      console.log(selectedUnit);
     };
   };
 
@@ -662,6 +661,33 @@ $(()=>{
     attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid);
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
+    while (allDefenders.length > 0 && allAttackers.length > 0) {
+      // Fix the below two variables later for when multiple units show up
+      var attackerIndex = Math.floor(Math.random() * Math.floor(allAttackers.length));
+      var attackerUnit = allAttackers[attackerIndex];
+      var defenderIndex = Math.floor(Math.random() * Math.floor(allDefenders.length));
+      var defenderUnit = allDefenders[defenderIndex];
+      var tookHit = null;
+      var hitArray = null;
+      var totalScore = defenderScore + attackerScore;
+      var attackerChance = attackerScore / totalScore;
+      var chanceNumber = Math.random();
+      if (chanceNumber < attackerChance) {
+        defenderUnit.health -= 2;
+        console.log(defenderUnit.name + " took a hit!");
+        tookHit = defenderUnit;
+        hitArray = allDefenders;
+      } else {
+        attackerUnit.health -= 2;
+        console.log(attackerUnit.name + " took a hit!");
+        tookHit = attackerUnit;
+        hitArray = allAttackers;
+      };
+      if (tookHit.health <= 0) {
+        hitArray.splice(0,1);
+        console.log("The " + tookHit.name + " was defeated!");
+      }
+    }
   }
 
   const addPoints = (thosePresent,atkTeam,defTeam,oneGrid) => {
