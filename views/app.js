@@ -637,9 +637,13 @@ $(()=>{
     if (selectedUnit.attack == true) {
       selectedUnit.direction = "center";
       // I think I set up the below line IOT keep a player's unit from continuing in that direction on its own, but I had to take it off because nextDirection is important for the scores in "battleSequence". Find a different way to prevent them from moving on their own AFTER the battle.
-      // selectedUnit.nextDirection = "center";
+      selectedUnit.nextDirection = "center";
       selectedUnit.attack = false;
-    };
+    } else if (selectedUnit.attack == false) {
+      selectedUnit.nextDirection = selectedUnit.direction;
+    } else {
+      console.log("Error in changeCurrentValues.")
+    }
   };
 
   const battleSequence = (grid) => {
@@ -662,12 +666,14 @@ $(()=>{
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
     while (allDefenders.length > 0 && allAttackers.length > 0) {
-      // Fix the below two variables later for when multiple units show up
       var attackerIndex = Math.floor(Math.random() * Math.floor(allAttackers.length));
       var attackerUnit = allAttackers[attackerIndex];
+      // console.log("Attacker Unit: " + attackerUnit.name);
       var defenderIndex = Math.floor(Math.random() * Math.floor(allDefenders.length));
       var defenderUnit = allDefenders[defenderIndex];
+      // console.log("Defender Unit: " + defenderUnit.name);
       var tookHit = null;
+      var hitIndex = null;
       var hitArray = null;
       var totalScore = defenderScore + attackerScore;
       var attackerChance = attackerScore / totalScore;
@@ -676,18 +682,20 @@ $(()=>{
         defenderUnit.health -= 2;
         console.log(defenderUnit.name + " took a hit!");
         tookHit = defenderUnit;
+        hitIndex = defenderIndex;
         hitArray = allDefenders;
       } else {
         attackerUnit.health -= 2;
         console.log(attackerUnit.name + " took a hit!");
         tookHit = attackerUnit;
+        hitIndex = attackerIndex;
         hitArray = allAttackers;
       };
       if (tookHit.health <= 0) {
         tookHit.active = false;
-        hitArray.splice(0,1);
-        console.log("The " + tookHit.name + " was defeated!");
-        console.log("tookHit.active: " + tookHit.active)
+        hitArray.splice(hitIndex,1);
+        console.log("The " + tookHit.name + " was defeated! The remaining units are...");
+        console.log(hitArray);
       }
     }
   }
@@ -703,11 +711,7 @@ $(()=>{
     for (var b = 0; b < defTeam.length; b++) {
       defDir.push(defTeam[b].nextDirection);
     };
-    // console.log(atkDir);
-    // console.log(defDir);
     if (thosePresent == defTeam) {
-      // console.log(defTeam);
-      // console.log(atkTeam);
       for (var i = 0; i < thosePresent.length; i++) {
         console.log(thosePresent[i].name);
         // add minor points to defender if "attack: false"
@@ -816,6 +820,16 @@ $(()=>{
     };
   }
 
+  const checkUnitsLeft = (unitType) => {
+    var numLeft = 0;
+    for (var i = 0; i < unitType.length; i++) {
+      if (unitType[i].active == true) {
+        numLeft += 1
+      }
+    }
+    return numLeft
+  };
+
   const issueAllOrders = () => {
     selectedInfantry = currentPlayer.infantry;
     selectedCavalry = currentPlayer.cavalry;
@@ -839,8 +853,6 @@ $(()=>{
         battleSequence(battlefield);
       };
     };
-
-    // This must change the images show that the remaining unit/team is shown in the grid where they won.
 
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
@@ -873,6 +885,11 @@ $(()=>{
     showGridUnits(currentPlayer, selectedInfantry);
     showGridUnits(currentPlayer, selectedCavalry);
     showGridUnits(currentPlayer, selectedArtillery);
+    showGridUnits(oppositePlayer, oppositePlayer.infantry);
+    showGridUnits(oppositePlayer, oppositePlayer.cavalry);
+    showGridUnits(oppositePlayer, oppositePlayer.artillery);
+    console.log("Current Player: " + currentPlayer.teamName);
+    console.log("Opposite Player: " + oppositePlayer.teamName);
     battleReport = [];
     if (currentPlayer == blueTeam) {
       currentPlayer = redTeam;
@@ -881,9 +898,24 @@ $(()=>{
       currentPlayer = blueTeam;
       oppositePlayer = redTeam;
     };
-    console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
-    removeAllColors();
-    console.log(allGrids);
+    // The remaining left in issueAllOrders checks to see if someone's won yet
+    var blueCavLeft = checkUnitsLeft(blueTeam.cavalry);
+    var blueInLeft  = checkUnitsLeft(blueTeam.infantry);
+    var blueArLeft  = checkUnitsLeft(blueTeam.artillery);
+    var blueUnitsLeft = blueCavLeft + blueInLeft + blueArLeft;
+    var redCavLeft = checkUnitsLeft(redTeam.cavalry);
+    var redInLeft  = checkUnitsLeft(redTeam.infantry);
+    var redArLeft  = checkUnitsLeft(redTeam.artillery);
+    var redUnitsLeft = redCavLeft + redInLeft + redArLeft;
+    if (blueUnitsLeft <= 0) {
+      console.log(redTeam.teamName + " has won the battle! Congratulations!");
+    } else if (redUnitsLeft <= 0) {
+      console.log(blueTeam.teamName + " has won the battle! Congratulations!");
+    } else {
+      console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
+      removeAllColors();
+      console.log(allGrids);
+    }
   };
 
   $('#ordersButton').click(issueAllOrders);
