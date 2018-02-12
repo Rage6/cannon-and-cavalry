@@ -888,8 +888,6 @@ $(()=>{
     showGridUnits(oppositePlayer, oppositePlayer.infantry);
     showGridUnits(oppositePlayer, oppositePlayer.cavalry);
     showGridUnits(oppositePlayer, oppositePlayer.artillery);
-    console.log("Current Player: " + currentPlayer.teamName);
-    console.log("Opposite Player: " + oppositePlayer.teamName);
     battleReport = [];
     if (currentPlayer == blueTeam) {
       currentPlayer = redTeam;
@@ -945,11 +943,11 @@ $(()=>{
       for (var e = 0; e < allDirections.length; e++) {
         var removeColorHere = coordinates + allDirections[e];
         if (allGrids[d].bluePresent.length > 0) {
-          $(removeColorHere).css('color','white');
+          $(removeColorHere).css('color','white').css("border","0px solid transparent");
         } else if (allGrids[d].redPresent.length > 0) {
-          $(removeColorHere).css('color','black');
+          $(removeColorHere).css('color','black').css("border","0px solid transparent");
         } else {
-          $(removeColorHere).css('color','transparent');
+          $(removeColorHere).css('color','transparent').css("border","0px solid transparent");
         }
       }
     }
@@ -966,7 +964,7 @@ $(()=>{
     selectedUnit = currentPlayer.infantry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
+    $(gridAndDirection).css("border","5px solid yellow");
     selectedValues();
   };
 
@@ -987,7 +985,7 @@ $(()=>{
     selectedUnit = currentPlayer.cavalry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
+    $(gridAndDirection).css("border","5px solid yellow");
     selectedValues();
   };
 
@@ -1008,7 +1006,7 @@ $(()=>{
     selectedUnit = currentPlayer.artillery[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css('color','orange');
+    $(gridAndDirection).css("border","5px solid yellow");
     selectedValues();
   };
 
@@ -1034,6 +1032,11 @@ $(()=>{
       var gridIDsouth = gridID + "_south";
       var gridIDwest = gridID + "_west";
       var gridIDcenter = gridID + "_center";
+      $("#gridIDnorth").css("border","0px solid transparent");
+      $("#gridIDeast").css("border","0px solid transparent");
+      $("#gridIDsouth").css("border","0px solid transparent");
+      $("#gridIDwest").css("border","0px solid transparent");
+      $("#gridIDcenter").css("border","0px solid transparent");
       for (var i = 0; i < unitType.length; i++) {
         if (unitType[i].xValue == allGrids[currentGrid].xValue && unitType[i].yValue == allGrids[currentGrid].yValue) {
           if (unitType[i].active == true) {
