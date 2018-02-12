@@ -59,7 +59,7 @@ div.title {
   -ms-height: 24%;
   height: 24%; }
   .gridSquare .topLine {
-    margin: 0;
+    margin: 0 20%;
     height: 20%; }
   .gridSquare .centerLine {
     margin: 0;
