@@ -287,9 +287,23 @@ $(()=>{
   unitsInAllGrids();
   console.log(allGrids)
 
+  const showCurrentPlayer = () => {
+    if (currentPlayer == blueTeam) {
+      $("#blueTitle").css("background-color","yellow");
+      $("#redTitle").css("background-color","transparent");
+    } else if (currentPlayer == redTeam) {
+      $("#blueTitle").css("background-color","transparent");
+      $("#redTitle").css("background-color","yellow");
+    } else {
+      console.log("Error");
+    };
+  };
+
   // The blueTeam starts by default
   var currentPlayer = blueTeam;
   var oppositePlayer = redTeam;
+
+  showCurrentPlayer();
 
   // To display all of a team's units
   const infantryColumn = (displayTeam) =>{
@@ -661,8 +675,9 @@ $(()=>{
     } else {
       allDefenders = grid.bluePresent
     };
-    defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid);
-    attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid);
+    var defLineUse = false;
+    defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid,defLineUse);
+    attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid,defLineUse);
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
     while (allDefenders.length > 0 && allAttackers.length > 0) {
@@ -700,7 +715,7 @@ $(()=>{
     }
   }
 
-  const addPoints = (thosePresent,atkTeam,defTeam,oneGrid) => {
+  const addPoints = (thosePresent,atkTeam,defTeam,oneGrid,defLineStatus) => {
     var finalScore = 0;
     var atkDir = [];
     var defDir = [];
@@ -713,6 +728,7 @@ $(()=>{
     };
     if (thosePresent == defTeam) {
       for (var i = 0; i < thosePresent.length; i++) {
+        console.log("Defending Units: ");
         console.log(thosePresent[i].name);
         // add minor points to defender if "attack: false"
         if (thosePresent[i].attack == false) {
@@ -731,8 +747,9 @@ $(()=>{
           } else if (thosePresent[i].direction == "east" && atkTeam[j].nextDirection == "west") {
             defenseLine += 1;
           };
-          if (defenseLine > 0) {
+          if (defenseLine > 0 && defLineStatus == false) {
             finalScore += 40;
+            defLineStatus = true;
             console.log("Strong defensive line: +40");
           };
         };
@@ -759,6 +776,7 @@ $(()=>{
       // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
       // add minor points to attacker if attacker meets "nextDirection: center"
       for (var i = 0; i < thosePresent.length; i++) {
+        console.log("Attacking Units: ");
         console.log(thosePresent[i].name);
         var defenseLine = 0;
         var defenseCenter = 0;
@@ -910,6 +928,7 @@ $(()=>{
     } else if (redUnitsLeft <= 0) {
       console.log(blueTeam.teamName + " has won the battle! Congratulations!");
     } else {
+      showCurrentPlayer();
       console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
       removeAllColors();
       console.log(allGrids);
@@ -934,14 +953,39 @@ $(()=>{
   };
 
   var gridAndDirection = null;
-  const allDirections = ["_north", "_east", "_south", "_west", "_center"];
 
   // This will reset all of the text color after a) a new unit is selected or b) all of the orders have been issued
   const removeAllColors = () => {
+    const allDirections = ["_north", "_east", "_south", "_west", "_center"];
     for (var d = 0; d < allGrids.length; d++) {
       var coordinates = "#x" + allGrids[d].xValue + "y" + allGrids[d].yValue;
       for (var e = 0; e < allDirections.length; e++) {
         var removeColorHere = coordinates + allDirections[e];
+
+        // START: This makes any directed, defensive lines disappear if the defenders were defeated
+        var notCenter = false;
+        for (var f = 0; f < allGrids[d].bluePresent.length; f++) {
+          if (allGrids[d].bluePresent[f].direction != "center") {
+            notCenter = true;
+          }
+        };
+        for (var f = 0; f < allGrids[d].redPresent.length; f++) {
+          if (allGrids[d].redPresent[f].direction != "center") {
+            notCenter = true;
+          }
+        };
+        if (notCenter == false) {
+          var northDefLine = coordinates + "_north";
+          var eastDefLine = coordinates + "_east";
+          var southDefLine = coordinates + "_south";
+          var westDefLine = coordinates + "_west";
+          $(northDefLine).css("background-color","transparent").text("");
+          $(eastDefLine).css("background-color","transparent").text("");
+          $(southDefLine).css("background-color","transparent").text("");
+          $(westDefLine).css("background-color","transparent").text("");
+        };
+        // END
+
         if (allGrids[d].bluePresent.length > 0) {
           $(removeColorHere).css('color','white').css("border","0px solid transparent");
         } else if (allGrids[d].redPresent.length > 0) {
