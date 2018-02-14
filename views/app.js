@@ -556,8 +556,9 @@ $(()=>{
   };
 
 // This determines a) if a unit is going to move and b) where it's new location will be
-  const issueOneOrder = () => {
+  const issueOneOrder = (ordersCarriedOut) => {
     if (selectedUnit.attack == true) {
+      console.log(selectedUnit.name + ": attack");
       // something will be needed here to checks for water @ next grid
       // something here will block this unit from moving if the nextGrid already has a friend unit there
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
@@ -615,18 +616,70 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue;
       };
     } else if (selectedUnit.attack == false) {
+      // console.log(selectedUnit.name + ": defend");
       var currentGrid = findCurrentGrid();
       var nextGrid = currentGrid;
       var currentDirection = selectedUnit.direction;
-      var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
-      $(currentID).text("").css("background-color","transparent");
-      selectedUnit.direction = selectedUnit.nextDirection;
-      selectedUnit.nextXvalue = currentGrid.xValue;
-      selectedUnit.nextYvalue = currentGrid.yValue;
+
+      // This whole stretched is to prevent muliple units from filling the same defensive line /A
+      var blockLine = false;
+      var activeUnits = [];
+      // Within that, this finds all of the team's ACTIVE units before comparing them. The active units are then put in the activeUnits array /B
+      const currentInfType = currentPlayer.infantry;
+      const currentCavType = currentPlayer.cavalry;
+      const currentArType = currentPlayer.artillery;
+      const typeUnitsActive = (type) => {
+        for (var m = 0; m < type.length; m++) {
+          if (type[m].active == true) {
+            return activeUnits.push(type[m]);
+          }
+        }
+      };
+      typeUnitsActive(currentInfType);
+      typeUnitsActive(currentCavType);
+      typeUnitsActive(currentArType);
+      // -b
+      // Now, it identifies the selectedUnit in the activeUnits arrays and its number /C
+      var orderNumber = null;
+      var orderUnit = null;
+      for (var n = 0; n < activeUnits.length; n++) {
+        if (selectedUnit.name == activeUnits[n].name) {
+          orderNumber = n;
+          orderUnit = activeUnits[n];
+          // console.log("orderNumber: " + orderNumber);
+        }
+      };
+      // -c
+      // Now that you can find a the right unit in the activeUnits array, it can compare it's potential defensive line to the other units /D
+      for (var o = 0; o < activeUnits.length; o++) {
+        if (orderNumber > o) {
+          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].direction == selectedUnit.direction) {
+            blockLine = true;
+          }
+        } else if (orderNumber < o) {
+          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].nextDirection == selectedUnit.nextDirection && activeUnits[o].direction == selectedUnit.nextDirection) {
+            blockLine = true;
+          }
+        };
+      };
+      // -d
+      if (blockLine == true) {
+        // errorPresent
+      } else {
+        var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
+        $(currentID).text("").css("background-color","transparent");
+        selectedUnit.direction = selectedUnit.nextDirection;
+        selectedUnit.nextXvalue = currentGrid.xValue;
+        selectedUnit.nextYvalue = currentGrid.yValue;
+      };
+      // -a
       showBattleReport(selectedUnit);
     } else {
       console.log("An error occurred in issueOneOrder.");
     };
+    ordersCarriedOut.push(selectedUnit);
+    console.log("ordersCarriedOut: ")
+    console.log(ordersCarriedOut);
   };
 
   // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
@@ -849,22 +902,23 @@ $(()=>{
   };
 
   const issueAllOrders = () => {
+    var ordersDone = [];
     selectedInfantry = currentPlayer.infantry;
     selectedCavalry = currentPlayer.cavalry;
     selectedArtillery = currentPlayer.artillery;
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
-      issueOneOrder();
+      issueOneOrder(ordersDone);
     };
     for (var i = 0; i < selectedCavalry.length; i++) {
       selectedUnit = selectedCavalry[i];
-      issueOneOrder();
+      issueOneOrder(ordersDone);
     };
     for (var i = 0; i < selectedArtillery.length; i++) {
       selectedUnit = selectedArtillery[i];
-      issueOneOrder();
+      issueOneOrder(ordersDone);
     };
-
+    // console.log(ordersDone);
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
