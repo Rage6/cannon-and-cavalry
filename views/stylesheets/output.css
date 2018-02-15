@@ -7,6 +7,9 @@ body {
 div.title {
   text-align: center; }
 
+.unitButton {
+  cursor: pointer; }
+
 #mainTitle {
   margin: 20px 10% 40px 10%;
   font-size: 4.5em;
