@@ -560,7 +560,6 @@ $(()=>{
     if (selectedUnit.attack == true) {
       console.log(selectedUnit.name + ": attack");
       // something will be needed here to checks for water @ next grid
-      // something here will block this unit from moving if the nextGrid already has a friend unit there
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
         showBattleReport(selectedUnit);
         selectedUnit.nextXvalue = selectedUnit.xValue;
@@ -616,15 +615,14 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue;
       };
     } else if (selectedUnit.attack == false) {
-      // console.log(selectedUnit.name + ": defend");
+      console.log(selectedUnit.name + ": defend");
       var currentGrid = findCurrentGrid();
       var nextGrid = currentGrid;
       var currentDirection = selectedUnit.direction;
 
-      // This whole stretched is to prevent muliple units from filling the same defensive line /A
+      // This whole stretched is to prevent muliple units from filling the same defensive line
       var blockLine = false;
       var activeUnits = [];
-      // Within that, this finds all of the team's ACTIVE units before comparing them. The active units are then put in the activeUnits array /B
       const currentInfType = currentPlayer.infantry;
       const currentCavType = currentPlayer.cavalry;
       const currentArType = currentPlayer.artillery;
@@ -638,22 +636,17 @@ $(()=>{
       typeUnitsActive(currentInfType);
       typeUnitsActive(currentCavType);
       typeUnitsActive(currentArType);
-      // -b
-      // Now, it identifies the selectedUnit in the activeUnits arrays and its number /C
       var orderNumber = null;
       var orderUnit = null;
       for (var n = 0; n < activeUnits.length; n++) {
         if (selectedUnit.name == activeUnits[n].name) {
           orderNumber = n;
           orderUnit = activeUnits[n];
-          // console.log("orderNumber: " + orderNumber);
         }
       };
-      // -c
-      // Now that you can find a the right unit in the activeUnits array, it can compare it's potential defensive line to the other units /D
       for (var o = 0; o < activeUnits.length; o++) {
         if (orderNumber > o) {
-          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].direction == selectedUnit.direction) {
+          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].direction == selectedUnit.nextDirection) {
             blockLine = true;
           }
         } else if (orderNumber < o) {
@@ -662,9 +655,8 @@ $(()=>{
           }
         };
       };
-      // -d
       if (blockLine == true) {
-        // errorPresent
+        // somehow make this show up in the battle report; use errorPresent?
       } else {
         var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
         $(currentID).text("").css("background-color","transparent");
@@ -672,14 +664,13 @@ $(()=>{
         selectedUnit.nextXvalue = currentGrid.xValue;
         selectedUnit.nextYvalue = currentGrid.yValue;
       };
-      // -a
+
       showBattleReport(selectedUnit);
     } else {
       console.log("An error occurred in issueOneOrder.");
     };
     ordersCarriedOut.push(selectedUnit);
-    console.log("ordersCarriedOut: ")
-    console.log(ordersCarriedOut);
+    console.log("ordersCarriedOut: " + ordersCarriedOut.length);
   };
 
   // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
@@ -1066,17 +1057,29 @@ $(()=>{
     selectedValues();
   };
 
-  $("#blueIn0").click(0, newClickNum).click(infantryNumSelect);
-  $("#blueIn1").click(1, newClickNum).click(infantryNumSelect);
-  $("#blueIn2").click(2, newClickNum).click(infantryNumSelect);
-  $("#blueIn3").click(3, newClickNum).click(infantryNumSelect);
-  $("#blueIn4").click(4, newClickNum).click(infantryNumSelect);
+  const onlyClickBlueIn = () => {
+    if (currentPlayer == blueTeam) {
+      infantryNumSelect()
+    }
+  };
 
-  $("#redIn0").click(0, newClickNum).click(infantryNumSelect);
-  $("#redIn1").click(1, newClickNum).click(infantryNumSelect);
-  $("#redIn2").click(2, newClickNum).click(infantryNumSelect);
-  $("#redIn3").click(3, newClickNum).click(infantryNumSelect);
-  $("#redIn4").click(4, newClickNum).click(infantryNumSelect);
+  $("#blueIn0").click(0, newClickNum).click(onlyClickBlueIn);
+  $("#blueIn1").click(1, newClickNum).click(onlyClickBlueIn);
+  $("#blueIn2").click(2, newClickNum).click(onlyClickBlueIn);
+  $("#blueIn3").click(3, newClickNum).click(onlyClickBlueIn);
+  $("#blueIn4").click(4, newClickNum).click(onlyClickBlueIn);
+
+  const onlyClickRedIn = () => {
+    if (currentPlayer == redTeam) {
+      infantryNumSelect();
+    }
+  };
+
+  $("#redIn0").click(0, newClickNum).click(onlyClickRedIn);
+  $("#redIn1").click(1, newClickNum).click(onlyClickRedIn);
+  $("#redIn2").click(2, newClickNum).click(onlyClickRedIn);
+  $("#redIn3").click(3, newClickNum).click(onlyClickRedIn);
+  $("#redIn4").click(4, newClickNum).click(onlyClickRedIn);
 
   // ------ CAVALRY --------
   const cavalryNumSelect = () =>{
@@ -1087,17 +1090,29 @@ $(()=>{
     selectedValues();
   };
 
-  $("#blueCav0").click(0, newClickNum).click(cavalryNumSelect);
-  $("#blueCav1").click(1, newClickNum).click(cavalryNumSelect);
-  $("#blueCav2").click(2, newClickNum).click(cavalryNumSelect);
-  $("#blueCav3").click(3, newClickNum).click(cavalryNumSelect);
-  $("#blueCav4").click(4, newClickNum).click(cavalryNumSelect);
+  const onlyClickBlueCav = () => {
+    if (currentPlayer == blueTeam) {
+      cavalryNumSelect()
+    }
+  };
 
-  $("#redCav0").click(0, newClickNum).click(cavalryNumSelect);
-  $("#redCav1").click(1, newClickNum).click(cavalryNumSelect);
-  $("#redCav2").click(2, newClickNum).click(cavalryNumSelect);
-  $("#redCav3").click(3, newClickNum).click(cavalryNumSelect);
-  $("#redCav4").click(4, newClickNum).click(cavalryNumSelect);
+  $("#blueCav0").click(0, newClickNum).click(onlyClickBlueCav);
+  $("#blueCav1").click(1, newClickNum).click(onlyClickBlueCav);
+  $("#blueCav2").click(2, newClickNum).click(onlyClickBlueCav);
+  $("#blueCav3").click(3, newClickNum).click(onlyClickBlueCav);
+  $("#blueCav4").click(4, newClickNum).click(onlyClickBlueCav);
+
+  const onlyClickRedCav = () => {
+    if (currentPlayer == redTeam) {
+      cavalryNumSelect()
+    }
+  };
+
+  $("#redCav0").click(0, newClickNum).click(onlyClickRedCav);
+  $("#redCav1").click(1, newClickNum).click(onlyClickRedCav);
+  $("#redCav2").click(2, newClickNum).click(onlyClickRedCav);
+  $("#redCav3").click(3, newClickNum).click(onlyClickRedCav);
+  $("#redCav4").click(4, newClickNum).click(onlyClickRedCav);
 
   // ------ ARTILLERY --------
   const artilleryNumSelect = () =>{
@@ -1108,17 +1123,29 @@ $(()=>{
     selectedValues();
   };
 
-  $("#blueAr0").click(0, newClickNum).click(artilleryNumSelect);
-  $("#blueAr1").click(1, newClickNum).click(artilleryNumSelect);
-  $("#blueAr2").click(2, newClickNum).click(artilleryNumSelect);
-  $("#blueAr3").click(3, newClickNum).click(artilleryNumSelect);
-  $("#blueAr4").click(4, newClickNum).click(artilleryNumSelect);
+  const onlyClickBlueAr = () => {
+    if (currentPlayer == blueTeam) {
+      artilleryNumSelect()
+    }
+  };
 
-  $("#redAr0").click(0, newClickNum).click(artilleryNumSelect);
-  $("#redAr1").click(1, newClickNum).click(artilleryNumSelect);
-  $("#redAr2").click(2, newClickNum).click(artilleryNumSelect);
-  $("#redAr3").click(3, newClickNum).click(artilleryNumSelect);
-  $("#redAr4").click(4, newClickNum).click(artilleryNumSelect);
+  $("#blueAr0").click(0, newClickNum).click(onlyClickBlueAr);
+  $("#blueAr1").click(1, newClickNum).click(onlyClickBlueAr);
+  $("#blueAr2").click(2, newClickNum).click(onlyClickBlueAr);
+  $("#blueAr3").click(3, newClickNum).click(onlyClickBlueAr);
+  $("#blueAr4").click(4, newClickNum).click(onlyClickBlueAr);
+
+  const onlyClickRedAr = () => {
+    if (currentPlayer == redTeam) {
+      artilleryNumSelect()
+    }
+  };
+
+  $("#redAr0").click(0, newClickNum).click(onlyClickRedAr);
+  $("#redAr1").click(1, newClickNum).click(onlyClickRedAr);
+  $("#redAr2").click(2, newClickNum).click(onlyClickRedAr);
+  $("#redAr3").click(3, newClickNum).click(onlyClickRedAr);
+  $("#redAr4").click(4, newClickNum).click(onlyClickRedAr);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
   const showGridUnits = (oneTeam, unitType) => {
