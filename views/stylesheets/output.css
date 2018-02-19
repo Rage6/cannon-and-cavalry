@@ -119,6 +119,7 @@ div.title {
           border: 2px solid black;
           font-size: 2.5em;
           text-align: center;
+          cursor: pointer;
           -webkit-width: 45%;
           -moz-width: 45%;
           -ms-width: 45%;

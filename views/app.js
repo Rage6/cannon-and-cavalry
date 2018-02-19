@@ -3,6 +3,7 @@ $(()=>{
   const totalGrids = 16;
   const maxXvalue = 4;
   const maxYvalue = 4;
+  const maxUnits = 5;
   var errorPresent = [];
   var battleReport = [];
   var completeStatement = null;
@@ -172,6 +173,19 @@ $(()=>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null
+      },
+      {
+        name: "3-5 BN",
+        type: "IN",
+        active: true,
+        health: 10,
+        attack: false,
+        direction: "center",
+        nextDirection: "center",
+        xValue: 4,
+        yValue: 1,
+        nextXvalue: null,
+        nextYvalue: null
       }
     ],
     cavalry: [
@@ -221,6 +235,17 @@ $(()=>{
         nextDirection: "center",
         xValue: 1,
         yValue: 4
+      },
+      {
+        name: "2-8 BN",
+        type: "IN",
+        active: true,
+        health: 10,
+        attack: false,
+        direction: "center",
+        nextDirection: "center",
+        xValue: 4,
+        yValue: 4
       }
     ],
     cavalry: [
@@ -257,20 +282,32 @@ $(()=>{
       for (var i = 0; i < blueTeam.infantry.length; i++) {
         if (allGrids[gridNumber].xValue == blueTeam.infantry[i].xValue && allGrids[gridNumber].yValue == blueTeam.infantry[i].yValue) {
           allGrids[gridNumber].bluePresent.push(blueTeam.infantry[i]);
-        } else if (allGrids[gridNumber].xValue == blueTeam.cavalry[i].xValue && allGrids[gridNumber].yValue == blueTeam.cavalry[i].yValue) {
-          allGrids[gridNumber].bluePresent.push(blueTeam.cavalry[i]);
-        } else if (allGrids[gridNumber].xValue == blueTeam.artillery[i].xValue && allGrids[gridNumber].yValue == blueTeam.artillery[i].yValue) {
-          allGrids[gridNumber].bluePresent.push(blueTeam.artillery[i]);
+        }
+      };
+      for (var p = 0; p < blueTeam.cavalry.length; p++) {
+        if (allGrids[gridNumber].xValue == blueTeam.cavalry[p].xValue && allGrids[gridNumber].yValue == blueTeam.cavalry[p].yValue) {
+          allGrids[gridNumber].bluePresent.push(blueTeam.cavalry[p]);
+        };
+      };
+      for (var q = 0; q < blueTeam.artillery.length; q++) {
+        if (allGrids[gridNumber].xValue == blueTeam.artillery[q].xValue && allGrids[gridNumber].yValue == blueTeam.artillery[q].yValue) {
+          allGrids[gridNumber].bluePresent.push(blueTeam.artillery[q]);
         };
       }
     } else if (oneTeam == redTeam) {
       for (var i = 0; i < redTeam.infantry.length; i++) {
         if (allGrids[gridNumber].xValue == redTeam.infantry[i].xValue && allGrids[gridNumber].yValue == redTeam.infantry[i].yValue) {
           allGrids[gridNumber].redPresent.push(redTeam.infantry[i]);
-        } else if (allGrids[gridNumber].xValue == redTeam.cavalry[i].xValue && allGrids[gridNumber].yValue == redTeam.cavalry[i].yValue) {
-          allGrids[gridNumber].redPresent.push(redTeam.cavalry[i]);
-        } else if (allGrids[gridNumber].xValue == redTeam.artillery[i].xValue && allGrids[gridNumber].yValue == redTeam.artillery[i].yValue) {
-          allGrids[gridNumber].redPresent.push(redTeam.artillery[i]);
+        }
+      };
+      for (var p = 0; p < redTeam.cavalry.length; p++) {
+        if (allGrids[gridNumber].xValue == redTeam.cavalry[p].xValue && allGrids[gridNumber].yValue == redTeam.cavalry[p].yValue) {
+          allGrids[gridNumber].redPresent.push(redTeam.cavalry[p]);
+        };
+      };
+      for (var q = 0; q < redTeam.artillery.length; q++) {
+        if (allGrids[gridNumber].xValue == redTeam.artillery[q].xValue && allGrids[gridNumber].yValue == redTeam.artillery[q].yValue) {
+          allGrids[gridNumber].redPresent.push(redTeam.artillery[q]);
         };
       }
     }
@@ -312,19 +349,19 @@ $(()=>{
         var box = "#blueIn" + i;
         var unitName = blueTeam.infantry[i].name;
         if (blueTeam.infantry[i].active == true) {
-          $(box).css('background-color','blue').text(unitName);
+          $(box).css('background-color','blue').css('border','none').text(unitName);
           displayTeam.infantry[i].columnNum = i
         } else {
-          $(box).css('background-color','transparent').text('');
+          $(box).css('background-color','transparent').css('border','none').text('');
         }
       } else {
         var box = "#redIn" + i;
         var unitName = redTeam.infantry[i].name;
         if (redTeam.infantry[i].active == true) {
-          $(box).css('background-color','red').text(unitName);
+          $(box).css('background-color','red').css('border','none').text(unitName);
           displayTeam.infantry[i].columnNum = i
         } else {
-          $(box).css('background-color','transparent').text('');
+          $(box).css('background-color','transparent').css('border','none').text('');
         }
       }
     }
@@ -332,50 +369,47 @@ $(()=>{
 
   const artilleryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.artillery.length; i++) {
-      // if (displayTeam.artillery[i].active == true) {
-        if (displayTeam == blueTeam) {
-          var box = "#blueAr" + i;
-          var unitName = blueTeam.artillery[i].name;
-          if (blueTeam.artillery[i].active == true) {
-            $(box).css('background-color','blue').text(unitName);
-            displayTeam.artillery[i].columnNum = i
-          } else {
-            $(box).css('background-color','transparent').text('');
-          }
+      if (displayTeam == blueTeam) {
+        var box = "#blueAr" + i;
+        var unitName = blueTeam.artillery[i].name;
+        if (blueTeam.artillery[i].active == true) {
+          $(box).css('background-color','blue').css('border','none').text(unitName);
+          displayTeam.artillery[i].columnNum = i
         } else {
-          var box = "#redAr" + i;
-          var unitName = redTeam.artillery[i].name;
-          if (redTeam.artillery[i].active == true) {
-            $(box).css('background-color','red').text(unitName);
-            displayTeam.artillery[i].columnNum = i
-          } else {
-            $(box).css('background-color','transparent').text('');
-          }
-        };
-      // }
+          $(box).css('background-color','transparent').css('border','none').text('');
+        }
+      } else {
+        var box = "#redAr" + i;
+        var unitName = redTeam.artillery[i].name;
+        if (redTeam.artillery[i].active == true) {
+          $(box).css('background-color','red').css('border','none').text(unitName);
+          displayTeam.artillery[i].columnNum = i
+        } else {
+          $(box).css('background-color','transparent').css('border','none').text('');
+        }
+      };
     };
   };
 
   const cavalryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.cavalry.length; i++) {
-      console.log("Active? " + displayTeam.cavalry[i].active);
       if (displayTeam == blueTeam) {
         var box = "#blueCav" + i;
         var unitName = blueTeam.cavalry[i].name;
         if (blueTeam.cavalry[i].active == true) {
-          $(box).css('background-color','blue').text(unitName);
+          $(box).css('background-color','blue').css('border','none').text(unitName);
           displayTeam.cavalry[i].columnNum = i
         } else {
-          $(box).css('background-color','transparent').text('');
+          $(box).css('background-color','transparent').css('border','none').text('');
         }
       } else {
         var box = "#redCav" + i;
         var unitName = redTeam.cavalry[i].name;
         if (redTeam.cavalry[i].active == true) {
-          $(box).css('background-color','red').text(unitName);
+          $(box).css('background-color','red').css('border','none').text(unitName);
           displayTeam.cavalry[i].columnNum = i
         } else {
-          $(box).css('background-color','transparent').text('');
+          $(box).css('background-color','transparent').css('border','none').text('');
         }
       }
     }
@@ -804,7 +838,7 @@ $(()=>{
     };
     if (thosePresent == defTeam) {
       for (var i = 0; i < thosePresent.length; i++) {
-        console.log("Defending Units: ");
+        console.log("Defending Unit: ");
         console.log(thosePresent[i].name);
         // add minor points to defender if "attack: false"
         if (thosePresent[i].attack == false) {
@@ -852,7 +886,7 @@ $(()=>{
       // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
       // add minor points to attacker if attacker meets "nextDirection: center"
       for (var i = 0; i < thosePresent.length; i++) {
-        console.log("Attacking Units: ");
+        console.log("Attacking Unit: ");
         console.log(thosePresent[i].name);
         var defenseLine = 0;
         var defenseCenter = 0;
@@ -1091,9 +1125,26 @@ $(()=>{
     selectedValues();
   };
 
+  const borderBlueInColumn = () => {
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      if (currentPlayer.infantry[k].columnNum == selectedUnit.columnNum) {
+        $("#blueIn" + k).css("border","5px solid red")
+      } else {
+        $("#blueIn" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      $("#blueAr" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      $("#blueCav" + k).css("border","none")
+    };
+  };
+
   const onlyClickBlueIn = () => {
     if (currentPlayer == blueTeam) {
       infantryNumSelect()
+      borderBlueInColumn();
     }
   };
 
@@ -1103,9 +1154,26 @@ $(()=>{
   $("#blueIn3").click(3, newClickNum).click(onlyClickBlueIn);
   $("#blueIn4").click(4, newClickNum).click(onlyClickBlueIn);
 
+  const borderRedInColumn = () => {
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      if (currentPlayer.infantry[k].columnNum == selectedUnit.columnNum) {
+        $("#redIn" + k).css("border","5px solid blue")
+      } else {
+        $("#redIn" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      $("#redAr" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      $("#redCav" + k).css("border","none")
+    };
+  };
+
   const onlyClickRedIn = () => {
     if (currentPlayer == redTeam) {
       infantryNumSelect();
+      borderRedInColumn();
     }
   };
 
@@ -1124,9 +1192,26 @@ $(()=>{
     selectedValues();
   };
 
+  const borderBlueCavColumn = () => {
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      if (currentPlayer.cavalry[k].columnNum == selectedUnit.columnNum) {
+        $("#blueCav" + k).css("border","5px solid red")
+      } else {
+        $("#blueCav" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      $("#blueAr" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      $("#blueIn" + k).css("border","none")
+    };
+  };
+
   const onlyClickBlueCav = () => {
     if (currentPlayer == blueTeam) {
-      cavalryNumSelect()
+      cavalryNumSelect();
+      borderBlueCavColumn();
     }
   };
 
@@ -1136,9 +1221,26 @@ $(()=>{
   $("#blueCav3").click(3, newClickNum).click(onlyClickBlueCav);
   $("#blueCav4").click(4, newClickNum).click(onlyClickBlueCav);
 
+  const borderRedCavColumn = () => {
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      if (currentPlayer.cavalry[k].columnNum == selectedUnit.columnNum) {
+        $("#redCav" + k).css("border","5px solid blue")
+      } else {
+        $("#redCav" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      $("#redAr" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      $("#redIn" + k).css("border","none")
+    };
+  };
+
   const onlyClickRedCav = () => {
     if (currentPlayer == redTeam) {
-      cavalryNumSelect()
+      cavalryNumSelect();
+      borderRedCavColumn();
     }
   };
 
@@ -1157,9 +1259,26 @@ $(()=>{
     selectedValues();
   };
 
+  const borderBlueArColumn = () => {
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      if (currentPlayer.artillery[k].columnNum == selectedUnit.columnNum) {
+        $("#blueAr" + k).css("border","5px solid red")
+      } else {
+        $("#blueAr" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      $("#blueCav" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      $("#blueIn" + k).css("border","none")
+    };
+  };
+
   const onlyClickBlueAr = () => {
     if (currentPlayer == blueTeam) {
-      artilleryNumSelect()
+      artilleryNumSelect();
+      borderBlueArColumn();
     }
   };
 
@@ -1169,9 +1288,26 @@ $(()=>{
   $("#blueAr3").click(3, newClickNum).click(onlyClickBlueAr);
   $("#blueAr4").click(4, newClickNum).click(onlyClickBlueAr);
 
+  const borderRedArColumn = () => {
+    for (var k = 0; k < currentPlayer.artillery.length; k++) {
+      if (currentPlayer.artillery[k].columnNum == selectedUnit.columnNum) {
+        $("#redAr" + k).css("border","5px solid blue")
+      } else {
+        $("#redAr" + k).css("border","none")
+      };
+    };
+    for (var k = 0; k < currentPlayer.cavalry.length; k++) {
+      $("#redCav" + k).css("border","none")
+    };
+    for (var k = 0; k < currentPlayer.infantry.length; k++) {
+      $("#redIn" + k).css("border","none")
+    };
+  };
+
   const onlyClickRedAr = () => {
     if (currentPlayer == redTeam) {
-      artilleryNumSelect()
+      artilleryNumSelect();
+      borderRedArColumn();
     }
   };
 
