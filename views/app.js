@@ -311,54 +311,86 @@ $(()=>{
       if (displayTeam == blueTeam) {
         var box = "#blueIn" + i;
         var unitName = blueTeam.infantry[i].name;
-        $(box).css('background-color','blue').text(unitName);
-        displayTeam.infantry[i].columnNum = i
+        if (blueTeam.infantry[i].active == true) {
+          $(box).css('background-color','blue').text(unitName);
+          displayTeam.infantry[i].columnNum = i
+        } else {
+          $(box).css('background-color','transparent').text('');
+        }
       } else {
         var box = "#redIn" + i;
         var unitName = redTeam.infantry[i].name;
-        $(box).css('background-color','red').text(unitName);
-        displayTeam.infantry[i].columnNum = i
-      };
-    };
+        if (redTeam.infantry[i].active == true) {
+          $(box).css('background-color','red').text(unitName);
+          displayTeam.infantry[i].columnNum = i
+        } else {
+          $(box).css('background-color','transparent').text('');
+        }
+      }
+    }
   };
-  infantryColumn(blueTeam);
-  infantryColumn(redTeam);
 
   const artilleryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.artillery.length; i++) {
-      if (displayTeam == blueTeam) {
-        var box = "#blueAr" + i;
-        var unitName = blueTeam.artillery[i].name;
-        $(box).css('background-color','blue').text(unitName);
-        displayTeam.artillery[i].columnNum = i
-      } else {
-        var box = "#redAr" + i;
-        var unitName = redTeam.artillery[i].name;
-        $(box).css('background-color','red').text(unitName);
-        displayTeam.artillery[i].columnNum = i
-      };
+      // if (displayTeam.artillery[i].active == true) {
+        if (displayTeam == blueTeam) {
+          var box = "#blueAr" + i;
+          var unitName = blueTeam.artillery[i].name;
+          if (blueTeam.artillery[i].active == true) {
+            $(box).css('background-color','blue').text(unitName);
+            displayTeam.artillery[i].columnNum = i
+          } else {
+            $(box).css('background-color','transparent').text('');
+          }
+        } else {
+          var box = "#redAr" + i;
+          var unitName = redTeam.artillery[i].name;
+          if (redTeam.artillery[i].active == true) {
+            $(box).css('background-color','red').text(unitName);
+            displayTeam.artillery[i].columnNum = i
+          } else {
+            $(box).css('background-color','transparent').text('');
+          }
+        };
+      // }
     };
   };
-  artilleryColumn(blueTeam);
-  artilleryColumn(redTeam);
 
   const cavalryColumn = (displayTeam) =>{
     for (var i = 0; i < displayTeam.cavalry.length; i++) {
+      console.log("Active? " + displayTeam.cavalry[i].active);
       if (displayTeam == blueTeam) {
         var box = "#blueCav" + i;
         var unitName = blueTeam.cavalry[i].name;
-        $(box).css('background-color','blue').text(unitName);
-        displayTeam.cavalry[i].columnNum = i
+        if (blueTeam.cavalry[i].active == true) {
+          $(box).css('background-color','blue').text(unitName);
+          displayTeam.cavalry[i].columnNum = i
+        } else {
+          $(box).css('background-color','transparent').text('');
+        }
       } else {
         var box = "#redCav" + i;
         var unitName = redTeam.cavalry[i].name;
-        $(box).css('background-color','red').text(unitName);
-        displayTeam.cavalry[i].columnNum = i
-      };
-    };
+        if (redTeam.cavalry[i].active == true) {
+          $(box).css('background-color','red').text(unitName);
+          displayTeam.cavalry[i].columnNum = i
+        } else {
+          $(box).css('background-color','transparent').text('');
+        }
+      }
+    }
   };
-  cavalryColumn(blueTeam);
-  cavalryColumn(redTeam);
+
+  const refreshAllColumns = () => {
+    infantryColumn(blueTeam);
+    infantryColumn(redTeam);
+    artilleryColumn(blueTeam);
+    artilleryColumn(redTeam);
+    cavalryColumn(blueTeam);
+    cavalryColumn(redTeam);
+  }
+
+  refreshAllColumns();
 
   // The default settings for a selectedUnit
   var selectedUnit = null;
@@ -976,6 +1008,7 @@ $(()=>{
       showCurrentPlayer();
       console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
       removeAllColors();
+      refreshAllColumns();
       console.log(allGrids);
     }
   };
@@ -1048,6 +1081,7 @@ $(()=>{
   const newClickNum = (num) => {
     clickNum = num.data;
   }
+
   // ------ INFANTRY --------
   const infantryNumSelect = () =>{
     selectedUnit = currentPlayer.infantry[clickNum];
