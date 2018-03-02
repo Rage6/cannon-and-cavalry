@@ -66,6 +66,7 @@ div.title {
   text-align: center;
   font-size: 2em;
   background-color: lightgreen;
+  background-size: cover;
   @include divWidth(24%);
   @include divHeight(24%);
 
@@ -73,6 +74,10 @@ div.title {
     margin: 0 20%;
     // border: 1px solid red;
     height: 20%;
+    img {
+      max-height: 100%;
+      max-width: auto;
+    }
   }
 
   .centerLine {
@@ -83,6 +88,11 @@ div.title {
 
     .centerLeft {
       width: 20%;
+      img {
+        max-height: auto;
+        width: 100%;
+        transform: rotate(-90deg);
+      }
     }
 
     .centerMiddle {
@@ -93,13 +103,23 @@ div.title {
 
     .centerRight {
       width: 20%;
+      img {
+        max-height: auto;
+        width: 100%;
+        transform: rotate(90deg);
+      }
     }
 
   }
 
   .bottomLine {
     margin: 0 20%;
-    // border: 1px solid yellow;
+    height: 20%;
+    img {
+      max-height: auto;
+      max-width: 100%;
+      transform: rotate(180deg);
+    }
   }
 
 }

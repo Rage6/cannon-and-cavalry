@@ -53,6 +53,7 @@ div.title {
   text-align: center;
   font-size: 2em;
   background-color: lightgreen;
+  background-size: cover;
   -webkit-width: 24%;
   -moz-width: 24%;
   -ms-width: 24%;
@@ -64,19 +65,35 @@ div.title {
   .gridSquare .topLine {
     margin: 0 20%;
     height: 20%; }
+    .gridSquare .topLine img {
+      max-height: 100%;
+      max-width: auto; }
   .gridSquare .centerLine {
     margin: 0;
     display: flex;
     height: 60%; }
     .gridSquare .centerLine .centerLeft {
       width: 20%; }
+      .gridSquare .centerLine .centerLeft img {
+        max-height: auto;
+        width: 100%;
+        transform: rotate(-90deg); }
     .gridSquare .centerLine .centerMiddle {
       width: 60%;
       background-size: 100% 100%; }
     .gridSquare .centerLine .centerRight {
       width: 20%; }
+      .gridSquare .centerLine .centerRight img {
+        max-height: auto;
+        width: 100%;
+        transform: rotate(90deg); }
   .gridSquare .bottomLine {
-    margin: 0 20%; }
+    margin: 0 20%;
+    height: 20%; }
+    .gridSquare .bottomLine img {
+      max-height: auto;
+      max-width: 100%;
+      transform: rotate(180deg); }
 
 #allOptions {
   margin: 50px auto;

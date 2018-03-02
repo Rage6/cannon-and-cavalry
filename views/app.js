@@ -1062,6 +1062,9 @@ $(()=>{
     };
     $("#healthReading").text(selectedUnit.health);
     showUnitDirection();
+    if (selectedUnit.direction != selectedUnit.nextDirection) {
+      showUnitNextDirection();
+    };
   };
 
   var gridAndDirection = null;
@@ -1469,6 +1472,7 @@ $(()=>{
     coverImage();
     const terrainImage = () => {
       var gridIDcenter = gridID + "_center";
+      // var gridIDcenter = gridID;
       if (allGrids[gridNumber].terrain == "woods") {
         $(gridIDcenter).css('background-image','url("stylesheets/images/forest.png")')
       } else if (allGrids[gridNumber].terrain == "hill") {
