@@ -981,25 +981,28 @@ $(()=>{
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
-      var attackOrder = " The " + unitReport.name + " will march to the " + unitReport.nextDirection + ". ";
+      var attackOrder = unitReport.name + ": march " + unitReport.nextDirection + ". ";
       battleReport.push(attackOrder);
     } else {
       if (unitReport.direction == "center") {
-        var defendOrder = " The " + unitReport.name + " will set up a central defense.";
+        var defendOrder = unitReport.name + ": defend central position.";
       } else {
-        var defendOrder = " The " + unitReport.name + " will defend to the " + unitReport.nextDirection + ". ";
+        var defendOrder = unitReport.name + ": defend " + unitReport.nextDirection + "ern position. ";
       };
       battleReport.push(defendOrder);
     }
   };
 
   const completeReport = () => {
-    var startReport = "** ORDERS ** ";
-    battleReport.splice(0, 0, startReport);
-    completeStatement = battleReport[0];
-    for (var i = 1; i < battleReport.length; i++) {
-      completeStatement += battleReport[i];
+    console.log("orders: ");
+    for (var rep = 0; rep < battleReport.length; rep++) {
+      console.log(battleReport[rep]);
     };
+    // battleReport.splice(0, 0, startReport);
+    // completeStatement = battleReport[0];
+    // for (var i = 1; i < battleReport.length; i++) {
+    //   completeStatement += battleReport[i];
+    // };
   }
 
   const checkUnitsLeft = (unitType) => {
