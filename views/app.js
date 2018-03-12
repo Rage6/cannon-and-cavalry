@@ -5,8 +5,10 @@ $(()=>{
   const maxYvalue = 4;
   const maxUnits = 5;
   var errorPresent = [];
+  var completedPresent = [];
   var battleReport = [];
   var completeStatement = null;
+  var numOfPlayers = 1;
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -320,10 +322,54 @@ $(()=>{
       ifTeamPresent(i,redTeam);
     }
   };
-
   unitsInAllGrids();
   console.log(allGrids)
 
+  // This controls how the players choose the character name(s) and nationality
+  // --- ONE PLAYER ---
+  const oneStart = () => {
+    numOfPlayers = 1;
+    console.log(numOfPlayers);
+    $("#openIntro").css('display','none');
+    $("#openOneName").css('display','block');
+  }
+  $("#onePlayer").click(oneStart);
+
+  const submitBluePlayer = () => {
+    blueTeam.playerName = $("#blueLeader").val();
+    blueTeam.teamName = $("#blueArmy").val();
+    blueTeam.teamName = blueTeam.teamName.toUpperCase();
+    $("#blueStatus").text(blueTeam.teamName);
+    $("#openOneName").css("display","none");
+    $("#openPage").css("display","none");
+    console.log(blueTeam);
+    if (numOfPlayers == 2) {
+      $("#openPage").css("display","block");
+      $("#openTwoName").css("display","block");
+    }
+  };
+  $("#submitBlue").click(submitBluePlayer);
+
+  // --- TWO PLAYER ---
+  const twoStart = () => {
+    numOfPlayers = 2;
+    $("#openIntro").css('display','none');
+    $("#openOneName").css('display','block');
+  }
+  $("#twoPlayer").click(twoStart);
+
+  const submitRedPlayer = () => {
+    redTeam.playerName = $("#redLeader").val();
+    redTeam.teamName = $("#redArmy").val();
+    redTeam.teamName = redTeam.teamName.toUpperCase();
+    $("#redStatus").text(redTeam.teamName);
+    $("#openTwoName").css("display","none");
+    $("#openPage").css("display","none");
+    console.log(redTeam);
+  };
+  $("#submitRed").click(submitRedPlayer);
+
+  // To highlight the current player in their status box
   const showCurrentPlayer = () => {
     if (currentPlayer == blueTeam) {
       $("#blueTitle").css("background-color","yellow");
@@ -637,6 +683,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
+        completedPresent.push(selectedUnit);
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
         showBattleReport(selectedUnit);
@@ -649,6 +696,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
+        completedPresent.push(selectedUnit);
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
         showBattleReport(selectedUnit);
@@ -661,6 +709,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
+        completedPresent.push(selectedUnit);
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
         showBattleReport(selectedUnit);
@@ -673,6 +722,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
+        completedPresent.push(selectedUnit);
         removeAbsentUnit();
       } else {
         errorPresent.push(selectedUnit);
@@ -680,6 +730,8 @@ $(()=>{
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
       };
+      console.log("errorPresent: " + errorPresent.length);
+      console.log("completedPresent: " + completedPresent.length);
     } else if (selectedUnit.attack == false) {
       console.log(selectedUnit.name + ": defend");
       var currentGrid = findCurrentGrid();
@@ -722,15 +774,17 @@ $(()=>{
         };
       };
       if (blockLine == true) {
-        // somehow make this show up in the battle report; use errorPresent?
+        errorPresent.push(selectedUnit);
       } else {
         var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
         $(currentID).text("").css("background-color","transparent");
         selectedUnit.direction = selectedUnit.nextDirection;
         selectedUnit.nextXvalue = currentGrid.xValue;
         selectedUnit.nextYvalue = currentGrid.yValue;
+        completedPresent.push(selectedUnit);
       };
-
+      console.log("errorPresent: " + errorPresent.length);
+      console.log("completedPresent: " + completedPresent.length);
       showBattleReport(selectedUnit);
     } else {
       console.log("An error occurred in issueOneOrder.");
@@ -927,13 +981,13 @@ $(()=>{
 
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
-      var attackOrder = " The " + unitReport.name + " will march to the " + unitReport.nextDirection + ".";
+      var attackOrder = " The " + unitReport.name + " will march to the " + unitReport.nextDirection + ". ";
       battleReport.push(attackOrder);
     } else {
       if (unitReport.direction == "center") {
         var defendOrder = " The " + unitReport.name + " will set up a central defense.";
       } else {
-        var defendOrder = " The " + unitReport.name + " will set a defensive position to the " + unitReport.nextDirection + ".";
+        var defendOrder = " The " + unitReport.name + " will defend to the " + unitReport.nextDirection + ". ";
       };
       battleReport.push(defendOrder);
     }
@@ -1000,11 +1054,11 @@ $(()=>{
     };
     if (errorPresent.length > 0) {
       for (var j = 0; j < errorPresent.length; j++) {
-        var reportError = " ** RESULTS ** The " + errorPresent[j].name + " could not carry out its orders!"
+        var reportError = " - The " + errorPresent[j].name + " could not carry out its orders."
         battleReport.push(reportError);
       }
     } else {
-      var reportError = " ** RESULTS ** All orders carried out."
+      var reportError = " - All orders carried out."
       battleReport.push(reportError);
     };
     completeReport();
@@ -1043,6 +1097,8 @@ $(()=>{
       console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
       removeAllColors();
       refreshAllColumns();
+      errorPresent = [];
+      completedPresent = [];
       console.log(allGrids);
     }
   };
@@ -1405,6 +1461,11 @@ $(()=>{
                 $(gridIDcenter).text("CAV");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
+              };
+              if (allGrids[currentGrid].bluePresent.length > 1) {
+                $(gridIDcenter).text("(" + allGrids[currentGrid].bluePresent.length + ")");
+              } else if (allGrids[currentGrid].redPresent.length > 1) {
+                $(gridIDcenter).text("(" + allGrids[currentGrid].redPresent.length + ")");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDcenter).css('color','white').css('background-color','blue');

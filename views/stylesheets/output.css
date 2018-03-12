@@ -1,14 +1,58 @@
 body {
   margin: 0;
-  padding: 0;
-  background-color: green;
-  background-size: cover; }
+  background-color: green; }
+
+#openPage {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: black;
+  opacity: 0.5;
+  height: 100%;
+  width: 100%; }
+
+.openBox {
+  margin: 0 25%;
+  position: absolute;
+  top: 200px;
+  z-index: 2;
+  background-color: brown;
+  color: white;
+  font-size: 4em;
+  text-align: center;
+  width: 50%; }
+  .openBox #openIntro {
+    display: block; }
+    .openBox #openIntro #openTitle {
+      text-decoration: underline; }
+    .openBox #openIntro .openButton {
+      margin: 30px 5%;
+      border: 5px solid white;
+      border-radius: 25px;
+      cursor: pointer; }
+  .openBox #openOneName {
+    padding: 20px 10%;
+    display: none;
+    background-color: blue; }
+  .openBox #openTwoName {
+    padding: 20px 10%;
+    display: none;
+    background-color: red; }
+  .openBox input {
+    font-size: 1.5em;
+    color: white;
+    background-color: black;
+    width: 100%; }
 
 div.title {
   text-align: center; }
 
 .unitButton {
   cursor: pointer; }
+
+.blueButton {
+  color: white; }
 
 #mainTitle {
   margin: 20px 10% 40px 10%;
@@ -96,8 +140,7 @@ div.title {
       transform: rotate(180deg); }
 
 #allOptions {
-  margin: 50px auto;
-  padding-bottom: 20px;
+  margin: 50px auto 0px auto;
   background-color: grey;
   -webkit-width: 90%;
   -moz-width: 90%;
@@ -128,11 +171,11 @@ div.title {
         display: block;
         font-size: 3em;
         text-align: center; }
-      #allOptions .turnBoxes .indivBox #attackDefendBox {
+      #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around; }
-        #allOptions .turnBoxes .indivBox #attackDefendBox .attackDefendButton {
+        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
           border: 2px solid black;
           font-size: 2.5em;
           text-align: center;
@@ -141,21 +184,21 @@ div.title {
           -moz-width: 45%;
           -ms-width: 45%;
           width: 45%; }
-        #allOptions .turnBoxes .indivBox #attackDefendBox #attackButton {
+        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
           color: black;
           background-color: none; }
-        #allOptions .turnBoxes .indivBox #attackDefendBox #defendButton {
+        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
           color: black;
           background-color: none; }
-      #allOptions .turnBoxes .indivBox #unitName {
+      #allOptions .turnBoxes .indivBox #unitBox #unitName {
         margin: 20px 0;
         font-size: 2em;
         text-align: center; }
-      #allOptions .turnBoxes .indivBox #healthAndArrowBox {
+      #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around; }
-        #allOptions .turnBoxes .indivBox #healthAndArrowBox #health {
+        #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
           border: 2px solid green;
           font-size: 2.2em;
           text-align: center;
@@ -163,32 +206,45 @@ div.title {
           -moz-width: 48%;
           -ms-width: 48%;
           width: 48%; }
-        #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows {
+        #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
           display: flex;
           flex-wrap: wrap;
           -webkit-width: 48%;
           -moz-width: 48%;
           -ms-width: 48%;
           width: 48%; }
-          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows .arrowBox {
+          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox {
             font-size: 2.5em;
             text-align: center;
             -webkit-width: 30%;
             -moz-width: 30%;
             -ms-width: 30%;
             width: 30%; }
-            #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows .arrowBox img {
+            #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox img {
               margin-top: 10%;
               height: 80%;
               width: 80%; }
-          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #north {
+          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
             border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #east {
+          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
             border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #south {
+          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
             border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #healthAndArrowBox #arrows #west {
+          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
             border: 1px solid black; }
+      #allOptions .turnBoxes .indivBox #completeReport {
+        margin: 0 5%;
+        border: 1px solid black;
+        padding: 5%;
+        font-size: 2em;
+        height: 60%;
+        overflow: scroll; }
+        #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+          text-align: center; }
+        #allOptions .turnBoxes .indivBox #completeReport #orderList {
+          color: blue; }
+        #allOptions .turnBoxes .indivBox #completeReport #resultList {
+          color: blue; }
       #allOptions .turnBoxes .indivBox .allUnitColumns {
         display: flex;
         flex-direction: row;
@@ -202,9 +258,9 @@ div.title {
           -ms-width: 30%;
           width: 30%; }
       #allOptions .turnBoxes .indivBox #teamOne {
-        background-color: lightblue; }
+        background-color: white; }
       #allOptions .turnBoxes .indivBox #teamTwo {
-        background-color: red; }
+        background-color: white; }
   #allOptions #ordersButton {
     margin: 0px auto;
     padding: 20px;
@@ -213,12 +269,5 @@ div.title {
     color: white;
     background-color: orange;
     width: 50%; }
-
-#completeReport {
-  border: 1px solid black;
-  padding: 5%;
-  font-size: 2em;
-  height: 60%;
-  overflow: scroll; }
 
 /*# sourceMappingURL=output.css.map */
