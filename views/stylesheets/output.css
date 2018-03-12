@@ -241,10 +241,6 @@ div.title {
         overflow: scroll; }
         #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
           text-align: center; }
-        #allOptions .turnBoxes .indivBox #completeReport #orderList {
-          color: blue; }
-        #allOptions .turnBoxes .indivBox #completeReport #resultList {
-          color: blue; }
       #allOptions .turnBoxes .indivBox .allUnitColumns {
         display: flex;
         flex-direction: row;

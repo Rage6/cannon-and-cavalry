@@ -7,7 +7,6 @@ $(()=>{
   var errorPresent = [];
   var completedPresent = [];
   var battleReport = [];
-  var completeStatement = null;
   var numOfPlayers = 1;
 
   // This array contains all of the grids and their values
@@ -683,7 +682,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
-        completedPresent.push(selectedUnit);
+        completedPresent.push(selectedUnit.name + ": completed");
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
         showBattleReport(selectedUnit);
@@ -696,7 +695,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
-        completedPresent.push(selectedUnit);
+        completedPresent.push(selectedUnit.name + ": completed");
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
         showBattleReport(selectedUnit);
@@ -709,7 +708,7 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
-        completedPresent.push(selectedUnit);
+        completedPresent.push(selectedUnit.name + ": completed");
         removeAbsentUnit();
       } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
         showBattleReport(selectedUnit);
@@ -722,16 +721,14 @@ $(()=>{
         } else if (currentPlayer == redTeam) {
           nextGrid.redPresent.push(selectedUnit);
         };
-        completedPresent.push(selectedUnit);
+        completedPresent.push(selectedUnit.name + ": completed");
         removeAbsentUnit();
       } else {
-        errorPresent.push(selectedUnit);
+        errorPresent.push(selectedUnit.name + ": INCOMPLETE");
         showBattleReport(selectedUnit);
         selectedUnit.nextXvalue = selectedUnit.xValue;
         selectedUnit.nextYvalue = selectedUnit.yValue;
       };
-      console.log("errorPresent: " + errorPresent.length);
-      console.log("completedPresent: " + completedPresent.length);
     } else if (selectedUnit.attack == false) {
       console.log(selectedUnit.name + ": defend");
       var currentGrid = findCurrentGrid();
@@ -774,17 +771,15 @@ $(()=>{
         };
       };
       if (blockLine == true) {
-        errorPresent.push(selectedUnit);
+        errorPresent.push(selectedUnit.name + ": INCOMPLETE");
       } else {
         var currentID = "#x" + currentGrid.xValue + "y" + currentGrid.yValue + "_" + currentDirection;
         $(currentID).text("").css("background-color","transparent");
         selectedUnit.direction = selectedUnit.nextDirection;
         selectedUnit.nextXvalue = currentGrid.xValue;
         selectedUnit.nextYvalue = currentGrid.yValue;
-        completedPresent.push(selectedUnit);
+        completedPresent.push(selectedUnit.name + ": completed");
       };
-      console.log("errorPresent: " + errorPresent.length);
-      console.log("completedPresent: " + completedPresent.length);
       showBattleReport(selectedUnit);
     } else {
       console.log("An error occurred in issueOneOrder.");
@@ -994,15 +989,19 @@ $(()=>{
   };
 
   const completeReport = () => {
-    console.log("orders: ");
     for (var rep = 0; rep < battleReport.length; rep++) {
-      console.log(battleReport[rep]);
+      $("#orderList").append("<li>" + battleReport[rep] + "</li>")
     };
-    // battleReport.splice(0, 0, startReport);
-    // completeStatement = battleReport[0];
-    // for (var i = 1; i < battleReport.length; i++) {
-    //   completeStatement += battleReport[i];
-    // };
+    if (completedPresent.length > 0) {
+      for (var comP = 0; comP < completedPresent.length; comP++) {
+        $("#resultList").append("<li>" + completedPresent[comP] + "</li>")
+      }
+    };
+    if (errorPresent.length > 0) {
+      for (var errP = 0; errP < errorPresent.length; errP++) {
+        $("#resultList").append("<li><b>" + errorPresent[errP] + "</b></li>")
+      }
+    }
   }
 
   const checkUnitsLeft = (unitType) => {
@@ -1055,17 +1054,7 @@ $(()=>{
       checkIfError(selectedUnit);
       changeCurrentValues();
     };
-    if (errorPresent.length > 0) {
-      for (var j = 0; j < errorPresent.length; j++) {
-        var reportError = " - The " + errorPresent[j].name + " could not carry out its orders."
-        battleReport.push(reportError);
-      }
-    } else {
-      var reportError = " - All orders carried out."
-      battleReport.push(reportError);
-    };
     completeReport();
-    $("#completeReport").text(completeStatement);
     // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
     showGridUnits(currentPlayer, selectedInfantry);
