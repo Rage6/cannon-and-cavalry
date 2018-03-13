@@ -7,6 +7,9 @@ $(()=>{
   var errorPresent = [];
   var completedPresent = [];
   var battleReport = [];
+  var orderNum = 0;
+  var completedNum = 0;
+  var errorNum = 0;
   var numOfPlayers = 1;
 
   // This array contains all of the grids and their values
@@ -669,7 +672,6 @@ $(()=>{
 // This determines a) if a unit is going to move and b) where it's new location will be
   const issueOneOrder = (ordersCarriedOut) => {
     if (selectedUnit.attack == true) {
-      console.log(selectedUnit.name + ": attack");
       // something will be needed here to checks for water @ next grid
       if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
         showBattleReport(selectedUnit);
@@ -730,7 +732,6 @@ $(()=>{
         selectedUnit.nextYvalue = selectedUnit.yValue;
       };
     } else if (selectedUnit.attack == false) {
-      console.log(selectedUnit.name + ": defend");
       var currentGrid = findCurrentGrid();
       var nextGrid = currentGrid;
       var currentDirection = selectedUnit.direction;
@@ -785,7 +786,7 @@ $(()=>{
       console.log("An error occurred in issueOneOrder.");
     };
     ordersCarriedOut.push(selectedUnit);
-    console.log("ordersCarriedOut: " + ordersCarriedOut.length);
+    // console.log("ordersCarriedOut: " + ordersCarriedOut.length);
   };
 
   // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
@@ -974,6 +975,12 @@ $(()=>{
     return finalScore
   };
 
+  const clearOldRep = () => {
+    for (var g = 0; g < orderNum; g++) {
+      $("li").remove();
+    }
+  };
+
   const showBattleReport = (unitReport) => {
     if (unitReport.attack == true) {
       var attackOrder = unitReport.name + ": march " + unitReport.nextDirection + ". ";
@@ -985,7 +992,7 @@ $(()=>{
         var defendOrder = unitReport.name + ": defend " + unitReport.nextDirection + "ern position. ";
       };
       battleReport.push(defendOrder);
-    }
+    };
   };
 
   const completeReport = () => {
@@ -1001,7 +1008,7 @@ $(()=>{
       for (var errP = 0; errP < errorPresent.length; errP++) {
         $("#resultList").append("<li><b>" + errorPresent[errP] + "</b></li>")
       }
-    }
+    };
   }
 
   const checkUnitsLeft = (unitType) => {
@@ -1016,6 +1023,7 @@ $(()=>{
 
   const issueAllOrders = () => {
     var ordersDone = [];
+    clearOldRep();
     selectedInfantry = currentPlayer.infantry;
     selectedCavalry = currentPlayer.cavalry;
     selectedArtillery = currentPlayer.artillery;
@@ -1063,6 +1071,7 @@ $(()=>{
     showGridUnits(oppositePlayer, oppositePlayer.infantry);
     showGridUnits(oppositePlayer, oppositePlayer.cavalry);
     showGridUnits(oppositePlayer, oppositePlayer.artillery);
+    orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
       currentPlayer = redTeam;
@@ -1453,11 +1462,6 @@ $(()=>{
                 $(gridIDcenter).text("CAV");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
-              };
-              if (allGrids[currentGrid].bluePresent.length > 1) {
-                $(gridIDcenter).text("(" + allGrids[currentGrid].bluePresent.length + ")");
-              } else if (allGrids[currentGrid].redPresent.length > 1) {
-                $(gridIDcenter).text("(" + allGrids[currentGrid].redPresent.length + ")");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDcenter).css('color','white').css('background-color','blue');
