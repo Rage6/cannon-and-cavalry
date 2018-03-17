@@ -325,7 +325,7 @@ $(()=>{
     }
   };
   unitsInAllGrids();
-  console.log(allGrids)
+  console.log(allGrids);
 
   // This controls how the players choose the character name(s) and nationality
   // --- ONE PLAYER ---
@@ -596,7 +596,7 @@ $(()=>{
     }
   }
 
-  // Like findCurrentGrid, this finds the old grid so that the unit can be REMOVED from it's bluePresent or redPresent
+  // Like findNextGrid, this finds the old grid so that the unit can be REMOVED from it's bluePresent or redPresent
   const findCurrentGrid = () => {
     for (var b = 0; b < totalGrids; b++) {
       if (selectedUnit.xValue == allGrids[b].xValue && selectedUnit.yValue == allGrids[b].yValue) {
@@ -610,7 +610,7 @@ $(()=>{
   const removeAbsentUnit = () =>{
     if (currentPlayer == blueTeam) {
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
-        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.redPresent.length == 0) {
+        if (selectedUnit.name == currentGrid.bluePresent[c].name && currentGrid.redPresent.length == 0) {
           var removedUnit = currentGrid.bluePresent[c];
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           if (removedUnit.direction == "north") {
@@ -631,14 +631,13 @@ $(()=>{
           } else {
             console.log("Error in direction if loop")
           };
+          console.log("Removing "+currentGrid.bluePresent[c].name+" from "+currentGrid.xValue+", "+currentGrid.yValue);
           currentGrid.bluePresent.splice(c, 1);
-        } else {
-          console.log("Error in removeAbsentUnit's blueTeam")
         }
       }
     } else if (currentPlayer == redTeam) {
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
-        if (selectedUnit.xValue == currentGrid.xValue && selectedUnit.yValue == currentGrid.yValue && currentGrid.bluePresent.length == 0) {
+        if (selectedUnit.name == currentGrid.redPresent[c].name && currentGrid.bluePresent.length == 0) {
           var removedUnit = currentGrid.redPresent[c];
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
           if (removedUnit.direction == "north") {
@@ -656,10 +655,9 @@ $(()=>{
           } else if (removedUnit.direction == "center") {
             removedIDcenter = removedID + "_center";
             $(removedIDcenter).text("").css('background-color','transparent').css('color','transparent');
-          } else {
-            console.log("Error in direction if loop")
-          };
-          currentGrid.redPresent.splice(c, 1)
+          }
+          console.log("Removing: " + currentGrid.redPresent[c].name+" from "+currentGrid.xValue+", "+currentGrid.yValue);
+          currentGrid.redPresent.splice(c, 1);
         } else {
           console.log("Error in removeAbsentUnit's redTeam")
         }
@@ -1090,9 +1088,15 @@ $(()=>{
     var redArLeft  = checkUnitsLeft(redTeam.artillery);
     var redUnitsLeft = redCavLeft + redInLeft + redArLeft;
     if (blueUnitsLeft <= 0) {
-      console.log(redTeam.teamName + " has won the battle! Congratulations!");
+      $("#openPage").css('display','block');
+      $("#openClose").css('display','block')
+      $("#winName").text(redTeam.playerName);
+      $("#winArmy").text(redTeam.teamName);
     } else if (redUnitsLeft <= 0) {
-      console.log(blueTeam.teamName + " has won the battle! Congratulations!");
+      $("#openPage").css('display','block');
+      $("#openClose").css('display','block')
+      $("#winName").text(blueTeam.playerName);
+      $("#winArmy").text(blueTeam.teamName);
     } else {
       showCurrentPlayer();
       console.log("It is now the " + currentPlayer.teamName + " team's turn. The " + oppositePlayer.teamName + " team is the opposite player.");
@@ -1101,10 +1105,18 @@ $(()=>{
       errorPresent = [];
       completedPresent = [];
       console.log(allGrids);
+      console.log(blueTeam);
+      console.log(redTeam);
     }
   };
 
   $('#ordersButton').click(issueAllOrders);
+
+  // At the end of the game, the player can reset the page
+  const resetFunc = () => {
+    window.location.reload();
+  };
+  $("#reset").click(resetFunc);
 
   // This displays the selected unit's values
   const selectedValues = () =>{

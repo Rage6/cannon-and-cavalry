@@ -47,14 +47,11 @@ body {
   font-size: 4em;
   text-align: center;
   width: 50%;
-
   #openIntro {
     display: block;
-
     #openTitle {
       text-decoration: underline;
     }
-
     .openButton {
       margin: 30px 5%;
       border: 5px solid white;
@@ -72,12 +69,27 @@ body {
     display: none;
     background-color: red;
   }
-
   input {
     font-size: 1.5em;
     color: white;
     background-color: black;
     width: 100%;
+  }
+  #openClose {
+    display: none;
+    #finalButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      #reset {
+        color: black;
+        background-color: orange;
+      }
+      #quit {
+        color: white;
+        background-color: red;
+      }
+    }
   }
 }
 
@@ -280,7 +292,7 @@ div.title {
 
         }
         #resultList {
-          
+
         }
       }
 

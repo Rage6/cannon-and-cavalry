@@ -44,6 +44,18 @@ body {
     color: white;
     background-color: black;
     width: 100%; }
+  .openBox #openClose {
+    display: none; }
+    .openBox #openClose #finalButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around; }
+      .openBox #openClose #finalButtons #reset {
+        color: black;
+        background-color: orange; }
+      .openBox #openClose #finalButtons #quit {
+        color: white;
+        background-color: red; }
 
 div.title {
   text-align: center; }
