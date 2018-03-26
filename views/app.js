@@ -637,6 +637,7 @@ $(()=>{
       }
     } else if (currentPlayer == redTeam) {
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
+        // Note: BECAUSE OF THE BELOW 'IF' STATMENT, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead. 
         if (selectedUnit.name == currentGrid.redPresent[c].name && currentGrid.bluePresent.length == 0) {
           var removedUnit = currentGrid.redPresent[c];
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
