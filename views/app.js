@@ -11,6 +11,10 @@ $(()=>{
   var completedNum = 0;
   var errorNum = 0;
   var numOfPlayers = 1;
+  var attackTally = 0;
+  var defendTally = 0;
+  var battleOccur = false;
+  var allBattles = [];
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -164,6 +168,7 @@ $(()=>{
   const blueTeam = {
     playerName: "Player 1",
     teamName: "blue",
+    // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
         name: "1-5 BN",
@@ -228,6 +233,7 @@ $(()=>{
   const redTeam = {
     playerName: "Player 2",
     teamName: "red",
+    // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
         name: "2-5 BN",
@@ -344,7 +350,6 @@ $(()=>{
     $("#blueStatus").text(blueTeam.teamName);
     $("#openOneName").css("display","none");
     $("#openPage").css("display","none");
-    console.log(blueTeam);
     if (numOfPlayers == 2) {
       $("#openPage").css("display","block");
       $("#openTwoName").css("display","block");
@@ -367,7 +372,6 @@ $(()=>{
     $("#redStatus").text(redTeam.teamName);
     $("#openTwoName").css("display","none");
     $("#openPage").css("display","none");
-    console.log(redTeam);
   };
   $("#submitRed").click(submitRedPlayer);
 
@@ -606,7 +610,7 @@ $(()=>{
     }
   }
 
-  // After the moved unit is added to the nextGrid, this function removes it from the currentGrid.
+  // After the moved unit is added to the nextGrid, this function removes the unit from it's old grid (currentGrid).
   const removeAbsentUnit = () =>{
     if (currentPlayer == blueTeam) {
       for (var c = 0; c < currentGrid.bluePresent.length; c++) {
@@ -631,13 +635,11 @@ $(()=>{
           } else {
             console.log("Error in direction if loop")
           };
-          console.log("Removing "+currentGrid.bluePresent[c].name+" from "+currentGrid.xValue+", "+currentGrid.yValue);
           currentGrid.bluePresent.splice(c, 1);
         }
       }
     } else if (currentPlayer == redTeam) {
       for (var c = 0; c < currentGrid.redPresent.length; c++) {
-        // Note: BECAUSE OF THE BELOW 'IF' STATMENT, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead. 
         if (selectedUnit.name == currentGrid.redPresent[c].name && currentGrid.bluePresent.length == 0) {
           var removedUnit = currentGrid.redPresent[c];
           var removedID = "#x" + removedUnit.xValue + "y" + removedUnit.yValue;
@@ -657,7 +659,6 @@ $(()=>{
             removedIDcenter = removedID + "_center";
             $(removedIDcenter).text("").css('background-color','transparent').css('color','transparent');
           }
-          console.log("Removing: " + currentGrid.redPresent[c].name+" from "+currentGrid.xValue+", "+currentGrid.yValue);
           currentGrid.redPresent.splice(c, 1);
         } else {
           console.log("Error in removeAbsentUnit's redTeam")
@@ -819,17 +820,18 @@ $(()=>{
     }
   };
 
+  // THIS IS HOW A BATTLE IS CARRIED OUT!!!
   const battleSequence = (grid) => {
     var attackerScore = 0;
     var allAttackers = "test";
-    if (currentPlayer.teamName == "blue") {
+    if (currentPlayer.teamName == blueTeam.teamName) {
       allAttackers = grid.bluePresent
     } else {
       allAttackers = grid.redPresent
     };
     var defenderScore = 0;
     var allDefenders = "test";
-    if (currentPlayer.teamName == "blue") {
+    if (currentPlayer.teamName == blueTeam.teamName) {
       allDefenders = grid.redPresent
     } else {
       allDefenders = grid.bluePresent
@@ -837,6 +839,8 @@ $(()=>{
     var defLineUse = false;
     defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid,defLineUse);
     attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid,defLineUse);
+    attackTally = 0;
+    defendTally = 0;
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
     while (allDefenders.length > 0 && allAttackers.length > 0) {
@@ -858,12 +862,14 @@ $(()=>{
         tookHit = defenderUnit;
         hitIndex = defenderIndex;
         hitArray = allDefenders;
+        attackTally += 1;
       } else {
         attackerUnit.health -= 2;
         console.log(attackerUnit.name + " took a hit!");
         tookHit = attackerUnit;
         hitIndex = attackerIndex;
         hitArray = allAttackers;
+        defendTally += 1;
       };
       if (tookHit.health <= 0) {
         tookHit.active = false;
@@ -1008,6 +1014,11 @@ $(()=>{
         $("#resultList").append("<li><b>" + errorPresent[errP] + "</b></li>")
       }
     };
+    if (battleOccur == true) {
+      for (var battP = 0; battP < allBattles.length; battP++) {
+        $("#battleList").append(allBattles);
+      }
+    };
   }
 
   const checkUnitsLeft = (unitType) => {
@@ -1038,14 +1049,15 @@ $(()=>{
       selectedUnit = selectedArtillery[i];
       issueOneOrder(ordersDone);
     };
-    // console.log(ordersDone);
+    battleOccur = false;
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
         battleSequence(battlefield);
+        battleOccur = true;
+        allBattles.push("<li>A battle took place</li>");
       };
     };
-
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       checkIfError(selectedUnit);
@@ -1062,6 +1074,7 @@ $(()=>{
       changeCurrentValues();
     };
     completeReport();
+    allBattles = [];
     // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
     showGridUnits(currentPlayer, selectedInfantry);
@@ -1106,8 +1119,8 @@ $(()=>{
       errorPresent = [];
       completedPresent = [];
       console.log(allGrids);
-      console.log(blueTeam);
-      console.log(redTeam);
+      // console.log(blueTeam);
+      // console.log(redTeam);
     }
   };
 
