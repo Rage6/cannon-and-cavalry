@@ -15,6 +15,9 @@ $(()=>{
   var defendTally = 0;
   var battleOccur = false;
   var allBattles = [];
+  var northHalf = Math.round(maxYvalue/2);
+  var westHalf = Math.round(maxXvalue/2);
+  var reportFacts = [];
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -824,32 +827,72 @@ $(()=>{
   const battleSequence = (grid) => {
     var attackerScore = 0;
     var allAttackers = "test";
+    var attackTeam = null;
     if (currentPlayer.teamName == blueTeam.teamName) {
-      allAttackers = grid.bluePresent
+      allAttackers = grid.bluePresent;
+      attackTeam = blueTeam;
     } else {
-      allAttackers = grid.redPresent
+      allAttackers = grid.redPresent;
+      attackTeam = redTeam;
     };
     var defenderScore = 0;
     var allDefenders = "test";
+    var defendTeam = null;
     if (currentPlayer.teamName == blueTeam.teamName) {
-      allDefenders = grid.redPresent
+      allDefenders = grid.redPresent;
+      defendTeam = redTeam;
     } else {
-      allDefenders = grid.bluePresent
+      allDefenders = grid.bluePresent;
+      defendTeam = blueTeam;
     };
+    // --- This reports the facts before the actual fights...
+    reportFacts = [];
+    if (grid.yValue <= northHalf) {
+      reportFacts.push(" north");
+    } else {
+      reportFacts.push(" south");
+    };
+    if (grid.xValue <= westHalf) {
+      reportFacts.push("west");
+    } else {
+      reportFacts.push("east");
+    };
+    const displayUnits = (thesePresent) => {
+      console.log(thesePresent);
+      if (thesePresent.length == 1) {
+        reportFacts.push(" " + thesePresent[0].name)
+      } else if (thesePresent.length == 2) {
+        reportFacts.push(" " + thesePresent[0].name + " and " + thesePresent[1].name + ".")
+      } else {
+        var lastUnit = thesePresent.length - 1;
+        console.log("lastUnit:" + lastUnit);
+        var allNames = " " + thesePresent[0].name + ",";
+        for (var r = 1; r < lastUnit; r++) {
+          console.log(thesePresent[r].name);
+          allNames + " " + thesePresent[r].name + ",";
+        };
+        allNames + " and " + thesePresent[lastUnit].name;
+        reportFacts.push(allNames);
+      }
+      console.log("pre-battle report:");
+      console.log(reportFacts);
+    };
+    displayUnits(allAttackers);
+    displayUnits(allDefenders);
+    // ---
     var defLineUse = false;
     defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid,defLineUse);
     attackerScore = addPoints(allAttackers,allAttackers,allDefenders,grid,defLineUse);
     attackTally = 0;
     defendTally = 0;
+    totalTally = 0;
     console.log("Defender Score: " + defenderScore);
     console.log("Attacker Score: " + attackerScore);
     while (allDefenders.length > 0 && allAttackers.length > 0) {
       var attackerIndex = Math.floor(Math.random() * Math.floor(allAttackers.length));
       var attackerUnit = allAttackers[attackerIndex];
-      // console.log("Attacker Unit: " + attackerUnit.name);
       var defenderIndex = Math.floor(Math.random() * Math.floor(allDefenders.length));
       var defenderUnit = allDefenders[defenderIndex];
-      // console.log("Defender Unit: " + defenderUnit.name);
       var tookHit = null;
       var hitIndex = null;
       var hitArray = null;
@@ -878,6 +921,16 @@ $(()=>{
         console.log(hitArray);
       }
     }
+    // --- ... and this reports the final results
+    if (allAttackers.length > 0) {
+      reportFacts.push(attackTeam.teamName);
+    } else {
+      reportFacts.push(defendTeam.teamName);
+    };
+    totalTally = attackTally + defendTally;
+    reportFacts.push(totalTally);
+    console.log(reportFacts);
+    // ---
   }
 
   const addPoints = (thosePresent,atkTeam,defTeam,oneGrid,defLineStatus) => {
@@ -1018,7 +1071,9 @@ $(()=>{
       for (var battP = 0; battP < allBattles.length; battP++) {
         $("#battleList").append(allBattles);
       }
-    };
+    } else {
+      $("#battleList").append("<li>No battles to report</li>");
+    }
   }
 
   const checkUnitsLeft = (unitType) => {
@@ -1055,7 +1110,8 @@ $(()=>{
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
         battleSequence(battlefield);
         battleOccur = true;
-        allBattles.push("<li>A battle took place</li>");
+        //reportFacts
+        allBattles.push("<li>A battle took place in the" + reportFacts[0] + reportFacts[1] + ".</li>");
       };
     };
     for (var i = 0; i < selectedInfantry.length; i++) {
