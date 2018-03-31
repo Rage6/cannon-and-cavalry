@@ -195,7 +195,7 @@ $(()=>{
         direction: "center",
         nextDirection: "center",
         xValue: 4,
-        yValue: 1,
+        yValue: 2,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -258,7 +258,7 @@ $(()=>{
         direction: "center",
         nextDirection: "center",
         xValue: 4,
-        yValue: 4
+        yValue: 3
       }
     ],
     cavalry: [
@@ -765,11 +765,11 @@ $(()=>{
       };
       for (var o = 0; o < activeUnits.length; o++) {
         if (orderNumber > o) {
-          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].direction == selectedUnit.nextDirection) {
+          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].direction == selectedUnit.nextDirection && selectedUnit.nextDirection != "center") {
             blockLine = true;
           }
         } else if (orderNumber < o) {
-          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].nextDirection == selectedUnit.nextDirection && activeUnits[o].direction == selectedUnit.nextDirection) {
+          if (activeUnits[o].xValue == selectedUnit.xValue && activeUnits[o].yValue == selectedUnit.yValue && activeUnits[o].nextDirection == selectedUnit.nextDirection && activeUnits[o].direction == selectedUnit.nextDirection && selectedUnit.nextDirection != "center") {
             blockLine = true;
           }
         };
@@ -881,7 +881,6 @@ $(()=>{
     };
     displayUnits(allAttackers);
     displayUnits(allDefenders);
-    console.log(reportFacts);
     // ---
     var defLineUse = false;
     defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid,defLineUse);
@@ -932,7 +931,7 @@ $(()=>{
     };
     totalTally = attackTally + defendTally;
     reportFacts.push(totalTally);
-    if (totalTally < 6) {
+    if (totalTally < 7) {
       reportFacts.push("short ")
     } else if (totalTally > 12) {
       reportFacts.push("fierce ")
@@ -1079,7 +1078,7 @@ $(()=>{
     };
     if (battleOccur == true) {
       for (var battP = 0; battP < allBattles.length; battP++) {
-        $("#battleList").append(allBattles);
+        $("#battleList").append(allBattles[battP]);
       }
     } else {
       $("#battleList").append("<li>No battles to report</li>");
@@ -1118,9 +1117,12 @@ $(()=>{
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
+        console.log("Battle started.")
         battleSequence(battlefield);
         battleOccur = true;
-        allBattles.push("<li>A " + reportFacts[8] + "battle took place in the " + reportFacts[0] + reportFacts[1] + ". " + reportFacts[2] + " forces, composed of the " + reportFacts[4] + ", attacked the " + reportFacts[3] + "'s " + reportFacts[5] + ". " + reportFacts[7] + " attacks and counter-attacks took place, but the " + reportFacts[6] + " ultimately controlled the battlefield</li>");
+        allBattles.push("<li>A " + reportFacts[8] + "battle took place in the " + reportFacts[0] + reportFacts[1] + ". " + reportFacts[2] + " forces, composed of the " + reportFacts[4] + ", attacked the " + reportFacts[3] + "'s " + reportFacts[5] + ". During the fight, " + reportFacts[7] + " attacks and counter-attacks took place. Ultimately, " + reportFacts[6] + " forces controlled the battlefield</li>");
+        console.log("allBattles: ");
+        console.log(allBattles);
       };
     };
     for (var i = 0; i < selectedInfantry.length; i++) {
