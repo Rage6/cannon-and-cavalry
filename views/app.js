@@ -181,8 +181,8 @@ $(()=>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 1,
-        yValue: 1,
+        xValue: 2,
+        yValue: 2,
         nextXvalue: null,
         nextYvalue: null
       },
@@ -210,7 +210,7 @@ $(()=>{
         direction: "center",
         nextDirection: "center",
         xValue: 2,
-        yValue: 1,
+        yValue: 2,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -224,8 +224,8 @@ $(()=>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 3,
-        yValue: 1,
+        xValue: 2,
+        yValue: 2,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -246,8 +246,8 @@ $(()=>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 1,
-        yValue: 4
+        xValue: 2,
+        yValue: 3
       },
       {
         name: "2-8 BN",
@@ -271,7 +271,7 @@ $(()=>{
         direction: "center",
         nextDirection: "center",
         xValue: 2,
-        yValue: 4
+        yValue: 3
       }
     ],
     artillery: [
@@ -283,8 +283,8 @@ $(()=>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 3,
-        yValue: 4
+        xValue: 2,
+        yValue: 3
       }
     ]
   };
@@ -857,28 +857,31 @@ $(()=>{
     } else {
       reportFacts.push("east");
     };
+    if (currentPlayer.teamName == blueTeam.teamName) {
+      reportFacts.push(blueTeam.teamName);
+      reportFacts.push(redTeam.teamName);
+    } else {
+      reportFacts.push(redTeam.teamName);
+      reportFacts.push(blueTeam.teamName);
+    };
     const displayUnits = (thesePresent) => {
-      console.log(thesePresent);
       if (thesePresent.length == 1) {
         reportFacts.push(" " + thesePresent[0].name)
       } else if (thesePresent.length == 2) {
         reportFacts.push(" " + thesePresent[0].name + " and " + thesePresent[1].name + ".")
       } else {
         var lastUnit = thesePresent.length - 1;
-        console.log("lastUnit:" + lastUnit);
         var allNames = " " + thesePresent[0].name + ",";
         for (var r = 1; r < lastUnit; r++) {
-          console.log(thesePresent[r].name);
-          allNames + " " + thesePresent[r].name + ",";
+          allNames = allNames + " " + thesePresent[r].name + ",";
         };
-        allNames + " and " + thesePresent[lastUnit].name;
+        allNames = allNames + " and " + thesePresent[lastUnit].name;
         reportFacts.push(allNames);
       }
-      console.log("pre-battle report:");
-      console.log(reportFacts);
     };
     displayUnits(allAttackers);
     displayUnits(allDefenders);
+    console.log(reportFacts);
     // ---
     var defLineUse = false;
     defenderScore = addPoints(allDefenders,allAttackers,allDefenders,grid,defLineUse);
@@ -929,6 +932,13 @@ $(()=>{
     };
     totalTally = attackTally + defendTally;
     reportFacts.push(totalTally);
+    if (totalTally < 6) {
+      reportFacts.push("short ")
+    } else if (totalTally > 12) {
+      reportFacts.push("fierce ")
+    } else {
+      reportFacts.push("");
+    };
     console.log(reportFacts);
     // ---
   }
@@ -1110,8 +1120,7 @@ $(()=>{
       if (battlefield.bluePresent.length > 0 && battlefield.redPresent.length > 0) {
         battleSequence(battlefield);
         battleOccur = true;
-        //reportFacts
-        allBattles.push("<li>A battle took place in the" + reportFacts[0] + reportFacts[1] + ".</li>");
+        allBattles.push("<li>A " + reportFacts[8] + "battle took place in the " + reportFacts[0] + reportFacts[1] + ". " + reportFacts[2] + " forces, composed of the " + reportFacts[4] + ", attacked the " + reportFacts[3] + "'s " + reportFacts[5] + ". " + reportFacts[7] + " attacks and counter-attacks took place, but the " + reportFacts[6] + " ultimately controlled the battlefield</li>");
       };
     };
     for (var i = 0; i < selectedInfantry.length; i++) {
