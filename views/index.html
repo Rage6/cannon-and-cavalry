@@ -4,118 +4,257 @@
     <meta charset="utf-8">
     <title>Hold Your Ground!</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/output.css">
+    <link rel="icon" type="image/png" href="stylesheets/images/cannon_tab.png">
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="app.js"></script>
   </head>
   <body>
-    <div class="title" id="mainTitle">
-      HOLD YOUR GROUND!
+    <div id="openPage">
+    </div>
+    <div class="openBox">
+      <div id="openIntro">
+        <div id="openTitle">HOLD YOUR GROUND!</div>
+        <div class="openButton" id="onePlayer">One Player</div>
+        <div class="openButton" id="twoPlayer">Two Player</div>
+        <div class="openButton" id="howTo">How To Play</div>
+        <div class="openButton" id="rules">Rules</div>
+        <div class="openButton" id="about">About</div>
+      </div>
+      <div id="openOneName">
+        <p>
+          Enter your name and your army's name, and then hit enter.
+        </p>
+        <div>Commander:</div>
+        <div class="lengthNote">(Max length: 15)</div>
+        <input type="text" maxlength="15" id="blueLeader">
+        <div>Nation:</div>
+        <div class="lengthNote">(Max length: 3)</div>
+        <input type="text" maxlength="3" id="blueArmy">
+        <div id="submitBlue">Submit</div>
+      </div>
+      <div id="openTwoName">
+        <p>
+          Enter your name and your army's name, and then hit enter.
+        </p>
+        <div>Commander:</div>
+        <div class="lengthNote">(Max length: 15)</div>
+        <input type="text" maxlength="15" id="redLeader">
+        <div>Nation :</div>
+        <div class="lengthNote">(Max length: 3)</div>
+        <input type="text" maxlength="3" id="redArmy">
+        <div id="submitRed">Submit</div>
+      </div>
+      <div id="openClose">
+        Congratulations, <span id="winName"></span>! The <span id="winArmy"></span> army has taken the field and defeated the enemy! VICTORY IS YOURS!
+        <div id="finalButtons">
+          <div id="reset">RESET</div>
+          <!-- <div id="quit">QUIT</div> -->
+        </div>
+      </div>
     </div>
     <div id="terrain">
       <div id="ground">
         <div class="gridSquare" id="x1y1">
-          
+          <div class="topLine" id="x1y1_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x1y1_west"></div>
+            <div class="centerMiddle" id="x1y1_center"></div>
+            <div class="centerRight" id="x1y1_east"></div>
+          </div>
+          <div class="bottomLine" id="x1y1_south"></div>
         </div>
         <div class="gridSquare" id="x2y1">
-
+          <div class="topLine" id="x2y1_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x2y1_west"></div>
+            <div class="centerMiddle" id="x2y1_center"></div>
+            <div class="centerRight" id="x2y1_east"></div>
+          </div>
+          <div class="bottomLine" id="x2y1_south"></div>
         </div>
         <div class="gridSquare" id="x3y1">
-
+          <div class="topLine" id="x3y1_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x3y1_west"></div>
+            <div class="centerMiddle" id="x3y1_center"></div>
+            <div class="centerRight" id="x3y1_east"></div>
+          </div>
+          <div class="bottomLine" id="x3y1_south"></div>
         </div>
         <div class="gridSquare" id="x4y1">
-
+          <div class="topLine" id="x4y1_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x4y1_west"></div>
+            <div class="centerMiddle" id="x4y1_center"></div>
+            <div class="centerRight" id="x4y1_east"></div>
+          </div>
+          <div class="bottomLine" id="x4y1_south"></div>
         </div>
         <div class="gridSquare" id="x1y2">
-
+          <div class="topLine" id="x1y2_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x1y2_west"></div>
+            <div class="centerMiddle" id="x1y2_center"></div>
+            <div class="centerRight" id="x1y2_east"></div>
+          </div>
+          <div class="bottomLine" id="x1y2_south"></div>
         </div>
         <div class="gridSquare" id="x2y2">
-
+          <div class="topLine" id="x2y2_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x2y2_west"></div>
+            <div class="centerMiddle" id="x2y2_center"></div>
+            <div class="centerRight" id="x2y2_east"></div>
+          </div>
+          <div class="bottomLine" id="x2y2_south"></div>
         </div>
         <div class="gridSquare" id="x3y2">
-
+          <div class="topLine" id="x3y2_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x3y2_west"></div>
+            <div class="centerMiddle" id="x3y2_center"></div>
+            <div class="centerRight" id="x3y2_east"></div>
+          </div>
+          <div class="bottomLine" id="x3y2_south"></div>
         </div>
         <div class="gridSquare" id="x4y2">
-
+          <div class="topLine" id="x4y2_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x4y2_west"></div>
+            <div class="centerMiddle" id="x4y2_center"></div>
+            <div class="centerRight" id="x4y2_east"></div>
+          </div>
+          <div class="bottomLine" id="x4y2_south"></div>
         </div>
         <div class="gridSquare" id="x1y3">
-
+          <div class="topLine" id="x1y3_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x1y3_west"></div>
+            <div class="centerMiddle" id="x1y3_center"></div>
+            <div class="centerRight" id="x1y3_east"></div>
+          </div>
+          <div class="bottomLine" id="x1y3_south"></div>
         </div>
         <div class="gridSquare" id="x2y3">
-
+          <div class="topLine" id="x2y3_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x2y3_west"></div>
+            <div class="centerMiddle" id="x2y3_center"></div>
+            <div class="centerRight" id="x2y3_east"></div>
+          </div>
+          <div class="bottomLine" id="x2y3_south"></div>
         </div>
         <div class="gridSquare" id="x3y3">
-
+          <div class="topLine" id="x3y3_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x3y3_west"></div>
+            <div class="centerMiddle" id="x3y3_center"></div>
+            <div class="centerRight" id="x3y3_east"></div>
+          </div>
+          <div class="bottomLine" id="x3y3_south"></div>
         </div>
         <div class="gridSquare" id="x4y3">
-
+          <div class="topLine" id="x4y3_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x4y3_west"></div>
+            <div class="centerMiddle" id="x4y3_center"></div>
+            <div class="centerRight" id="x4y3_east"></div>
+          </div>
+          <div class="bottomLine" id="x4y3_south"></div>
         </div>
         <div class="gridSquare" id="x1y4">
-
+          <div class="topLine" id="x1y4_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x1y4_west"></div>
+            <div class="centerMiddle" id="x1y4_center"></div>
+            <div class="centerRight" id="x1y4_east"></div>
+          </div>
+          <div class="bottomLine" id="x1y4_south"></div>
         </div>
         <div class="gridSquare" id="x2y4">
-
+          <div class="topLine" id="x2y4_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x2y4_west"></div>
+            <div class="centerMiddle" id="x2y4_center"></div>
+            <div class="centerRight" id="x2y4_east"></div>
+          </div>
+          <div class="bottomLine" id="x2y4_south"></div>
         </div>
         <div class="gridSquare" id="x3y4">
-
+          <div class="topLine" id="x3y4_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x3y4_west"></div>
+            <div class="centerMiddle" id="x3y4_center"></div>
+            <div class="centerRight" id="x3y4_east"></div>
+          </div>
+          <div class="bottomLine" id="x3y4_south"></div>
         </div>
         <div class="gridSquare" id="x4y4">
-
+          <div class="topLine" id="x4y4_north"></div>
+          <div class="centerLine">
+            <div class="centerLeft" id="x4y4_west"></div>
+            <div class="centerMiddle" id="x4y4_center"></div>
+            <div class="centerRight" id="x4y4_east"></div>
+          </div>
+          <div class="bottomLine" id="x4y4_south"></div>
         </div>
       </div>
     </div>
     <div id="allOptions">
       <div class="turnBoxes" id="unitAndRep">
-        <div class="indivBox" id="unitBox">
-          <div class="title">
-            <u>Selected Unit:</u>
-          </div>
-          <div id="attackDefendBox">
-            <div class="attackDefendButton" id="attackButton">
-              ATTACK
+        <div class="indivBox">
+          <div id="unitBox">
+            <div class="title">
+              <u>Selected Unit:</u>
             </div>
-            <div class="attackDefendButton" id="defendButton">
-              DEFEND
-            </div>
-          </div>
-          <div id="unitName">
-            <i>Name</i>
-          </div>
-          <div id="healthAndArrowBox">
-            <div id="health">
-              <div>
-                Health:
+            <div id="attackDefendBox">
+              <div class="attackDefendButton" id="attackButton">
+                ATTACK
               </div>
-              <div>
-                100%
+              <div class="attackDefendButton" id="defendButton">
+                DEFEND
               </div>
             </div>
-            <div id="arrows">
-              <div class="arrowBox">
+            <div id="unitName">
+              <i>Name</i>
+            </div>
+            <div id="healthAndArrowBox">
+              <div id="health">
+                <div>
+                  Health:
+                </div>
+                <div id="healthReading">
+                  --
+                </div>
+              </div>
+              <div id="arrows">
+                <div class="arrowBox">
 
-              </div>
-              <div class="arrowBox" id="north">
-                N
-              </div>
-              <div class="arrowBox">
+                </div>
+                <div class="arrowBox unitButton" id="north">
+                  <img src="stylesheets/images/arrow-up.png" alt="N">
+                </div>
+                <div class="arrowBox">
 
-              </div>
-              <div class="arrowBox" id="west">
-                W
-              </div>
-              <div class="arrowBox">
+                </div>
+                <div class="arrowBox unitButton" id="west">
+                  <img src="stylesheets/images/arrow-left.png" alt="W">
+                </div>
+                <div class="arrowBox unitButton" id="center">
+                  <img src="stylesheets/images/circle.png"alt="Circle">
+                </div>
+                <div class="arrowBox unitButton" id="east">
+                  <img src="stylesheets/images/arrow-right.png" alt="E">
+                </div>
+                <div class="arrowBox">
 
-              </div>
-              <div class="arrowBox" id="east">
-                E
-              </div>
-              <div class="arrowBox">
+                </div>
+                <div class="arrowBox unitButton" id="south">
+                  <img src="stylesheets/images/arrow-down.png" alt="S">
+                </div>
+                <div class="arrowBox">
 
-              </div>
-              <div class="arrowBox" id="south">
-                S
-              </div>
-              <div class="arrowBox">
-
+                </div>
               </div>
             </div>
           </div>
@@ -124,41 +263,86 @@
           <div class="title">
             <u>Battle Report:</u>
           </div>
+          <div id="completeReport">
+            <div class="battleTitle">** ORDERS **</div>
+            <ul id="orderList"></ul>
+            <div class="battleTitle">** RESULTS **</div>
+            <ul id="resultList"></ul>
+            <div class="battleTitle">** BATTLES **</div>
+            <ul id="battleList"></ul>
+          </div>
         </div>
       </div>
       <div class="turnBoxes" id="teamStats">
-        <div class="indivBox" id="teamOne">
-          <div class="title">
-            <u>Troops Status:</u>
-          </div>
-          <div class="allUnitColumns">
-            <div class="unitColumn">
-              IN
+        <div class="indivBox">
+          <div id="teamOne">
+            <div class="title" id="blueTitle">
+              <u><span id="blueStatus">Blue</span> Army:</u>
             </div>
-            <div class="unitColumn">
-              AR
-            </div>
-            <div class="unitColumn">
-              CAV
+            <div class="allUnitColumns">
+              <div class="unitColumn">
+                <div>IN</div>
+                <div class="unitButton blueButton" id="blueIn0"></div>
+                <div class="unitButton blueButton" id="blueIn1"></div>
+                <div class="unitButton blueButton" id="blueIn2"></div>
+                <div class="unitButton blueButton" id="blueIn3"></div>
+                <div class="unitButton blueButton" id="blueIn4"></div>
+              </div>
+              <div class="unitColumn">
+                <div>AR</div>
+                <div class="unitButton blueButton" id="blueAr0"></div>
+                <div class="unitButton blueButton" id="blueAr1"></div>
+                <div class="unitButton blueButton" id="blueAr2"></div>
+                <div class="unitButton blueButton" id="blueAr3"></div>
+                <div class="unitButton blueButton" id="blueAr4"></div>
+              </div>
+              <div class="unitColumn">
+                <div>CAV</div>
+                <div class="unitButton blueButton" id="blueCav0"></div>
+                <div class="unitButton blueButton" id="blueCav1"></div>
+                <div class="unitButton blueButton" id="blueCav2"></div>
+                <div class="unitButton blueButton" id="blueCav3"></div>
+                <div class="unitButton blueButton" id="blueCav4"></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="indivBox" id="teamTwo">
-          <div class="title">
-            <u>Enemy Status:</u>
-          </div>
-          <div class="allUnitColumns">
-            <div class="unitColumn">
-              IN
+        <div class="indivBox">
+          <div id="teamTwo">
+            <div class="title" id="redTitle">
+              <u><span id="redStatus">Red</span> Army:</u>
             </div>
-            <div class="unitColumn">
-              AR
-            </div>
-            <div class="unitColumn">
-              CAV
+            <div class="allUnitColumns">
+              <div class="unitColumn">
+                <div>IN</div>
+                <div class="unitButton" id="redIn0"></div>
+                <div class="unitButton" id="redIn1"></div>
+                <div class="unitButton" id="redIn2"></div>
+                <div class="unitButton" id="redIn3"></div>
+                <div class="unitButton" id="redIn4"></div>
+              </div>
+              <div class="unitColumn">
+                <div>AR</div>
+                <div class="unitButton" id="redAr0"></div>
+                <div class="unitButton" id="redAr1"></div>
+                <div class="unitButton" id="redAr2"></div>
+                <div class="unitButton" id="redAr3"></div>
+                <div class="unitButton" id="redAr4"></div>
+              </div>
+              <div class="unitColumn">
+                <div>CAV</div>
+                <div class="unitButton" id="redCav0"></div>
+                <div class="unitButton" id="redCav1"></div>
+                <div class="unitButton" id="redCav2"></div>
+                <div class="unitButton" id="redCav3"></div>
+                <div class="unitButton" id="redCav4"></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="unitButton" id="ordersButton">
+        Carry out my orders
       </div>
     </div>
   </body>
