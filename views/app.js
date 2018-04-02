@@ -1,4 +1,4 @@
-$(()=>{
+$(() =>{
 
   const totalGrids = 16;
   const maxXvalue = 4;
@@ -560,38 +560,90 @@ $(()=>{
     }
   }
 
-// This is how the arrow buttons change a unit's nextDirections
-
+// This is how the arrow buttons change a unit's nextDirections and show where it will go
   $('#north').click( ()=> {
+    clearBorders();
+    borderColor();
     selectedUnit.nextDirection = "north";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
+    if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
+      var targetYnorth = selectedUnit.yValue - 1;
+      var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
+      $(targetID).css("border",targetBorder);
+    }
   });
   $('#east').click( ()=> {
+    clearBorders();
+    borderColor();
     selectedUnit.nextDirection = "east";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
+    if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
+      var targetXeast = selectedUnit.xValue + 1;
+      var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
+      $(targetID).css("border",targetBorder);
+    }
   });
   $('#south').click( ()=> {
+    clearBorders();
+    borderColor();
     selectedUnit.nextDirection = "south";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
+    if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
+      var targetYsouth = selectedUnit.yValue + 1;
+      var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
+      $(targetID).css("border",targetBorder);
+    }
   });
   $('#west').click( ()=> {
+    clearBorders();
+    borderColor();
     selectedUnit.nextDirection = "west";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
+    if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
+      var targetXwest = selectedUnit.xValue - 1;
+      var targetID = "#x" + targetXwest + "y" + selectedUnit.yValue + "_center";
+      $(targetID).css("border",targetBorder);
+    }
   });
   $('#center').click( ()=> {
+    clearBorders();
     selectedUnit.nextDirection = "center";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
   });
+  // This erases the border on the grid that the user had directed towards
+  const clearBorders = () => {
+    var northY = selectedUnit.yValue - 1;
+    var southY = selectedUnit.yValue + 1;
+    var westX  = selectedUnit.xValue - 1;
+    var eastX  = selectedUnit.xValue + 1;
+    var clearID = "#x" + selectedUnit.xValue + "y" + northY + "_center";
+    $(clearID).css("border","none");
+    clearID = "#x" + westX + "y" + selectedUnit.yValue + "_center";
+    $(clearID).css("border","none");
+    clearID = "#x" + selectedUnit.xValue + "y" + southY + "_center";
+    $(clearID).css("border","none");
+    clearID = "#x" + eastX + "y" + selectedUnit.yValue + "_center";
+    $(clearID).css("border","none");
+  }
+  // To choose which border color for the next potential grid
+  var targetBorder = "5px solid blue";
+  const borderColor = () => {
+    targetBorder = "5px solid blue";
+    if (currentPlayer == redTeam) {
+      targetBorder = "5px solid red";
+    };
+    return targetBorder
+  };
 
 // To be used within issueOneOrder below, this determines the grid where the unit will be moved to. It's important because both the unit and the grid square need to know that the unit is in a new grid square.
   const findNextGrid = () => {
