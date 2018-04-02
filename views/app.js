@@ -557,6 +557,31 @@ $(() =>{
       $("#center").css('background-color','yellow');
     }  else {
       console.log("error in showUnitDirection function.")
+    };
+    if (selectedUnit.nextDirection == "north") {
+      if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
+        var targetYnorth = selectedUnit.yValue - 1;
+        var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
+        $(targetID).css("border",targetBorder);
+      }
+    } else if (selectedUnit.nextDirection == "east") {
+      if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
+        var targetXeast = selectedUnit.xValue + 1;
+        var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
+        $(targetID).css("border",targetBorder);
+      }
+    } else if (selectedUnit.nextDirection == "south") {
+      if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
+        var targetYsouth = selectedUnit.yValue + 1;
+        var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
+        $(targetID).css("border",targetBorder);
+      }
+    } else if (selectedUnit.nextDirection == "west") {
+      if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
+        var targetXwest = selectedUnit.xValue - 1;
+        var targetID = "#x" + targetXwest + "y" + selectedUnit.yValue + "_center";
+        $(targetID).css("border",targetBorder);
+      }
     }
   }
 
@@ -568,11 +593,6 @@ $(() =>{
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
-    if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
-      var targetYnorth = selectedUnit.yValue - 1;
-      var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
-      $(targetID).css("border",targetBorder);
-    }
   });
   $('#east').click( ()=> {
     clearBorders();
@@ -581,11 +601,6 @@ $(() =>{
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
-    if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
-      var targetXeast = selectedUnit.xValue + 1;
-      var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
-      $(targetID).css("border",targetBorder);
-    }
   });
   $('#south').click( ()=> {
     clearBorders();
@@ -594,11 +609,6 @@ $(() =>{
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
-    if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
-      var targetYsouth = selectedUnit.yValue + 1;
-      var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
-      $(targetID).css("border",targetBorder);
-    }
   });
   $('#west').click( ()=> {
     clearBorders();
@@ -607,11 +617,6 @@ $(() =>{
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
-    if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
-      var targetXwest = selectedUnit.xValue - 1;
-      var targetID = "#x" + targetXwest + "y" + selectedUnit.yValue + "_center";
-      $(targetID).css("border",targetBorder);
-    }
   });
   $('#center').click( ()=> {
     clearBorders();
