@@ -4,6 +4,7 @@ $(() =>{
   const maxXvalue = 4;
   const maxYvalue = 4;
   const maxUnits = 5;
+  var startGrids = true;
   var errorPresent = [];
   var completedPresent = [];
   var battleReport = [];
@@ -181,8 +182,8 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 2,
+        xValue: 1,
+        yValue: 1,
         nextXvalue: null,
         nextYvalue: null
       },
@@ -195,7 +196,7 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 4,
-        yValue: 2,
+        yValue: 1,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -210,7 +211,7 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 2,
-        yValue: 2,
+        yValue: 1,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -224,8 +225,8 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 2,
+        xValue: 3,
+        yValue: 1,
         nextXvalue: null,
         nextYvalue: null
       }
@@ -246,8 +247,8 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 3
+        xValue: 1,
+        yValue: 4
       },
       {
         name: "2-8 BN",
@@ -258,7 +259,7 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 4,
-        yValue: 3
+        yValue: 4
       }
     ],
     cavalry: [
@@ -271,7 +272,7 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 2,
-        yValue: 3
+        yValue: 4
       }
     ],
     artillery: [
@@ -283,8 +284,8 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 3
+        xValue: 3,
+        yValue: 4
       }
     ]
   };
@@ -1243,12 +1244,12 @@ $(() =>{
     allBattles = [];
     // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
-    showGridUnits(currentPlayer, selectedInfantry);
-    showGridUnits(currentPlayer, selectedCavalry);
-    showGridUnits(currentPlayer, selectedArtillery);
-    showGridUnits(oppositePlayer, oppositePlayer.infantry);
-    showGridUnits(oppositePlayer, oppositePlayer.cavalry);
-    showGridUnits(oppositePlayer, oppositePlayer.artillery);
+    showGridUnits(startGrids, currentPlayer, selectedInfantry);
+    showGridUnits(startGrids, currentPlayer, selectedCavalry);
+    showGridUnits(startGrids, currentPlayer, selectedArtillery);
+    showGridUnits(startGrids, oppositePlayer, oppositePlayer.infantry);
+    showGridUnits(startGrids, oppositePlayer, oppositePlayer.cavalry);
+    showGridUnits(startGrids, oppositePlayer, oppositePlayer.artillery);
     orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
@@ -1570,7 +1571,13 @@ $(() =>{
   $("#redAr4").click(4, newClickNum).click(onlyClickRedAr);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
-  const showGridUnits = (oneTeam, unitType) => {
+  const showGridUnits = (startCheck, oneTeam, unitType) => {
+    if (startCheck == true) {
+      console.log("startCheck is " + startCheck);
+    }
+    else {
+      console.log("startCheck is " + startCheck);
+    }
     for (var x = 0; x < totalGrids; x++) {
       var currentGrid = x;
       var gridID = "#x" + allGrids[currentGrid].xValue + "y" + allGrids[currentGrid].yValue;
@@ -1583,13 +1590,12 @@ $(() =>{
       $("#gridIDeast").css("border","0px solid transparent");
       $("#gridIDsouth").css("border","0px solid transparent");
       $("#gridIDwest").css("border","0px solid transparent");
-      $("#gridIDcenter").css("border","0px solid transparent");
+      $("#gridIDcenter").css("border","0px solid transparent").prepend("<img src=''>");
       for (var i = 0; i < unitType.length; i++) {
         if (unitType[i].xValue == allGrids[currentGrid].xValue && unitType[i].yValue == allGrids[currentGrid].yValue) {
           if (unitType[i].active == true) {
             if (unitType[i].direction == "north") {
               if (unitType[i].type == "IN") {
-                // $(gridIDnorth).text("IN");
                 $(gridIDnorth).text("IN");
               } else if (unitType[i].type == "CAV") {
                 $(gridIDnorth).text("CAV");
@@ -1652,7 +1658,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDcenter).text("CAV");
+                // $(gridIDcenter).text("CAV");
+                $(gridIDcenter).prepend("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
               };
@@ -1751,23 +1758,20 @@ $(() =>{
       // console.log("terrainImage is functioning.");
     };
     terrainImage();
-    showGridUnits(blueTeam, blueTeam.infantry);
-    showGridUnits(blueTeam, blueTeam.cavalry);
-    showGridUnits(blueTeam, blueTeam.artillery);
-    showGridUnits(redTeam, redTeam.infantry);
-    showGridUnits(redTeam, redTeam.cavalry);
-    showGridUnits(redTeam, redTeam.artillery);
-    // console.log("End makeOneGrid function: " + gridNumber);
+    showGridUnits(startGrids, blueTeam, blueTeam.infantry);
+    showGridUnits(startGrids, blueTeam, blueTeam.cavalry);
+    showGridUnits(startGrids, blueTeam, blueTeam.artillery);
+    showGridUnits(startGrids, redTeam, redTeam.infantry);
+    showGridUnits(startGrids, redTeam, redTeam.cavalry);
+    showGridUnits(startGrids, redTeam, redTeam.artillery);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
   const makeAllGrids = (howMany) => {
-    // console.log("Start makeAllGrids function");
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
-      // console.log(allGrids[i]);
     };
-    // console.log("End makeAllGrids function");
+    startGrids = false;
   };
   makeAllGrids(totalGrids);
 
