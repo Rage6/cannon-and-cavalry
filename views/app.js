@@ -1201,6 +1201,8 @@ $(() =>{
     selectedInfantry = currentPlayer.infantry;
     selectedCavalry = currentPlayer.cavalry;
     selectedArtillery = currentPlayer.artillery;
+    // console.log("oppositePlayer: " + oppositePlayer.teamName);
+
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       issueOneOrder(ordersDone);
@@ -1242,14 +1244,13 @@ $(() =>{
     };
     completeReport();
     allBattles = [];
-    // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
-    showGridUnits(startGrids, currentPlayer, selectedInfantry);
-    showGridUnits(startGrids, currentPlayer, selectedCavalry);
-    showGridUnits(startGrids, currentPlayer, selectedArtillery);
-    showGridUnits(startGrids, oppositePlayer, oppositePlayer.infantry);
-    showGridUnits(startGrids, oppositePlayer, oppositePlayer.cavalry);
-    showGridUnits(startGrids, oppositePlayer, oppositePlayer.artillery);
+    showGridUnits(startGrids, null, currentPlayer, selectedInfantry);
+    showGridUnits(startGrids, null, currentPlayer, selectedCavalry);
+    showGridUnits(startGrids, null, currentPlayer, selectedArtillery);
+    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.infantry);
+    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.cavalry);
+    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.artillery);
     orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
@@ -1571,14 +1572,17 @@ $(() =>{
   $("#redAr4").click(4, newClickNum).click(onlyClickRedAr);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
-  const showGridUnits = (startCheck, oneTeam, unitType) => {
+  const showGridUnits = (startCheck, singleGrid, oneTeam, unitType) => {
+    // console.log(oppositePlayer);
     if (startCheck == true) {
-      console.log("startCheck is " + startCheck);
+      startNum = singleGrid;
+      endNum = singleGrid + 1;
     }
     else {
-      console.log("startCheck is " + startCheck);
-    }
-    for (var x = 0; x < totalGrids; x++) {
+      startNum = 0;
+      endNum = totalGrids;
+    };
+    for (var x = startNum; x < endNum; x++) {
       var currentGrid = x;
       var gridID = "#x" + allGrids[currentGrid].xValue + "y" + allGrids[currentGrid].yValue;
       var gridIDnorth = gridID + "_north";
@@ -1590,7 +1594,7 @@ $(() =>{
       $("#gridIDeast").css("border","0px solid transparent");
       $("#gridIDsouth").css("border","0px solid transparent");
       $("#gridIDwest").css("border","0px solid transparent");
-      $("#gridIDcenter").css("border","0px solid transparent").prepend("<img src=''>");
+      $("#gridIDcenter").css("border","0px solid transparent");
       for (var i = 0; i < unitType.length; i++) {
         if (unitType[i].xValue == allGrids[currentGrid].xValue && unitType[i].yValue == allGrids[currentGrid].yValue) {
           if (unitType[i].active == true) {
@@ -1659,7 +1663,7 @@ $(() =>{
                 $(gridIDcenter).text("IN");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDcenter).text("CAV");
-                $(gridIDcenter).prepend("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDcenter).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
               };
@@ -1758,12 +1762,12 @@ $(() =>{
       // console.log("terrainImage is functioning.");
     };
     terrainImage();
-    showGridUnits(startGrids, blueTeam, blueTeam.infantry);
-    showGridUnits(startGrids, blueTeam, blueTeam.cavalry);
-    showGridUnits(startGrids, blueTeam, blueTeam.artillery);
-    showGridUnits(startGrids, redTeam, redTeam.infantry);
-    showGridUnits(startGrids, redTeam, redTeam.cavalry);
-    showGridUnits(startGrids, redTeam, redTeam.artillery);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.infantry);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.cavalry);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.artillery);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.infantry);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.cavalry);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.artillery);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
