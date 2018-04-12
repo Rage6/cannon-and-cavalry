@@ -1663,7 +1663,7 @@ $(() =>{
                 $(gridIDcenter).text("IN");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDcenter).text("CAV");
-                $(gridIDcenter).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDcenter + " img").attr('src','stylesheets/images/icon-knight.png');
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
               };
