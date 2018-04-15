@@ -1662,8 +1662,7 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).text("IN");
               } else if (unitType[i].type == "CAV") {
-                // $(gridIDcenter).text("CAV");
-                $(gridIDcenter + " img").attr('src','stylesheets/images/icon-knight.png');
+                $(gridIDcenter).text("CAV");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
               };
@@ -1689,7 +1688,7 @@ $(() =>{
                 console.log("Error ")
               };
             } else {
-              console.log("No direction")
+              console.log("No direction");
             }
           }
         }
