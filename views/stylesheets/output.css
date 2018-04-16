@@ -130,22 +130,14 @@ div.title {
     height: 60%; }
     .gridSquare .centerLine .centerLeft {
       width: 20%; }
-      .gridSquare .centerLine .centerLeft img {
-        max-height: auto;
-        width: 100%;
-        transform: rotate(-90deg); }
     .gridSquare .centerLine .centerMiddle {
       width: 60%;
       background-size: 100% 100%; }
-      .gridSquare .centerLine .centerMiddle .unitImg {
-        max-width: 100%;
-        max-height: 100%; }
     .gridSquare .centerLine .centerRight {
       width: 20%; }
-      .gridSquare .centerLine .centerRight img {
-        max-height: auto;
-        width: 100%;
-        transform: rotate(90deg); }
+      .gridSquare .centerLine .centerRight .textRight {
+        border: 1px solid red;
+        transform: rotate(90%); }
   .gridSquare .bottomLine {
     margin: 0 20%;
     height: 20%; }
