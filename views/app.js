@@ -1248,9 +1248,9 @@ $(() =>{
     showGridUnits(startGrids, null, currentPlayer, selectedInfantry);
     showGridUnits(startGrids, null, currentPlayer, selectedCavalry);
     showGridUnits(startGrids, null, currentPlayer, selectedArtillery);
-    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.infantry);
-    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.cavalry);
-    showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.artillery);
+    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.infantry);
+    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.cavalry);
+    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.artillery);
     orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
@@ -1602,7 +1602,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDnorth).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDnorth).text("CAV");
+                // $(gridIDnorth).text("CAV");
+                $(gridIDnorth).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDnorth).text("AR");
               };
@@ -1617,7 +1618,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDeast).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDeast).text("CAV");
+                // $(gridIDeast).text("CAV");
+                $(gridIDeast).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDeast).text("AR");
               };
@@ -1632,7 +1634,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDsouth).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDsouth).text("CAV");
+                // $(gridIDsouth).text("CAV");
+                $(gridIDsouth).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDsouth).text("AR");
               };
@@ -1647,7 +1650,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDwest).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDwest).text("CAV");
+                // $(gridIDwest).text("CAV");
+                $(gridIDwest).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDwest).text("AR");
               };
@@ -1662,7 +1666,8 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).text("IN");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDcenter).text("CAV");
+                // $(gridIDcenter).text("CAV");
+                $(gridIDcenter).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).text("AR");
               };
