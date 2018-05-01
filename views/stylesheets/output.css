@@ -39,6 +39,15 @@ body {
     padding: 20px 10%;
     display: none;
     background-color: red; }
+  .openBox #openHowTo {
+    padding: 20px 10%;
+    display: none; }
+  .openBox #openRules {
+    padding: 20px 10%;
+    display: none; }
+  .openBox #openAbout {
+    padding: 20px 10%;
+    display: none; }
   .openBox input {
     font-size: 1.5em;
     color: white;

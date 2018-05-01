@@ -337,7 +337,7 @@ $(() =>{
   unitsInAllGrids();
   console.log(allGrids);
 
-  // This controls how the players choose the character name(s) and nationality
+  // This controls how the players choose the character name(s) and nation(s)
   // --- ONE PLAYER ---
   const oneStart = () => {
     numOfPlayers = 1;
@@ -378,6 +378,13 @@ $(() =>{
     $("#openPage").css("display","none");
   };
   $("#submitRed").click(submitRedPlayer);
+
+  // --- ABOUT
+  const aboutRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openAbout").css('display','block');
+  }
+  $("#about").click(aboutRun);
 
   // To highlight the current player in their status box
   const showCurrentPlayer = () => {
