@@ -401,6 +401,14 @@ $(() =>{
     $(".openBox").css({"margin":"0 5%","width":"90%"});
   }
   $("#rules").click(rulesRun);
+  $("#seeRules1").click(()=>{
+    howToStop();
+    rulesRun();
+  });
+  $("#seeRules2").click(()=>{
+    howToStop();
+    rulesRun();
+  });
 
   const rulesStop = () => {
     $("#openIntro").css('display','block');
@@ -416,6 +424,10 @@ $(() =>{
     $(".openBox").css({"margin":"0 5%","width":"90%"});
   }
   $("#about").click(aboutRun);
+  $("#seeAbout").click(()=>{
+    howToStop();
+    aboutRun();
+  })
 
   const aboutStop = () => {
     $("#openIntro").css('display','block');

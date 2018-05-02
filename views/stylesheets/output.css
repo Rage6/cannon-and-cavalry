@@ -1,291 +1,291 @@
 body {
   margin: 0;
+  font-size: 16px;
   background-color: green; }
-
-#openPage {
-  margin: 0;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  background-color: black;
-  opacity: 0.5;
-  height: 100%;
-  width: 100%; }
-
-.openBox {
-  margin: 0 25%;
-  position: absolute;
-  top: 200px;
-  z-index: 2;
-  background-color: brown;
-  color: white;
-  font-size: 4em;
-  text-align: center;
-  width: 50%; }
-  .openBox #openIntro {
-    display: block; }
-    .openBox #openIntro #openTitle {
-      text-decoration: underline; }
-    .openBox #openIntro .openButton {
-      margin: 30px 5%;
-      border: 5px solid white;
-      border-radius: 25px;
-      cursor: pointer; }
-    .openBox #openIntro #onePlayer {
-      text-decoration: line-through; }
-  .openBox #openOneName {
-    padding: 20px 10%;
-    display: none;
-    background-color: blue; }
-  .openBox #openTwoName {
-    padding: 20px 10%;
-    display: none;
-    background-color: red; }
-  .openBox #openHowTo {
-    padding: 20px 10%;
-    display: none; }
-  .openBox #openRules {
-    padding: 20px 10%;
-    display: none; }
-  .openBox #openAbout {
-    padding: 20px 10%;
-    display: none; }
-  .openBox .closeButton {
-    border-radius: 25px;
-    background-color: white;
-    color: brown; }
-  .openBox input {
-    font-size: 1.5em;
-    color: white;
-    background-color: black;
-    width: 100%; }
-  .openBox #openClose {
-    display: none; }
-    .openBox #openClose #finalButtons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around; }
-      .openBox #openClose #finalButtons #reset {
-        color: black;
-        background-color: orange; }
-      .openBox #openClose #finalButtons #quit {
-        color: white;
-        background-color: red; }
-
-div.title {
-  text-align: center; }
-
-.unitButton {
-  cursor: pointer; }
-
-.blueButton {
-  color: white; }
-
-#mainTitle {
-  margin: 20px 10% 40px 10%;
-  font-size: 4.5em;
-  background-color: lightgrey;
-  -webkit-width: 80%;
-  -moz-width: 80%;
-  -ms-width: 80%;
-  width: 80%; }
-
-#terrain {
-  margin: 50px auto;
-  padding: 20px;
-  background-color: grey;
-  -webkit-width: 700px;
-  -moz-width: 700px;
-  -ms-width: 700px;
-  width: 700px;
-  -webkit-height: 700px;
-  -moz-height: 700px;
-  -ms-height: 700px;
-  height: 700px; }
-
-#ground {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: space-around;
-  background-color: black;
-  -webkit-width: 100%;
-  -moz-width: 100%;
-  -ms-width: 100%;
-  width: 100%;
-  -webkit-height: 100%;
-  -moz-height: 100%;
-  -ms-height: 100%;
-  height: 100%; }
-
-.gridSquare {
-  margin: auto;
-  border: solid black 1px;
-  text-align: center;
-  font-size: 2em;
-  background-color: lightgreen;
-  background-size: cover;
-  -webkit-width: 24%;
-  -moz-width: 24%;
-  -ms-width: 24%;
-  width: 24%;
-  -webkit-height: 24%;
-  -moz-height: 24%;
-  -ms-height: 24%;
-  height: 24%; }
-  .gridSquare .topLine {
-    margin: 0 20%;
-    height: 20%; }
-    .gridSquare .topLine img {
-      max-height: 100%;
-      max-width: auto; }
-  .gridSquare .centerLine {
+  body #openPage {
     margin: 0;
-    display: flex;
-    height: 60%; }
-    .gridSquare .centerLine .centerLeft {
-      width: 20%; }
-    .gridSquare .centerLine .centerMiddle {
-      width: 60%;
-      background-size: 100% 100%; }
-    .gridSquare .centerLine .centerRight {
-      width: 20%; }
-      .gridSquare .centerLine .centerRight .textRight {
-        border: 1px solid red;
-        transform: rotate(90%); }
-  .gridSquare .bottomLine {
-    margin: 0 20%;
-    height: 20%; }
-    .gridSquare .bottomLine img {
-      max-height: auto;
-      max-width: 100%;
-      transform: rotate(180deg); }
-
-#allOptions {
-  margin: 50px auto 0px auto;
-  background-color: grey;
-  -webkit-width: 90%;
-  -moz-width: 90%;
-  -ms-width: 90%;
-  width: 90%; }
-  #allOptions .turnBoxes {
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    background-color: black;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%; }
+  body .openBox {
+    margin: 0 25%;
+    position: absolute;
+    top: 200px;
+    z-index: 2;
+    background-color: brown;
+    color: white;
+    font-size: 4rem;
+    text-align: center;
+    width: 50%; }
+    body .openBox #openIntro {
+      display: block; }
+      body .openBox #openIntro #openTitle {
+        text-decoration: underline; }
+      body .openBox #openIntro .openButton {
+        margin: 30px 5%;
+        border: 5px solid white;
+        border-radius: 25px;
+        cursor: pointer; }
+      body .openBox #openIntro #onePlayer {
+        text-decoration: line-through; }
+    body .openBox #openOneName {
+      padding: 20px 10%;
+      display: none;
+      background-color: blue; }
+    body .openBox #openTwoName {
+      padding: 20px 10%;
+      display: none;
+      background-color: red; }
+    body .openBox #openHowTo {
+      padding: 20px 10%;
+      display: none; }
+    body .openBox #openRules {
+      padding: 20px 10%;
+      display: none; }
+    body .openBox #openAbout {
+      padding: 20px 10%;
+      display: none; }
+    body .openBox .closeButton {
+      margin: 40px 0;
+      border-radius: 25px;
+      background-color: white;
+      color: brown; }
+    body .openBox .explainTitle {
+      margin: 30px 0;
+      text-decoration: underline; }
+    body .openBox .explainBox {
+      border: 1px solid yellow;
+      padding: 30px 5%;
+      font-size: 2.8rem;
+      text-align: left;
+      overflow-y: scroll;
+      height: 1000px; }
+      body .openBox .explainBox .explainSubTitle {
+        margin: 10px 0 30px 0;
+        font-size: 3rem;
+        text-align: center; }
+      body .openBox .explainBox .explainContent {
+        margin-bottom: 60px; }
+    body .openBox input {
+      font-size: 4rem;
+      color: white;
+      background-color: black;
+      width: 100%; }
+    body .openBox #openClose {
+      display: none; }
+      body .openBox #openClose #finalButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; }
+        body .openBox #openClose #finalButtons #reset {
+          color: black;
+          background-color: orange; }
+        body .openBox #openClose #finalButtons #quit {
+          color: white;
+          background-color: red; }
+  body div.title {
+    text-align: center; }
+  body .unitButton {
+    cursor: pointer; }
+  body .blueButton {
+    color: white; }
+  body #terrain {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: grey;
+    -webkit-width: 700px;
+    -moz-width: 700px;
+    -ms-width: 700px;
+    width: 700px;
+    -webkit-height: 700px;
+    -moz-height: 700px;
+    -ms-height: 700px;
+    height: 700px; }
+  body #ground {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: space-around;
+    background-color: black;
+    -webkit-width: 100%;
+    -moz-width: 100%;
+    -ms-width: 100%;
+    width: 100%;
+    -webkit-height: 100%;
+    -moz-height: 100%;
+    -ms-height: 100%;
+    height: 100%; }
+  body .gridSquare {
+    margin: auto;
+    border: solid black 1px;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightgreen;
+    background-size: cover;
+    -webkit-width: 24%;
+    -moz-width: 24%;
+    -ms-width: 24%;
+    width: 24%;
+    -webkit-height: 24%;
+    -moz-height: 24%;
+    -ms-height: 24%;
+    height: 24%; }
+    body .gridSquare .topLine {
+      margin: 0 20%;
+      height: 20%; }
+      body .gridSquare .topLine img {
+        max-height: 100%;
+        max-width: auto; }
+    body .gridSquare .centerLine {
+      margin: 0;
+      display: flex;
+      height: 60%; }
+      body .gridSquare .centerLine .centerLeft {
+        width: 20%; }
+      body .gridSquare .centerLine .centerMiddle {
+        width: 60%;
+        background-size: 100% 100%; }
+      body .gridSquare .centerLine .centerRight {
+        width: 20%; }
+        body .gridSquare .centerLine .centerRight .textRight {
+          border: 1px solid red;
+          transform: rotate(90%); }
+    body .gridSquare .bottomLine {
+      margin: 0 20%;
+      height: 20%; }
+      body .gridSquare .bottomLine img {
+        max-height: auto;
+        max-width: 100%;
+        transform: rotate(180deg); }
+  body #allOptions {
+    margin: 50px auto 0px auto;
+    background-color: grey;
     -webkit-width: 90%;
     -moz-width: 90%;
     -ms-width: 90%;
     width: 90%; }
-    #allOptions .turnBoxes .indivBox {
-      margin: 20px 0;
-      background-color: white;
-      -webkit-width: 48%;
-      -moz-width: 48%;
-      -ms-width: 48%;
-      width: 48%;
-      -webkit-height: 360px;
-      -moz-height: 360px;
-      -ms-height: 360px;
-      height: 360px; }
-      #allOptions .turnBoxes .indivBox .title {
-        margin-bottom: 20px;
-        display: block;
-        font-size: 3em;
-        text-align: center; }
-      #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around; }
-        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
-          border: 2px solid black;
-          font-size: 2.5em;
-          text-align: center;
-          cursor: pointer;
-          -webkit-width: 45%;
-          -moz-width: 45%;
-          -ms-width: 45%;
-          width: 45%; }
-        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
-          color: black;
-          background-color: none; }
-        #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
-          color: black;
-          background-color: none; }
-      #allOptions .turnBoxes .indivBox #unitBox #unitName {
+    body #allOptions .turnBoxes {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      -webkit-width: 90%;
+      -moz-width: 90%;
+      -ms-width: 90%;
+      width: 90%; }
+      body #allOptions .turnBoxes .indivBox {
         margin: 20px 0;
-        font-size: 2em;
-        text-align: center; }
-      #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around; }
-        #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
-          border: 2px solid green;
-          font-size: 2.2em;
-          text-align: center;
-          -webkit-width: 48%;
-          -moz-width: 48%;
-          -ms-width: 48%;
-          width: 48%; }
-        #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+        background-color: white;
+        -webkit-width: 48%;
+        -moz-width: 48%;
+        -ms-width: 48%;
+        width: 48%;
+        -webkit-height: 360px;
+        -moz-height: 360px;
+        -ms-height: 360px;
+        height: 360px; }
+        body #allOptions .turnBoxes .indivBox .title {
+          margin-bottom: 20px;
+          display: block;
+          font-size: 3rem;
+          text-align: center; }
+        body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
           display: flex;
-          flex-wrap: wrap;
-          -webkit-width: 48%;
-          -moz-width: 48%;
-          -ms-width: 48%;
-          width: 48%; }
-          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox {
+          flex-direction: row;
+          justify-content: space-around; }
+          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+            border: 2px solid black;
             font-size: 2.5em;
+            text-align: center;
+            cursor: pointer;
+            -webkit-width: 45%;
+            -moz-width: 45%;
+            -ms-width: 45%;
+            width: 45%; }
+          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
+            color: black;
+            background-color: none; }
+          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
+            color: black;
+            background-color: none; }
+        body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+          margin: 20px 0;
+          font-size: 2rem;
+          text-align: center; }
+        body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around; }
+          body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+            border: 2px solid green;
+            font-size: 2.2rem;
+            text-align: center;
+            -webkit-width: 48%;
+            -moz-width: 48%;
+            -ms-width: 48%;
+            width: 48%; }
+          body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+            display: flex;
+            flex-wrap: wrap;
+            -webkit-width: 48%;
+            -moz-width: 48%;
+            -ms-width: 48%;
+            width: 48%; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox {
+              font-size: 2.5rem;
+              text-align: center;
+              -webkit-width: 30%;
+              -moz-width: 30%;
+              -ms-width: 30%;
+              width: 30%; }
+              body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox img {
+                margin-top: 10%;
+                height: 80%;
+                width: 80%; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
+              border: 1px solid black; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
+              border: 1px solid black; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
+              border: 1px solid black; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
+              border: 1px solid black; }
+        body #allOptions .turnBoxes .indivBox #completeReport {
+          margin: 0 5%;
+          border: 1px solid black;
+          padding: 5%;
+          font-size: 2rem;
+          height: 60%;
+          overflow: scroll; }
+          body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+            text-align: center; }
+        body #allOptions .turnBoxes .indivBox .allUnitColumns {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around; }
+          body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn {
+            margin: 0;
+            font-size: 2.5rem;
             text-align: center;
             -webkit-width: 30%;
             -moz-width: 30%;
             -ms-width: 30%;
             width: 30%; }
-            #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox img {
-              margin-top: 10%;
-              height: 80%;
-              width: 80%; }
-          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
-            border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
-            border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
-            border: 1px solid black; }
-          #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
-            border: 1px solid black; }
-      #allOptions .turnBoxes .indivBox #completeReport {
-        margin: 0 5%;
-        border: 1px solid black;
-        padding: 5%;
-        font-size: 2em;
-        height: 60%;
-        overflow: scroll; }
-        #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
-          text-align: center; }
-      #allOptions .turnBoxes .indivBox .allUnitColumns {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around; }
-        #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn {
-          margin: 0;
-          font-size: 2.5em;
-          text-align: center;
-          -webkit-width: 30%;
-          -moz-width: 30%;
-          -ms-width: 30%;
-          width: 30%; }
-      #allOptions .turnBoxes .indivBox #teamOne {
-        background-color: white; }
-      #allOptions .turnBoxes .indivBox #teamTwo {
-        background-color: white; }
-  #allOptions #ordersButton {
-    margin: 0px auto;
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-    color: white;
-    background-color: orange;
-    width: 50%; }
+        body #allOptions .turnBoxes .indivBox #teamOne {
+          background-color: white; }
+        body #allOptions .turnBoxes .indivBox #teamTwo {
+          background-color: white; }
+    body #allOptions #ordersButton {
+      margin: 0px auto;
+      padding: 20px;
+      font-size: 2rem;
+      text-align: center;
+      color: white;
+      background-color: orange;
+      width: 50%; }
 
 /*# sourceMappingURL=output.css.map */
