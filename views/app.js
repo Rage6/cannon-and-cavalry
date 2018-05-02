@@ -379,12 +379,50 @@ $(() =>{
   };
   $("#submitRed").click(submitRedPlayer);
 
+  // --- HOW TO PLAY
+  const howToRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openHowTo").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#howTo").click(howToRun);
+
+  const howToStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openHowTo").css('display','none');
+    $(".openBox").css({"margin":"0 25%","width":"50%"});
+  }
+  $("#closeHowTo").click(howToStop);
+
+  // --- RULES
+  const rulesRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openRules").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#rules").click(rulesRun);
+
+  const rulesStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openRules").css('display','none');
+    $(".openBox").css({"margin":"0 25%","width":"50%"});
+  }
+  $("#closeRules").click(rulesStop);
+
   // --- ABOUT
   const aboutRun = () => {
     $("#openIntro").css('display','none');
     $("#openAbout").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
   }
   $("#about").click(aboutRun);
+
+  const aboutStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openAbout").css('display','none');
+    $(".openBox").css({"margin":"0 25%","width":"50%"});
+  }
+  $("#closeAbout").click(aboutStop);
 
   // To highlight the current player in their status box
   const showCurrentPlayer = () => {
@@ -1613,6 +1651,7 @@ $(() =>{
                 $(gridIDnorth).append("<img src='stylesheets/images/icon-knight.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDnorth).text("AR");
+                // $(gridIDnorth).append("<img src='stylesheets/images/red_cannon.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDnorth).css('color','white').css('background-color','blue');

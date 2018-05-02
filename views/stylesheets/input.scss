@@ -58,6 +58,9 @@ body {
       border-radius: 25px;
       cursor: pointer;
     }
+    #onePlayer {
+      text-decoration: line-through;
+    }
   }
   #openOneName {
     padding: 20px 10%;
@@ -80,6 +83,16 @@ body {
   #openAbout {
     padding: 20px 10%;
     display: none;
+    // #closeAbout {
+    //   border-radius: 25px;
+    //   background-color: white;
+    //   color: brown;
+    // }
+  }
+  .closeButton {
+    border-radius: 25px;
+    background-color: white;
+    color: brown;
   }
   input {
     font-size: 1.5em;

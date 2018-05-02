@@ -31,6 +31,8 @@ body {
       border: 5px solid white;
       border-radius: 25px;
       cursor: pointer; }
+    .openBox #openIntro #onePlayer {
+      text-decoration: line-through; }
   .openBox #openOneName {
     padding: 20px 10%;
     display: none;
@@ -48,6 +50,10 @@ body {
   .openBox #openAbout {
     padding: 20px 10%;
     display: none; }
+  .openBox .closeButton {
+    border-radius: 25px;
+    background-color: white;
+    color: brown; }
   .openBox input {
     font-size: 1.5em;
     color: white;
