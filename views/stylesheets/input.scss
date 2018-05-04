@@ -234,34 +234,63 @@ body {
       height: 60%;
       .centerLeft {
         width: 20%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
         img {
+          display: inline-block;
+          vertical-align: middle;
           width: 100%;
         }
       }
       .centerMiddle {
         width: 60%;
         background-size: 100% 100%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
         img {
+          display: inline-block;
+          vertical-align: middle;
           width: 100%;
         }
       }
       .centerRight {
         width: 20%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
         img {
+          display: inline-block;
+          vertical-align: middle;
           width: 100%;
+          transform: rotate(180deg);
         }
-        .textRight {
-          border: 1px solid red;
-          transform: rotate(90%);
-        }
+        // .textRight {
+        //   border: 1px solid red;
+        //   // transform: rotate(90%);
+        // }
       }
     }
     .bottomLine {
       margin: 0 20%;
       height: 20%;
-      img {
+      .helper {
+        display: inline-block;
+        vertical-align: middle;
         height: 100%;
-        transform: rotate(180deg);
+      }
+      img {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        // transform: rotate(180deg);
       }
     }
   }

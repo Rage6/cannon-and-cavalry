@@ -172,26 +172,47 @@ body {
       height: 60%; }
       body .gridSquare .centerLine .centerLeft {
         width: 20%; }
+        body .gridSquare .centerLine .centerLeft .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%; }
         body .gridSquare .centerLine .centerLeft img {
+          display: inline-block;
+          vertical-align: middle;
           width: 100%; }
       body .gridSquare .centerLine .centerMiddle {
         width: 60%;
         background-size: 100% 100%; }
+        body .gridSquare .centerLine .centerMiddle .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%; }
         body .gridSquare .centerLine .centerMiddle img {
+          display: inline-block;
+          vertical-align: middle;
           width: 100%; }
       body .gridSquare .centerLine .centerRight {
         width: 20%; }
+        body .gridSquare .centerLine .centerRight .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%; }
         body .gridSquare .centerLine .centerRight img {
-          width: 100%; }
-        body .gridSquare .centerLine .centerRight .textRight {
-          border: 1px solid red;
-          transform: rotate(90%); }
+          display: inline-block;
+          vertical-align: middle;
+          width: 100%;
+          transform: rotate(180deg); }
     body .gridSquare .bottomLine {
       margin: 0 20%;
       height: 20%; }
+      body .gridSquare .bottomLine .helper {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%; }
       body .gridSquare .bottomLine img {
-        height: 100%;
-        transform: rotate(180deg); }
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%; }
   body #allOptions {
     margin: 50px auto 0px auto;
     background-color: grey;
