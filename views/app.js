@@ -213,7 +213,8 @@ $(() =>{
         xValue: 2,
         yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        twoSquaresN: false
       }
     ],
     artillery: [
@@ -272,7 +273,8 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 2,
-        yValue: 4
+        yValue: 4,
+        twoSquaresN: false
       }
     ],
     artillery: [
@@ -602,6 +604,9 @@ $(() =>{
   }
 
   // Here is the function that displays the selectedUnit's CURRENT direction
+  // -- For show CAV moving one or two squares north
+  var secondClickNorth = false;
+  // --
   const showUnitNextDirection = ()=> {
     if (selectedUnit.nextDirection == "north") {
       $("#north").css('background-color','yellow');
@@ -617,14 +622,42 @@ $(() =>{
       console.log("error in showUnitDirection function.")
     };
     if (selectedUnit.nextDirection == "north") {
+      // -- trying to let CAV move north two squares
+      if (secondClickNorth == true && selectedUnit.type == "CAV") {
+        howFar = 2;
+        notHowFar = 1;
+        twoSquaresN = 2;
+      } else {
+        howFar = 1;
+        notHowFar = 2;
+        twoSquaresN = 1;
+      };
+      // --
       if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
-        var targetYnorth = selectedUnit.yValue - 1;
+        var targetYnorth = selectedUnit.yValue - howFar;
+        // -- CAV stuff
+        var notTargetYnorth = selectedUnit.yValue - notHowFar;
+        // --
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
         $(targetID).css("border",targetBorder);
+        // -- CAV stuff
+        var notTargetID = "#x" + selectedUnit.xValue + "y" + notTargetYnorth + "_center";
+        $(notTargetID).css("border","none");
+        // --
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_north";
         $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
-      }
+      };
+      // -- For showing CAV next location
+      if (secondClickNorth == false) {
+        secondClickNorth = true;
+        selectedUnit.twoSquaresN = false;
+      } else {
+        secondClickNorth = false;
+        selectedUnit.twoSquaresN = true;
+      };
+      // --
+      console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
       if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
         var targetXeast = selectedUnit.xValue + 1;
@@ -655,9 +688,29 @@ $(() =>{
     }
   }
 
+  const clearCavBorders = () => {
+    var northTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue - 2) + "_center";
+    var eastTwo = "#x" + (selectedUnit.xValue + 2) + "y" + selectedUnit.yValue + "_center";
+    var southTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue + 2) + "_center";
+    var westTwo = "#x" + (selectedUnit.xValue - 2) + "y" + selectedUnit.yValue + "_center";
+    const allTwo = [northTwo, eastTwo, southTwo, westTwo];
+    for (var pickTwo = 0; pickTwo < allTwo.length; pickTwo++) {
+      console.log("pickTwo: " + (allTwo[pickTwo]));
+      for (var cleanGrid = 0; cleanGrid < allGrids.length; cleanGrid++) {
+        var pickGrid = "#x" + allGrids[cleanGrid].xValue + "y" + allGrids[cleanGrid].yValue + "_center";
+        console.log("pickGrid: " + pickGrid)
+        if (allTwo[pickTwo] == pickGrid) {
+          console.log("it worked")
+          $(pickGrid).css('border','none')
+        }
+      }
+    }
+  }
+
 // This is how the arrow buttons change a unit's nextDirections and show where it will go
   $('#north').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "north";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -666,6 +719,7 @@ $(() =>{
   });
   $('#east').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "east";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -818,15 +872,23 @@ $(() =>{
   const issueOneOrder = (ordersCarriedOut) => {
     if (selectedUnit.active == true) {
       if (selectedUnit.attack == true) {
-        // something will be needed here to checks for water @ next grid
+        // -- To allow CAV to move two squares
+        if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresN == true) {
+          var borderCheck = 2;
+        } else {
+          var borderCheck = 1;
+        };
+        // --
         if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
           showBattleReport(selectedUnit);
           selectedUnit.nextXvalue = selectedUnit.xValue;
-          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - borderCheck;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -842,8 +904,8 @@ $(() =>{
           selectedUnit.nextYvalue = selectedUnit.yValue;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.");
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -859,8 +921,8 @@ $(() =>{
           selectedUnit.nextYvalue = selectedUnit.yValue + 1;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.");
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -876,8 +938,8 @@ $(() =>{
           selectedUnit.nextYvalue = selectedUnit.yValue;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.");
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
