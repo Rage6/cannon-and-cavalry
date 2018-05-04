@@ -1653,13 +1653,14 @@ $(() =>{
           if (unitType[i].active == true) {
             if (unitType[i].direction == "north") {
               if (unitType[i].type == "IN") {
-                $(gridIDnorth).text("IN");
+                // $(gridIDnorth).text("IN");
+                $(gridIDnorth).append("<img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDnorth).text("CAV");
-                $(gridIDnorth).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDnorth).append("<img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDnorth).text("AR");
-                // $(gridIDnorth).append("<img src='stylesheets/images/red_cannon.png'>");
+                // $(gridIDnorth).text("AR");
+                $(gridIDnorth).append("<img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDnorth).css('color','white').css('background-color','blue');
@@ -1670,12 +1671,14 @@ $(() =>{
               };
             } else if (unitType[i].direction == "east") {
               if (unitType[i].type == "IN") {
-                $(gridIDeast).text("IN");
+                // $(gridIDeast).text("IN");
+                $(gridIDeast).append("<img src='stylesheets/images/infantry_left_right.png'>");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDeast).text("CAV");
-                $(gridIDeast).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDeast).append("<img src='stylesheets/images/cavalry_left_right.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDeast).text("AR");
+                // $(gridIDeast).text("AR");
+                $(gridIDeast).append("<img src='stylesheets/images/cannon_left_right.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDeast).css('color','white').css('background-color','blue');
@@ -1686,12 +1689,14 @@ $(() =>{
               };
             } else if (unitType[i].direction == "south") {
               if (unitType[i].type == "IN") {
-                $(gridIDsouth).text("IN");
+                // $(gridIDsouth).text("IN");
+                $(gridIDsouth).append("<img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDsouth).text("CAV");
-                $(gridIDsouth).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDsouth).append("<img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDsouth).text("AR");
+                // $(gridIDsouth).text("AR");
+                $(gridIDsouth).append("<img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDsouth).css('color','white').css('background-color','blue');
@@ -1702,12 +1707,14 @@ $(() =>{
               };
             } else if (unitType[i].direction == "west") {
               if (unitType[i].type == "IN") {
-                $(gridIDwest).text("IN");
+                // $(gridIDwest).text("IN");
+                $(gridIDwest).append("<img src='stylesheets/images/infantry_left_right.png'>");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDwest).text("CAV");
-                $(gridIDwest).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDwest).append("<img src='stylesheets/images/cavalry_left_right.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDwest).text("AR");
+                // $(gridIDwest).text("AR");
+                $(gridIDwest).append("<img src='stylesheets/images/cannon_left_right.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDwest).css('color','white').css('background-color','blue');
@@ -1718,12 +1725,14 @@ $(() =>{
               };
             } else if (unitType[i].direction == "center") {
               if (unitType[i].type == "IN") {
-                $(gridIDcenter).text("IN");
+                // $(gridIDcenter).text("IN");
+                $(gridIDcenter).append("<img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
                 // $(gridIDcenter).text("CAV");
-                $(gridIDcenter).append("<img src='stylesheets/images/icon-knight.png'>");
+                $(gridIDcenter).append("<img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDcenter).text("AR");
+                // $(gridIDcenter).text("AR");
+                $(gridIDcenter).append("<img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (allGrids[x].bluePresent.length > 1) {
                 var arePresent = allGrids[x].bluePresent;
