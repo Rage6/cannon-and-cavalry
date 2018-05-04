@@ -394,28 +394,24 @@ $(() =>{
   }
   $("#closeHowTo").click(howToStop);
 
-  // --- RULES
-  const rulesRun = () => {
+  // --- GLOSSARY
+  const glossaryRun = () => {
     $("#openIntro").css('display','none');
-    $("#openRules").css('display','block');
+    $("#openGlossary").css('display','block');
     $(".openBox").css({"margin":"0 5%","width":"90%"});
   }
-  $("#rules").click(rulesRun);
-  $("#seeRules1").click(()=>{
+  $("#glossary").click(glossaryRun);
+  $("#seeGlossary").click(()=>{
     howToStop();
-    rulesRun();
-  });
-  $("#seeRules2").click(()=>{
-    howToStop();
-    rulesRun();
+    glossaryRun();
   });
 
-  const rulesStop = () => {
+  const glossaryStop = () => {
     $("#openIntro").css('display','block');
-    $("#openRules").css('display','none');
+    $("#openGlossary").css('display','none');
     $(".openBox").css({"margin":"0 25%","width":"50%"});
   }
-  $("#closeRules").click(rulesStop);
+  $("#closeGlossary").click(glossaryStop);
 
   // --- ABOUT
   const aboutRun = () => {

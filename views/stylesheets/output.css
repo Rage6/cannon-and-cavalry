@@ -43,7 +43,7 @@ body {
     body .openBox #openHowTo {
       padding: 20px 10%;
       display: none; }
-    body .openBox #openRules {
+    body .openBox #openGlossary {
       padding: 20px 10%;
       display: none; }
     body .openBox #openAbout {
@@ -66,10 +66,35 @@ body {
       height: 1000px; }
       body .openBox .explainBox .explainSubTitle {
         margin: 10px 0 30px 0;
-        font-size: 3rem;
+        font-size: 3.2rem;
         text-align: center; }
       body .openBox .explainBox .explainContent {
         margin-bottom: 60px; }
+        body .openBox .explainBox .explainContent ol li {
+          margin: 10px 0; }
+        body .openBox .explainBox .explainContent .glossBox .glossImg {
+          border-radius: 25px;
+          padding: 10px 0;
+          background-color: white; }
+          body .openBox .explainBox .explainContent .glossBox .glossImg img {
+            margin: 0 25%;
+            width: 50%; }
+        body .openBox .explainBox .explainContent .glossBox #thickConceal {
+          background-color: darkgreen;
+          height: 150px; }
+        body .openBox .explainBox .explainContent .glossBox #someConceal {
+          background-color: lightgreen;
+          height: 150px; }
+        body .openBox .explainBox .explainContent .glossBox #noConceal {
+          background-color: orange;
+          height: 150px; }
+        body .openBox .explainBox .explainContent .glossBox .glossTitle {
+          margin: 15px 0 30px 0;
+          font-size: 3.5rem;
+          text-align: center; }
+        body .openBox .explainBox .explainContent .glossBox .glossDescribe {
+          margin-bottom: 100px;
+          font-size: 2.8rem; }
     body .openBox input {
       font-size: 4rem;
       color: white;

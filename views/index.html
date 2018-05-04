@@ -17,7 +17,7 @@
         <div class="openButton" id="onePlayer">One Player</div>
         <div class="openButton" id="twoPlayer">Two Player</div>
         <div class="openButton" id="howTo">How To Play</div>
-        <div class="openButton" id="rules">Rules</div>
+        <div class="openButton" id="glossary">Glossary</div>
         <div class="openButton" id="about">About</div>
       </div>
       <div id="openOneName">
@@ -49,20 +49,41 @@
           How To Play
         </div>
         <div class="explainBox">
+          <ol type="A">
+            <li>Overview</li>
+            <li>Rules</li>
+            <li>Setting Up</li>
+            <li>How A Turn Works</li>
+          </ol>
           <div class="explainSubTitle">
-            OVERVIEW
+            A. OVERVIEW
           </div>
           <div class="explainContent">
-            "Hold Your Ground!" is a turn-based war game that will test your tactics and strategies. In addition to your oppenent's abilities, you will also be by the battlefield's tough terrain and your own troops' strengths/weaknesses. If this is your first time playing, you are encouraged to read to below instructions and the <b><span id="seeRules1">"<u>Rules</u>"</span></b> page.
+            "Hold Your Ground!" is a turn-based war game that will test your tactics and strategies. In addition to your oppenent's abilities, you will also be by the battlefield's tough terrain and your own troops' strengths/weaknesses. If this is your first time playing, you are encouraged to read to below instructions and the <b><span id="seeGlossary">"<u>Glossary</u>"</span></b> for details.
           </div>
           <div class="explainSubTitle">
-            SETTING PLAYERS
+            B. RULES
+          </div>
+          <div class="explainContent">
+             Consider the following rules when trying to make your next move:
+             <ul>
+               <li>The winner is the team that is the only one with units still left on the battlefield.</li>
+               <li>No unit can cross the outer boundaries of the map.</li>
+               <li>No unit can position itself in a water-filled grid square...</li>
+               <li>...HOWEVER, a cavalry unit (CAV) can cross one <i>as long as the next grid square is NOT filled with water</i>.</li>
+               <li>Multiple units from the same team can be in one grid square's "center" area, but...</li>
+               <li>...there CANNOT be multiple units on the same edge (ex. southern edge) on the same grid square.</li>
+               <li>Battles take place when two or more units of opposite teams are on the same grid square.</li>
+             </ul>
+          </div>
+          <div class="explainSubTitle">
+            B. SETTING UP
           </div>
           <div class="explainContent">
              Select whether you wish to play against <span style="text-decoration:line-through">the computer ("One Player") or</span> a friend ("Two Player") on the same device.Upon selecting the number of players, each one must enter their character's name (no more than 15 letters) and their army's nationality (no more than three letters). Unsure how to abbreviate your nation's name? Try <a style="color:white;cursor:pointer" href="https://www.worldatlas.com/aatlas/ctycodes.htm">this website</a>. The nation's name will appear in the box containing it's military units.
           </div>
           <div class="explainSubTitle">
-            HOW A TURN WORKS
+            C. HOW A TURN WORKS
           </div>
           <div class="explainContent">
             The first player (the blue team) will begin their first turn. The name of the current player's army will always be highlighted in yellow. A turn will usually go something like this:
@@ -77,7 +98,7 @@
                 Now you have "issued" all of your orders to the correct units, but those units still need to actually "carry them out". To do that, simply click the "Carry Out My Orders" button at the bottom. The "Battle Report" box will then display a) the orders that you entered, b) if your units were actually able to carry out those orders, and c) the outcomes of any battles that took place.
               </li>
               <li>
-                A battle only takes place if at least one unit from each team are in the same grid square. During a battle, attackers and defenders will attack/counter-attack their opponents multiple times until all of one team's units in the battle defeated. To see all of the factors that help determine which team wins a battle, see the <b><span id="seeRules2">"<u>Rules</u>"</span></b> page. To help understand the events that are happening in the background during a battle, see the <b><span id="seeAbout">"<u>About</u>"</span></b> page.
+                A battle only takes place if at least one unit from each team are in the same grid square. During a battle, attackers and defenders will attack/counter-attack their opponents multiple times until all of one team's units in the battle defeated. To help understand the events that are happening in the background during a battle, see the <b><span id="seeAbout">"<u>About</u>"</span></b> page.
               </li>
               <li>
                 With all of your orders issued and any battles completed, it is now the other players turn. This will be demonstrated by the way that their army's name is now highlighted in yellow.
@@ -89,14 +110,127 @@
           DONE
         </div>
       </div>
-      <div id="openRules">
+      <div id="openGlossary">
         <div class="explainTitle">
-          Rules
+          Glossary
         </div>
         <div class="explainBox">
-          test
+          <div class="explainSubTitle">
+            Terrain
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/pond_noBackground.png">
+              </div>
+              <div class="glossTitle">
+                Swamps and Rivers
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/forest.png">
+              </div>
+              <div class="glossTitle">
+                Forest and Woodlands
+              </div>
+              <div class="glossDescribe">
+                Trees and forests can give good protection to anyone trying to defend their location. During a battle, all defending units in woods increase their chance by 20pts.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/hill_noBackground.png">
+              </div>
+              <div class="glossTitle">
+                Hills
+              </div>
+              <div class="glossDescribe">
+                The strongest defensive position during a battle is the high grounds. Besides the exhaustion of charging uphill (both for soldiers and horses), cannons are limited on what they can hit on a hill. This is why every defender on a hill increases their chance by 60pts.
+              </div>
+            </div>
+          </div>
+          <div class="explainSubTitle">
+            Cover
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg" id="thickConceal">
+
+              </div>
+              <div class="glossTitle">
+                Thick Concealment
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg" id="someConceal">
+
+              </div>
+              <div class="glossTitle">
+                Some Concealment
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg" id="noConceal">
+
+              </div>
+              <div class="glossTitle">
+                No Concealment
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+          </div>
+          <div class="explainSubTitle">
+            Unit Types
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/infantry.png">
+              </div>
+              <div class="glossTitle">
+                Infantry
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/horse.png">
+              </div>
+              <div class="glossTitle">
+                Cavalry
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/cannon.png">
+              </div>
+              <div class="glossTitle">
+                Artillery
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="closeButton" id="closeRules">
+        <div class="closeButton" id="closeGlossary">
           DONE
         </div>
       </div>
