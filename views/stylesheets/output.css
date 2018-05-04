@@ -327,6 +327,8 @@ body {
             -moz-width: 30%;
             -ms-width: 30%;
             width: 30%; }
+            body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn img {
+              height: 50px; }
         body #allOptions .turnBoxes .indivBox #teamOne {
           background-color: white; }
         body #allOptions .turnBoxes .indivBox #teamTwo {

@@ -351,7 +351,9 @@ $(() =>{
     blueTeam.playerName = $("#blueLeader").val();
     blueTeam.teamName = $("#blueArmy").val();
     blueTeam.teamName = blueTeam.teamName.toUpperCase();
-    $("#blueStatus").text(blueTeam.teamName);
+    if (blueTeam.teamName != "") {
+      $("#blueStatus").text(blueTeam.teamName);
+    };
     $("#openOneName").css("display","none");
     $("#openPage").css("display","none");
     if (numOfPlayers == 2) {
@@ -373,7 +375,9 @@ $(() =>{
     redTeam.playerName = $("#redLeader").val();
     redTeam.teamName = $("#redArmy").val();
     redTeam.teamName = redTeam.teamName.toUpperCase();
-    $("#redStatus").text(redTeam.teamName);
+    if (redTeam.teamName != "") {
+      $("#redStatus").text(redTeam.teamName);
+    };
     $("#openTwoName").css("display","none");
     $("#openPage").css("display","none");
   };
