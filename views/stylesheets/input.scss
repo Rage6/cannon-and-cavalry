@@ -223,7 +223,6 @@ body {
     @include divHeight(24%);
     .topLine {
       margin: 0 20%;
-      // border: 1px solid red;
       height: 20%;
       img {
         height: 100%;
@@ -231,24 +230,19 @@ body {
     }
     .centerLine {
       margin: 0;
-      // border: 1px solid blue;
       display: flex;
       height: 60%;
       .centerLeft {
-        // border: 1px solid red;
         width: 20%;
         img {
           width: 100%;
         }
       }
       .centerMiddle {
-        // border: 1px solid red;
         width: 60%;
         background-size: 100% 100%;
         img {
-          vertical-align: super;
           width: 100%;
-          // max-width: 100%;
         }
       }
       .centerRight {

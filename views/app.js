@@ -1746,7 +1746,9 @@ $(() =>{
                 }
               };
               if (allCenter > 1) {
-                $(gridIDcenter).text("camp");
+                $(gridIDcenter).empty();
+                // $(gridIDcenter).text("camp");
+                $(gridIDcenter).append("<img src='stylesheets/images/camp.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDcenter).css('color','white').css('background-color','blue');

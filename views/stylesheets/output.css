@@ -178,7 +178,6 @@ body {
         width: 60%;
         background-size: 100% 100%; }
         body .gridSquare .centerLine .centerMiddle img {
-          vertical-align: super;
           width: 100%; }
       body .gridSquare .centerLine .centerRight {
         width: 20%; }
