@@ -214,10 +214,10 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        twoSquaresN: false,
-        twoSquaresE: false,
-        twoSquaresS: false,
-        twoSquaresW: false
+        twoSquaresN: null,
+        twoSquaresE: null,
+        twoSquaresS: null,
+        twoSquaresW: null
       }
     ],
     artillery: [
@@ -277,10 +277,10 @@ $(() =>{
         nextDirection: "center",
         xValue: 2,
         yValue: 4,
-        twoSquaresN: false,
-        twoSquaresE: false,
-        twoSquaresS: false,
-        twoSquaresW: false
+        twoSquaresN: null,
+        twoSquaresE: null,
+        twoSquaresS: null,
+        twoSquaresW: null
       }
     ],
     artillery: [
@@ -555,17 +555,44 @@ $(() =>{
   // This connects the attackButton in HTML with the selectedUnit's attack mode
   $('#attackButton').click( ()=> {
     selectedUnit.attack = true;
+    switchMode();
+    clearCavBorders();
     $('#attackButton').css('background-color','blue').css('color','white');
     $('#defendButton').css('background-color','white').css('color','black');
     console.log("Attack mode");
+    console.log(selectedUnit);
   });
+
+  // This will reset the borders and directions if someone switches from Defense mode to Attack mode
+  const switchMode = () => {
+    var idBasic = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_";
+    var compass = ["north","east","south","west"]
+    for (var t = 0; t < 4; t++) {
+      var idComplete = idBasic + compass[t];
+      $(idComplete).css('border','none');
+    };
+    selectedUnit.nextDirection = "center";
+    if (selectedUnit.type == "CAV") {
+      selectedUnit.twoSquaresN = null;
+      selectedUnit.twoSquaresE = null;
+      selectedUnit.twoSquaresS = null;
+      selectedUnit.twoSquaresW = null;
+    };
+    $("#north").css('background-color','white');
+    $("#east").css('background-color','white');
+    $("#south").css('background-color','white');
+    $("#west").css('background-color','white');
+  }
 
   // This connects the defendButton in HTML with the selectedUnit's attack mode
   $('#defendButton').click( ()=> {
     selectedUnit.attack = false;
+    switchMode();
+    clearCavBorders();
     $('#attackButton').css('background-color','white').css('color','black');
     $('#defendButton').css('background-color','red').css('color','white');
     console.log("Defense mode");
+    console.log(selectedUnit);
   })
 
   //This function makes the arrows show the selectedUnit's NEXT direction
@@ -712,24 +739,7 @@ $(() =>{
     }
   }
 
-  // Specifically clears the borders that are TWO grid squares away. Only applies for CAV units sometimes.
-  const clearCavBorders = () => {
-    var northTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue - 2) + "_center";
-    var eastTwo = "#x" + (selectedUnit.xValue + 2) + "y" + selectedUnit.yValue + "_center";
-    var southTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue + 2) + "_center";
-    var westTwo = "#x" + (selectedUnit.xValue - 2) + "y" + selectedUnit.yValue + "_center";
-    const allTwo = [northTwo, eastTwo, southTwo, westTwo];
-    for (var pickTwo = 0; pickTwo < allTwo.length; pickTwo++) {
-      for (var cleanGrid = 0; cleanGrid < allGrids.length; cleanGrid++) {
-        var pickGrid = "#x" + allGrids[cleanGrid].xValue + "y" + allGrids[cleanGrid].yValue + "_center";
-        if (allTwo[pickTwo] == pickGrid) {
-          $(pickGrid).css('border','none')
-        }
-      }
-    }
-  }
-
-// This is how the arrow buttons change a unit's nextDirections and show where it will go
+  // This is how the arrow buttons change a unit's nextDirections and show where it will go
   $('#north').click( ()=> {
     clearBorders();
     clearCavBorders();
@@ -807,6 +817,23 @@ $(() =>{
     };
     return targetBorder
   };
+
+  // Specifically clears the borders that are TWO grid squares away. Only applies for CAV units sometimes.
+  const clearCavBorders = () => {
+    var northTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue - 2) + "_center";
+    var eastTwo = "#x" + (selectedUnit.xValue + 2) + "y" + selectedUnit.yValue + "_center";
+    var southTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue + 2) + "_center";
+    var westTwo = "#x" + (selectedUnit.xValue - 2) + "y" + selectedUnit.yValue + "_center";
+    const allTwo = [northTwo, eastTwo, southTwo, westTwo];
+    for (var pickTwo = 0; pickTwo < allTwo.length; pickTwo++) {
+      for (var cleanGrid = 0; cleanGrid < allGrids.length; cleanGrid++) {
+        var pickGrid = "#x" + allGrids[cleanGrid].xValue + "y" + allGrids[cleanGrid].yValue + "_center";
+        if (allTwo[pickTwo] == pickGrid) {
+          $(pickGrid).css('border','none')
+        }
+      }
+    }
+  }
 
 // To be used within issueOneOrder below, this determines the grid where the unit will be moved to. It's important because both the unit and the grid square need to know that the unit is in a new grid square.
   const findNextGrid = () => {
@@ -1052,10 +1079,10 @@ $(() =>{
     };
     // console.log("ordersCarriedOut: " + ordersCarriedOut.length);
     if (selectedUnit.type == "CAV") {
-      selectedUnit.twoSquaresN = false;
-      selectedUnit.twoSquaresE = false;
-      selectedUnit.twoSquaresS = false;
-      selectedUnit.twoSquaresW = false;
+      selectedUnit.twoSquaresN = null;
+      selectedUnit.twoSquaresE = null;
+      selectedUnit.twoSquaresS = null;
+      selectedUnit.twoSquaresW = null;
     };
   };
 
