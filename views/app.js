@@ -610,12 +610,6 @@ $(() =>{
   }
 
   // Here is the function that displays the selectedUnit's CURRENT direction
-  // -- For show CAV moving one or two squares north
-  var secondClickNorth = false;
-  var secondClickEast = false;
-  var secondClickSouth = false;
-  var secondClickWest = false;
-  // --
   const showUnitNextDirection = ()=> {
     if (selectedUnit.nextDirection == "north") {
       $("#north").css('background-color','yellow');
@@ -631,7 +625,6 @@ $(() =>{
       console.log("error in showUnitDirection function.")
     };
     if (selectedUnit.nextDirection == "north") {
-      // -- trying to let CAV move north two squares
       if (selectedUnit.twoSquaresN == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
@@ -641,34 +634,19 @@ $(() =>{
         notHowFar = 2;
         selectedUnit.twoSquaresN = false;
       };
-      // --
       if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
         var targetYnorth = selectedUnit.yValue - howFar;
-        // -- CAV stuff
         var notTargetYnorth = selectedUnit.yValue - notHowFar;
-        // --
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
         $(targetID).css("border",targetBorder);
-        // -- CAV stuff
         var notTargetID = "#x" + selectedUnit.xValue + "y" + notTargetYnorth + "_center";
         $(notTargetID).css("border","none");
-        // --
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_north";
         $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
       };
-      // -- For showing CAV next location
-      // if (secondClickNorth == false) {
-      //   secondClickNorth = true;
-      //   twoSquaresN = false;
-      // } else {
-      //   secondClickNorth = false;
-      //   twoSquaresN = true;
-      // };
-      // --
       console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
-      // -- trying to let CAV move east two squares
       if (selectedUnit.twoSquaresE == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
@@ -678,33 +656,18 @@ $(() =>{
         notHowFar = 2;
         selectedUnit.twoSquaresE = false;
       };
-      // --
       if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
         var targetXeast = selectedUnit.xValue + howFar;
-        // -- CAV stuff
         var notTargetXeast = selectedUnit.xValue + notHowFar;
-        // --
         var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
         $(targetID).css("border",targetBorder);
-        // -- CAV stuff
         var notTargetID = "#x" + notTargetXeast + "y" + selectedUnit.yValue + "_center";
         $(notTargetID).css("border","none");
-        //
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_east";
         $(targetID).css("border","5px solid yellow").css("border-left","none");;
       };
-      // --
-      // if (secondClickEast == false) {
-      //   secondClickEast = true;
-      //   selectedUnit.twoSquaresE = false;
-      // } else {
-      //   secondClickEast = false;
-      //   selectedUnit.twoSquaresE = true;
-      // };
-      // --
     } else if (selectedUnit.nextDirection == "south") {
-      // -- trying to let CAV move east two squares
       if (selectedUnit.twoSquaresS == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
@@ -714,31 +677,17 @@ $(() =>{
         notHowFar = 2;
         selectedUnit.twoSquaresS = false;
       };
-      // --
       if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
         var targetYsouth = selectedUnit.yValue + howFar;
-        // -- CAV stuff
         var notTargetYsouth = selectedUnit.yValue + notHowFar;
-        // --
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
         $(targetID).css("border",targetBorder);
-        // -- CAV stuff
         var notTargetID = "#x" + selectedUnit.xValue + "y" + notTargetYsouth + "_center";
         $(notTargetID).css("border","none");
-        //
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_south";
         $(targetID).css("border","5px solid yellow").css("border-top","none");;
       };
-      // -- More CAV stuff
-      // if (secondClickSouth == false) {
-      //   secondClickSouth = true;
-      //   selectedUnit.twoSquaresS = false;
-      // } else {
-      //   secondClickSouth = false;
-      //   selectedUnit.twoSquaresS = true;
-      // };
-      // --
     } else if (selectedUnit.nextDirection == "west") {
       if (selectedUnit.twoSquaresW == false && selectedUnit.type == "CAV") {
         howFar = 2;
