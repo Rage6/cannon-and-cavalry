@@ -632,14 +632,14 @@ $(() =>{
     };
     if (selectedUnit.nextDirection == "north") {
       // -- trying to let CAV move north two squares
-      if (secondClickNorth == true && selectedUnit.type == "CAV") {
+      if (selectedUnit.twoSquaresN == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
-        twoSquaresN = 2;
+        selectedUnit.twoSquaresN = true;
       } else {
         howFar = 1;
         notHowFar = 2;
-        twoSquaresN = 1;
+        selectedUnit.twoSquaresN = false;
       };
       // --
       if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
@@ -658,25 +658,25 @@ $(() =>{
         $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
       };
       // -- For showing CAV next location
-      if (secondClickNorth == false) {
-        secondClickNorth = true;
-        selectedUnit.twoSquaresN = false;
-      } else {
-        secondClickNorth = false;
-        selectedUnit.twoSquaresN = true;
-      };
+      // if (secondClickNorth == false) {
+      //   secondClickNorth = true;
+      //   twoSquaresN = false;
+      // } else {
+      //   secondClickNorth = false;
+      //   twoSquaresN = true;
+      // };
       // --
       console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
       // -- trying to let CAV move east two squares
-      if (secondClickEast == true && selectedUnit.type == "CAV") {
+      if (selectedUnit.twoSquaresE == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
-        twoSquaresE = 2;
+        selectedUnit.twoSquaresE = true;
       } else {
         howFar = 1;
         notHowFar = 2;
-        twoSquaresE = 1;
+        selectedUnit.twoSquaresE = false;
       };
       // --
       if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
@@ -695,24 +695,24 @@ $(() =>{
         $(targetID).css("border","5px solid yellow").css("border-left","none");;
       };
       // --
-      if (secondClickEast == false) {
-        secondClickEast = true;
-        selectedUnit.twoSquaresE = false;
-      } else {
-        secondClickEast = false;
-        selectedUnit.twoSquaresE = true;
-      };
+      // if (secondClickEast == false) {
+      //   secondClickEast = true;
+      //   selectedUnit.twoSquaresE = false;
+      // } else {
+      //   secondClickEast = false;
+      //   selectedUnit.twoSquaresE = true;
+      // };
       // --
     } else if (selectedUnit.nextDirection == "south") {
       // -- trying to let CAV move east two squares
-      if (secondClickSouth == true && selectedUnit.type == "CAV") {
+      if (selectedUnit.twoSquaresS == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
-        twoSquaresS = 2;
+        selectedUnit.twoSquaresS = true;
       } else {
         howFar = 1;
         notHowFar = 2;
-        twoSquaresS = 1;
+        selectedUnit.twoSquaresS = false;
       };
       // --
       if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
@@ -731,50 +731,35 @@ $(() =>{
         $(targetID).css("border","5px solid yellow").css("border-top","none");;
       };
       // -- More CAV stuff
-      if (secondClickSouth == false) {
-        secondClickSouth = true;
-        selectedUnit.twoSquaresS = false;
-      } else {
-        secondClickSouth = false;
-        selectedUnit.twoSquaresS = true;
-      };
+      // if (secondClickSouth == false) {
+      //   secondClickSouth = true;
+      //   selectedUnit.twoSquaresS = false;
+      // } else {
+      //   secondClickSouth = false;
+      //   selectedUnit.twoSquaresS = true;
+      // };
       // --
     } else if (selectedUnit.nextDirection == "west") {
-      // -- trying to let CAV move east two squares
-      if (secondClickWest == true && selectedUnit.type == "CAV") {
+      if (selectedUnit.twoSquaresW == false && selectedUnit.type == "CAV") {
         howFar = 2;
         notHowFar = 1;
-        twoSquaresW = 2;
+        selectedUnit.twoSquaresW = true;
       } else {
         howFar = 1;
         notHowFar = 2;
-        twoSquaresW = 1;
+        selectedUnit.twoSquaresW = false;
       };
-      // --
       if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
         var targetXwest = selectedUnit.xValue - howFar;
-        // -- CAV stuff
         var notTargetXwest = selectedUnit.xValue - notHowFar;
-        // --
         var targetID = "#x" + targetXwest + "y" + selectedUnit.yValue + "_center";
         $(targetID).css("border",targetBorder);
-        // -- CAV stuff
         var notTargetID = "#x" + notTargetXwest + "y" + selectedUnit.yValue + "_center";
         $(notTargetID).css("border","none");
-        //
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_west";
         $(targetID).css("border","5px solid yellow").css("border-right","none");
       };
-      // -- More CAV stuff
-      if (secondClickWest == false) {
-        secondClickWest = true;
-        selectedUnit.twoSquaresW = false;
-      } else {
-        secondClickWest = false;
-        selectedUnit.twoSquaresW = true;
-      };
-      // --
     }
   }
 
@@ -965,14 +950,19 @@ $(() =>{
       if (selectedUnit.attack == true) {
         // -- To allow CAV to move two squares
         if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresN == true) {
+          console.log("check twoSquaresN: " + selectedUnit.twoSquaresN);
           var borderCheck = 2;
         } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresE == true) {
+          console.log("check twoSquaresE: " + selectedUnit.twoSquaresE);
           var borderCheck = 2;
         } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresS == true) {
+          console.log("check twoSquaresS: " + selectedUnit.twoSquaresS);
           var borderCheck = 2;
         } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresW == true) {
+          console.log("check twoSquaresW: " + selectedUnit.twoSquaresW);
           var borderCheck = 2;
         } else {
+          console.log("check twoSquaresN: " + selectedUnit.twoSquaresN);
           var borderCheck = 1;
         };
         // --
@@ -1104,7 +1094,7 @@ $(() =>{
           selectedUnit.nextXvalue = currentGrid.xValue;
           selectedUnit.nextYvalue = currentGrid.yValue;
           completedPresent.push(selectedUnit.name + ": completed");
-        };
+        }
         showBattleReport(selectedUnit);
       } else {
         console.log("An error occurred in issueOneOrder.");
@@ -1112,6 +1102,12 @@ $(() =>{
       ordersCarriedOut.push(selectedUnit);
     };
     // console.log("ordersCarriedOut: " + ordersCarriedOut.length);
+    if (selectedUnit.type == "CAV") {
+      selectedUnit.twoSquaresN = false;
+      selectedUnit.twoSquaresE = false;
+      selectedUnit.twoSquaresS = false;
+      selectedUnit.twoSquaresW = false;
+    };
   };
 
   // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
