@@ -19,6 +19,9 @@ $(() =>{
   var northHalf = Math.round(maxYvalue/2);
   var westHalf = Math.round(maxXvalue/2);
   var reportFacts = [];
+  var currentClickUnit = null;
+  var lastClickUnit = null;
+  var startClick = true;
 
   // This array contains all of the grids and their values
   const allGrids = [
@@ -217,7 +220,7 @@ $(() =>{
         twoSquaresN: null,
         twoSquaresE: null,
         twoSquaresS: null,
-        twoSquaresW: null
+        twoSquaresW: null,
       }
     ],
     artillery: [
@@ -280,7 +283,7 @@ $(() =>{
         twoSquaresN: null,
         twoSquaresE: null,
         twoSquaresS: null,
-        twoSquaresW: null
+        twoSquaresW: null,
       }
     ],
     artillery: [
@@ -651,16 +654,46 @@ $(() =>{
     }  else {
       console.log("error in showUnitDirection function.")
     };
+    console.log("nextDirection: " + selectedUnit.nextDirection);
     if (selectedUnit.nextDirection == "north") {
-      if (selectedUnit.twoSquaresN == false && selectedUnit.type == "CAV") {
-        howFar = 2;
-        notHowFar = 1;
-        selectedUnit.twoSquaresN = true;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          console.log(selectedUnit.name + " : " + lastClickUnit);
+          if (selectedUnit.twoSquaresN == false) {
+            console.log("false?: " + selectedUnit.twoSquaresN);
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresN = true;
+          } else if (selectedUnit.twoSquaresN == true) {
+            console.log("true?: " + selectedUnit.twoSquaresN);
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          } else {
+            console.log("null?: " + selectedUnit.twoSquaresN);
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          };
+        } else {
+          console.log(selectedUnit.name + " : " + lastClickUnit);
+          if (selectedUnit.twoSquaresN == false) {
+            console.log("false?: " + selectedUnit.twoSquaresN);
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          } else {
+            console.log("True?: " + selectedUnit.twoSquaresN);
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresN = true;
+          };
+        }
       } else {
         howFar = 1;
         notHowFar = 2;
-        selectedUnit.twoSquaresN = false;
       };
+      // lastClickUnit = selectedUnit.name;
       if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
         var targetYnorth = selectedUnit.yValue - howFar;
         var notTargetYnorth = selectedUnit.yValue - notHowFar;
@@ -672,7 +705,7 @@ $(() =>{
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_north";
         $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
       };
-      console.log(selectedUnit);
+      // console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
       if (selectedUnit.twoSquaresE == false && selectedUnit.type == "CAV") {
         howFar = 2;
@@ -736,8 +769,10 @@ $(() =>{
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_west";
         $(targetID).css("border","5px solid yellow").css("border-right","none");
       };
-    }
-  }
+    };
+    lastClickUnit = selectedUnit.name;
+    console.log("END")
+  };
 
   // This is how the arrow buttons change a unit's nextDirections and show where it will go
   $('#north').click( ()=> {
@@ -1396,7 +1431,7 @@ $(() =>{
     selectedCavalry = currentPlayer.cavalry;
     selectedArtillery = currentPlayer.artillery;
     // console.log("oppositePlayer: " + oppositePlayer.teamName);
-
+    console.log("before: " + lastClickUnit);
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       issueOneOrder(ordersDone);
@@ -1409,6 +1444,7 @@ $(() =>{
       selectedUnit = selectedArtillery[i];
       issueOneOrder(ordersDone);
     };
+    console.log("before: " + lastClickUnit);
     battleOccur = false;
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
@@ -1442,9 +1478,6 @@ $(() =>{
     showGridUnits(startGrids, null, currentPlayer, selectedInfantry);
     showGridUnits(startGrids, null, currentPlayer, selectedCavalry);
     showGridUnits(startGrids, null, currentPlayer, selectedArtillery);
-    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.infantry);
-    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.cavalry);
-    // showGridUnits(startGrids, null, oppositePlayer, oppositePlayer.artillery);
     orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
@@ -1484,6 +1517,8 @@ $(() =>{
       // console.log(blueTeam);
       // console.log(redTeam);
     }
+    startClick = true;
+    lastClickUnit = null;
   };
 
   $('#ordersButton').click(issueAllOrders);
@@ -1496,7 +1531,8 @@ $(() =>{
 
   // This displays the selected unit's values
   const selectedValues = () =>{
-    console.log("Unit: " + selectedUnit.name);
+    // console.log("Unit: " + selectedUnit.name);
+    // console.log(selectedUnit);
     $("#unitName").text(selectedUnit.name);
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','blue');
@@ -1566,6 +1602,12 @@ $(() =>{
 
   // ------ INFANTRY --------
   const infantryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.infantry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
@@ -1633,6 +1675,12 @@ $(() =>{
 
   // ------ CAVALRY --------
   const cavalryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.cavalry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
@@ -1700,6 +1748,12 @@ $(() =>{
 
   // ------ ARTILLERY --------
   const artilleryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.artillery[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
