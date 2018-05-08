@@ -654,36 +654,28 @@ $(() =>{
     }  else {
       console.log("error in showUnitDirection function.")
     };
-    console.log("nextDirection: " + selectedUnit.nextDirection);
     if (selectedUnit.nextDirection == "north") {
       if (selectedUnit.type == "CAV") {
         if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
-          console.log(selectedUnit.name + " : " + lastClickUnit);
           if (selectedUnit.twoSquaresN == false) {
-            console.log("false?: " + selectedUnit.twoSquaresN);
             howFar = 2;
             notHowFar = 1;
             selectedUnit.twoSquaresN = true;
           } else if (selectedUnit.twoSquaresN == true) {
-            console.log("true?: " + selectedUnit.twoSquaresN);
             howFar = 1;
             notHowFar = 2;
             selectedUnit.twoSquaresN = false;
           } else {
-            console.log("null?: " + selectedUnit.twoSquaresN);
             howFar = 1;
             notHowFar = 2;
             selectedUnit.twoSquaresN = false;
           };
         } else {
-          console.log(selectedUnit.name + " : " + lastClickUnit);
           if (selectedUnit.twoSquaresN == false) {
-            console.log("false?: " + selectedUnit.twoSquaresN);
             howFar = 1;
             notHowFar = 2;
             selectedUnit.twoSquaresN = false;
           } else {
-            console.log("True?: " + selectedUnit.twoSquaresN);
             howFar = 2;
             notHowFar = 1;
             selectedUnit.twoSquaresN = true;
@@ -707,14 +699,35 @@ $(() =>{
       };
       // console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
-      if (selectedUnit.twoSquaresE == false && selectedUnit.type == "CAV") {
-        howFar = 2;
-        notHowFar = 1;
-        selectedUnit.twoSquaresE = true;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresE == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresE = true;
+          } else if (selectedUnit.twoSquaresE == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresE == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresE = true;
+          };
+        }
       } else {
         howFar = 1;
         notHowFar = 2;
-        selectedUnit.twoSquaresE = false;
       };
       if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
         var targetXeast = selectedUnit.xValue + howFar;
@@ -728,14 +741,35 @@ $(() =>{
         $(targetID).css("border","5px solid yellow").css("border-left","none");;
       };
     } else if (selectedUnit.nextDirection == "south") {
-      if (selectedUnit.twoSquaresS == false && selectedUnit.type == "CAV") {
-        howFar = 2;
-        notHowFar = 1;
-        selectedUnit.twoSquaresS = true;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresS == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresS = true;
+          } else if (selectedUnit.twoSquaresS == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresS == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresS = true;
+          };
+        }
       } else {
         howFar = 1;
         notHowFar = 2;
-        selectedUnit.twoSquaresS = false;
       };
       if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
         var targetYsouth = selectedUnit.yValue + howFar;
@@ -749,14 +783,35 @@ $(() =>{
         $(targetID).css("border","5px solid yellow").css("border-top","none");;
       };
     } else if (selectedUnit.nextDirection == "west") {
-      if (selectedUnit.twoSquaresW == false && selectedUnit.type == "CAV") {
-        howFar = 2;
-        notHowFar = 1;
-        selectedUnit.twoSquaresW = true;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresW == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresW = true;
+          } else if (selectedUnit.twoSquaresW == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresW == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresW = true;
+          };
+        }
       } else {
         howFar = 1;
         notHowFar = 2;
-        selectedUnit.twoSquaresW = false;
       };
       if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
         var targetXwest = selectedUnit.xValue - howFar;
@@ -771,7 +826,6 @@ $(() =>{
       };
     };
     lastClickUnit = selectedUnit.name;
-    console.log("END")
   };
 
   // This is how the arrow buttons change a unit's nextDirections and show where it will go
