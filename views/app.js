@@ -606,37 +606,101 @@ $(() =>{
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
       $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
     } else if (selectedUnit.direction == "east") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','grey');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
       $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
     } else if (selectedUnit.direction == "south") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','grey');
       $("#west").css('background-color','white');
       $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
     } else if (selectedUnit.direction == "west") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','grey');
       $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
     } else if (selectedUnit.direction == "center") {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
       $("#center").css('background-color','grey');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
+    } else if (selectedUnit.direction == "northEast" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','white');
+      $("#east").css('background-color','white');
+      $("#south").css('background-color','white');
+      $("#west").css('background-color','white');
+      $("#center").css('background-color','white');
+      $("#northEast").css('background-color','grey');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
+    } else if (selectedUnit.direction == "southEast" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','white');
+      $("#east").css('background-color','white');
+      $("#south").css('background-color','white');
+      $("#west").css('background-color','white');
+      $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','grey');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
+    } else if (selectedUnit.direction == "southWest" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','white');
+      $("#east").css('background-color','white');
+      $("#south").css('background-color','white');
+      $("#west").css('background-color','white');
+      $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','grey');
+      $("#northWest").css('background-color','white');
+    } else if (selectedUnit.direction == "northWest" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','white');
+      $("#east").css('background-color','white');
+      $("#south").css('background-color','white');
+      $("#west").css('background-color','white');
+      $("#center").css('background-color','white');
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','grey');
     } else {
       $("#north").css('background-color','white');
       $("#east").css('background-color','white');
       $("#south").css('background-color','white');
       $("#west").css('background-color','white');
       $("#center").css('background-color','white');
-    };
+      $("#northEast").css('background-color','white');
+      $("#southEast").css('background-color','white');
+      $("#southWest").css('background-color','white');
+      $("#northWest").css('background-color','white');
+    }
   }
 
   // Here is the function that displays the selectedUnit's CURRENT direction
@@ -651,7 +715,17 @@ $(() =>{
       $("#west").css('background-color','yellow');
     } else if (selectedUnit.nextDirection == "center") {
       $("#center").css('background-color','yellow');
-    }  else {
+    } else if (selectedUnit.type == "IN") {
+      if (selectedUnit.nextDirection == "northEast") {
+        $("#northEast").css('background-color','yellow');
+      } else if (selectedUnit.nextDirection == "southEast") {
+        $("#southEast").css('background-color','yellow');
+      } else if (selectedUnit.nextDirection == "southWest") {
+        $("#southWest").css('background-color','yellow');
+      } else if (selectedUnit.nextDirection == "northWest") {
+        $("#northWest").css('background-color','yellow');
+      }
+    } else {
       console.log("error in showUnitDirection function.")
     };
     if (selectedUnit.nextDirection == "north") {
@@ -824,6 +898,38 @@ $(() =>{
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_west";
         $(targetID).css("border","5px solid yellow").css("border-right","none");
       };
+    } else if (selectedUnit.nextDirection == "northWest") {
+      if (selectedUnit.attack == true && selectedUnit.xValue > 1 && selectedUnit.yValue > 1) {
+        var targetID = "#x" + (selectedUnit.xValue - 1) + "y" + (selectedUnit.yValue - 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    } else if (selectedUnit.nextDirection == "northEast") {
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue && selectedUnit.yValue > 1) {
+        var targetID = "#x" + (selectedUnit.xValue + 1) + "y" + (selectedUnit.yValue - 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    } else if (selectedUnit.nextDirection == "southEast") {
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue && selectedUnit.yValue < maxYvalue) {
+        var targetID = "#x" + (selectedUnit.xValue + 1) + "y" + (selectedUnit.yValue + 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    } else if (selectedUnit.nextDirection == "southWest") {
+      if (selectedUnit.attack == true && selectedUnit.xValue > 1 && selectedUnit.yValue < maxYvalue) {
+        var targetID = "#x" + (selectedUnit.xValue - 1) + "y" + (selectedUnit.yValue + 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
     };
     lastClickUnit = selectedUnit.name;
   };
@@ -873,6 +979,58 @@ $(() =>{
     showUnitDirection();
     showUnitNextDirection();
   });
+  $('#northWest').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "northWest";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#northEast').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "northEast";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#southWest').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "southWest";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#southEast').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "southEast";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
   // This erases the border on the grid that the user had directed towards
   const clearBorders = () => {
     var northY = selectedUnit.yValue - 1;
@@ -880,14 +1038,31 @@ $(() =>{
     var westX  = selectedUnit.xValue - 1;
     var eastX  = selectedUnit.xValue + 1;
     var thisGrid = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue;
+    // North
     var clearID = "#x" + selectedUnit.xValue + "y" + northY + "_center";
     $(clearID).css("border","none");
+    // West
     clearID = "#x" + westX + "y" + selectedUnit.yValue + "_center";
     $(clearID).css("border","none");
+    // South
     clearID = "#x" + selectedUnit.xValue + "y" + southY + "_center";
     $(clearID).css("border","none");
+    // East
     clearID = "#x" + eastX + "y" + selectedUnit.yValue + "_center";
     $(clearID).css("border","none");
+    // North-West
+    clearID = "#x" + westX + "y" + northY + "_center";
+    $(clearID).css("border","none");
+    // North-EastTwo
+    clearID = "#x" + eastX + "y" + northY + "_center";
+    $(clearID).css("border","none");
+    // South-EastTwo
+    clearID = "#x" + eastX + "y" + southY + "_center";
+    $(clearID).css("border","none");
+    // South-West
+    clearID = "#x" + westX + "y" + southY + "_center";
+    $(clearID).css("border","none");
+    //clears all defense lines
     clearID = thisGrid + "_north";
     $(clearID).css("border","none");
     clearID = thisGrid + "_east";
@@ -1092,6 +1267,82 @@ $(() =>{
           showBattleReport(selectedUnit);
           selectedUnit.nextXvalue = selectedUnit.xValue - borderCheck;
           selectedUnit.nextYvalue = selectedUnit.yValue;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "northWest" && selectedUnit.xValue > 1 && selectedUnit.yValue > 1) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "northEast" && selectedUnit.xValue < maxXvalue && selectedUnit.yValue > 1) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue + 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "southEast" && selectedUnit.xValue < maxXvalue && selectedUnit.yValue < maxYvalue) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue + 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue + 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "southWest" && selectedUnit.xValue > 1 && selectedUnit.yValue < maxYvalue) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue + 1;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
           if (nextGrid == undefined) {
