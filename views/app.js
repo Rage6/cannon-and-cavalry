@@ -600,6 +600,17 @@ $(() =>{
 
   //This function makes the arrows show the selectedUnit's NEXT direction
   const showUnitDirection = ()=> {
+    if (selectedUnit.type == "IN") {
+      $("#northEast").css('border','1px solid black');
+      $("#southEast").css('border','1px solid black');
+      $("#southWest").css('border','1px solid black');
+      $("#northWest").css('border','1px solid black');
+    } else {
+      $("#northEast").css('border','none');
+      $("#southEast").css('border','none');
+      $("#southWest").css('border','none');
+      $("#northWest").css('border','none');
+    };
     if (selectedUnit.direction == "north") {
       $("#north").css('background-color','grey');
       $("#east").css('background-color','white');
@@ -715,16 +726,14 @@ $(() =>{
       $("#west").css('background-color','yellow');
     } else if (selectedUnit.nextDirection == "center") {
       $("#center").css('background-color','yellow');
-    } else if (selectedUnit.type == "IN") {
-      if (selectedUnit.nextDirection == "northEast") {
-        $("#northEast").css('background-color','yellow');
-      } else if (selectedUnit.nextDirection == "southEast") {
-        $("#southEast").css('background-color','yellow');
-      } else if (selectedUnit.nextDirection == "southWest") {
-        $("#southWest").css('background-color','yellow');
-      } else if (selectedUnit.nextDirection == "northWest") {
-        $("#northWest").css('background-color','yellow');
-      }
+    } else if (selectedUnit.nextDirection == "northEast" && selectedUnit.type == "IN") {
+      $("#northEast").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "southEast" && selectedUnit.type == "IN") {
+      $("#southEast").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "southWest" && selectedUnit.type == "IN") {
+      $("#southWest").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "northWest" && selectedUnit.type == "IN") {
+      $("#northWest").css('background-color','yellow');
     } else {
       console.log("error in showUnitDirection function.")
     };
