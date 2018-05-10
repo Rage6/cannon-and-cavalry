@@ -235,7 +235,8 @@ $(() =>{
         xValue: 3,
         yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        inPlace: true
       }
     ]
   };
@@ -296,7 +297,8 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 3,
-        yValue: 4
+        yValue: 4,
+        inPlace: true
       }
     ]
   };
@@ -1215,6 +1217,13 @@ $(() =>{
           var borderCheck = 1;
         };
         // --
+        // -- This labels an AR as stationary or not. Only stationary AR can fire their cannons.
+        if (selectedUnit.type == "AR" && selectedUnit.nextDirection == "center") {
+          selectedUnit.inPlace = true;
+        } else {
+          selectedUnit.inPlace = false;
+        };
+        // --
         if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
           showBattleReport(selectedUnit);
           selectedUnit.nextXvalue = selectedUnit.xValue;
@@ -1375,7 +1384,7 @@ $(() =>{
         var nextGrid = currentGrid;
         var currentDirection = selectedUnit.direction;
 
-        // This whole stretched is to prevent muliple units from filling the same defensive line
+        // This whole stretch is to prevent muliple units from filling the same defensive line
         var blockLine = false;
         var activeUnits = [];
         const currentInfType = currentPlayer.infantry;
@@ -1738,14 +1747,91 @@ $(() =>{
     return numLeft
   };
 
+  const findCannonTargets = (oneCannon,collectTargets) => {
+    var oneUp = [];
+    if (oneCannon.yValue > 1) {
+      oneUp.push(oneCannon.xValue);
+      oneUp.push(oneCannon.yValue - 1);
+    };
+    collectTargets.push(oneUp);
+    var twoUp = [];
+    if (oneCannon.yValue > 2) {
+      twoUp.push(oneCannon.xValue);
+      twoUp.push(oneCannon.yValue - 2);
+    };
+    collectTargets.push(twoUp);
+    var oneRight = [];
+    if (oneCannon.xValue < maxXvalue) {
+      oneRight.push(oneCannon.xValue + 1);
+      oneRight.push(oneCannon.yValue);
+    };
+    collectTargets.push(oneRight);
+    var twoRight = [];
+    if (oneCannon.xValue < (maxXvalue - 1)) {
+      twoRight.push(oneCannon.xValue + 2);
+      twoRight.push(oneCannon.yValue);
+    };
+    collectTargets.push(twoRight);
+    var oneDown = [];
+    if (oneCannon.yValue < maxYvalue) {
+      oneDown.push(oneCannon.xValue);
+      oneDown.push(oneCannon.yValue + 1);
+    };
+    collectTargets.push(oneDown);
+    var twoDown = [];
+    if (oneCannon.yValue < (maxYvalue - 1)) {
+      twoDown.push(oneCannon.xValue);
+      twoDown.push(oneCannon.yValue + 2);
+    };
+    collectTargets.push(twoDown);
+    var oneLeft = [];
+    if (oneCannon.xValue > 1) {
+      oneLeft.push(oneCannon.xValue - 1);
+      oneLeft.push(oneCannon.yValue);
+    };
+    collectTargets.push(oneLeft);
+    var twoLeft = [];
+    if (oneCannon.xValue > 2) {
+      twoLeft.push(oneCannon.xValue - 2);
+      twoLeft.push(oneCannon.yValue);
+    };
+    collectTargets.push(twoLeft);
+  }
+
+  const fireCannons = (theTeam) => {
+    for (var v = 0; v < theTeam.artillery.length; v++) {
+      var cannon = theTeam.artillery[v];
+      console.log(cannon.name);
+      if (cannon.inPlace == true) {
+        var allTargets = [];
+        findCannonTargets(cannon,allTargets);
+        for (var w = 0; w < allGrids.length; w++) {
+          for (var y = 0; y < allTargets.length; y++) {
+            if (allGrids[w].xValue == allTargets[y][0] && allGrids[w].yValue == allTargets[y][1]) {
+              if (theTeam == blueTeam) {
+                if (allGrids[w].redPresent.length > 0) {
+                  console.log("Pew at Red Team!")
+                }
+              } else {
+                if (allGrids[w].bluePresent.length > 0) {
+                  console.log("Pew at Blue Team!")
+                }
+              }
+            }
+          }
+        }
+      } else {
+        cannon.inPlace = true;
+      }
+    }
+  };
+
   const issueAllOrders = () => {
     var ordersDone = [];
     clearOldRep();
     selectedInfantry = currentPlayer.infantry;
     selectedCavalry = currentPlayer.cavalry;
     selectedArtillery = currentPlayer.artillery;
-    // console.log("oppositePlayer: " + oppositePlayer.teamName);
-    console.log("before: " + lastClickUnit);
     for (var i = 0; i < selectedInfantry.length; i++) {
       selectedUnit = selectedInfantry[i];
       issueOneOrder(ordersDone);
@@ -1758,7 +1844,8 @@ $(() =>{
       selectedUnit = selectedArtillery[i];
       issueOneOrder(ordersDone);
     };
-    console.log("before: " + lastClickUnit);
+    fireCannons(oppositePlayer);
+    fireCannons(currentPlayer);
     battleOccur = false;
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
