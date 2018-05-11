@@ -1802,7 +1802,7 @@ $(() =>{
     for (var v = 0; v < theTeam.artillery.length; v++) {
       var cannon = theTeam.artillery[v];
       console.log(cannon.name);
-      if (cannon.inPlace == true) {
+      if (cannon.inPlace == true && cannon.active == true) {
         var allTargets = [];
         findCannonTargets(cannon,allTargets);
         for (var w = 0; w < allGrids.length; w++) {
@@ -1810,11 +1810,169 @@ $(() =>{
             if (allGrids[w].xValue == allTargets[y][0] && allGrids[w].yValue == allTargets[y][1]) {
               if (theTeam == blueTeam) {
                 if (allGrids[w].redPresent.length > 0) {
-                  console.log("Pew at Red Team!")
+                  var chanceOfHit = 0;
+                  var targetUnit = allGrids[w].redPresent[0];
+                  if (cannon.direction == "center") {
+                    if (y == 0 || y == 2 || y == 4 || y == 6) {
+                      console.log("fired from center at close range");
+                      chanceOfHit = 0.3;
+                    } else if (y == 1 || y == 3 || y == 5 || y == 7) {
+                      console.log("fired from center at far range");
+                      chanceOfHit = 0.1;
+                    } else {
+                      console.log("this didn't work");
+                    };
+                  } else {
+                    if (cannon.direction == "north") {
+                      if (y == 0) {
+                        console.log("fired to oneUp");
+                        chanceOfHit = 0.8;
+                      } else if (y == 1) {
+                        console.log("fired to twoUp");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the north")
+                      };
+                    } else if (cannon.direction == "east") {
+                      if (y == 2) {
+                        console.log("fired to oneRight");
+                        chanceOfHit = 0.8;
+                      } else if (y == 3) {
+                        console.log("fired to twoRight");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the east")
+                      };
+                    } else if (cannon.direction == "south") {
+                      if (y == 4) {
+                        console.log("fired to oneDown");
+                        chanceOfHit = 0.8;
+                      } else if (y == 5) {
+                        console.log("fired to twoDown");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the south")
+                      };
+                    } else if (cannon.direction == "west") {
+                      if (y == 6) {
+                        console.log("fired to oneLeft");
+                        chanceOfHit = 0.8;
+                      } else if (y == 7) {
+                        console.log("fired to twoLeft");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the west")
+                      };
+                    };
+                  };
+                  // "Fire" the cannon and see if it hits. If it's within chance, it's a hit.
+                  var actualShot = Math.random();
+                  if (actualShot < chanceOfHit) {
+                    var hitTarget = true;
+                  } else {
+                    var hitTarget = false;
+                  };
+                  // change the health values if the hits are successful
+                  if (hitTarget == true) {
+                    targetUnit.health -= 2;
+                    $("#battleList").append("<li>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</li>");
+                  };
+                  if (targetUnit.health <= 0) {
+                    targetUnit.active = false;
+                    var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
+                    $(removeImgHere).empty();
+                    allGrids[w].redPresent.splice(0,1);
+                    $("#battleList").append("<li>That barrage destroyed the " + targetUnit.name + " unit!</li>");
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
+                  }
+                  // report any hits on the battle reports
                 }
               } else {
                 if (allGrids[w].bluePresent.length > 0) {
-                  console.log("Pew at Blue Team!")
+                  var chanceOfHit = 0;
+                  var targetUnit = allGrids[w].bluePresent[0];
+                  if (cannon.direction == "center") {
+                    if (y == 0 || y == 2 || y == 4 || y == 6) {
+                      console.log("fired from center at close range");
+                      chanceOfHit = 0.3;
+                    } else if (y == 1 || y == 3 || y == 5 || y == 7) {
+                      console.log("fired from center at far range");
+                      chanceOfHit = 0.1;
+                    } else {
+                      console.log("this didn't work");
+                    };
+                  } else {
+                    if (cannon.direction == "north") {
+                      if (y == 0) {
+                        console.log("fired to oneUp");
+                        chanceOfHit = 0.8;
+                      } else if (y == 1) {
+                        console.log("fired to twoUp");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the north")
+                      };
+                    } else if (cannon.direction == "east") {
+                      if (y == 2) {
+                        console.log("fired to oneRight");
+                        chanceOfHit = 0.8;
+                      } else if (y == 3) {
+                        console.log("fired to twoRight");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the east")
+                      };
+                    } else if (cannon.direction == "south") {
+                      if (y == 4) {
+                        console.log("fired to oneDown");
+                        chanceOfHit = 0.8;
+                      } else if (y == 5) {
+                        console.log("fired to twoDown");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the south")
+                      };
+                    } else if (cannon.direction == "west") {
+                      if (y == 6) {
+                        console.log("fired to oneLeft");
+                        chanceOfHit = 0.8;
+                      } else if (y == 7) {
+                        console.log("fired to twoLeft");
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the west")
+                      };
+                    };
+                  };
+                  // "Fire" the cannon and see if it hits. If it's within chance, it's a hit.
+                  var actualShot = Math.random();
+                  if (actualShot < chanceOfHit) {
+                    var hitTarget = true;
+                  } else {
+                    var hitTarget = false;
+                  };
+                  // change the health values if the hits are successful
+                  if (hitTarget == true) {
+                    targetUnit.health -= 2;
+                    $("#battleList").append("<li>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</li>");
+                  };
+                  if (targetUnit.health <= 0) {
+                    targetUnit.active = false;
+                    var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
+                    $(removeImgHere).empty();
+                    allGrids[w].bluePresent.splice(0,1);
+                    $("#battleList").append("<li>That barrage destroyed the " + targetUnit.name + " unit!</li>");
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
+                  }
+                  // report any hits on the battle reports
                 }
               }
             }
@@ -2226,8 +2384,7 @@ $(() =>{
     if (startCheck == true) {
       startNum = singleGrid;
       endNum = singleGrid + 1;
-    }
-    else {
+    } else {
       startNum = 0;
       endNum = totalGrids;
     };
@@ -2340,6 +2497,8 @@ $(() =>{
             } else {
               console.log("No direction");
             }
+          } else {
+            console.log("Remove the " + unitType[i].name + " unit.")
           }
         }
       }
