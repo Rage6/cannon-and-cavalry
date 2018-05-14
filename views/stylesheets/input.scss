@@ -80,6 +80,10 @@ body {
       padding: 20px 10%;
       display: none;
     }
+    #openSettings {
+      padding: 20px 10%;
+      display: none;
+    }
     #openAbout {
       padding: 20px 10%;
       display: none;
@@ -221,10 +225,13 @@ body {
     font-size: 2rem;
     background-color: lightgreen;
     background-size: cover;
-    @include divWidth(24%);
-    @include divHeight(24%);
+    // @include divWidth(24%);
+    // @include divHeight(24%);
+    @include divWidth(19%);
+    @include divHeight(19%);
     .topLine {
       margin: 0 20%;
+      border: 3px solid yellow;
       height: 20%;
       img {
         height: 100%;
@@ -248,6 +255,7 @@ body {
         }
       }
       .centerMiddle {
+        border: 3px solid yellow;
         width: 60%;
         background-size: 100% 100%;
         .helper {
@@ -282,6 +290,7 @@ body {
     }
     .bottomLine {
       margin: 0 20%;
+      border: 3px solid yellow;
       height: 20%;
       .helper {
         display: inline-block;

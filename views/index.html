@@ -18,6 +18,7 @@
         <div class="openButton" id="twoPlayer">Two Player</div>
         <div class="openButton" id="howTo">How To Play</div>
         <div class="openButton" id="glossary">Glossary</div>
+        <div class="openButton" id="settings">Settings</div>
         <div class="openButton" id="about">About</div>
       </div>
       <div id="openOneName">
@@ -203,7 +204,21 @@
                 Infantry
               </div>
               <div class="glossDescribe">
-                Cover may not block bullets or <a href="https://en.wikipedia.org/wiki/Grapeshot">"grapeshot"</a>, but it sure can confuse it. This is why concealment can make an attacker less effective when charging against the defender, and why a defending unit increases its chance by 40pts.
+                Infantry soldiers are the "foot soldiers" first thought of when discussing an army. They're skills include marching anywhere, riflemanship, and high number.
+                <table>
+                  <tr>
+                    <td>Health<td>
+                    <td>10<td>
+                  </tr>
+                  <tr>
+                    <td>Advantages<td>
+                    <td>Can move in any direction, largest unit size makes it highest health points<td>
+                  </tr>
+                  <tr>
+                    <td>Disadvantages<td>
+                    <td>Only move one square at a time, cannot cross water<td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div class="glossBox">
@@ -214,7 +229,21 @@
                 Cavalry
               </div>
               <div class="glossDescribe">
-                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+                Cavalry units, which are soldiers mounted on horses, are trained to strike far and fast. This makes them perfect for surprising enemies or rescuing allies.
+                <table>
+                  <tr>
+                    <td>Health<td>
+                    <td>8<td>
+                  </tr>
+                  <tr>
+                    <td>Advantages<td>
+                    <td>Move up to two grid squares, can cross water<td>
+                  </tr>
+                  <tr>
+                    <td>Disadvantages<td>
+                    <td>Cannot move diagonally, smaller unit size makes it start with lower health points<td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div class="glossBox">
@@ -225,12 +254,78 @@
                 Artillery
               </div>
               <div class="glossDescribe">
-                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+                Artillery units are responsible for the cannons that can fire devastating cannon balls over long distances. This means that they can do damage before a battle even takes place.
+                <table>
+                  <tr>
+                    <td>Advantages<td>
+                    <td>Can take away 2 health points from an enemy within 2 grid squares (NOTE: best chance of hitting an enemy is when the cannon faces the enemy from close distance)<td>
+                  </tr>
+                  <tr>
+                    <td>Disadvantages<td>
+                    <td>Cannot move diagonally, starts with smallest health points, cannot cross water<td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
         </div>
         <div class="closeButton" id="closeGlossary">
+          DONE
+        </div>
+      </div>
+      <div id="openSettings">
+        <div class="explainTitle">
+          Settings
+        </div>
+        <div class="explainBox">
+          <div>Map size: </div>
+          <table>
+            <tr>
+              <td id="fourGrids">
+                4 x 4
+              </td>
+              <td id="fiveGrids">
+                5 x 5
+              </td>
+            </tr>
+          </table>
+          <div>Battle: </div>
+          <ul>
+            <li class="pickMap">
+              <div>
+                Battle of Gettysburg
+              </div>
+              <div>
+                This strategic and political turning point of the American Civil War took place in Gettysburg, Pennsylvania in 1864.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div>
+                Battle of Waterloo
+              </div>
+              <div>
+                This famous battle from 1815 occurred in Belgium and was the definitive conclusion of the Napoleonic Wars.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div>
+                Battle of Borodino
+              </div>
+              <div>
+                At this critical phase of Napoleon's attempt to conquer Russia in 1812, this battle decided the fate of Moscow.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div>
+                Randomized Map
+              </div>
+              <div>
+                This option will randomly generate new terrain and concealment for each grid square. Are you willing to risk it?
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="closeButton" id="closeSettings">
           DONE
         </div>
       </div>

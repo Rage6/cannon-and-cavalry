@@ -1,8 +1,8 @@
 $(() =>{
 
-  const totalGrids = 16;
-  const maxXvalue = 4;
-  const maxYvalue = 4;
+  var totalGrids = 16;
+  var maxXvalue = 4;
+  var maxYvalue = 4;
   const maxUnits = 5;
   var startGrids = true;
   var errorPresent = [];
@@ -23,7 +23,7 @@ $(() =>{
   var lastClickUnit = null;
   var startClick = true;
 
-  // This array contains all of the grids and their values
+  // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
     // rowOneColumnOne
     {
@@ -170,6 +170,136 @@ $(() =>{
       redPresent: []
     }
   ]
+
+  // These grid squares and values are added for a 5x5 map.
+  const fiveByFive = [
+    // rowOneColumnFive
+    {
+      xValue: 5,
+      yValue: 1,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowTwoColumnFive
+    {
+      xValue: 5,
+      yValue: 2,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowThreeColumnFive
+    {
+      xValue: 5,
+      yValue: 3,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFourColumnFive
+    {
+      xValue: 5,
+      yValue: 4,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnOne
+    {
+      xValue: 1,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnTwo
+    {
+      xValue: 2,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnThree
+    {
+      xValue: 3,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnFour
+    {
+      xValue: 4,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnFive
+    {
+      xValue: 5,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+  ];
+
+  // This function actually adds the 5x5 grid squares
+  const addOneSquare = (pastX,pastY,newX,newY,newArray,newObject,allGridsIndex,isSplice) => {
+    if (isSplice == true) {
+      console.log("past isSplice");
+      allGrids.splice(allGridsIndex,0,newArray[newObject]);
+      $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
+    } else {
+      allGrids.push(newArray[newObject]);
+      $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
+      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
+      $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
+    }
+  }
+
+  const expandToFive = () => {
+    addOneSquare(4,1,5,1,fiveByFive,0,4,true);
+    addOneSquare(4,2,5,2,fiveByFive,1,9,true);
+    addOneSquare(4,3,5,3,fiveByFive,2,14,true);
+    addOneSquare(4,4,5,4,fiveByFive,3,19,true);
+    addOneSquare(5,4,1,5,fiveByFive,4,null,false);
+    addOneSquare(1,5,2,5,fiveByFive,5,null,false);
+    addOneSquare(2,5,3,5,fiveByFive,6,null,false);
+    addOneSquare(3,5,4,5,fiveByFive,7,null,false);
+    addOneSquare(4,5,5,5,fiveByFive,8,null,false);
+    totalGrids = 25;
+    maxXvalue = 5;
+    maxYvalue = 5;
+    startGrids = true;
+    console.log(allGrids);
+    makeAllGrids(totalGrids);
+    console.log(allGrids);
+  };
+
+  $("#fiveGrids").click(expandToFive);
 
   // Here are the starting values of the blueTeam
   const blueTeam = {
@@ -429,6 +559,21 @@ $(() =>{
     $(".openBox").css({"margin":"0 25%","width":"50%"});
   }
   $("#closeGlossary").click(glossaryStop);
+
+  // --- SETTINGS
+  const settingsRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openSettings").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#settings").click(settingsRun);
+
+  const settingsStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openSettings").css('display','none');
+    $(".openBox").css({"margin":"0 25%","width":"50%"});
+  }
+  $("#closeSettings").click(settingsStop);
 
   // --- ABOUT
   const aboutRun = () => {
@@ -1858,7 +2003,7 @@ $(() =>{
                       };
                     };
                   };
-                  // "Fire" the cannon and see if it hits. If it's within chance, it's a hit.
+                  // "Fire" the cannon and see if it hits. If the actualShot is within chance, then it's a hit.
                   var actualShot = Math.random();
                   if (actualShot < chanceOfHit) {
                     var hitTarget = true;
@@ -1868,7 +2013,9 @@ $(() =>{
                   // change the health values if the hits are successful
                   if (hitTarget == true) {
                     targetUnit.health -= 2;
-                    $("#battleList").append("<li>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</li>");
+                    $("#battleList").append("<li><b>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</b></li>");
+                  } else {
+                    $("#battleList").append("<li>The " + cannon.name + " failed to hit the " + targetUnit.name + ".</li>");
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
@@ -1941,7 +2088,9 @@ $(() =>{
                   // change the health values if the hits are successful
                   if (hitTarget == true) {
                     targetUnit.health -= 2;
-                    $("#battleList").append("<li>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</li>");
+                    $("#battleList").append("<li><b>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</b></li>");
+                  } else {
+                    $("#battleList").append("<li>The " + cannon.name + " failed to hit the " + targetUnit.name + ".</li>");
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
