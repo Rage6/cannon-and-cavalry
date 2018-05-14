@@ -283,7 +283,8 @@ $(() =>{
     addOneSquare(3,5,4,5,fiveByFive,7,null,false);
     addOneSquare(4,5,5,5,fiveByFive,8,null,false);
     $(".gridSquare").css('width','19%').css('height','19%');
-
+    $("#fourGrids").css('color','white').css('background-color','brown');
+    $("#fiveGrids").css('color','brown').css('background-color','white');
     totalGrids = 25;
     maxXvalue = 5;
     maxYvalue = 5;
@@ -481,7 +482,7 @@ $(() =>{
     $("#openIntro").css('display','none');
     $("#openOneName").css('display','block');
   }
-  $("#onePlayer").click(oneStart);
+  // $("#onePlayer").click(oneStart);
 
   const submitBluePlayer = () => {
     blueTeam.playerName = $("#blueLeader").val();

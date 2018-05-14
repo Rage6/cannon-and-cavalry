@@ -207,16 +207,16 @@
                 Infantry soldiers are the "foot soldiers" first thought of when discussing an army. They're skills include marching anywhere, riflemanship, and high number.
                 <table>
                   <tr>
-                    <td>Health<td>
-                    <td>10<td>
+                    <td class="glossaryCells">Health</td>
+                    <td class="glossaryCells">10</td>
                   </tr>
                   <tr>
-                    <td>Advantages<td>
-                    <td>Can move in any direction, largest unit size makes it highest health points<td>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Can move in any direction, largest unit size makes it highest health points</td>
                   </tr>
                   <tr>
-                    <td>Disadvantages<td>
-                    <td>Only move one square at a time, cannot cross water<td>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Only move one square at a time, cannot cross water</td>
                   </tr>
                 </table>
               </div>
@@ -232,16 +232,16 @@
                 Cavalry units, which are soldiers mounted on horses, are trained to strike far and fast. This makes them perfect for surprising enemies or rescuing allies.
                 <table>
                   <tr>
-                    <td>Health<td>
-                    <td>8<td>
+                    <td class="glossaryCells">Health</td>
+                    <td class="glossaryCells">8</td>
                   </tr>
                   <tr>
-                    <td>Advantages<td>
-                    <td>Move up to two grid squares, can cross water<td>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Move up to two grid squares, can cross water</td>
                   </tr>
                   <tr>
-                    <td>Disadvantages<td>
-                    <td>Cannot move diagonally, smaller unit size makes it start with lower health points<td>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Cannot move diagonally, smaller unit size makes it start with lower health points</td>
                   </tr>
                 </table>
               </div>
@@ -257,12 +257,12 @@
                 Artillery units are responsible for the cannons that can fire devastating cannon balls over long distances. This means that they can do damage before a battle even takes place.
                 <table>
                   <tr>
-                    <td>Advantages<td>
-                    <td>Can take away 2 health points from an enemy within 2 grid squares (NOTE: best chance of hitting an enemy is when the cannon faces the enemy from close distance)<td>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Can take away 2 health points from an enemy within 2 grid squares (NOTE: best chance of hitting an enemy is when the cannon faces the enemy from close distance)</td>
                   </tr>
                   <tr>
-                    <td>Disadvantages<td>
-                    <td>Cannot move diagonally, starts with smallest health points, cannot cross water<td>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Cannot move diagonally, starts with smallest health points, cannot cross water</td>
                   </tr>
                 </table>
               </div>
@@ -278,46 +278,50 @@
           Settings
         </div>
         <div class="explainBox">
-          <div>Map size: </div>
+          <div class="explainSubTitle">
+            Map size:
+          </div>
           <table>
             <tr>
-              <td id="fourGrids">
+              <td class="settingCells" id="fourGrids">
                 4 x 4
               </td>
-              <td id="fiveGrids">
+              <td class="settingCells" id="fiveGrids">
                 5 x 5
               </td>
             </tr>
           </table>
-          <div>Battle: </div>
+          <div class="explainSubTitle">
+            Battle:
+          </div>
           <ul>
             <li class="pickMap">
-              <div>
-                Battle of Gettysburg
+              <div class="mapTitle">
+                <u>Battle of Gettysburg</u>
               </div>
               <div>
                 This strategic and political turning point of the American Civil War took place in Gettysburg, Pennsylvania in 1864.
               </div>
             </li>
             <li class="pickMap">
-              <div>
-                Battle of Waterloo
+              <div class="mapTitle">
+                <u>Battle of Waterloo</u>
               </div>
               <div>
                 This famous battle from 1815 occurred in Belgium and was the definitive conclusion of the Napoleonic Wars.
               </div>
             </li>
             <li class="pickMap">
-              <div>
-                Battle of Borodino
+              <div class="mapTitle">
+                <u>Battle of Borodino</u>
               </div>
               <div>
                 At this critical phase of Napoleon's attempt to conquer Russia in 1812, this battle decided the fate of Moscow.
               </div>
             </li>
             <li class="pickMap">
-              <div>
-                Randomized Map
+              <div class="mapTitle">
+                <u>Random Battle</u>
               </div>
               <div>
                 This option will randomly generate new terrain and concealment for each grid square. Are you willing to risk it?
@@ -334,7 +338,23 @@
           About
         </div>
         <div class="explainBox">
-          test
+          <div class="explainContent">
+            <div class="explainSubTitle">
+              Welcome to the battlefield!
+            </div>
+            <div class="aboutPara">
+              <u>WHAT</u>: This game is a two-player, turn-based strategy game. What does that mean? Well, think of chess, except you can move all (or none) of your pieces during your turn. If you're familiar with other strategy video games, you have probably noticed my games similarities with things like the <i>Civilization</i> series.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/chess.jpg">
+            <div class="aboutPara">
+              <u>WHY</u>: It's main purpose was simply to practice/improve my skills and show what I am capable of so far. In addition to my Javascript "heavy lifting" (with jQuery), this was also my first practice with Sass. All of my code can be seen on my <a style="color:white" href="https://github.com/Rage6/strategy_game">GitHub profile</a>.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/web-dev-joke.jpg">
+            <div class="aboutPara">
+              <u>WHO</u>: My name is Nicholas Vogt, and I am the sole developer of "Hold Your Ground!". You can see my previous works or read my story on <a style="color:white" href="www.nicholasvogt.info">my portfolio</a>. I graduated from the United States Military Academy in 2010 and, following my medical retirement, jumped into the website developer world in 2017 after completing my training from <a style="color:white" href="https://generalassemb.ly">General Assembly</a>. For my job history, check out my <a style="color:white" href="https://www.linkedin.com/in/nvogt10/">LinkedIn profile</a>.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/nick-vogt-2.jpg">
+          </div>
         </div>
         <div class="closeButton" id="closeAbout">
           DONE
