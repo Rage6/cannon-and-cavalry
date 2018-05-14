@@ -159,17 +159,10 @@ body {
     font-size: 2rem;
     background-color: lightgreen;
     background-size: cover;
-    -webkit-width: 19%;
-    -moz-width: 19%;
-    -ms-width: 19%;
-    width: 19%;
-    -webkit-height: 19%;
-    -moz-height: 19%;
-    -ms-height: 19%;
-    height: 19%; }
+    width: 24%;
+    height: 24%; }
     body .gridSquare .topLine {
       margin: 0 20%;
-      border: 3px solid yellow;
       height: 20%; }
       body .gridSquare .topLine img {
         height: 100%; }
@@ -188,7 +181,6 @@ body {
           vertical-align: middle;
           width: 100%; }
       body .gridSquare .centerLine .centerMiddle {
-        border: 3px solid yellow;
         width: 60%;
         background-size: 100% 100%; }
         body .gridSquare .centerLine .centerMiddle .helper {
@@ -212,7 +204,6 @@ body {
           transform: rotate(180deg); }
     body .gridSquare .bottomLine {
       margin: 0 20%;
-      border: 3px solid yellow;
       height: 20%; }
       body .gridSquare .bottomLine .helper {
         display: inline-block;

@@ -259,25 +259,17 @@ $(() =>{
   // This function actually adds the 5x5 grid squares
   const addOneSquare = (pastX,pastY,newX,newY,newArray,newObject,allGridsIndex,isSplice) => {
     if (isSplice == true) {
-      console.log("past isSplice");
       allGrids.splice(allGridsIndex,0,newArray[newObject]);
-      $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
     } else {
       allGrids.push(newArray[newObject]);
-      $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
-      $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
-      $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
-    }
+    };
+    $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
   }
 
   const expandToFive = () => {
@@ -290,11 +282,12 @@ $(() =>{
     addOneSquare(2,5,3,5,fiveByFive,6,null,false);
     addOneSquare(3,5,4,5,fiveByFive,7,null,false);
     addOneSquare(4,5,5,5,fiveByFive,8,null,false);
+    $(".gridSquare").css('width','19%').css('height','19%');
+
     totalGrids = 25;
     maxXvalue = 5;
     maxYvalue = 5;
     startGrids = true;
-    console.log(allGrids);
     makeAllGrids(totalGrids);
     console.log(allGrids);
   };
@@ -959,7 +952,7 @@ $(() =>{
         howFar = 1;
         notHowFar = 2;
       };
-      if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue) {
         var targetXeast = selectedUnit.xValue + howFar;
         var notTargetXeast = selectedUnit.xValue + notHowFar;
         var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
@@ -1001,7 +994,7 @@ $(() =>{
         howFar = 1;
         notHowFar = 2;
       };
-      if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
+      if (selectedUnit.attack == true && selectedUnit.yValue < maxYvalue) {
         var targetYsouth = selectedUnit.yValue + howFar;
         var notTargetYsouth = selectedUnit.yValue + notHowFar;
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
