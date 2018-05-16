@@ -767,17 +767,19 @@ $(() =>{
 
   //This function makes the arrows show the selectedUnit's NEXT direction
   const showUnitDirection = ()=> {
-    if (selectedUnit.type == "IN") {
-      $("#northEast").css('border','1px solid black');
-      $("#southEast").css('border','1px solid black');
-      $("#southWest").css('border','1px solid black');
-      $("#northWest").css('border','1px solid black');
-    } else {
-      $("#northEast").css('border','none');
-      $("#southEast").css('border','none');
-      $("#southWest").css('border','none');
-      $("#northWest").css('border','none');
-    };
+    // if (selectedUnit.type == "IN") {
+    //   console.log("is IN");
+    //   $("#northEast").css('border','1px solid black');
+    //   $("#southEast").css('border','1px solid black');
+    //   $("#southWest").css('border','1px solid black');
+    //   $("#northWest").css('border','1px solid black');
+    // } else {
+    //   console.log("is not IN");
+    //   $("#northEast").css('background-color','black');
+    //   $("#southEast").css('border','1px solid red');
+    //   $("#southWest").css('border','none');
+    //   $("#northWest").css('border','none');
+    // };
     if (selectedUnit.direction == "north") {
       $("#north").css('background-color','grey');
       $("#east").css('background-color','white');
@@ -878,7 +880,18 @@ $(() =>{
       $("#southEast").css('background-color','white');
       $("#southWest").css('background-color','white');
       $("#northWest").css('background-color','white');
-    }
+    };
+    if (selectedUnit.type == "IN") {
+      $("#northEast").css({'border':'1px solid black','background-color':'white'});
+      $("#southEast").css({'border':'1px solid black','background-color':'white'});
+      $("#southWest").css({'border':'1px solid black','background-color':'white'});
+      $("#northWest").css({'border':'1px solid black','background-color':'white'});
+    } else {
+      $("#northEast").css('background-color','black');
+      $("#southEast").css('background-color','black');
+      $("#southWest").css('background-color','black');
+      $("#northWest").css('background-color','black');
+    };
   }
 
   // Here is the function that displays the selectedUnit's CURRENT direction
@@ -2249,6 +2262,11 @@ $(() =>{
       $("#defendButton").css('color','white').css('background-color','red');
     };
     $("#healthReading").text(selectedUnit.health);
+    if (selectedUnit.health <= 2) {
+      $("#healthReading").css('color','red');
+    } else {
+      $("#healthReading").css('color','black');
+    }
     showUnitDirection();
     if (selectedUnit.direction != selectedUnit.nextDirection) {
       showUnitNextDirection();
