@@ -565,7 +565,7 @@ $(() =>{
   const howToStop = () => {
     $("#openIntro").css('display','block');
     $("#openHowTo").css('display','none');
-    $(".openBox").css({"margin":"0 25%","width":"50%"});
+    $(".openBox").css("margin","0 10%");
   }
   $("#closeHowTo").click(howToStop);
 
@@ -584,7 +584,7 @@ $(() =>{
   const glossaryStop = () => {
     $("#openIntro").css('display','block');
     $("#openGlossary").css('display','none');
-    $(".openBox").css({"margin":"0 25%","width":"50%"});
+    $(".openBox").css("margin","0 10%");
   }
   $("#closeGlossary").click(glossaryStop);
 
@@ -599,7 +599,7 @@ $(() =>{
   const settingsStop = () => {
     $("#openIntro").css('display','block');
     $("#openSettings").css('display','none');
-    $(".openBox").css({"margin":"0 25%","width":"50%"});
+    $(".openBox").css("margin","0 10%");
   }
   $("#closeSettings").click(settingsStop);
 
@@ -618,14 +618,14 @@ $(() =>{
   const aboutStop = () => {
     $("#openIntro").css('display','block');
     $("#openAbout").css('display','none');
-    $(".openBox").css({"margin":"0 25%","width":"50%"});
+    $(".openBox").css("margin","0 10%");
   }
   $("#closeAbout").click(aboutStop);
 
   // To highlight the current player in their status box
   const showCurrentPlayer = () => {
     if (currentPlayer == blueTeam) {
-      $("#blueTitle").css("background-color","yellow");
+      $("#blueTitle").css("background-color","yellow").css("border","5px 5px 0 5px solid black");
       $("#redTitle").css("background-color","transparent");
     } else if (currentPlayer == redTeam) {
       $("#blueTitle").css("background-color","transparent");
@@ -736,7 +736,7 @@ $(() =>{
     switchMode();
     clearCavBorders();
     $('#attackButton').css('background-color','blue').css('color','white');
-    $('#defendButton').css('background-color','white').css('color','black');
+    $('#defendButton').css('background-color','transparent').css('color','black');
     console.log("Attack mode");
     console.log(selectedUnit);
   });
@@ -756,10 +756,10 @@ $(() =>{
       selectedUnit.twoSquaresS = null;
       selectedUnit.twoSquaresW = null;
     };
-    $("#north").css('background-color','white');
-    $("#east").css('background-color','white');
-    $("#south").css('background-color','white');
-    $("#west").css('background-color','white');
+    $("#north").css('background-color','transparent');
+    $("#east").css('background-color','transparent');
+    $("#south").css('background-color','transparent');
+    $("#west").css('background-color','transparent');
   }
 
   // This connects the defendButton in HTML with the selectedUnit's attack mode
@@ -767,7 +767,7 @@ $(() =>{
     selectedUnit.attack = false;
     switchMode();
     clearCavBorders();
-    $('#attackButton').css('background-color','white').css('color','black');
+    $('#attackButton').css('background-color','transparent').css('color','black');
     $('#defendButton').css('background-color','red').css('color','white');
     console.log("Defense mode");
     console.log(selectedUnit);
@@ -775,125 +775,112 @@ $(() =>{
 
   //This function makes the arrows show the selectedUnit's NEXT direction
   const showUnitDirection = ()=> {
-    // if (selectedUnit.type == "IN") {
-    //   console.log("is IN");
-    //   $("#northEast").css('border','1px solid black');
-    //   $("#southEast").css('border','1px solid black');
-    //   $("#southWest").css('border','1px solid black');
-    //   $("#northWest").css('border','1px solid black');
-    // } else {
-    //   console.log("is not IN");
-    //   $("#northEast").css('background-color','black');
-    //   $("#southEast").css('border','1px solid red');
-    //   $("#southWest").css('border','none');
-    //   $("#northWest").css('border','none');
-    // };
     if (selectedUnit.direction == "north") {
       $("#north").css('background-color','grey');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "east") {
-      $("#north").css('background-color','white');
+      $("#north").css('background-color','transparent');
       $("#east").css('background-color','grey');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "south") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
       $("#south").css('background-color','grey');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "west") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
       $("#west").css('background-color','grey');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "center") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
       $("#center").css('background-color','grey');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "northEast" && selectedUnit.type == "IN") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
       $("#northEast").css('background-color','grey');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "southEast" && selectedUnit.type == "IN") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
       $("#southEast").css('background-color','grey');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "southWest" && selectedUnit.type == "IN") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
       $("#southWest").css('background-color','grey');
-      $("#northWest").css('background-color','white');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "northWest" && selectedUnit.type == "IN") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
       $("#northWest").css('background-color','grey');
     } else {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
-      $("#northEast").css('background-color','white');
-      $("#southEast").css('background-color','white');
-      $("#southWest").css('background-color','white');
-      $("#northWest").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     };
     if (selectedUnit.type == "IN") {
-      $("#northEast").css({'border':'1px solid black','background-color':'white'});
-      $("#southEast").css({'border':'1px solid black','background-color':'white'});
-      $("#southWest").css({'border':'1px solid black','background-color':'white'});
-      $("#northWest").css({'border':'1px solid black','background-color':'white'});
+      $("#northEast").css({'border':'1px solid black','background-color':'transparent'});
+      $("#southEast").css({'border':'1px solid black','background-color':'transparent'});
+      $("#southWest").css({'border':'1px solid black','background-color':'transparent'});
+      $("#northWest").css({'border':'1px solid black','background-color':'transparent'});
     } else {
       $("#northEast").css('background-color','black');
       $("#southEast").css('background-color','black');
@@ -1270,11 +1257,12 @@ $(() =>{
     $(clearID).css("border","none");
   }
   // To choose which border color for the next potential grid
-  var targetBorder = "5px solid blue";
+  // Note: These used to switch from blue to red, but it makes it difficult to see the borders when entering the same unit with allies
+  var targetBorder = "5px solid yellow";
   const borderColor = () => {
-    targetBorder = "5px solid blue";
+    targetBorder = "5px solid yellow";
     if (currentPlayer == redTeam) {
-      targetBorder = "5px solid red";
+      targetBorder = "5px solid yellow";
     };
     return targetBorder
   };
@@ -2264,9 +2252,9 @@ $(() =>{
     $("#unitName").text(selectedUnit.fullName);
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','blue');
-      $("#defendButton").css('color','black').css('background-color','white');
+      $("#defendButton").css('color','black').css('background-color','transparent');
     } else {
-      $("#attackButton").css('color','black').css('background-color','white');
+      $("#attackButton").css('color','black').css('background-color','transparent');
       $("#defendButton").css('color','white').css('background-color','red');
     };
     $("#healthReading").text(selectedUnit.health);

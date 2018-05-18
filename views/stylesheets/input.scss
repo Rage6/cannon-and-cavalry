@@ -23,6 +23,7 @@
 body {
   margin: 0;
   font-size: 16px;
+  font-family: 'Stylish', sans-serif;
   background-image: url('images/gettysburg.jpg');
   background-size: cover;
 
@@ -38,19 +39,22 @@ body {
   }
 
   .openBox {
-    margin: 0 25%;
+    margin: 0 10%;
+    border: 2px solid white;
+    border-radius: 40px;
     position: absolute;
     top: 200px;
     z-index: 2;
     background-color: brown;
     color: white;
-    font-size: 4rem;
+    font-family: 'Stylish', sans-serif;
+    font-size: 4.7rem;
     text-align: center;
-    width: 50%;
     #openIntro {
       display: block;
       #openTitle {
-        text-decoration: underline;
+        font-family: 'Black Ops One', cursive;
+        font-size: 6rem;
       }
       .openButton {
         margin: 30px 5%;
@@ -61,13 +65,60 @@ body {
       #onePlayer {
         text-decoration: line-through;
       }
+      #onePlayer:hover {
+        background-color: white;
+        color: brown;
+      }
+      #twoPlayer {
+
+      }
+      #twoPlayer:hover {
+        background-color: white;
+        color: brown;
+      }
+      #howTo {
+
+      }
+      #howTo:hover {
+        background-color: white;
+        color: brown;
+      }
+      #glossary {
+
+      }
+      #glossary:hover {
+        background-color: white;
+        color: brown;
+      }
+      #settings {
+
+      }
+      #settings:hover {
+        background-color: white;
+        color: brown;
+      }
+      #about {
+
+      }
+      #about:hover {
+        background-color: white;
+        color: brown;
+      }
+    }
+    .submitButton {
+      margin: 40px 20%;
+      border: 8px solid white;
+      border-radius: 20px;
+      padding: 10px 0;
     }
     #openOneName {
+      border-radius: 40px;
       padding: 20px 10%;
       display: none;
       background-color: blue;
     }
     #openTwoName {
+      border-radius: 40px;
       padding: 20px 10%;
       display: none;
       background-color: red;
@@ -201,14 +252,20 @@ body {
       width: 100%;
     }
     #openClose {
+      padding: 40px 7%;
       display: none;
       #finalButtons {
+        margin-top: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         #reset {
+          border: 5px solid white;
+          border-radius: 25px;
+          padding: 10px 5%;
           color: black;
           background-color: orange;
+          width: 30%;
         }
         #quit {
           color: white;
@@ -227,14 +284,14 @@ body {
   }
 
   .blueButton {
-    margin-bottom: 10px;
+    margin: 0 5% 10px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white;
   }
 
   .redButton {
-    margin-bottom: 10px;
+    margin: 0 5% 10px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white;
@@ -248,11 +305,12 @@ body {
   // }
 
   #terrain {
-    margin: 50px auto;
+    margin: 30px auto;
     border: 2px solid black;
     border-radius: 15px;
     padding: 20px;
-    background-color: grey;
+    background-image: url('images/slate.jpg');
+    background-size: cover;
     @include divWidth(700px);
     @include divHeight(700px);
   }
@@ -281,6 +339,7 @@ body {
     height: 24%;
     .topLine {
       margin: 0 20%;
+      border-radius: 20px 20px 0 0;
       height: 20%;
       img {
         height: 100%;
@@ -291,6 +350,7 @@ body {
       display: flex;
       height: 60%;
       .centerLeft {
+        border-radius: 20px 0 0 20px;
         width: 20%;
         .helper {
           display: inline-block;
@@ -304,6 +364,7 @@ body {
         }
       }
       .centerMiddle {
+        border-radius: 25px;
         width: 60%;
         background-size: 100% 100%;
         .helper {
@@ -318,6 +379,7 @@ body {
         }
       }
       .centerRight {
+        border-radius: 0 20px 20px 0;
         width: 20%;
         .helper {
           display: inline-block;
@@ -338,6 +400,7 @@ body {
     }
     .bottomLine {
       margin: 0 20%;
+      border-radius: 0 0 20px 20px;
       height: 20%;
       .helper {
         display: inline-block;
@@ -355,9 +418,11 @@ body {
 
   // The four boxes (unit, report, team one, team two)
   #allOptions {
-    margin: 50px auto 0px auto;
+    margin: 0px auto 0px auto;
     border: 2px solid black;
-    background-color: grey;
+    border-radius: 10px;
+    background-image: url('images/slate.jpg');
+    background-size: cover;
     @include divWidth(90%);
     .turnBoxes {
       margin: 0 auto;
@@ -375,6 +440,8 @@ body {
         @include divHeight(360px);
         .title {
           margin-bottom: 20px;
+          border: solid black;
+          border-width: 3px 0 0 3px;
           display: block;
           font-size: 3rem;
           text-align: center;
@@ -383,21 +450,25 @@ body {
         // The box for selecting directions and modes
         #unitBox {
           #attackDefendBox {
+            margin-top: 25px;
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             .attackDefendButton {
-              border: 2px solid black;
-              font-size: 2.5em;
+              margin: 0 5%;
+              border: 5px solid;
+              font-size: 2.5rem;
               text-align: center;
               cursor: pointer;
               @include divWidth(45%);
             }
             #attackButton {
+              border-color: blue;
               color: black;
               background-color: none;
             }
             #defendButton {
+              border-color: red;
               color: black;
               background-color: none;
             }
@@ -412,10 +483,16 @@ body {
             flex-direction: row;
             justify-content: space-around;
             #health {
-              border: 2px solid green;
-              font-size: 2.2rem;
+              padding: 20px;
+              // border: 2px solid green;
+              font-size: 3rem;
               text-align: center;
               @include divWidth(48%);
+              #healthReading {
+                // margin: 0 10%;
+                border: 2px solid black;
+                font-size: 4rem;
+              }
             }
             #arrows {
               display: flex;
@@ -438,7 +515,6 @@ body {
               }
               #north {
                 border: 1px solid black;
-                // border-radius: 25px 25px 0 0;
               }
               #northEast {
                 border: 1px solid black;
@@ -447,7 +523,6 @@ body {
               }
               #east {
                 border: 1px solid black;
-                // border-radius: 0 25px 25px 0;
               }
               #southEast {
                 border: 1px solid black;
@@ -456,7 +531,6 @@ body {
               }
               #south {
                 border: 1px solid black;
-                // border-radius: 0 0 25px 25px;
               }
               #southWest {
                 border: 1px solid black;
@@ -465,7 +539,6 @@ body {
               }
               #west {
                 border: 1px solid black;
-                // border-radius: 25px 0 0 25px;
               }
             }
           }
@@ -514,11 +587,12 @@ body {
         }
       }
     }
-
     #ordersButton {
-      margin: 0px auto;
-      padding: 20px;
-      font-size: 2rem;
+      margin: 0px auto 20px auto;
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 5px;
+      font-size: 4rem;
       text-align: center;
       color: white;
       background-color: orange;

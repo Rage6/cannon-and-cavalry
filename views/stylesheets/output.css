@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-size: 16px;
+  font-family: 'Stylish', sans-serif;
   background-image: url("images/gettysburg.jpg");
   background-size: cover; }
   body #openPage {
@@ -13,19 +14,22 @@ body {
     height: 100%;
     width: 100%; }
   body .openBox {
-    margin: 0 25%;
+    margin: 0 10%;
+    border: 2px solid white;
+    border-radius: 40px;
     position: absolute;
     top: 200px;
     z-index: 2;
     background-color: brown;
     color: white;
-    font-size: 4rem;
-    text-align: center;
-    width: 50%; }
+    font-family: 'Stylish', sans-serif;
+    font-size: 4.7rem;
+    text-align: center; }
     body .openBox #openIntro {
       display: block; }
       body .openBox #openIntro #openTitle {
-        text-decoration: underline; }
+        font-family: 'Black Ops One', cursive;
+        font-size: 6rem; }
       body .openBox #openIntro .openButton {
         margin: 30px 5%;
         border: 5px solid white;
@@ -33,11 +37,36 @@ body {
         cursor: pointer; }
       body .openBox #openIntro #onePlayer {
         text-decoration: line-through; }
+      body .openBox #openIntro #onePlayer:hover {
+        background-color: white;
+        color: brown; }
+      body .openBox #openIntro #twoPlayer:hover {
+        background-color: white;
+        color: brown; }
+      body .openBox #openIntro #howTo:hover {
+        background-color: white;
+        color: brown; }
+      body .openBox #openIntro #glossary:hover {
+        background-color: white;
+        color: brown; }
+      body .openBox #openIntro #settings:hover {
+        background-color: white;
+        color: brown; }
+      body .openBox #openIntro #about:hover {
+        background-color: white;
+        color: brown; }
+    body .openBox .submitButton {
+      margin: 40px 20%;
+      border: 8px solid white;
+      border-radius: 20px;
+      padding: 10px 0; }
     body .openBox #openOneName {
+      border-radius: 40px;
       padding: 20px 10%;
       display: none;
       background-color: blue; }
     body .openBox #openTwoName {
+      border-radius: 40px;
       padding: 20px 10%;
       display: none;
       background-color: red; }
@@ -136,14 +165,20 @@ body {
       background-color: black;
       width: 100%; }
     body .openBox #openClose {
+      padding: 40px 7%;
       display: none; }
       body .openBox #openClose #finalButtons {
+        margin-top: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-around; }
         body .openBox #openClose #finalButtons #reset {
+          border: 5px solid white;
+          border-radius: 25px;
+          padding: 10px 5%;
           color: black;
-          background-color: orange; }
+          background-color: orange;
+          width: 30%; }
         body .openBox #openClose #finalButtons #quit {
           color: white;
           background-color: red; }
@@ -152,21 +187,22 @@ body {
   body .unitButton {
     cursor: pointer; }
   body .blueButton {
-    margin-bottom: 10px;
+    margin: 0 5% 10px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white; }
   body .redButton {
-    margin-bottom: 10px;
+    margin: 0 5% 10px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white; }
   body #terrain {
-    margin: 50px auto;
+    margin: 30px auto;
     border: 2px solid black;
     border-radius: 15px;
     padding: 20px;
-    background-color: grey;
+    background-image: url("images/slate.jpg");
+    background-size: cover;
     -webkit-width: 700px;
     -moz-width: 700px;
     -ms-width: 700px;
@@ -200,6 +236,7 @@ body {
     height: 24%; }
     body .gridSquare .topLine {
       margin: 0 20%;
+      border-radius: 20px 20px 0 0;
       height: 20%; }
       body .gridSquare .topLine img {
         height: 100%; }
@@ -208,6 +245,7 @@ body {
       display: flex;
       height: 60%; }
       body .gridSquare .centerLine .centerLeft {
+        border-radius: 20px 0 0 20px;
         width: 20%; }
         body .gridSquare .centerLine .centerLeft .helper {
           display: inline-block;
@@ -218,6 +256,7 @@ body {
           vertical-align: middle;
           width: 100%; }
       body .gridSquare .centerLine .centerMiddle {
+        border-radius: 25px;
         width: 60%;
         background-size: 100% 100%; }
         body .gridSquare .centerLine .centerMiddle .helper {
@@ -229,6 +268,7 @@ body {
           vertical-align: middle;
           width: 100%; }
       body .gridSquare .centerLine .centerRight {
+        border-radius: 0 20px 20px 0;
         width: 20%; }
         body .gridSquare .centerLine .centerRight .helper {
           display: inline-block;
@@ -241,6 +281,7 @@ body {
           transform: rotate(180deg); }
     body .gridSquare .bottomLine {
       margin: 0 20%;
+      border-radius: 0 0 20px 20px;
       height: 20%; }
       body .gridSquare .bottomLine .helper {
         display: inline-block;
@@ -251,9 +292,11 @@ body {
         vertical-align: middle;
         height: 100%; }
   body #allOptions {
-    margin: 50px auto 0px auto;
+    margin: 0px auto 0px auto;
     border: 2px solid black;
-    background-color: grey;
+    border-radius: 10px;
+    background-image: url("images/slate.jpg");
+    background-size: cover;
     -webkit-width: 90%;
     -moz-width: 90%;
     -ms-width: 90%;
@@ -281,16 +324,20 @@ body {
         height: 360px; }
         body #allOptions .turnBoxes .indivBox .title {
           margin-bottom: 20px;
+          border: solid black;
+          border-width: 3px 0 0 3px;
           display: block;
           font-size: 3rem;
           text-align: center; }
         body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
+          margin-top: 25px;
           display: flex;
           flex-direction: row;
           justify-content: space-around; }
           body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
-            border: 2px solid black;
-            font-size: 2.5em;
+            margin: 0 5%;
+            border: 5px solid;
+            font-size: 2.5rem;
             text-align: center;
             cursor: pointer;
             -webkit-width: 45%;
@@ -298,9 +345,11 @@ body {
             -ms-width: 45%;
             width: 45%; }
           body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
+            border-color: blue;
             color: black;
             background-color: none; }
           body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
+            border-color: red;
             color: black;
             background-color: none; }
         body #allOptions .turnBoxes .indivBox #unitBox #unitName {
@@ -312,13 +361,16 @@ body {
           flex-direction: row;
           justify-content: space-around; }
           body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
-            border: 2px solid green;
-            font-size: 2.2rem;
+            padding: 20px;
+            font-size: 3rem;
             text-align: center;
             -webkit-width: 48%;
             -moz-width: 48%;
             -ms-width: 48%;
             width: 48%; }
+            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+              border: 2px solid black;
+              font-size: 4rem; }
           body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
             display: flex;
             flex-wrap: wrap;
@@ -386,9 +438,11 @@ body {
               padding: 5px 0;
               height: 50px; }
     body #allOptions #ordersButton {
-      margin: 0px auto;
-      padding: 20px;
-      font-size: 2rem;
+      margin: 0px auto 20px auto;
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 5px;
+      font-size: 4rem;
       text-align: center;
       color: white;
       background-color: orange;

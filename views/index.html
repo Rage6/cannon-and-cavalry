@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Hold Your Ground!</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/output.css">
     <link rel="icon" type="image/png" href="stylesheets/images/cannon_tab.png">
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
@@ -23,7 +26,7 @@
       </div>
       <div id="openOneName">
         <p>
-          Enter your name and your country's name, and then hit enter.
+          Enter your name and your country's name, and then hit 'Submit'.
         </p>
         <div>Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
@@ -31,11 +34,11 @@
         <div>Nation:</div>
         <div class="lengthNote">(Max length: 3)</div>
         <input type="text" maxlength="3" id="blueArmy">
-        <div id="submitBlue">Submit</div>
+        <div class="submitButton" id="submitBlue">Submit</div>
       </div>
       <div id="openTwoName">
         <p>
-          Enter your name and your country's name, and then hit enter.
+          Enter your name and your country's name, and then hit 'Submit'.
         </p>
         <div>Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
@@ -43,7 +46,7 @@
         <div>Nation :</div>
         <div class="lengthNote">(Max length: 3)</div>
         <input type="text" maxlength="3" id="redArmy">
-        <div id="submitRed">Submit</div>
+        <div class="submitButton" id="submitRed">Submit</div>
       </div>
       <div id="openHowTo">
         <div class="explainTitle">
@@ -263,6 +266,27 @@
                   <tr>
                     <td class="glossaryCells">Disadvantages</td>
                     <td class="glossaryCells">Cannot move diagonally, starts with smallest health points, cannot cross water</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg glossUnit">
+                <img src="stylesheets/images/camp.png">
+              </div>
+              <div class="glossTitle">
+                Multiple Units
+              </div>
+              <div class="glossDescribe">
+                If multiple units (even if they are the same type) are in the same location and direction, then they will be represented by this flag.
+                <table>
+                  <tr>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">The more units in the same grid square, the higher the chance of controlling that grid square.</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">"Central" positions on a grid square are the only place where multiple units can stay at the same time, and "central" defenses only provide a minor advantage.</td>
                   </tr>
                 </table>
               </div>
@@ -520,9 +544,6 @@
       <div class="turnBoxes" id="unitAndRep">
         <div class="indivBox">
           <div id="unitBox">
-            <!-- <div class="title">
-              <u>Selected Unit:</u>
-            </div> -->
             <div id="attackDefendBox">
               <div class="attackDefendButton" id="attackButton">
                 ATTACK
@@ -576,7 +597,7 @@
           </div>
         </div>
         <div class="indivBox" id="repBox">
-          <div class="title">
+          <div class="title armyTitle">
             <u>Battle Report:</u>
           </div>
           <div id="completeReport">
@@ -592,7 +613,7 @@
       <div class="turnBoxes" id="teamStats">
         <div class="indivBox">
           <div id="teamOne">
-            <div class="title" id="blueTitle">
+            <div class="title armyTitle" id="blueTitle">
               <u><span id="blueStatus">Blue</span> Army:</u>
             </div>
             <div class="allUnitColumns">
@@ -631,7 +652,7 @@
         </div>
         <div class="indivBox">
           <div id="teamTwo">
-            <div class="title" id="redTitle">
+            <div class="title armyTitle" id="redTitle">
               <u><span id="redStatus">Red</span> Army:</u>
             </div>
             <div class="allUnitColumns">
