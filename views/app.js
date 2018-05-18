@@ -263,7 +263,7 @@ $(() =>{
     // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
-        name: "1-5 BN",
+        name: "1-5",
         type: "IN",
         active: true,
         health: 10,
@@ -273,10 +273,11 @@ $(() =>{
         xValue: 1,
         yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        fullName: "1st Battalion, 5th Regiment"
       },
       {
-        name: "3-5 BN",
+        name: "1-24",
         type: "IN",
         active: true,
         health: 10,
@@ -286,12 +287,13 @@ $(() =>{
         xValue: 4,
         yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        fullName: "1st Battalion, 24th Regiment"
       }
     ],
     cavalry: [
       {
-        name: "2ND RGT",
+        name: "5-1",
         type: "CAV",
         active: true,
         health: 8,
@@ -306,11 +308,12 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
+        fullName: "5th Squadron, 1st Regiment"
       }
     ],
     artillery: [
       {
-        name: "2-6 BN",
+        name: "2-6",
         type: "AR",
         active: true,
         health: 6,
@@ -321,7 +324,8 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        inPlace: true
+        inPlace: true,
+        fullName: "2nd Battalion, 8th Regiment"
       }
     ]
   };
@@ -333,7 +337,7 @@ $(() =>{
     // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
-        name: "2-5 BN",
+        name: "2-5",
         type: "IN",
         active: true,
         health: 10,
@@ -341,10 +345,11 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 1,
-        yValue: 4
+        yValue: 4,
+        fullName: "2nd Battalion, 5th Regiment"
       },
       {
-        name: "2-8 BN",
+        name: "4-8",
         type: "IN",
         active: true,
         health: 10,
@@ -352,12 +357,13 @@ $(() =>{
         direction: "center",
         nextDirection: "center",
         xValue: 4,
-        yValue: 4
+        yValue: 4,
+        fullName: "4th Battalion, 9th Regiment"
       }
     ],
     cavalry: [
       {
-        name: "3RD RGT",
+        name: "3RD",
         type: "CAV",
         active: true,
         health: 8,
@@ -370,11 +376,12 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
+        fullName: "3rd Regiment"
       }
     ],
     artillery: [
       {
-        name: "2-7 BN",
+        name: "2-7",
         type: "AR",
         active: true,
         health: 6,
@@ -383,7 +390,8 @@ $(() =>{
         nextDirection: "center",
         xValue: 3,
         yValue: 4,
-        inPlace: true
+        inPlace: true,
+        fullName: "2nd Battalion, 7th Regiment"
       }
     ]
   };
@@ -2253,7 +2261,7 @@ $(() =>{
   const selectedValues = () =>{
     // console.log("Unit: " + selectedUnit.name);
     // console.log(selectedUnit);
-    $("#unitName").text(selectedUnit.name);
+    $("#unitName").text(selectedUnit.fullName);
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','blue');
       $("#defendButton").css('color','black').css('background-color','white');

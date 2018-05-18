@@ -227,6 +227,16 @@ body {
   }
 
   .blueButton {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
+    color: white;
+  }
+
+  .redButton {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
     color: white;
   }
 
@@ -423,39 +433,39 @@ body {
               }
               #northWest {
                 border: 1px solid black;
-                border-radius: 25px 25px 0 25px;
+                border-radius: 25px 0 0 0;
                 background-color: black;
               }
               #north {
                 border: 1px solid black;
-                border-radius: 25px 25px 0 0;
+                // border-radius: 25px 25px 0 0;
               }
               #northEast {
                 border: 1px solid black;
-                border-radius: 25px 25px 25px 0;
+                border-radius: 0 25px 0 0;
                 background-color: black;
               }
               #east {
                 border: 1px solid black;
-                border-radius: 0 25px 25px 0;
+                // border-radius: 0 25px 25px 0;
               }
               #southEast {
                 border: 1px solid black;
-                border-radius: 0 25px 25px 25px;
+                border-radius: 0 0 25px 0;
                 background-color: black;
               }
               #south {
                 border: 1px solid black;
-                border-radius: 0 0 25px 25px;
+                // border-radius: 0 0 25px 25px;
               }
               #southWest {
                 border: 1px solid black;
-                border-radius: 25px 0 25px 25px;
+                border-radius: 0 0 0 25px;
                 background-color: black;
               }
               #west {
                 border: 1px solid black;
-                border-radius: 25px 0 0 25px;
+                // border-radius: 25px 0 0 25px;
               }
             }
           }
@@ -491,6 +501,7 @@ body {
             text-align: center;
             @include divWidth(30%);
             img {
+              padding: 5px 0;
               height: 50px;
             }
           }

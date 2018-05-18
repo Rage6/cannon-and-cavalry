@@ -152,6 +152,14 @@ body {
   body .unitButton {
     cursor: pointer; }
   body .blueButton {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
+    color: white; }
+  body .redButton {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
     color: white; }
   body #terrain {
     margin: 50px auto;
@@ -331,32 +339,28 @@ body {
                 width: 80%; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northWest {
               border: 1px solid black;
-              border-radius: 25px 25px 0 25px;
+              border-radius: 25px 0 0 0;
               background-color: black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
-              border: 1px solid black;
-              border-radius: 25px 25px 0 0; }
+              border: 1px solid black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northEast {
               border: 1px solid black;
-              border-radius: 25px 25px 25px 0;
+              border-radius: 0 25px 0 0;
               background-color: black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
-              border: 1px solid black;
-              border-radius: 0 25px 25px 0; }
+              border: 1px solid black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southEast {
               border: 1px solid black;
-              border-radius: 0 25px 25px 25px;
+              border-radius: 0 0 25px 0;
               background-color: black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
-              border: 1px solid black;
-              border-radius: 0 0 25px 25px; }
+              border: 1px solid black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southWest {
               border: 1px solid black;
-              border-radius: 25px 0 25px 25px;
+              border-radius: 0 0 0 25px;
               background-color: black; }
             body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
-              border: 1px solid black;
-              border-radius: 25px 0 0 25px; }
+              border: 1px solid black; }
         body #allOptions .turnBoxes .indivBox #completeReport {
           margin: 0 5%;
           border: 1px solid black;
@@ -379,6 +383,7 @@ body {
             -ms-width: 30%;
             width: 30%; }
             body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn img {
+              padding: 5px 0;
               height: 50px; }
     body #allOptions #ordersButton {
       margin: 0px auto;
