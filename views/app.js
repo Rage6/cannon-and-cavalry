@@ -22,6 +22,7 @@ $(() =>{
   var currentClickUnit = null;
   var lastClickUnit = null;
   var startClick = true;
+  var fourByFour = true;
 
   // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
@@ -396,7 +397,7 @@ $(() =>{
     ]
   };
 
-  // This is the process for picking the 5x5 grid squares
+  // This is the process for when picking the 5x5 grid squares
   const addOneSquare = (pastX,pastY,newX,newY,newArray,newObject,allGridsIndex,isSplice) => {
     if (isSplice == true) {
       allGrids.splice(allGridsIndex,0,newArray[newObject]);
@@ -433,33 +434,100 @@ $(() =>{
             $(oldCenter).css('background-color','transparent');
             $(oldCenter + " img").remove();
           };
-          blockMove == false;
+          blockMove = false;
         }
       }
     }
   };
   const expandToFive = () => {
-    addOneSquare(4,1,5,1,fiveByFive,0,4,true);
-    addOneSquare(4,2,5,2,fiveByFive,1,9,true);
-    addOneSquare(4,3,5,3,fiveByFive,2,14,true);
-    addOneSquare(4,4,5,4,fiveByFive,3,19,true);
-    addOneSquare(5,4,1,5,fiveByFive,4,null,false);
-    addOneSquare(1,5,2,5,fiveByFive,5,null,false);
-    addOneSquare(2,5,3,5,fiveByFive,6,null,false);
-    addOneSquare(3,5,4,5,fiveByFive,7,null,false);
-    addOneSquare(4,5,5,5,fiveByFive,8,null,false);
-    $(".gridSquare").css('width','19%').css('height','19%');
-    $("#fourGrids").css('color','white').css('background-color','brown');
-    $("#fiveGrids").css('color','brown').css('background-color','white');
-    totalGrids = 25;
-    maxXvalue = 5;
-    maxYvalue = 5;
-    startGrids = true;
-    moveRedSouth();
-    makeAllGrids(totalGrids);
-    console.log(allGrids);
+    if (fourByFour == true) {
+      addOneSquare(4,1,5,1,fiveByFive,0,4,true);
+      addOneSquare(4,2,5,2,fiveByFive,1,9,true);
+      addOneSquare(4,3,5,3,fiveByFive,2,14,true);
+      addOneSquare(4,4,5,4,fiveByFive,3,19,true);
+      addOneSquare(5,4,1,5,fiveByFive,4,null,false);
+      addOneSquare(1,5,2,5,fiveByFive,5,null,false);
+      addOneSquare(2,5,3,5,fiveByFive,6,null,false);
+      addOneSquare(3,5,4,5,fiveByFive,7,null,false);
+      addOneSquare(4,5,5,5,fiveByFive,8,null,false);
+      $(".gridSquare").css('width','19%').css('height','19%');
+      $("#fourGrids").css('color','white').css('background-color','brown');
+      $("#fiveGrids").css('color','brown').css('background-color','white');
+      totalGrids = 25;
+      maxXvalue = 5;
+      maxYvalue = 5;
+      startGrids = true;
+      fourByFour = false;
+      moveRedSouth(true);
+      makeAllGrids(totalGrids);
+      console.log(allGrids);
+    } else {
+      console.log("Already in 5x5 map.")
+    }
   };
   $("#fiveGrids").click(expandToFive);
+
+  // To switch back to 4x4 map
+  const removeOneSquare = (xNum,yNum,removeNum) => {
+    var removeID = "#x" + xNum + "y" + yNum;
+    $(removeID).remove();
+    allGrids.splice(removeNum,1);
+  };
+  const moveRedNorth = () => {
+    var alreadyMoved = [];
+    for (var gridNum = 0; gridNum < allGrids.length; gridNum++) {
+      var stopMove = false;
+      if (allGrids[gridNum].redPresent.length > 0) {
+        for (var delta = 0; delta < allGrids[gridNum].redPresent.length; delta++) {
+          for (var foxtrot = 0; foxtrot < alreadyMoved.length; foxtrot++) {
+            if (allGrids[gridNum].redPresent[delta].name == alreadyMoved[foxtrot]) {
+              stopMove = true;
+            }
+          };
+          if (stopMove == false) {
+            var echo = gridNum - 5;
+            allGrids[echo].redPresent.push(allGrids[gridNum].redPresent[delta]);
+            var justAdded = allGrids[echo].redPresent.length - 1;
+            allGrids[echo].redPresent[justAdded].yValue -= 1;
+            alreadyMoved.push(allGrids[echo].redPresent[justAdded].name);
+            allGrids[gridNum].redPresent.splice(0,1);
+          } else {
+            console.log("move blocked");
+          };
+          stopMove = false
+        }
+      }
+    }
+  }
+  const reduceToFour = () => {
+    if (fourByFour == false) {
+      var startEmpty = [];
+      moveRedNorth();
+      removeOneSquare(5,5,24);
+      removeOneSquare(4,5,23);
+      removeOneSquare(3,5,22);
+      removeOneSquare(2,5,21);
+      removeOneSquare(1,5,20);
+      removeOneSquare(5,4,19);
+      removeOneSquare(5,3,14);
+      removeOneSquare(5,2,9);
+      removeOneSquare(5,1,4);
+      $(".gridSquare").css('width','24%').css('height','24%');
+      $("#fourGrids").css('color','brown').css('background-color','white');
+      $("#fiveGrids").css('color','white').css('background-color','brown');
+      totalGrids = 16;
+      maxXvalue = 4;
+      maxYvalue = 4;
+      startGrids = true;
+      fourByFour = true;
+      console.log(allGrids);
+      // moveRedNorth();
+      makeAllGrids(totalGrids);
+    } else {
+      console.log("Already in 4x4");
+    }
+  }
+  $("#fourGrids").click(reduceToFour);
 
   // This will compare a single grid to a all of a team's units IOT see if any of those units should be added to the grid's bluePresent or redPresent arrays
   const ifTeamPresent = (gridNumber,oneTeam) => {
