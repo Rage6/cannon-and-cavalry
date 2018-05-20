@@ -2696,17 +2696,25 @@ $(() =>{
                 console.log("Error ")
               };
             } else if (unitType[i].direction == "center") {
+              var centerFather = gridIDcenter + ".centerMiddle";
+              var centerSon = $(centerFather).children();
+              $(centerSon).remove();
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
+                // var centerFather = gridIDcenter + ".centerMiddle";
+                // var centerSon = $(centerFather).children();
+                // $(centerSon).remove();
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (allGrids[x].bluePresent.length > 1) {
                 var arePresent = allGrids[x].bluePresent;
-              } else {
+              } else if (allGrids[x].redPresent.length > 1) {
                 var arePresent = allGrids[x].redPresent;
+              } else {
+                var arePresent = [];
               };
               var allCenter = 0;
               for (var s = 0; s < arePresent.length; s++) {
