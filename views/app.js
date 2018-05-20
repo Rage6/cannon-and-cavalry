@@ -2116,8 +2116,8 @@ $(() =>{
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
-                    var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
-                    $(removeImgHere).empty();
+                    // var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
+                    // $(removeImgHere).empty();
                     allGrids[w].redPresent.splice(0,1);
                     $("#battleList").append("<li>A barrage destroyed the " + targetUnit.name + " unit!</li>");
                     console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
@@ -2191,9 +2191,10 @@ $(() =>{
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
-                    var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
-                    $(removeImgHere).empty();
+                    // var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
+                    // $(removeImgHere).empty();
                     allGrids[w].bluePresent.splice(0,1);
+
                     $("#battleList").append("<li>That barrage destroyed the " + targetUnit.name + " unit!</li>");
                     console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
                   }
@@ -2709,7 +2710,7 @@ $(() =>{
               };
               var allCenter = 0;
               for (var s = 0; s < arePresent.length; s++) {
-                if (arePresent[s].direction == "center") {
+                if (arePresent[s].direction == "center" && arePresent[s].active == true) {
                   allCenter+=1
                 }
               };
