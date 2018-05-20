@@ -385,12 +385,12 @@ $(() =>{
         name: "2-7",
         type: "AR",
         active: true,
-        health: 6,
+        health: 2,
         attack: false,
         direction: "center",
         nextDirection: "center",
         xValue: 3,
-        yValue: 4,
+        yValue: 2,
         inPlace: true,
         fullName: "2nd Battalion, 7th Regiment"
       }
@@ -1619,7 +1619,7 @@ $(() =>{
             removeAbsentUnit();
           }
         } else {
-          reportError(selectedUnit,"cannot to leave the battlefield.");
+          reportError(selectedUnit,"cannot leave the battlefield.");
         };
       } else if (selectedUnit.attack == false) {
         var currentGrid = findCurrentGrid();
@@ -2116,8 +2116,6 @@ $(() =>{
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
-                    // var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
-                    // $(removeImgHere).empty();
                     allGrids[w].redPresent.splice(0,1);
                     $("#battleList").append("<li>A barrage destroyed the " + targetUnit.name + " unit!</li>");
                     console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
@@ -2702,9 +2700,6 @@ $(() =>{
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
-                // var centerFather = gridIDcenter + ".centerMiddle";
-                // var centerSon = $(centerFather).children();
-                // $(centerSon).remove();
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
