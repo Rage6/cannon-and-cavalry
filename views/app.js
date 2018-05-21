@@ -271,7 +271,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 1,
+        xValue: 3,
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
@@ -285,7 +285,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 4,
+        xValue: 3,
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
@@ -301,7 +301,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
+        xValue: 3,
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
@@ -345,7 +345,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 1,
+        xValue: 3,
         yValue: 4,
         fullName: "2nd Battalion, 5th Regiment"
       },
@@ -357,7 +357,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 4,
+        xValue: 3,
         yValue: 4,
         fullName: "4th Battalion, 9th Regiment"
       }
@@ -371,7 +371,7 @@ $(() =>{
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
+        xValue: 3,
         yValue: 4,
         twoSquaresN: null,
         twoSquaresE: null,
@@ -413,12 +413,13 @@ $(() =>{
     $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
   };
   const moveRedSouth = () => {
-    var beenMoved = [];
+    var beenMoved = ["test"];
     var blockMove = false;
     for (var z = 0; z < allGrids.length; z++) {
+      var gulf = 0;
       if (allGrids[z].redPresent.length > 0) {
-        // console.log("gridID: " + z);
-        for (var alpha = 0; alpha < allGrids[z].redPresent.length; alpha++) {
+        var startWith = allGrids[z].redPresent.length - 1;
+        for (var alpha = startWith; alpha >= 0; alpha-=1) {
           for (var charlie = 0; charlie < beenMoved.length; charlie++) {
             if (allGrids[z].redPresent[alpha].name == beenMoved[charlie]) {
               blockMove = true;
@@ -427,9 +428,10 @@ $(() =>{
           if (blockMove == false) {
             var destineGrid = z + 5;
             allGrids[destineGrid].redPresent.push(allGrids[z].redPresent[alpha]);
-            allGrids[destineGrid].redPresent[alpha].yValue+=1;
+            allGrids[destineGrid].redPresent[gulf].yValue+=1;
             allGrids[z].redPresent.splice(alpha,1);
-            beenMoved.push(allGrids[destineGrid].redPresent[alpha].name);
+            beenMoved.push(allGrids[destineGrid].redPresent[gulf].name);
+            gulf+=1;
             var oldCenter = "#x" + allGrids[z].xValue + "y" + allGrids[z].yValue + "_center";
             $(oldCenter).css('background-color','transparent');
             $(oldCenter + " img").remove();
@@ -2735,9 +2737,7 @@ $(() =>{
               };
             } else if (unitType[i].direction == "center") {
               var centerFather = gridIDcenter + ".centerMiddle";
-              console.log(centerFather);
               var centerSon = $(centerFather).children();
-              console.log(centerSon);
               $(centerSon).remove();
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
