@@ -385,12 +385,12 @@ $(() =>{
         name: "2-7",
         type: "AR",
         active: true,
-        health: 2,
+        health: 6,
         attack: false,
         direction: "center",
         nextDirection: "center",
         xValue: 3,
-        yValue: 2,
+        yValue: 4,
         inPlace: true,
         fullName: "2nd Battalion, 7th Regiment"
       }
@@ -2040,7 +2040,7 @@ $(() =>{
     collectTargets.push(twoLeft);
   }
 
-  const fireCannons = (theTeam) => {
+  const fireCannons = (theTeam,isOpposite) => {
     for (var v = 0; v < theTeam.artillery.length; v++) {
       var cannon = theTeam.artillery[v];
       if (cannon.inPlace == true && cannon.active == true) {
@@ -2050,6 +2050,7 @@ $(() =>{
           for (var y = 0; y < allTargets.length; y++) {
             if (allGrids[w].xValue == allTargets[y][0] && allGrids[w].yValue == allTargets[y][1]) {
               if (theTeam == blueTeam) {
+                var theOtherTeam = redTeam;
                 if (allGrids[w].redPresent.length > 0) {
                   var chanceOfHit = 0;
                   var targetUnit = allGrids[w].redPresent[0];
@@ -2114,15 +2115,36 @@ $(() =>{
                   } else {
                     $("#battleList").append("<li>The " + cannon.name + " failed to hit the " + targetUnit.name + ".</li>");
                   };
+                  // reports any hits on the battle reports
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
                     allGrids[w].redPresent.splice(0,1);
                     $("#battleList").append("<li>A barrage destroyed the " + targetUnit.name + " unit!</li>");
-                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
-                  }
-                  // report any hits on the battle reports
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!");
+                    if (isOpposite == false) {
+                      var unitImg = "#x" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction + ".centerMiddle";
+                      $(unitImg).css('background-color','transparent');
+                      var unitImgSon = $(unitImg).children();
+                      $(unitImgSon).remove();
+                      if (allGrids[w].redPresent.length == 1) {
+                        $(unitImg).css('background-color','red');
+                        if (allGrids[w].redPresent[0].type == "IN") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
+                        } else if (allGrids[w].redPresent[0].type == "CAV") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
+                        } else if (allGrids[w].redPresent[0].type == "AR") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
+                        };
+                      } else if (allGrids[w].redPresent.length > 1) {
+                        $(unitImg).css('background-color','red');
+                        $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/camp.png'>");
+                      };
+                    };
+                  };
+                  // reports any hits on the battle reports
                 }
               } else {
+                var theOtherTeam = blueTeam;
                 if (allGrids[w].bluePresent.length > 0) {
                   var chanceOfHit = 0;
                   var targetUnit = allGrids[w].bluePresent[0];
@@ -2189,12 +2211,28 @@ $(() =>{
                   };
                   if (targetUnit.health <= 0) {
                     targetUnit.active = false;
-                    // var removeImgHere = "#" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction;
-                    // $(removeImgHere).empty();
                     allGrids[w].bluePresent.splice(0,1);
-
                     $("#battleList").append("<li>That barrage destroyed the " + targetUnit.name + " unit!</li>");
-                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!")
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!");
+                    if (isOpposite == false) {
+                      var unitImg = "#x" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction + ".centerMiddle";
+                      $(unitImg).css('background-color','transparent');
+                      var unitImgSon = $(unitImg).children();
+                      $(unitImgSon).remove();
+                      if (allGrids[w].bluePresent.length == 1) {
+                        $(unitImg).css('background-color','blue');
+                        if (allGrids[w].bluePresent[0].type == "IN") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
+                        } else if (allGrids[w].bluePresent[0].type == "CAV") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
+                        } else if (allGrids[w].bluePresent[0].type == "AR") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
+                        };
+                      } else if (allGrids[w].bluePresent.length > 1) {
+                        $(unitImg).css('background-color','blue');
+                        $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/camp.png'>");
+                      };
+                    };
                   }
                   // report any hits on the battle reports
                 }
@@ -2226,8 +2264,10 @@ $(() =>{
       selectedUnit = selectedArtillery[i];
       issueOneOrder(ordersDone);
     };
-    fireCannons(oppositePlayer);
-    fireCannons(currentPlayer);
+    fireCannons(oppositePlayer,true);
+    console.log("first fireCannons done");
+    fireCannons(currentPlayer,false);
+    console.log("second fireCannons done");
     battleOccur = false;
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
@@ -2695,7 +2735,9 @@ $(() =>{
               };
             } else if (unitType[i].direction == "center") {
               var centerFather = gridIDcenter + ".centerMiddle";
+              console.log(centerFather);
               var centerSon = $(centerFather).children();
+              console.log(centerSon);
               $(centerSon).remove();
               if (unitType[i].type == "IN") {
                 $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
