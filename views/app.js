@@ -1637,7 +1637,7 @@ $(() =>{
         const typeUnitsActive = (type) => {
           for (var m = 0; m < type.length; m++) {
             if (type[m].active == true) {
-              return activeUnits.push(type[m]);
+              activeUnits.push(type[m]);
             }
           }
         };
