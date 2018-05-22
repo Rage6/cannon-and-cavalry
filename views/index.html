@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Hold Your Ground!</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/output.css">
     <link rel="icon" type="image/png" href="stylesheets/images/cannon_tab.png">
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
@@ -17,12 +20,13 @@
         <div class="openButton" id="onePlayer">One Player</div>
         <div class="openButton" id="twoPlayer">Two Player</div>
         <div class="openButton" id="howTo">How To Play</div>
-        <div class="openButton" id="rules">Rules</div>
+        <div class="openButton" id="glossary">Glossary</div>
+        <div class="openButton" id="settings">Settings</div>
         <div class="openButton" id="about">About</div>
       </div>
       <div id="openOneName">
         <p>
-          Enter your name and your army's name, and then hit enter.
+          Enter your name and your country's name, and then hit 'Submit'.
         </p>
         <div>Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
@@ -30,11 +34,11 @@
         <div>Nation:</div>
         <div class="lengthNote">(Max length: 3)</div>
         <input type="text" maxlength="3" id="blueArmy">
-        <div id="submitBlue">Submit</div>
+        <div class="submitButton" id="submitBlue">Submit</div>
       </div>
       <div id="openTwoName">
         <p>
-          Enter your name and your army's name, and then hit enter.
+          Enter your name and your country's name, and then hit 'Submit'.
         </p>
         <div>Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
@@ -42,7 +46,343 @@
         <div>Nation :</div>
         <div class="lengthNote">(Max length: 3)</div>
         <input type="text" maxlength="3" id="redArmy">
-        <div id="submitRed">Submit</div>
+        <div class="submitButton" id="submitRed">Submit</div>
+      </div>
+      <div id="openHowTo">
+        <div class="explainTitle">
+          How To Play
+        </div>
+        <div class="explainBox">
+          <ol type="A">
+            <li>Overview</li>
+            <li>Rules</li>
+            <li>Setting Up</li>
+            <li>How A Turn Works</li>
+          </ol>
+          <div class="explainSubTitle">
+            A. OVERVIEW
+          </div>
+          <div class="explainContent">
+            "Hold Your Ground!" is a turn-based war game that will test your tactics and strategies. In addition to your oppenent's abilities, you will also be by the battlefield's tough terrain and your own troops' strengths/weaknesses. If this is your first time playing, you are encouraged to read to below instructions and the <b><span id="seeGlossary">"<u>Glossary</u>"</span></b> for details.
+          </div>
+          <div class="explainSubTitle">
+            B. RULES
+          </div>
+          <div class="explainContent">
+             Consider the following rules when trying to make your next move:
+             <ul>
+               <li>The winner is the team that is the only one with units still left on the battlefield.</li>
+               <li>No unit can cross the outer boundaries of the map.</li>
+               <li>No unit can position itself in a water-filled grid square...</li>
+               <li>...HOWEVER, a cavalry unit (CAV) can cross one <i>as long as the next grid square is NOT filled with water</i>.</li>
+               <li>Multiple units from the same team can be in one grid square's "center" area, but...</li>
+               <li>...there CANNOT be multiple units on the same edge (ex. southern edge) on the same grid square.</li>
+               <li>Battles take place when two or more units of opposite teams are on the same grid square.</li>
+             </ul>
+          </div>
+          <div class="explainSubTitle">
+            B. SETTING UP
+          </div>
+          <div class="explainContent">
+             Select whether you wish to play against <span style="text-decoration:line-through">the computer ("One Player") or</span> a friend ("Two Player") on the same device.Upon selecting the number of players, each one must enter their character's name (no more than 15 letters) and their army's nationality (no more than three letters). Unsure how to abbreviate your nation's name? Try <a style="color:white;cursor:pointer" href="https://www.worldatlas.com/aatlas/ctycodes.htm">this website</a>. The nation's name will appear in the box containing it's military units.
+          </div>
+          <div class="explainSubTitle">
+            C. HOW A TURN WORKS
+          </div>
+          <div class="explainContent">
+            The first player (the blue team) will begin their first turn. The name of the current player's army will always be highlighted in yellow. A turn will usually go something like this:
+            <ol>
+              <li>
+                The player clicks a unit in their lists of units. The unit's symbol on the map is then outlined, and it's status (name, direction, etc.) are displayed in the "Selected Unit" box. It's current direction is highlighted by grey and the direction of its next move will be highlighted in yellow. If the unit is not facing a specific direction, then it is said to in a "central" direction.
+              </li>
+              <li>
+                Based on the player's plan, he/she will either move (aka "ATTACK") their unit into a new grid square or stay in (aka "DEFEND") their current one. If ATTACKing, that unit will automatically hold a "central", defensive position in that new grid square. A unit's next direction is selected by clicking the appropriate arrow (or the circle for the "central" direction). If the unit is DEFENDing, then it can defend their location in any direction (north, east, south, west, or central). If attacking, an outline will form around the grid square will the unit will end up. These changes are called a unit's  "order". If a unit is given no new orders, then it will simply defend its current location in its current direction.
+              </li>
+              <li>
+                Now you have "issued" all of your orders to the correct units, but those units still need to actually "carry them out". To do that, simply click the "GIVE ORDERS" button at the bottom. The "Battle Report" box will then display a) the orders that you entered, b) if your units were actually able to give those orders, and c) the outcomes of any battles that took place.
+              </li>
+              <li>
+                A battle only takes place if at least one unit from each team are in the same grid square. During a battle, attackers and defenders will attack/counter-attack their opponents multiple times until all of one team's units in the battle defeated. To help understand the events that are happening in the background during a battle, see the <b><span id="seeAbout">"<u>About</u>"</span></b> page.
+              </li>
+              <li>
+                With all of your orders issued and any battles completed, it is now the other players turn. This will be demonstrated by the way that their army's name is now highlighted in yellow.
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="closeButton" id="closeHowTo">
+          DONE
+        </div>
+      </div>
+      <div id="openGlossary">
+        <div class="explainTitle">
+          Glossary
+        </div>
+        <div class="explainBox">
+          <div class="explainSubTitle">
+            Terrain
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/pond_noBackground.png">
+              </div>
+              <div class="glossTitle">
+                Swamps and Rivers
+              </div>
+              <div class="glossDescribe">
+                These large bodies of water are impossible for any unit to defend, and for obvious reasons. In addition to the risk of soldiers drowning, immersing equipment (rifles, gunpowder, etc.) into water quickly makes it utterly useless. Even CAV units, which can cross water using their horses, cannot stay in it very long.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/forest.png">
+              </div>
+              <div class="glossTitle">
+                Forests
+              </div>
+              <div class="glossDescribe">
+                Trees and forests can give good protection to anyone trying to defend their location. During a battle, all defending units in woods increase their chance by 20pts.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg">
+                <img src="stylesheets/images/hill_noBackground.png">
+              </div>
+              <div class="glossTitle">
+                Hills
+              </div>
+              <div class="glossDescribe">
+                The strongest defensive position during a battle is the high grounds. Besides the exhaustion of charging uphill (both for soldiers and horses), cannons are limited on what they can hit on a hill. This is why every defender on a hill increases their chance by 60pts.
+              </div>
+            </div>
+          </div>
+          <div class="explainSubTitle">
+            Cover
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg" id="thickConceal">
+
+              </div>
+              <div class="glossTitle">
+                Thick Concealment
+              </div>
+              <div class="glossDescribe">
+                Cover may not block bullets or <a style="color: white" href="https://en.wikipedia.org/wiki/Grapeshot">"grapeshot"</a>, but it sure can confuse it. This is why concealment (e.g. heave leaves) can indirectly protect a defending unit, thereby increases a defending unit's chance by 40pts during a battle.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg" id="someConceal">
+
+              </div>
+              <div class="glossTitle">
+                Some Concealment
+              </div>
+              <div class="glossDescribe">
+                Concealment matters, even if it can't block bullets. This color indicates that units defending this location are partially concealed when an enemy attacks them, which increases the defenders chance by 20pts.
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg" id="noConceal">
+
+              </div>
+              <div class="glossTitle">
+                No Concealment
+              </div>
+              <div class="glossDescribe">
+                A battle that takes place on a wide open battlefield is in the attacker's favor. This is why the defender has lost one of their major advantages: concealment. For this reason, this factor increases the attacker's chance for victory by 30pts.
+              </div>
+            </div>
+          </div>
+          <div class="explainSubTitle">
+            Unit Types
+          </div>
+          <div class="explainContent">
+            <div class="glossBox">
+              <div class="glossImg glossUnit">
+                <img src="stylesheets/images/infantry_top_bottom.png">
+              </div>
+              <div class="glossTitle">
+                Infantry
+              </div>
+              <div class="glossDescribe">
+                Infantry soldiers are the "foot soldiers" first thought of when discussing an army. They're skills include marching anywhere, riflemanship, and high number.
+                <table>
+                  <tr>
+                    <td class="glossaryCells">Health</td>
+                    <td class="glossaryCells">10</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Can move in any direction, largest unit size makes it highest health points</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Only move one square at a time, cannot cross water</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg glossUnit">
+                <img src="stylesheets/images/cavalry_top_bottom.png">
+              </div>
+              <div class="glossTitle">
+                Cavalry
+              </div>
+              <div class="glossDescribe">
+                Cavalry units, which are soldiers mounted on horses, are trained to strike far and fast. This makes them perfect for surprising enemies or rescuing allies.
+                <table>
+                  <tr>
+                    <td class="glossaryCells">Health</td>
+                    <td class="glossaryCells">8</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Move up to two grid squares, can cross water</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Cannot move diagonally, smaller unit size makes it start with lower health points</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg glossUnit">
+                <img src="stylesheets/images/cannon_top_bottom.png">
+              </div>
+              <div class="glossTitle">
+                Artillery
+              </div>
+              <div class="glossDescribe">
+                Artillery units are responsible for the cannons that can fire devastating cannon balls over long distances. This means that they can do damage before a battle even takes place.
+                <table>
+                  <tr>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">Can take away 2 health points from an enemy within 2 grid squares (NOTE: best chance of hitting an enemy is when the cannon faces the enemy from close distance)</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">Cannot move diagonally, starts with smallest health points, cannot cross water</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="glossBox">
+              <div class="glossImg glossUnit">
+                <img src="stylesheets/images/camp.png">
+              </div>
+              <div class="glossTitle">
+                Multiple Units
+              </div>
+              <div class="glossDescribe">
+                If multiple units (even if they are the same type) are in the same location and direction, then they will be represented by this flag.
+                <table>
+                  <tr>
+                    <td class="glossaryCells">Advantages</td>
+                    <td class="glossaryCells">The more units in the same grid square, the higher the chance of controlling that grid square.</td>
+                  </tr>
+                  <tr>
+                    <td class="glossaryCells">Disadvantages</td>
+                    <td class="glossaryCells">"Central" positions on a grid square are the only place where multiple units can stay at the same time, and "central" defenses only provide a minor advantage.</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="closeButton" id="closeGlossary">
+          DONE
+        </div>
+      </div>
+      <div id="openSettings">
+        <div class="explainTitle">
+          Settings
+        </div>
+        <div class="explainBox">
+          <div class="explainSubTitle">
+            Map size:
+          </div>
+          <table>
+            <tr>
+              <td class="settingCells" id="fourGrids">
+                4 x 4
+              </td>
+              <td class="settingCells" id="fiveGrids">
+                5 x 5
+              </td>
+            </tr>
+          </table>
+          <div class="explainSubTitle">
+            Battle:
+          </div>
+          <ul>
+            <li class="pickMap">
+              <div class="mapTitle">
+                <u>Battle of Gettysburg</u>
+              </div>
+              <div>
+                This strategic and political turning point of the American Civil War took place in Gettysburg, Pennsylvania in 1864.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div class="mapTitle">
+                <u>Battle of Waterloo</u>
+              </div>
+              <div>
+                This famous battle from 1815 occurred in Belgium and was the definitive conclusion of the Napoleonic Wars.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div class="mapTitle">
+                <u>Battle of Borodino</u>
+              </div>
+              <div>
+                At this critical phase of Napoleon's attempt to conquer Russia in 1812, this battle decided the fate of Moscow.
+              </div>
+            </li>
+            <li class="pickMap">
+              <div class="mapTitle">
+                <u>Random Battle</u>
+              </div>
+              <div>
+                This option will randomly generate new terrain and concealment for each grid square. Are you willing to risk it?
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="closeButton" id="closeSettings">
+          DONE
+        </div>
+      </div>
+      <div id="openAbout">
+        <div class="explainTitle">
+          About
+        </div>
+        <div class="explainBox">
+          <div class="explainContent">
+            <div class="explainSubTitle">
+              Welcome to the battlefield!
+            </div>
+            <div class="aboutPara">
+              <u>WHAT</u>: This game is a two-player, turn-based strategy game. What does that mean? Well, think of chess, except you can move all (or none) of your pieces during your turn. If you're familiar with other strategy video games, you have probably noticed my games similarities with things like the <i>Civilization</i> series.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/chess.jpg">
+            <div class="aboutPara">
+              <u>WHY</u>: It's main purpose was simply to practice/improve my skills and show what I am capable of so far. In addition to my Javascript "heavy lifting" (with jQuery), this was also my first practice with Sass. All of my code can be seen on my <a style="color:white" href="https://github.com/Rage6/strategy_game">GitHub profile</a>.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/web-dev-joke.jpg">
+            <div class="aboutPara">
+              <u>WHO</u>: My name is Nicholas Vogt, and I am the sole developer of "Hold Your Ground!". You can see my previous works or read my story on <a style="color:white" href="www.nicholasvogt.info">my portfolio</a>. I graduated from the United States Military Academy in 2010 and, following my medical retirement, jumped into the website developer world in 2017 after completing my training from <a style="color:white" href="https://generalassemb.ly">General Assembly</a>. For my job history, check out my <a style="color:white" href="https://www.linkedin.com/in/nvogt10/">LinkedIn profile</a>.
+            </div>
+            <img class="aboutImg" src="stylesheets/images/nick-vogt-2.jpg">
+          </div>
+        </div>
+        <div class="closeButton" id="closeAbout">
+          DONE
+        </div>
       </div>
       <div id="openClose">
         Congratulations, <span id="winName"></span>! The <span id="winArmy"></span> army has taken the field and defeated the enemy! VICTORY IS YOURS!
@@ -204,9 +544,6 @@
       <div class="turnBoxes" id="unitAndRep">
         <div class="indivBox">
           <div id="unitBox">
-            <div class="title">
-              <u>Selected Unit:</u>
-            </div>
             <div id="attackDefendBox">
               <div class="attackDefendButton" id="attackButton">
                 ATTACK
@@ -228,14 +565,14 @@
                 </div>
               </div>
               <div id="arrows">
-                <div class="arrowBox">
-
+                <div class="arrowBox" id="northWest">
+                  <img src="stylesheets/images/northWest.png" alt="NW">
                 </div>
                 <div class="arrowBox unitButton" id="north">
                   <img src="stylesheets/images/arrow-up.png" alt="N">
                 </div>
-                <div class="arrowBox">
-
+                <div class="arrowBox" id="northEast">
+                  <img src="stylesheets/images/northEast.png" alt="NE">
                 </div>
                 <div class="arrowBox unitButton" id="west">
                   <img src="stylesheets/images/arrow-left.png" alt="W">
@@ -246,21 +583,21 @@
                 <div class="arrowBox unitButton" id="east">
                   <img src="stylesheets/images/arrow-right.png" alt="E">
                 </div>
-                <div class="arrowBox">
-
+                <div class="arrowBox" id="southWest">
+                  <img src="stylesheets/images/southWest.png" alt="SW">
                 </div>
                 <div class="arrowBox unitButton" id="south">
                   <img src="stylesheets/images/arrow-down.png" alt="S">
                 </div>
-                <div class="arrowBox">
-
+                <div class="arrowBox" id="southEast">
+                  <img src="stylesheets/images/southEast.png" alt="SE">
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="indivBox" id="repBox">
-          <div class="title">
+          <div class="title armyTitle">
             <u>Battle Report:</u>
           </div>
           <div id="completeReport">
@@ -276,12 +613,14 @@
       <div class="turnBoxes" id="teamStats">
         <div class="indivBox">
           <div id="teamOne">
-            <div class="title" id="blueTitle">
+            <div class="title armyTitle" id="blueTitle">
               <u><span id="blueStatus">Blue</span> Army:</u>
             </div>
             <div class="allUnitColumns">
               <div class="unitColumn">
-                <div>IN</div>
+                <div>
+                  <img style="background-color:blue" src="stylesheets/images/infantry_top_bottom.png">
+                </div>
                 <div class="unitButton blueButton" id="blueIn0"></div>
                 <div class="unitButton blueButton" id="blueIn1"></div>
                 <div class="unitButton blueButton" id="blueIn2"></div>
@@ -289,7 +628,9 @@
                 <div class="unitButton blueButton" id="blueIn4"></div>
               </div>
               <div class="unitColumn">
-                <div>AR</div>
+                <div>
+                  <img style="background-color:blue" src="stylesheets/images/cannon_top_bottom.png">
+                </div>
                 <div class="unitButton blueButton" id="blueAr0"></div>
                 <div class="unitButton blueButton" id="blueAr1"></div>
                 <div class="unitButton blueButton" id="blueAr2"></div>
@@ -297,7 +638,9 @@
                 <div class="unitButton blueButton" id="blueAr4"></div>
               </div>
               <div class="unitColumn">
-                <div>CAV</div>
+                <div>
+                  <img style="background-color:blue" src="stylesheets/images/cavalry_top_bottom.png">
+                </div>
                 <div class="unitButton blueButton" id="blueCav0"></div>
                 <div class="unitButton blueButton" id="blueCav1"></div>
                 <div class="unitButton blueButton" id="blueCav2"></div>
@@ -309,40 +652,46 @@
         </div>
         <div class="indivBox">
           <div id="teamTwo">
-            <div class="title" id="redTitle">
+            <div class="title armyTitle" id="redTitle">
               <u><span id="redStatus">Red</span> Army:</u>
             </div>
             <div class="allUnitColumns">
               <div class="unitColumn">
-                <div>IN</div>
-                <div class="unitButton" id="redIn0"></div>
-                <div class="unitButton" id="redIn1"></div>
-                <div class="unitButton" id="redIn2"></div>
-                <div class="unitButton" id="redIn3"></div>
-                <div class="unitButton" id="redIn4"></div>
+                <div>
+                  <img style="background-color:red" src="stylesheets/images/infantry_top_bottom.png">
+                </div>
+                <div class="unitButton redButton" id="redIn0"></div>
+                <div class="unitButton redButton" id="redIn1"></div>
+                <div class="unitButton redButton" id="redIn2"></div>
+                <div class="unitButton redButton" id="redIn3"></div>
+                <div class="unitButton redButton" id="redIn4"></div>
               </div>
               <div class="unitColumn">
-                <div>AR</div>
-                <div class="unitButton" id="redAr0"></div>
-                <div class="unitButton" id="redAr1"></div>
-                <div class="unitButton" id="redAr2"></div>
-                <div class="unitButton" id="redAr3"></div>
-                <div class="unitButton" id="redAr4"></div>
+                <div>
+                  <img style="background-color:red" src="stylesheets/images/cannon_top_bottom.png">
+                </div>
+                <div class="unitButton redButton" id="redAr0"></div>
+                <div class="unitButton redButton" id="redAr1"></div>
+                <div class="unitButton redButton" id="redAr2"></div>
+                <div class="unitButton redButton" id="redAr3"></div>
+                <div class="unitButton redButton" id="redAr4"></div>
               </div>
               <div class="unitColumn">
-                <div>CAV</div>
-                <div class="unitButton" id="redCav0"></div>
-                <div class="unitButton" id="redCav1"></div>
-                <div class="unitButton" id="redCav2"></div>
-                <div class="unitButton" id="redCav3"></div>
-                <div class="unitButton" id="redCav4"></div>
+                <div>
+                  <img style="background-color:red" src="stylesheets/images/cavalry_top_bottom.png">
+                </div>
+                <div class="unitButton redButton" id="redCav0"></div>
+                <div class="unitButton redButton" id="redCav1"></div>
+                <div class="unitButton redButton" id="redCav2"></div>
+                <div class="unitButton redButton" id="redCav3"></div>
+                <div class="unitButton redButton" id="redCav4"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="unitButton" id="ordersButton">
-        Carry out my orders
+        GIVE ORDERS
       </div>
     </div>
   </body>

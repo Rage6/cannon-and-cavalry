@@ -22,308 +22,581 @@
 
 body {
   margin: 0;
-  background-color: green;
-  // background-size: cover;
-}
+  font-size: 16px;
+  font-family: 'Stylish', sans-serif;
+  background-image: url('images/gettysburg.jpg');
+  background-size: cover;
 
-#openPage {
-  margin: 0;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  background-color: black;
-  opacity: 0.5;
-  height: 100%;
-  width: 100%;
-}
-
-.openBox {
-  margin: 0 25%;
-  position: absolute;
-  top: 200px;
-  z-index: 2;
-  background-color: brown;
-  color: white;
-  font-size: 4em;
-  text-align: center;
-  width: 50%;
-  #openIntro {
-    display: block;
-    #openTitle {
-      text-decoration: underline;
-    }
-    .openButton {
-      margin: 30px 5%;
-      border: 5px solid white;
-      border-radius: 25px;
-      cursor: pointer;
-    }
-  }
-  #openOneName {
-    padding: 20px 10%;
-    display: none;
-    background-color: blue;
-  }
-  #openTwoName {
-    padding: 20px 10%;
-    display: none;
-    background-color: red;
-  }
-  input {
-    font-size: 1.5em;
-    color: white;
+  #openPage {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    z-index: 1;
     background-color: black;
+    opacity: 0.5;
+    height: 100%;
     width: 100%;
   }
-  #openClose {
-    display: none;
-    #finalButtons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      #reset {
-        color: black;
-        background-color: orange;
+
+  .openBox {
+    margin: 0 10%;
+    border: 2px solid white;
+    border-radius: 40px;
+    position: absolute;
+    top: 200px;
+    z-index: 2;
+    background-color: brown;
+    color: white;
+    font-family: 'Stylish', sans-serif;
+    font-size: 4.7rem;
+    text-align: center;
+    #openIntro {
+      display: block;
+      #openTitle {
+        font-family: 'Black Ops One', cursive;
+        font-size: 6rem;
       }
-      #quit {
-        color: white;
-        background-color: red;
+      .openButton {
+        margin: 30px 5%;
+        border: 5px solid white;
+        border-radius: 25px;
+        cursor: pointer;
       }
-    }
-  }
-}
+      #onePlayer {
+        text-decoration: line-through;
+      }
+      #onePlayer:hover {
+        background-color: white;
+        color: brown;
+      }
+      #twoPlayer {
 
-div.title {
-  text-align: center;
-}
+      }
+      #twoPlayer:hover {
+        background-color: white;
+        color: brown;
+      }
+      #howTo {
 
-.unitButton {
-  cursor: pointer;
-}
+      }
+      #howTo:hover {
+        background-color: white;
+        color: brown;
+      }
+      #glossary {
 
-.blueButton {
-  color: white;
-}
+      }
+      #glossary:hover {
+        background-color: white;
+        color: brown;
+      }
+      #settings {
 
-#mainTitle {
-  margin: 20px 10% 40px 10%;
-  font-size: 4.5em;
-  background-color: lightgrey;
-  @include divWidth(80%);
-}
+      }
+      #settings:hover {
+        background-color: white;
+        color: brown;
+      }
+      #about {
 
-#terrain {
-  margin: 50px auto;
-  padding: 20px;
-  background-color: grey;
-  @include divWidth(700px);
-  @include divHeight(700px);
-}
-
-#ground {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: space-around;
-  background-color: black;
-  @include divWidth(100%);
-  @include divHeight(100%);
-}
-
-// The set-up of a grid square
-.gridSquare {
-  margin: auto;
-  border: solid black 1px;
-  text-align: center;
-  font-size: 2em;
-  background-color: lightgreen;
-  background-size: cover;
-  @include divWidth(24%);
-  @include divHeight(24%);
-  .topLine {
-    margin: 0 20%;
-    // border: 1px solid red;
-    height: 20%;
-    img {
-      max-height: 100%;
-      max-width: auto;
-    }
-  }
-  .centerLine {
-    margin: 0;
-    // border: 1px solid blue;
-    display: flex;
-    height: 60%;
-    .centerLeft {
-      width: 20%;
-      img {
-        max-height: auto;
-        width: 100%;
-        transform: rotate(-90deg);
+      }
+      #about:hover {
+        background-color: white;
+        color: brown;
       }
     }
-    .centerMiddle {
-      // border: 1px solid red;
-      width: 60%;
-      background-size: 100% 100%;
+    .submitButton {
+      margin: 40px 20%;
+      border: 8px solid white;
+      border-radius: 20px;
+      padding: 10px 0;
     }
-    .centerRight {
-      width: 20%;
-      img {
-        max-height: auto;
-        width: 100%;
-        transform: rotate(90deg);
-      }
+    #openOneName {
+      border-radius: 40px;
+      padding: 20px 10%;
+      display: none;
+      background-color: blue;
     }
-  }
-  .bottomLine {
-    margin: 0 20%;
-    height: 20%;
-    img {
-      max-height: auto;
-      max-width: 100%;
-      transform: rotate(180deg);
+    #openTwoName {
+      border-radius: 40px;
+      padding: 20px 10%;
+      display: none;
+      background-color: red;
     }
-  }
-}
-
-// The four boxes (unit, report, team one, team two)
-#allOptions {
-  margin: 50px auto 0px auto;
-  background-color: grey;
-  @include divWidth(90%);
-  .turnBoxes {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    @include divWidth(90%);
-    .indivBox {
-      margin: 20px 0;
+    #openHowTo {
+      padding: 20px 10%;
+      display: none;
+    }
+    #openGlossary {
+      padding: 20px 10%;
+      display: none;
+    }
+    #openSettings {
+      padding: 20px 10%;
+      display: none;
+    }
+    #openAbout {
+      padding: 20px 10%;
+      display: none;
+    }
+    .closeButton {
+      margin: 40px 0;
+      border-radius: 25px;
       background-color: white;
-      @include divWidth(48%);
-      @include divHeight(360px);
-      .title {
-        margin-bottom: 20px;
-        display: block;
-        font-size: 3em;
+      color: brown;
+    }
+    .explainTitle {
+      margin: 30px 0;
+      text-decoration: underline;
+    }
+    .explainBox {
+      border: 1px solid yellow;
+      padding: 30px 5%;
+      font-size: 2.8rem;
+      text-align: left;
+      overflow-y: scroll;
+      height: 1000px;
+      .explainSubTitle {
+        margin: 10px 0 30px 0;
+        font-size: 3.2rem;
         text-align: center;
       }
-
-      // The box for selecting directions and modes
-      #unitBox {
-        #attackDefendBox {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          .attackDefendButton {
-            border: 2px solid black;
-            font-size: 2.5em;
-            text-align: center;
-            cursor: pointer;
-            @include divWidth(45%);
-          }
-          #attackButton {
-            color: black;
-            background-color: none;
-          }
-          #defendButton {
-            color: black;
-            background-color: none;
-          }
+      table {
+        margin-bottom: 70px;
+        width: 100%;
+        border-spacing: 20px;
+        .glossaryCells {
+          border: 3px solid white;
+          text-align: center;
+          padding: 10px;
         }
-        #unitName {
-          margin: 20px 0;
-          font-size: 2em;
+        .settingCells {
+          border: 3px solid white;
+          font-size: 4rem;
           text-align: center;
         }
-        #healthAndArrowBox {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          #health {
-            border: 2px solid green;
-            font-size: 2.2em;
-            text-align: center;
-            @include divWidth(48%);
-          }
-          #arrows {
-            display: flex;
-            flex-wrap: wrap;
-            @include divWidth(48%);
-            .arrowBox {
-              font-size: 2.5em;
-              text-align: center;
-              @include divWidth(30%);
-              img {
-                margin-top: 10%;
-                height: 80%;
-                width: 80%;
-              }
-            }
-            #north {
-              border: 1px solid black;
-            }
-            #east {
-              border: 1px solid black;
-            }
-            #south {
-              border: 1px solid black;
-            }
-            #west {
-              border: 1px solid black;
-            }
-          }
+        #fourGrids {
+          color: brown;
+          background-color: white;
         }
-      }
-
-      // The box where the reporst come in
-      #completeReport {
-        margin: 0 5%;
-        border: 1px solid black;
-        padding: 5%;
-        font-size: 2em;
-        height: 60%;
-        overflow: scroll;
-        .battleTitle {
-          text-align: center;
-        }
-        #orderList {
-
-        }
-        #resultList {
+        #fiveGrids {
 
         }
       }
-
-      // The boxes for selecting a player's units
-      .allUnitColumns {
+      .pickMap {
+        margin-bottom: 50px;
+        border: 2px solid white;
+        padding: 20px 5%;
+        font-size: 2.5rem;
+        .mapTitle {
+          margin-bottom: 30px;
+          text-align: center;
+          font-size: 3rem;
+        }
+      }
+      .explainContent {
+        margin-bottom: 60px;
+        ol {
+          li {
+            margin: 10px 0;
+          }
+        }
+        .glossBox {
+          .glossImg {
+            border-radius: 25px;
+            padding: 10px 0;
+            background-color: white;
+            img {
+              margin: 0 25%;
+              width: 50%;
+            }
+          }
+          #thickConceal {
+            background-color: darkgreen;
+            height: 150px;
+          }
+          #someConceal {
+            background-color: lightgreen;
+            height: 150px;
+          }
+          #noConceal {
+            background-color: orange;
+            height: 150px;
+          }
+          .glossUnit {
+            background-color: black;
+          }
+          .glossTitle {
+            margin: 15px 0 30px 0;
+            font-size: 3.5rem;
+            text-align: center;
+          }
+          .glossDescribe {
+            margin-bottom: 100px;
+            font-size: 2.8rem;
+          }
+        }
+        .aboutPara {
+          margin: 50px 0;
+          font-size: 2.7rem;
+        }
+        .aboutImg {
+          width: 100%;
+        }
+      }
+    }
+    input {
+      font-size: 4rem;
+      color: white;
+      background-color: black;
+      width: 100%;
+    }
+    #openClose {
+      padding: 40px 7%;
+      display: none;
+      #finalButtons {
+        margin-top: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        .unitColumn {
-          margin: 0;
-          font-size: 2.5em;
-          text-align: center;
-          @include divWidth(30%);
+        #reset {
+          border: 5px solid white;
+          border-radius: 25px;
+          padding: 10px 5%;
+          color: black;
+          background-color: orange;
+          width: 30%;
         }
-      }
-      #teamOne {
-        background-color: white;
-      }
-      #teamTwo {
-        background-color: white;
+        #quit {
+          color: white;
+          background-color: red;
+        }
       }
     }
   }
 
-  #ordersButton {
-    margin: 0px auto;
-    padding: 20px;
-    font-size: 30px;
+  div.title {
     text-align: center;
+  }
+
+  .unitButton {
+    cursor: pointer;
+  }
+
+  .blueButton {
+    margin: 0 5% 10px 5%;
+    border-radius: 10px;
+    font-size: 3rem;
     color: white;
-    background-color: orange;
-    width: 50%;
+  }
+
+  .redButton {
+    margin: 0 5% 10px 5%;
+    border-radius: 10px;
+    font-size: 3rem;
+    color: white;
+  }
+
+  // #mainTitle {
+  //   margin: 20px 10% 40px 10%;
+  //   font-size: 4.5em;
+  //   background-color: lightgrey;
+  //   @include divWidth(80%);
+  // }
+
+  #terrain {
+    margin: 30px auto;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    background-image: url('images/slate.jpg');
+    background-size: cover;
+    @include divWidth(700px);
+    @include divHeight(700px);
+  }
+
+  #ground {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    background-color: black;
+    @include divWidth(100%);
+    @include divHeight(100%);
+  }
+
+  // The set-up of a grid square
+  .gridSquare {
+    margin: auto;
+    border: solid black 1px;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightgreen;
+    background-size: cover;
+    // @include divWidth(24%);
+    // @include divHeight(24%);
+    width: 24%;
+    height: 24%;
+    .topLine {
+      margin: 0 20%;
+      border-radius: 20px 20px 0 0;
+      height: 20%;
+      img {
+        height: 100%;
+      }
+    }
+    .centerLine {
+      margin: 0;
+      display: flex;
+      height: 60%;
+      .centerLeft {
+        border-radius: 20px 0 0 20px;
+        width: 20%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
+        img {
+          display: inline-block;
+          vertical-align: middle;
+          width: 100%;
+        }
+      }
+      .centerMiddle {
+        border-radius: 25px;
+        width: 60%;
+        background-size: 100% 100%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
+        img {
+          display: inline-block;
+          vertical-align: middle;
+          width: 100%;
+        }
+      }
+      .centerRight {
+        border-radius: 0 20px 20px 0;
+        width: 20%;
+        .helper {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
+        img {
+          display: inline-block;
+          vertical-align: middle;
+          width: 100%;
+          transform: rotate(180deg);
+        }
+        // .textRight {
+        //   border: 1px solid red;
+        //   // transform: rotate(90%);
+        // }
+      }
+    }
+    .bottomLine {
+      margin: 0 20%;
+      border-radius: 0 0 20px 20px;
+      height: 20%;
+      .helper {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
+      img {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        // transform: rotate(180deg);
+      }
+    }
+  }
+
+  // The four boxes (unit, report, team one, team two)
+  #allOptions {
+    margin: 0px auto 0px auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-image: url('images/slate.jpg');
+    background-size: cover;
+    @include divWidth(90%);
+    .turnBoxes {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      @include divWidth(90%);
+      .indivBox {
+        margin: 20px 0;
+        // background-color: white;
+        background-image: url('images/parchment.jpg');
+        background-size: cover;
+
+        @include divWidth(48%);
+        @include divHeight(360px);
+        .title {
+          margin-bottom: 20px;
+          border: solid black;
+          border-width: 3px 0 0 3px;
+          display: block;
+          font-size: 3rem;
+          text-align: center;
+        }
+
+        // The box for selecting directions and modes
+        #unitBox {
+          #attackDefendBox {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            .attackDefendButton {
+              margin: 0 5%;
+              border: 5px solid;
+              font-size: 2.5rem;
+              text-align: center;
+              cursor: pointer;
+              @include divWidth(45%);
+            }
+            #attackButton {
+              border-color: blue;
+              color: black;
+              background-color: none;
+            }
+            #defendButton {
+              border-color: red;
+              color: black;
+              background-color: none;
+            }
+          }
+          #unitName {
+            margin: 20px 0;
+            font-size: 2rem;
+            text-align: center;
+          }
+          #healthAndArrowBox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            #health {
+              padding: 20px;
+              // border: 2px solid green;
+              font-size: 3rem;
+              text-align: center;
+              @include divWidth(48%);
+              #healthReading {
+                // margin: 0 10%;
+                border: 2px solid black;
+                font-size: 4rem;
+              }
+            }
+            #arrows {
+              display: flex;
+              flex-wrap: wrap;
+              @include divWidth(48%);
+              .arrowBox {
+                font-size: 2.5rem;
+                text-align: center;
+                @include divWidth(30%);
+                img {
+                  margin-top: 10%;
+                  height: 80%;
+                  width: 80%;
+                }
+              }
+              #northWest {
+                border: 1px solid black;
+                border-radius: 25px 0 0 0;
+                background-color: black;
+              }
+              #north {
+                border: 1px solid black;
+              }
+              #northEast {
+                border: 1px solid black;
+                border-radius: 0 25px 0 0;
+                background-color: black;
+              }
+              #east {
+                border: 1px solid black;
+              }
+              #southEast {
+                border: 1px solid black;
+                border-radius: 0 0 25px 0;
+                background-color: black;
+              }
+              #south {
+                border: 1px solid black;
+              }
+              #southWest {
+                border: 1px solid black;
+                border-radius: 0 0 0 25px;
+                background-color: black;
+              }
+              #west {
+                border: 1px solid black;
+              }
+            }
+          }
+        }
+
+        // The box where the reporst come in
+        #completeReport {
+          margin: 0 5%;
+          border: 1px solid black;
+          padding: 5%;
+          font-size: 2rem;
+          height: 60%;
+          overflow: scroll;
+          .battleTitle {
+            text-align: center;
+          }
+          #orderList {
+
+          }
+          #resultList {
+
+          }
+        }
+
+        // The boxes for selecting a player's units
+        .allUnitColumns {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          .unitColumn {
+            margin: 0;
+            font-size: 2.5rem;
+            text-align: center;
+            @include divWidth(30%);
+            img {
+              padding: 5px 0;
+              height: 50px;
+            }
+          }
+        }
+        #teamOne {
+
+        }
+        #teamTwo {
+
+        }
+      }
+    }
+    #ordersButton {
+      margin: 0px auto 20px auto;
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 5px;
+      font-size: 4rem;
+      text-align: center;
+      color: white;
+      background-color: orange;
+      width: 50%;
+    }
   }
 }

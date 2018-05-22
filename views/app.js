@@ -1,9 +1,10 @@
 $(() =>{
 
-  const totalGrids = 16;
-  const maxXvalue = 4;
-  const maxYvalue = 4;
+  var totalGrids = 16;
+  var maxXvalue = 4;
+  var maxYvalue = 4;
   const maxUnits = 5;
+  var startGrids = true;
   var errorPresent = [];
   var completedPresent = [];
   var battleReport = [];
@@ -18,8 +19,12 @@ $(() =>{
   var northHalf = Math.round(maxYvalue/2);
   var westHalf = Math.round(maxXvalue/2);
   var reportFacts = [];
+  var currentClickUnit = null;
+  var lastClickUnit = null;
+  var startClick = true;
+  var fourByFour = true;
 
-  // This array contains all of the grids and their values
+  // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
     // rowOneColumnOne
     {
@@ -167,6 +172,91 @@ $(() =>{
     }
   ]
 
+  // These grid squares and values are added for a 5x5 map.
+  const fiveByFive = [
+    // rowOneColumnFive
+    {
+      xValue: 5,
+      yValue: 1,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowTwoColumnFive
+    {
+      xValue: 5,
+      yValue: 2,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowThreeColumnFive
+    {
+      xValue: 5,
+      yValue: 3,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFourColumnFive
+    {
+      xValue: 5,
+      yValue: 4,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnOne
+    {
+      xValue: 1,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnTwo
+    {
+      xValue: 2,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnThree
+    {
+      xValue: 3,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnFour
+    {
+      xValue: 4,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+    // rowFiveColumnFive
+    {
+      xValue: 5,
+      yValue: 5,
+      terrain: null,
+      cover: null,
+      bluePresent: [],
+      redPresent: []
+    },
+  ];
+
   // Here are the starting values of the blueTeam
   const blueTeam = {
     playerName: "Player 1",
@@ -174,60 +264,69 @@ $(() =>{
     // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
-        name: "1-5 BN",
+        name: "1-5",
         type: "IN",
         active: true,
         health: 10,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 2,
+        xValue: 3,
+        yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        fullName: "1st Battalion, 5th Regiment"
       },
       {
-        name: "3-5 BN",
+        name: "1-24",
         type: "IN",
         active: true,
         health: 10,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 4,
-        yValue: 2,
+        xValue: 3,
+        yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        fullName: "1st Battalion, 24th Regiment"
       }
     ],
     cavalry: [
       {
-        name: "2ND RGT",
+        name: "5-1",
         type: "CAV",
         active: true,
         health: 8,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 2,
+        xValue: 3,
+        yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        twoSquaresN: null,
+        twoSquaresE: null,
+        twoSquaresS: null,
+        twoSquaresW: null,
+        fullName: "5th Squadron, 1st Regiment"
       }
     ],
     artillery: [
       {
-        name: "2-6 BN",
+        name: "2-6",
         type: "AR",
         active: true,
         health: 6,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 2,
+        xValue: 3,
+        yValue: 1,
         nextXvalue: null,
-        nextYvalue: null
+        nextYvalue: null,
+        inPlace: true,
+        fullName: "2nd Battalion, 8th Regiment"
       }
     ]
   };
@@ -239,55 +338,198 @@ $(() =>{
     // Note: BECAUSE OF THE 'IF' STATMENT IN removeAbsentUnit, NO TWO UNITS CAN HAVE THE SAME NAME. If so, the incorrect unit may be removed. The names had to be used because the same thing happend when I used the grid coordinates instead.
     infantry: [
       {
-        name: "2-5 BN",
+        name: "2-5",
         type: "IN",
         active: true,
         health: 10,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 3
+        xValue: 3,
+        yValue: 4,
+        fullName: "2nd Battalion, 5th Regiment"
       },
       {
-        name: "2-8 BN",
+        name: "4-8",
         type: "IN",
         active: true,
         health: 10,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 4,
-        yValue: 3
+        xValue: 3,
+        yValue: 4,
+        fullName: "4th Battalion, 9th Regiment"
       }
     ],
     cavalry: [
       {
-        name: "3RD RGT",
+        name: "3RD",
         type: "CAV",
         active: true,
         health: 8,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 3
+        xValue: 3,
+        yValue: 4,
+        twoSquaresN: null,
+        twoSquaresE: null,
+        twoSquaresS: null,
+        twoSquaresW: null,
+        fullName: "3rd Regiment"
       }
     ],
     artillery: [
       {
-        name: "2-7 BN",
+        name: "2-7",
         type: "AR",
         active: true,
         health: 6,
         attack: false,
         direction: "center",
         nextDirection: "center",
-        xValue: 2,
-        yValue: 3
+        xValue: 3,
+        yValue: 4,
+        inPlace: true,
+        fullName: "2nd Battalion, 7th Regiment"
       }
     ]
   };
+
+  // This is the process for when picking the 5x5 grid squares
+  const addOneSquare = (pastX,pastY,newX,newY,newArray,newObject,allGridsIndex,isSplice) => {
+    if (isSplice == true) {
+      allGrids.splice(allGridsIndex,0,newArray[newObject]);
+    } else {
+      allGrids.push(newArray[newObject]);
+    };
+    $("#x"+pastX+"y"+pastY).after("<div class='gridSquare' id='x" + newX + "y" + newY + "'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='topLine' id='x"+newX+"y"+newY+"_north'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='centerLine'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerLeft' id='x"+newX+"y"+newY+"_west'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerMiddle' id='x"+newX+"y"+newY+"_center'></div>");
+    $("#x"+newX+"y"+newY+" .centerLine").append("<div class='centerRight' id='x"+newX+"y"+newY+"_east'></div>");
+    $("#x"+newX+"y"+newY).append("<div class='bottomLine' id='x5y1_south'></div>");
+  };
+  const moveRedSouth = () => {
+    var beenMoved = ["test"];
+    var blockMove = false;
+    for (var z = 0; z < allGrids.length; z++) {
+      var gulf = 0;
+      if (allGrids[z].redPresent.length > 0) {
+        var startWith = allGrids[z].redPresent.length - 1;
+        for (var alpha = startWith; alpha >= 0; alpha-=1) {
+          for (var charlie = 0; charlie < beenMoved.length; charlie++) {
+            if (allGrids[z].redPresent[alpha].name == beenMoved[charlie]) {
+              blockMove = true;
+            };
+          };
+          if (blockMove == false) {
+            var destineGrid = z + 5;
+            allGrids[destineGrid].redPresent.push(allGrids[z].redPresent[alpha]);
+            allGrids[destineGrid].redPresent[gulf].yValue+=1;
+            allGrids[z].redPresent.splice(alpha,1);
+            beenMoved.push(allGrids[destineGrid].redPresent[gulf].name);
+            gulf+=1;
+            var oldCenter = "#x" + allGrids[z].xValue + "y" + allGrids[z].yValue + "_center";
+            $(oldCenter).css('background-color','transparent');
+            $(oldCenter + " img").remove();
+          };
+          blockMove = false;
+        }
+      }
+    }
+  };
+  const expandToFive = () => {
+    if (fourByFour == true) {
+      addOneSquare(4,1,5,1,fiveByFive,0,4,true);
+      addOneSquare(4,2,5,2,fiveByFive,1,9,true);
+      addOneSquare(4,3,5,3,fiveByFive,2,14,true);
+      addOneSquare(4,4,5,4,fiveByFive,3,19,true);
+      addOneSquare(5,4,1,5,fiveByFive,4,null,false);
+      addOneSquare(1,5,2,5,fiveByFive,5,null,false);
+      addOneSquare(2,5,3,5,fiveByFive,6,null,false);
+      addOneSquare(3,5,4,5,fiveByFive,7,null,false);
+      addOneSquare(4,5,5,5,fiveByFive,8,null,false);
+      $(".gridSquare").css('width','19%').css('height','19%');
+      $("#fourGrids").css('color','white').css('background-color','brown');
+      $("#fiveGrids").css('color','brown').css('background-color','white');
+      totalGrids = 25;
+      maxXvalue = 5;
+      maxYvalue = 5;
+      startGrids = true;
+      fourByFour = false;
+      moveRedSouth(true);
+      makeAllGrids(totalGrids);
+      console.log(allGrids);
+    } else {
+      console.log("Already in 5x5 map.")
+    }
+  };
+  $("#fiveGrids").click(expandToFive);
+
+  // To switch back to 4x4 map
+  const removeOneSquare = (xNum,yNum,removeNum) => {
+    var removeID = "#x" + xNum + "y" + yNum;
+    $(removeID).remove();
+    allGrids.splice(removeNum,1);
+  };
+  const moveRedNorth = () => {
+    var alreadyMoved = [];
+    for (var gridNum = 0; gridNum < allGrids.length; gridNum++) {
+      var stopMove = false;
+      if (allGrids[gridNum].redPresent.length > 0) {
+        for (var delta = 0; delta < allGrids[gridNum].redPresent.length; delta++) {
+          for (var foxtrot = 0; foxtrot < alreadyMoved.length; foxtrot++) {
+            if (allGrids[gridNum].redPresent[delta].name == alreadyMoved[foxtrot]) {
+              stopMove = true;
+            }
+          };
+          if (stopMove == false) {
+            var echo = gridNum - 5;
+            allGrids[echo].redPresent.push(allGrids[gridNum].redPresent[delta]);
+            var justAdded = allGrids[echo].redPresent.length - 1;
+            allGrids[echo].redPresent[justAdded].yValue -= 1;
+            alreadyMoved.push(allGrids[echo].redPresent[justAdded].name);
+            allGrids[gridNum].redPresent.splice(0,1);
+          } else {
+            console.log("move blocked");
+          };
+          stopMove = false
+        }
+      }
+    }
+  }
+  const reduceToFour = () => {
+    if (fourByFour == false) {
+      var startEmpty = [];
+      moveRedNorth();
+      removeOneSquare(5,5,24);
+      removeOneSquare(4,5,23);
+      removeOneSquare(3,5,22);
+      removeOneSquare(2,5,21);
+      removeOneSquare(1,5,20);
+      removeOneSquare(5,4,19);
+      removeOneSquare(5,3,14);
+      removeOneSquare(5,2,9);
+      removeOneSquare(5,1,4);
+      $(".gridSquare").css('width','24%').css('height','24%');
+      $("#fourGrids").css('color','brown').css('background-color','white');
+      $("#fiveGrids").css('color','white').css('background-color','brown');
+      totalGrids = 16;
+      maxXvalue = 4;
+      maxYvalue = 4;
+      startGrids = true;
+      fourByFour = true;
+      console.log(allGrids);
+      // moveRedNorth();
+      makeAllGrids(totalGrids);
+    } else {
+      console.log("Already in 4x4");
+    }
+  }
+  $("#fourGrids").click(reduceToFour);
 
   // This will compare a single grid to a all of a team's units IOT see if any of those units should be added to the grid's bluePresent or redPresent arrays
   const ifTeamPresent = (gridNumber,oneTeam) => {
@@ -336,7 +578,7 @@ $(() =>{
   unitsInAllGrids();
   console.log(allGrids);
 
-  // This controls how the players choose the character name(s) and nationality
+  // This controls how the players choose the character name(s) and nation(s)
   // --- ONE PLAYER ---
   const oneStart = () => {
     numOfPlayers = 1;
@@ -344,13 +586,15 @@ $(() =>{
     $("#openIntro").css('display','none');
     $("#openOneName").css('display','block');
   }
-  $("#onePlayer").click(oneStart);
+  // $("#onePlayer").click(oneStart);
 
   const submitBluePlayer = () => {
     blueTeam.playerName = $("#blueLeader").val();
     blueTeam.teamName = $("#blueArmy").val();
     blueTeam.teamName = blueTeam.teamName.toUpperCase();
-    $("#blueStatus").text(blueTeam.teamName);
+    if (blueTeam.teamName != "") {
+      $("#blueStatus").text(blueTeam.teamName);
+    };
     $("#openOneName").css("display","none");
     $("#openPage").css("display","none");
     if (numOfPlayers == 2) {
@@ -372,16 +616,86 @@ $(() =>{
     redTeam.playerName = $("#redLeader").val();
     redTeam.teamName = $("#redArmy").val();
     redTeam.teamName = redTeam.teamName.toUpperCase();
-    $("#redStatus").text(redTeam.teamName);
+    if (redTeam.teamName != "") {
+      $("#redStatus").text(redTeam.teamName);
+    };
     $("#openTwoName").css("display","none");
     $("#openPage").css("display","none");
   };
   $("#submitRed").click(submitRedPlayer);
 
+  // --- HOW TO PLAY
+  const howToRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openHowTo").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#howTo").click(howToRun);
+
+  const howToStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openHowTo").css('display','none');
+    $(".openBox").css("margin","0 10%");
+  }
+  $("#closeHowTo").click(howToStop);
+
+  // --- GLOSSARY
+  const glossaryRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openGlossary").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#glossary").click(glossaryRun);
+  $("#seeGlossary").click(()=>{
+    howToStop();
+    glossaryRun();
+  });
+
+  const glossaryStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openGlossary").css('display','none');
+    $(".openBox").css("margin","0 10%");
+  }
+  $("#closeGlossary").click(glossaryStop);
+
+  // --- SETTINGS
+  const settingsRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openSettings").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#settings").click(settingsRun);
+
+  const settingsStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openSettings").css('display','none');
+    $(".openBox").css("margin","0 10%");
+  }
+  $("#closeSettings").click(settingsStop);
+
+  // --- ABOUT
+  const aboutRun = () => {
+    $("#openIntro").css('display','none');
+    $("#openAbout").css('display','block');
+    $(".openBox").css({"margin":"0 5%","width":"90%"});
+  }
+  $("#about").click(aboutRun);
+  $("#seeAbout").click(()=>{
+    howToStop();
+    aboutRun();
+  })
+
+  const aboutStop = () => {
+    $("#openIntro").css('display','block');
+    $("#openAbout").css('display','none');
+    $(".openBox").css("margin","0 10%");
+  }
+  $("#closeAbout").click(aboutStop);
+
   // To highlight the current player in their status box
   const showCurrentPlayer = () => {
     if (currentPlayer == blueTeam) {
-      $("#blueTitle").css("background-color","yellow");
+      $("#blueTitle").css("background-color","yellow").css("border","5px 5px 0 5px solid black");
       $("#redTitle").css("background-color","transparent");
     } else if (currentPlayer == redTeam) {
       $("#blueTitle").css("background-color","transparent");
@@ -489,57 +803,159 @@ $(() =>{
   // This connects the attackButton in HTML with the selectedUnit's attack mode
   $('#attackButton').click( ()=> {
     selectedUnit.attack = true;
+    switchMode();
+    clearCavBorders();
     $('#attackButton').css('background-color','blue').css('color','white');
-    $('#defendButton').css('background-color','white').css('color','black');
+    $('#defendButton').css('background-color','transparent').css('color','black');
     console.log("Attack mode");
+    console.log(selectedUnit);
   });
+
+  // This will reset the borders and directions if someone switches from Defense mode to Attack mode
+  const switchMode = () => {
+    var idBasic = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_";
+    var compass = ["north","east","south","west"]
+    for (var t = 0; t < 4; t++) {
+      var idComplete = idBasic + compass[t];
+      $(idComplete).css('border','none');
+    };
+    selectedUnit.nextDirection = "center";
+    if (selectedUnit.type == "CAV") {
+      selectedUnit.twoSquaresN = null;
+      selectedUnit.twoSquaresE = null;
+      selectedUnit.twoSquaresS = null;
+      selectedUnit.twoSquaresW = null;
+    };
+    $("#north").css('background-color','transparent');
+    $("#east").css('background-color','transparent');
+    $("#south").css('background-color','transparent');
+    $("#west").css('background-color','transparent');
+  }
 
   // This connects the defendButton in HTML with the selectedUnit's attack mode
   $('#defendButton').click( ()=> {
     selectedUnit.attack = false;
-    $('#attackButton').css('background-color','white').css('color','black');
+    switchMode();
+    clearCavBorders();
+    $('#attackButton').css('background-color','transparent').css('color','black');
     $('#defendButton').css('background-color','red').css('color','white');
     console.log("Defense mode");
+    console.log(selectedUnit);
   })
 
   //This function makes the arrows show the selectedUnit's NEXT direction
   const showUnitDirection = ()=> {
     if (selectedUnit.direction == "north") {
       $("#north").css('background-color','grey');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "east") {
-      $("#north").css('background-color','white');
+      $("#north").css('background-color','transparent');
       $("#east").css('background-color','grey');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "south") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
       $("#south").css('background-color','grey');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "west") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
       $("#west").css('background-color','grey');
-      $("#center").css('background-color','white');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
     } else if (selectedUnit.direction == "center") {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
       $("#center").css('background-color','grey');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
+    } else if (selectedUnit.direction == "northEast" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','grey');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
+    } else if (selectedUnit.direction == "southEast" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','grey');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
+    } else if (selectedUnit.direction == "southWest" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','grey');
+      $("#northWest").css('background-color','transparent');
+    } else if (selectedUnit.direction == "northWest" && selectedUnit.type == "IN") {
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','grey');
     } else {
-      $("#north").css('background-color','white');
-      $("#east").css('background-color','white');
-      $("#south").css('background-color','white');
-      $("#west").css('background-color','white');
-      $("#center").css('background-color','white');
+      $("#north").css('background-color','transparent');
+      $("#east").css('background-color','transparent');
+      $("#south").css('background-color','transparent');
+      $("#west").css('background-color','transparent');
+      $("#center").css('background-color','transparent');
+      $("#northEast").css('background-color','transparent');
+      $("#southEast").css('background-color','transparent');
+      $("#southWest").css('background-color','transparent');
+      $("#northWest").css('background-color','transparent');
+    };
+    if (selectedUnit.type == "IN") {
+      $("#northEast").css({'border':'1px solid black','background-color':'transparent'});
+      $("#southEast").css({'border':'1px solid black','background-color':'transparent'});
+      $("#southWest").css({'border':'1px solid black','background-color':'transparent'});
+      $("#northWest").css({'border':'1px solid black','background-color':'transparent'});
+    } else {
+      $("#northEast").css('background-color','black');
+      $("#southEast").css('background-color','black');
+      $("#southWest").css('background-color','black');
+      $("#northWest").css('background-color','black');
     };
   }
 
@@ -555,51 +971,227 @@ $(() =>{
       $("#west").css('background-color','yellow');
     } else if (selectedUnit.nextDirection == "center") {
       $("#center").css('background-color','yellow');
-    }  else {
+    } else if (selectedUnit.nextDirection == "northEast" && selectedUnit.type == "IN") {
+      $("#northEast").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "southEast" && selectedUnit.type == "IN") {
+      $("#southEast").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "southWest" && selectedUnit.type == "IN") {
+      $("#southWest").css('background-color','yellow');
+    } else if (selectedUnit.nextDirection == "northWest" && selectedUnit.type == "IN") {
+      $("#northWest").css('background-color','yellow');
+    } else {
       console.log("error in showUnitDirection function.")
     };
     if (selectedUnit.nextDirection == "north") {
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresN == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresN = true;
+          } else if (selectedUnit.twoSquaresN == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresN == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresN = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresN = true;
+          };
+        }
+      } else {
+        howFar = 1;
+        notHowFar = 2;
+      };
+      // lastClickUnit = selectedUnit.name;
       if (selectedUnit.attack == true && selectedUnit.yValue > 1) {
-        var targetYnorth = selectedUnit.yValue - 1;
+        var targetYnorth = selectedUnit.yValue - howFar;
+        var notTargetYnorth = selectedUnit.yValue - notHowFar;
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYnorth + "_center";
         $(targetID).css("border",targetBorder);
+        var notTargetID = "#x" + selectedUnit.xValue + "y" + notTargetYnorth + "_center";
+        $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_north";
         $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
-      }
+      };
+      // console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
-      if (selectedUnit.attack == true && selectedUnit.xValue < 4) {
-        var targetXeast = selectedUnit.xValue + 1;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresE == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresE = true;
+          } else if (selectedUnit.twoSquaresE == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresE == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresE = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresE = true;
+          };
+        }
+      } else {
+        howFar = 1;
+        notHowFar = 2;
+      };
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue) {
+        var targetXeast = selectedUnit.xValue + howFar;
+        var notTargetXeast = selectedUnit.xValue + notHowFar;
         var targetID = "#x" + targetXeast + "y" + selectedUnit.yValue + "_center";
         $(targetID).css("border",targetBorder);
+        var notTargetID = "#x" + notTargetXeast + "y" + selectedUnit.yValue + "_center";
+        $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_east";
         $(targetID).css("border","5px solid yellow").css("border-left","none");;
-      }
+      };
     } else if (selectedUnit.nextDirection == "south") {
-      if (selectedUnit.attack == true && selectedUnit.yValue < 4) {
-        var targetYsouth = selectedUnit.yValue + 1;
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresS == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresS = true;
+          } else if (selectedUnit.twoSquaresS == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresS == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresS = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresS = true;
+          };
+        }
+      } else {
+        howFar = 1;
+        notHowFar = 2;
+      };
+      if (selectedUnit.attack == true && selectedUnit.yValue < maxYvalue) {
+        var targetYsouth = selectedUnit.yValue + howFar;
+        var notTargetYsouth = selectedUnit.yValue + notHowFar;
         var targetID = "#x" + selectedUnit.xValue + "y" + targetYsouth + "_center";
         $(targetID).css("border",targetBorder);
+        var notTargetID = "#x" + selectedUnit.xValue + "y" + notTargetYsouth + "_center";
+        $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_south";
         $(targetID).css("border","5px solid yellow").css("border-top","none");;
-      }
+      };
     } else if (selectedUnit.nextDirection == "west") {
+      if (selectedUnit.type == "CAV") {
+        if (lastClickUnit == selectedUnit.name || lastClickUnit == null) {
+          if (selectedUnit.twoSquaresW == false) {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresW = true;
+          } else if (selectedUnit.twoSquaresW == true) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          } else {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          };
+        } else {
+          if (selectedUnit.twoSquaresW == false) {
+            howFar = 1;
+            notHowFar = 2;
+            selectedUnit.twoSquaresW = false;
+          } else {
+            howFar = 2;
+            notHowFar = 1;
+            selectedUnit.twoSquaresW = true;
+          };
+        }
+      } else {
+        howFar = 1;
+        notHowFar = 2;
+      };
       if (selectedUnit.attack == true && selectedUnit.xValue > 1) {
-        var targetXwest = selectedUnit.xValue - 1;
+        var targetXwest = selectedUnit.xValue - howFar;
+        var notTargetXwest = selectedUnit.xValue - notHowFar;
         var targetID = "#x" + targetXwest + "y" + selectedUnit.yValue + "_center";
         $(targetID).css("border",targetBorder);
+        var notTargetID = "#x" + notTargetXwest + "y" + selectedUnit.yValue + "_center";
+        $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_west";
         $(targetID).css("border","5px solid yellow").css("border-right","none");
+      };
+    } else if (selectedUnit.nextDirection == "northWest") {
+      if (selectedUnit.attack == true && selectedUnit.xValue > 1 && selectedUnit.yValue > 1) {
+        var targetID = "#x" + (selectedUnit.xValue - 1) + "y" + (selectedUnit.yValue - 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
       }
-    }
-  }
+    } else if (selectedUnit.nextDirection == "northEast") {
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue && selectedUnit.yValue > 1) {
+        var targetID = "#x" + (selectedUnit.xValue + 1) + "y" + (selectedUnit.yValue - 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    } else if (selectedUnit.nextDirection == "southEast") {
+      if (selectedUnit.attack == true && selectedUnit.xValue < maxXvalue && selectedUnit.yValue < maxYvalue) {
+        var targetID = "#x" + (selectedUnit.xValue + 1) + "y" + (selectedUnit.yValue + 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    } else if (selectedUnit.nextDirection == "southWest") {
+      if (selectedUnit.attack == true && selectedUnit.xValue > 1 && selectedUnit.yValue < maxYvalue) {
+        var targetID = "#x" + (selectedUnit.xValue - 1) + "y" + (selectedUnit.yValue + 1) + "_center";
+        console.log(targetID);
+        $(targetID).css("border",targetBorder);
+      } else {
+        console.log("can't move that way");
+      }
+    };
+    lastClickUnit = selectedUnit.name;
+  };
 
-// This is how the arrow buttons change a unit's nextDirections and show where it will go
+  // This is how the arrow buttons change a unit's nextDirections and show where it will go
   $('#north').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "north";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -608,6 +1200,7 @@ $(() =>{
   });
   $('#east').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "east";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -616,6 +1209,7 @@ $(() =>{
   });
   $('#south').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "south";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -624,6 +1218,7 @@ $(() =>{
   });
   $('#west').click( ()=> {
     clearBorders();
+    clearCavBorders();
     borderColor();
     selectedUnit.nextDirection = "west";
     console.log("Direction: " + selectedUnit.nextDirection);
@@ -632,10 +1227,63 @@ $(() =>{
   });
   $('#center').click( ()=> {
     clearBorders();
+    clearCavBorders();
     selectedUnit.nextDirection = "center";
     console.log("Direction: " + selectedUnit.nextDirection);
     showUnitDirection();
     showUnitNextDirection();
+  });
+  $('#northWest').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "northWest";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#northEast').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "northEast";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#southWest').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "southWest";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
+  });
+  $('#southEast').click( ()=> {
+    if (selectedUnit.type == "IN") {
+      clearBorders();
+      clearCavBorders();
+      borderColor();
+      selectedUnit.nextDirection = "southEast";
+      console.log("Direction: " + selectedUnit.nextDirection);
+      showUnitDirection();
+      showUnitNextDirection();
+    } else {
+      console.log("Only IN can move diagonally.")
+    };
   });
   // This erases the border on the grid that the user had directed towards
   const clearBorders = () => {
@@ -644,14 +1292,31 @@ $(() =>{
     var westX  = selectedUnit.xValue - 1;
     var eastX  = selectedUnit.xValue + 1;
     var thisGrid = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue;
+    // North
     var clearID = "#x" + selectedUnit.xValue + "y" + northY + "_center";
     $(clearID).css("border","none");
+    // West
     clearID = "#x" + westX + "y" + selectedUnit.yValue + "_center";
     $(clearID).css("border","none");
+    // South
     clearID = "#x" + selectedUnit.xValue + "y" + southY + "_center";
     $(clearID).css("border","none");
+    // East
     clearID = "#x" + eastX + "y" + selectedUnit.yValue + "_center";
     $(clearID).css("border","none");
+    // North-West
+    clearID = "#x" + westX + "y" + northY + "_center";
+    $(clearID).css("border","none");
+    // North-EastTwo
+    clearID = "#x" + eastX + "y" + northY + "_center";
+    $(clearID).css("border","none");
+    // South-EastTwo
+    clearID = "#x" + eastX + "y" + southY + "_center";
+    $(clearID).css("border","none");
+    // South-West
+    clearID = "#x" + westX + "y" + southY + "_center";
+    $(clearID).css("border","none");
+    //clears all defense lines
     clearID = thisGrid + "_north";
     $(clearID).css("border","none");
     clearID = thisGrid + "_east";
@@ -662,14 +1327,32 @@ $(() =>{
     $(clearID).css("border","none");
   }
   // To choose which border color for the next potential grid
-  var targetBorder = "5px solid blue";
+  // Note: These used to switch from blue to red, but it makes it difficult to see the borders when entering the same unit with allies
+  var targetBorder = "5px solid yellow";
   const borderColor = () => {
-    targetBorder = "5px solid blue";
+    targetBorder = "5px solid yellow";
     if (currentPlayer == redTeam) {
-      targetBorder = "5px solid red";
+      targetBorder = "5px solid yellow";
     };
     return targetBorder
   };
+
+  // Specifically clears the borders that are TWO grid squares away. Only applies for CAV units sometimes.
+  const clearCavBorders = () => {
+    var northTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue - 2) + "_center";
+    var eastTwo = "#x" + (selectedUnit.xValue + 2) + "y" + selectedUnit.yValue + "_center";
+    var southTwo = "#x" + selectedUnit.xValue + "y" + (selectedUnit.yValue + 2) + "_center";
+    var westTwo = "#x" + (selectedUnit.xValue - 2) + "y" + selectedUnit.yValue + "_center";
+    const allTwo = [northTwo, eastTwo, southTwo, westTwo];
+    for (var pickTwo = 0; pickTwo < allTwo.length; pickTwo++) {
+      for (var cleanGrid = 0; cleanGrid < allGrids.length; cleanGrid++) {
+        var pickGrid = "#x" + allGrids[cleanGrid].xValue + "y" + allGrids[cleanGrid].yValue + "_center";
+        if (allTwo[pickTwo] == pickGrid) {
+          $(pickGrid).css('border','none')
+        }
+      }
+    }
+  }
 
 // To be used within issueOneOrder below, this determines the grid where the unit will be moved to. It's important because both the unit and the grid square need to know that the unit is in a new grid square.
   const findNextGrid = () => {
@@ -760,15 +1443,41 @@ $(() =>{
   const issueOneOrder = (ordersCarriedOut) => {
     if (selectedUnit.active == true) {
       if (selectedUnit.attack == true) {
-        // something will be needed here to checks for water @ next grid
+        // -- To allow CAV to move two squares
+        if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresN == true) {
+          console.log("check twoSquaresN: " + selectedUnit.twoSquaresN);
+          var borderCheck = 2;
+        } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresE == true) {
+          console.log("check twoSquaresE: " + selectedUnit.twoSquaresE);
+          var borderCheck = 2;
+        } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresS == true) {
+          console.log("check twoSquaresS: " + selectedUnit.twoSquaresS);
+          var borderCheck = 2;
+        } else if (selectedUnit.type == "CAV" && selectedUnit.twoSquaresW == true) {
+          console.log("check twoSquaresW: " + selectedUnit.twoSquaresW);
+          var borderCheck = 2;
+        } else {
+          console.log("check twoSquaresN: " + selectedUnit.twoSquaresN);
+          var borderCheck = 1;
+        };
+        // --
+        // -- This labels an AR as stationary or not. Only stationary AR can fire their cannons.
+        if (selectedUnit.type == "AR" && selectedUnit.nextDirection == "center") {
+          selectedUnit.inPlace = true;
+        } else {
+          selectedUnit.inPlace = false;
+        };
+        // --
         if (selectedUnit.nextDirection == "north" && selectedUnit.yValue > 1) {
           showBattleReport(selectedUnit);
           selectedUnit.nextXvalue = selectedUnit.xValue;
-          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - borderCheck;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -780,12 +1489,14 @@ $(() =>{
           };
         } else if (selectedUnit.nextDirection == "east" && selectedUnit.xValue < maxXvalue) {
           showBattleReport(selectedUnit);
-          selectedUnit.nextXvalue = selectedUnit.xValue + 1;
+          selectedUnit.nextXvalue = selectedUnit.xValue + borderCheck;
           selectedUnit.nextYvalue = selectedUnit.yValue;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -798,11 +1509,13 @@ $(() =>{
         } else if (selectedUnit.nextDirection == "south" && selectedUnit.yValue < maxYvalue) {
           showBattleReport(selectedUnit);
           selectedUnit.nextXvalue = selectedUnit.xValue;
-          selectedUnit.nextYvalue = selectedUnit.yValue + 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue + borderCheck;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -814,12 +1527,90 @@ $(() =>{
           }
         } else if (selectedUnit.nextDirection == "west" && selectedUnit.xValue > 1) {
           showBattleReport(selectedUnit);
-          selectedUnit.nextXvalue = selectedUnit.xValue - 1;
+          selectedUnit.nextXvalue = selectedUnit.xValue - borderCheck;
           selectedUnit.nextYvalue = selectedUnit.yValue;
           var nextGrid = findNextGrid();
           var currentGrid = findCurrentGrid();
-          if (nextGrid.terrain == "water" && selectedUnit.type!= "CAV") {
-            reportError(selectedUnit,"unit cannot cross water.");
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "northWest" && selectedUnit.xValue > 1 && selectedUnit.yValue > 1) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "northEast" && selectedUnit.xValue < maxXvalue && selectedUnit.yValue > 1) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue + 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue - 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "southEast" && selectedUnit.xValue < maxXvalue && selectedUnit.yValue < maxYvalue) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue + 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue + 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
+          } else {
+            if (currentPlayer == blueTeam) {
+              nextGrid.bluePresent.push(selectedUnit);
+            } else if (currentPlayer == redTeam) {
+              nextGrid.redPresent.push(selectedUnit);
+            };
+            completedPresent.push(selectedUnit.name + ": completed");
+            removeAbsentUnit();
+          }
+        } else if (selectedUnit.nextDirection == "southWest" && selectedUnit.xValue > 1 && selectedUnit.yValue < maxYvalue) {
+          showBattleReport(selectedUnit);
+          selectedUnit.nextXvalue = selectedUnit.xValue - 1;
+          selectedUnit.nextYvalue = selectedUnit.yValue + 1;
+          var nextGrid = findNextGrid();
+          var currentGrid = findCurrentGrid();
+          if (nextGrid == undefined) {
+            reportError(selectedUnit,"unit cannot leave the battlefield")
+          } else if (nextGrid.terrain == "water") {
+            reportError(selectedUnit,"unit cannot stay in water.")
           } else {
             if (currentPlayer == blueTeam) {
               nextGrid.bluePresent.push(selectedUnit);
@@ -830,14 +1621,14 @@ $(() =>{
             removeAbsentUnit();
           }
         } else {
-          reportError(selectedUnit,"cannot to leave the battlefield.");
+          reportError(selectedUnit,"cannot leave the battlefield.");
         };
       } else if (selectedUnit.attack == false) {
         var currentGrid = findCurrentGrid();
         var nextGrid = currentGrid;
         var currentDirection = selectedUnit.direction;
 
-        // This whole stretched is to prevent muliple units from filling the same defensive line
+        // This whole stretch is to prevent muliple units from filling the same defensive line
         var blockLine = false;
         var activeUnits = [];
         const currentInfType = currentPlayer.infantry;
@@ -846,7 +1637,7 @@ $(() =>{
         const typeUnitsActive = (type) => {
           for (var m = 0; m < type.length; m++) {
             if (type[m].active == true) {
-              return activeUnits.push(type[m]);
+              activeUnits.push(type[m]);
             }
           }
         };
@@ -881,7 +1672,7 @@ $(() =>{
           selectedUnit.nextXvalue = currentGrid.xValue;
           selectedUnit.nextYvalue = currentGrid.yValue;
           completedPresent.push(selectedUnit.name + ": completed");
-        };
+        }
         showBattleReport(selectedUnit);
       } else {
         console.log("An error occurred in issueOneOrder.");
@@ -889,6 +1680,12 @@ $(() =>{
       ordersCarriedOut.push(selectedUnit);
     };
     // console.log("ordersCarriedOut: " + ordersCarriedOut.length);
+    if (selectedUnit.type == "CAV") {
+      selectedUnit.twoSquaresN = null;
+      selectedUnit.twoSquaresE = null;
+      selectedUnit.twoSquaresS = null;
+      selectedUnit.twoSquaresW = null;
+    };
   };
 
   // This function takes place in issueAllOrders to see if a unit's orders are an error and, if so, resets that unit's values.
@@ -1194,6 +1991,263 @@ $(() =>{
     return numLeft
   };
 
+  const findCannonTargets = (oneCannon,collectTargets) => {
+    var oneUp = [];
+    if (oneCannon.yValue > 1) {
+      oneUp.push(oneCannon.xValue);
+      oneUp.push(oneCannon.yValue - 1);
+    };
+    collectTargets.push(oneUp);
+    var twoUp = [];
+    if (oneCannon.yValue > 2) {
+      twoUp.push(oneCannon.xValue);
+      twoUp.push(oneCannon.yValue - 2);
+    };
+    collectTargets.push(twoUp);
+    var oneRight = [];
+    if (oneCannon.xValue < maxXvalue) {
+      oneRight.push(oneCannon.xValue + 1);
+      oneRight.push(oneCannon.yValue);
+    };
+    collectTargets.push(oneRight);
+    var twoRight = [];
+    if (oneCannon.xValue < (maxXvalue - 1)) {
+      twoRight.push(oneCannon.xValue + 2);
+      twoRight.push(oneCannon.yValue);
+    };
+    collectTargets.push(twoRight);
+    var oneDown = [];
+    if (oneCannon.yValue < maxYvalue) {
+      oneDown.push(oneCannon.xValue);
+      oneDown.push(oneCannon.yValue + 1);
+    };
+    collectTargets.push(oneDown);
+    var twoDown = [];
+    if (oneCannon.yValue < (maxYvalue - 1)) {
+      twoDown.push(oneCannon.xValue);
+      twoDown.push(oneCannon.yValue + 2);
+    };
+    collectTargets.push(twoDown);
+    var oneLeft = [];
+    if (oneCannon.xValue > 1) {
+      oneLeft.push(oneCannon.xValue - 1);
+      oneLeft.push(oneCannon.yValue);
+    };
+    collectTargets.push(oneLeft);
+    var twoLeft = [];
+    if (oneCannon.xValue > 2) {
+      twoLeft.push(oneCannon.xValue - 2);
+      twoLeft.push(oneCannon.yValue);
+    };
+    collectTargets.push(twoLeft);
+  }
+
+  const fireCannons = (theTeam,isOpposite) => {
+    for (var v = 0; v < theTeam.artillery.length; v++) {
+      var cannon = theTeam.artillery[v];
+      if (cannon.inPlace == true && cannon.active == true) {
+        var allTargets = [];
+        findCannonTargets(cannon,allTargets);
+        for (var w = 0; w < allGrids.length; w++) {
+          for (var y = 0; y < allTargets.length; y++) {
+            if (allGrids[w].xValue == allTargets[y][0] && allGrids[w].yValue == allTargets[y][1]) {
+              if (theTeam == blueTeam) {
+                var theOtherTeam = redTeam;
+                if (allGrids[w].redPresent.length > 0) {
+                  var chanceOfHit = 0;
+                  var targetUnit = allGrids[w].redPresent[0];
+                  if (cannon.direction == "center") {
+                    if (y == 0 || y == 2 || y == 4 || y == 6) {
+                      chanceOfHit = 0.3;
+                    } else if (y == 1 || y == 3 || y == 5 || y == 7) {
+                      chanceOfHit = 0.1;
+                    } else {
+                      console.log("this didn't work");
+                    };
+                  } else {
+                    if (cannon.direction == "north") {
+                      if (y == 0) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 1) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the north")
+                      };
+                    } else if (cannon.direction == "east") {
+                      if (y == 2) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 3) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the east")
+                      };
+                    } else if (cannon.direction == "south") {
+                      if (y == 4) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 5) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the south")
+                      };
+                    } else if (cannon.direction == "west") {
+                      if (y == 6) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 7) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the west")
+                      };
+                    };
+                  };
+                  // "Fire" the cannon and see if it hits. If the actualShot is within chance, then it's a hit.
+                  var actualShot = Math.random();
+                  if (actualShot < chanceOfHit) {
+                    var hitTarget = true;
+                  } else {
+                    var hitTarget = false;
+                  };
+                  // change the health values if the hits are successful
+                  if (hitTarget == true) {
+                    targetUnit.health -= 2;
+                    $("#battleList").append("<li><b>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</b></li>");
+                  } else {
+                    $("#battleList").append("<li>The " + cannon.name + " failed to hit the " + targetUnit.name + ".</li>");
+                  };
+                  // reports any hits on the battle reports
+                  if (targetUnit.health <= 0) {
+                    targetUnit.active = false;
+                    allGrids[w].redPresent.splice(0,1);
+                    $("#battleList").append("<li>A barrage destroyed the " + targetUnit.name + " unit!</li>");
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!");
+                    if (isOpposite == false) {
+                      var unitImg = "#x" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction + ".centerMiddle";
+                      $(unitImg).css('background-color','transparent');
+                      var unitImgSon = $(unitImg).children();
+                      $(unitImgSon).remove();
+                      if (allGrids[w].redPresent.length == 1) {
+                        $(unitImg).css('background-color','red');
+                        if (allGrids[w].redPresent[0].type == "IN") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
+                        } else if (allGrids[w].redPresent[0].type == "CAV") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
+                        } else if (allGrids[w].redPresent[0].type == "AR") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
+                        };
+                      } else if (allGrids[w].redPresent.length > 1) {
+                        $(unitImg).css('background-color','red');
+                        $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/camp.png'>");
+                      };
+                    };
+                  };
+                  // reports any hits on the battle reports
+                }
+              } else {
+                var theOtherTeam = blueTeam;
+                if (allGrids[w].bluePresent.length > 0) {
+                  var chanceOfHit = 0;
+                  var targetUnit = allGrids[w].bluePresent[0];
+                  if (cannon.direction == "center") {
+                    if (y == 0 || y == 2 || y == 4 || y == 6) {
+                      chanceOfHit = 0.3;
+                    } else if (y == 1 || y == 3 || y == 5 || y == 7) {
+                      chanceOfHit = 0.1;
+                    } else {
+                      console.log("this didn't work");
+                    };
+                  } else {
+                    if (cannon.direction == "north") {
+                      if (y == 0) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 1) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the north")
+                      };
+                    } else if (cannon.direction == "east") {
+                      if (y == 2) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 3) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the east")
+                      };
+                    } else if (cannon.direction == "south") {
+                      if (y == 4) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 5) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the south")
+                      };
+                    } else if (cannon.direction == "west") {
+                      if (y == 6) {
+                        chanceOfHit = 0.8;
+                      } else if (y == 7) {
+                        chanceOfHit = 0.6;
+                      } else {
+                        chanceOfHit = 0;
+                        console.log("nothing in the west")
+                      };
+                    };
+                  };
+                  // "Fire" the cannon and see if it hits. If it's within chance, it's a hit.
+                  var actualShot = Math.random();
+                  if (actualShot < chanceOfHit) {
+                    var hitTarget = true;
+                  } else {
+                    var hitTarget = false;
+                  };
+                  // change the health values if the hits are successful
+                  if (hitTarget == true) {
+                    targetUnit.health -= 2;
+                    $("#battleList").append("<li><b>The " + cannon.name + " hit the " + targetUnit.name + " with a cannon barrage.</b></li>");
+                  } else {
+                    $("#battleList").append("<li>The " + cannon.name + " failed to hit the " + targetUnit.name + ".</li>");
+                  };
+                  if (targetUnit.health <= 0) {
+                    targetUnit.active = false;
+                    allGrids[w].bluePresent.splice(0,1);
+                    $("#battleList").append("<li>That barrage destroyed the " + targetUnit.name + " unit!</li>");
+                    console.log("The " + targetUnit.name + " was defeated by a cannon barrage!");
+                    if (isOpposite == false) {
+                      var unitImg = "#x" + targetUnit.xValue + "y" + targetUnit.yValue + "_" + targetUnit.direction + ".centerMiddle";
+                      $(unitImg).css('background-color','transparent');
+                      var unitImgSon = $(unitImg).children();
+                      $(unitImgSon).remove();
+                      if (allGrids[w].bluePresent.length == 1) {
+                        $(unitImg).css('background-color','blue');
+                        if (allGrids[w].bluePresent[0].type == "IN") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
+                        } else if (allGrids[w].bluePresent[0].type == "CAV") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
+                        } else if (allGrids[w].bluePresent[0].type == "AR") {
+                          $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
+                        };
+                      } else if (allGrids[w].bluePresent.length > 1) {
+                        $(unitImg).css('background-color','blue');
+                        $(unitImg).append("<span class='helper'></span><img src='stylesheets/images/camp.png'>");
+                      };
+                    };
+                  }
+                  // report any hits on the battle reports
+                }
+              }
+            }
+          }
+        }
+      } else {
+        cannon.inPlace = true;
+      }
+    }
+  };
+
   const issueAllOrders = () => {
     var ordersDone = [];
     clearOldRep();
@@ -1212,6 +2266,10 @@ $(() =>{
       selectedUnit = selectedArtillery[i];
       issueOneOrder(ordersDone);
     };
+    fireCannons(oppositePlayer,true);
+    console.log("first fireCannons done");
+    fireCannons(currentPlayer,false);
+    console.log("second fireCannons done");
     battleOccur = false;
     for (var i = 0; i < allGrids.length; i++) {
       var battlefield = allGrids[i];
@@ -1241,14 +2299,10 @@ $(() =>{
     };
     completeReport();
     allBattles = [];
-    // here is where a border should be added to the new currentPlayer's box
     errorPresent = [];
-    showGridUnits(currentPlayer, selectedInfantry);
-    showGridUnits(currentPlayer, selectedCavalry);
-    showGridUnits(currentPlayer, selectedArtillery);
-    showGridUnits(oppositePlayer, oppositePlayer.infantry);
-    showGridUnits(oppositePlayer, oppositePlayer.cavalry);
-    showGridUnits(oppositePlayer, oppositePlayer.artillery);
+    showGridUnits(startGrids, null, currentPlayer, selectedInfantry);
+    showGridUnits(startGrids, null, currentPlayer, selectedCavalry);
+    showGridUnits(startGrids, null, currentPlayer, selectedArtillery);
     orderNum = battleReport.length;
     battleReport = [];
     if (currentPlayer == blueTeam) {
@@ -1288,6 +2342,8 @@ $(() =>{
       // console.log(blueTeam);
       // console.log(redTeam);
     }
+    startClick = true;
+    lastClickUnit = null;
   };
 
   $('#ordersButton').click(issueAllOrders);
@@ -1300,16 +2356,22 @@ $(() =>{
 
   // This displays the selected unit's values
   const selectedValues = () =>{
-    console.log("Unit: " + selectedUnit.name);
-    $("#unitName").text(selectedUnit.name);
+    // console.log("Unit: " + selectedUnit.name);
+    // console.log(selectedUnit);
+    $("#unitName").text(selectedUnit.fullName);
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','blue');
-      $("#defendButton").css('color','black').css('background-color','white');
+      $("#defendButton").css('color','black').css('background-color','transparent');
     } else {
-      $("#attackButton").css('color','black').css('background-color','white');
+      $("#attackButton").css('color','black').css('background-color','transparent');
       $("#defendButton").css('color','white').css('background-color','red');
     };
     $("#healthReading").text(selectedUnit.health);
+    if (selectedUnit.health <= 2) {
+      $("#healthReading").css('color','red');
+    } else {
+      $("#healthReading").css('color','black');
+    }
     showUnitDirection();
     if (selectedUnit.direction != selectedUnit.nextDirection) {
       showUnitNextDirection();
@@ -1370,6 +2432,12 @@ $(() =>{
 
   // ------ INFANTRY --------
   const infantryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.infantry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
@@ -1437,6 +2505,12 @@ $(() =>{
 
   // ------ CAVALRY --------
   const cavalryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.cavalry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
@@ -1504,6 +2578,12 @@ $(() =>{
 
   // ------ ARTILLERY --------
   const artilleryNumSelect = () =>{
+    if (startClick == true) {
+      lastClickUnit = null;
+      startClick = false;
+    } else {
+      lastClickUnit = selectedUnit.name;
+    };
     selectedUnit = currentPlayer.artillery[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
@@ -1570,8 +2650,16 @@ $(() =>{
   $("#redAr4").click(4, newClickNum).click(onlyClickRedAr);
 
   // This will show all of the units in their current grid squares. It is run inside of the "makeOneGrid" and "issueAllOrders" functions.
-  const showGridUnits = (oneTeam, unitType) => {
-    for (var x = 0; x < totalGrids; x++) {
+  const showGridUnits = (startCheck, singleGrid, oneTeam, unitType) => {
+    // console.log(oppositePlayer);
+    if (startCheck == true) {
+      startNum = singleGrid;
+      endNum = singleGrid + 1;
+    } else {
+      startNum = 0;
+      endNum = totalGrids;
+    };
+    for (var x = startNum; x < endNum; x++) {
       var currentGrid = x;
       var gridID = "#x" + allGrids[currentGrid].xValue + "y" + allGrids[currentGrid].yValue;
       var gridIDnorth = gridID + "_north";
@@ -1589,12 +2677,11 @@ $(() =>{
           if (unitType[i].active == true) {
             if (unitType[i].direction == "north") {
               if (unitType[i].type == "IN") {
-                // $(gridIDnorth).text("IN");
-                $(gridIDnorth).text("IN");
+                $(gridIDnorth).append("<img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDnorth).text("CAV");
+                $(gridIDnorth).append("<img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDnorth).text("AR");
+                $(gridIDnorth).append("<img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDnorth).css('color','white').css('background-color','blue');
@@ -1605,11 +2692,11 @@ $(() =>{
               };
             } else if (unitType[i].direction == "east") {
               if (unitType[i].type == "IN") {
-                $(gridIDeast).text("IN");
+                $(gridIDeast).append("<span class='helper'></span><img src='stylesheets/images/infantry_left_right.png'>");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDeast).text("CAV");
+                $(gridIDeast).append("<span class='helper'></span><img src='stylesheets/images/cavalry_left_right.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDeast).text("AR");
+                $(gridIDeast).append("<span class='helper'></span><img src='stylesheets/images/cannon_left_right.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDeast).css('color','white').css('background-color','blue');
@@ -1620,11 +2707,11 @@ $(() =>{
               };
             } else if (unitType[i].direction == "south") {
               if (unitType[i].type == "IN") {
-                $(gridIDsouth).text("IN");
+                $(gridIDsouth).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDsouth).text("CAV");
+                $(gridIDsouth).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDsouth).text("AR");
+                $(gridIDsouth).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDsouth).css('color','white').css('background-color','blue');
@@ -1635,11 +2722,11 @@ $(() =>{
               };
             } else if (unitType[i].direction == "west") {
               if (unitType[i].type == "IN") {
-                $(gridIDwest).text("IN");
+                $(gridIDwest).append("<span class='helper'></span><img src='stylesheets/images/infantry_left_right.png'>");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDwest).text("CAV");
+                $(gridIDwest).append("<span class='helper'></span><img src='stylesheets/images/cavalry_left_right.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDwest).text("AR");
+                $(gridIDwest).append("<span class='helper'></span><img src='stylesheets/images/cannon_left_right.png'>");
               };
               if (oneTeam == blueTeam) {
                 $(gridIDwest).css('color','white').css('background-color','blue');
@@ -1649,37 +2736,45 @@ $(() =>{
                 console.log("Error ")
               };
             } else if (unitType[i].direction == "center") {
+              var centerFather = gridIDcenter + ".centerMiddle";
+              var centerSon = $(centerFather).children();
+              $(centerSon).remove();
               if (unitType[i].type == "IN") {
-                $(gridIDcenter).text("IN");
+                $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/infantry_top_bottom.png'>");
               } else if (unitType[i].type == "CAV") {
-                $(gridIDcenter).text("CAV");
+                $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cavalry_top_bottom.png'>");
               } else if (unitType[i].type == "AR") {
-                $(gridIDcenter).text("AR");
+                $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/cannon_top_bottom.png'>");
               };
               if (allGrids[x].bluePresent.length > 1) {
                 var arePresent = allGrids[x].bluePresent;
-              } else {
+              } else if (allGrids[x].redPresent.length > 1) {
                 var arePresent = allGrids[x].redPresent;
+              } else {
+                var arePresent = [];
               };
               var allCenter = 0;
               for (var s = 0; s < arePresent.length; s++) {
-                if (arePresent[s].direction == "center") {
+                if (arePresent[s].direction == "center" && arePresent[s].active == true) {
                   allCenter+=1
                 }
               };
               if (allCenter > 1) {
-                $(gridIDcenter).text("camp");
+                $(gridIDcenter).empty();
+                $(gridIDcenter).append("<span class='helper'></span><img src='stylesheets/images/camp.png'>");
               };
               if (oneTeam == blueTeam) {
-                $(gridIDcenter).css('color','white').css('background-color','blue');
+                $(gridIDcenter).css('background-color','blue');
               } else if (oneTeam == redTeam) {
-                $(gridIDcenter).css('color','black').css('background-color','red');
+                $(gridIDcenter).css('background-color','red');
               } else {
                 console.log("Error ")
               };
             } else {
-              console.log("No direction")
+              console.log("No direction");
             }
+          } else {
+            console.log("Remove the " + unitType[i].name + " unit.")
           }
         }
       }
@@ -1751,23 +2846,20 @@ $(() =>{
       // console.log("terrainImage is functioning.");
     };
     terrainImage();
-    showGridUnits(blueTeam, blueTeam.infantry);
-    showGridUnits(blueTeam, blueTeam.cavalry);
-    showGridUnits(blueTeam, blueTeam.artillery);
-    showGridUnits(redTeam, redTeam.infantry);
-    showGridUnits(redTeam, redTeam.cavalry);
-    showGridUnits(redTeam, redTeam.artillery);
-    // console.log("End makeOneGrid function: " + gridNumber);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.infantry);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.cavalry);
+    showGridUnits(startGrids, gridNumber, blueTeam, blueTeam.artillery);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.infantry);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.cavalry);
+    showGridUnits(startGrids, gridNumber, redTeam, redTeam.artillery);
   };
 
   // This uses the "makeOneGrid" function to give values to ALL of the grid squares
   const makeAllGrids = (howMany) => {
-    // console.log("Start makeAllGrids function");
     for (var i = 0; i < howMany; i++) {
       makeOneGrid(i);
-      // console.log(allGrids[i]);
     };
-    // console.log("End makeAllGrids function");
+    startGrids = false;
   };
   makeAllGrids(totalGrids);
 
