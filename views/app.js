@@ -2820,6 +2820,13 @@ $(() =>{
       } else {
         console.log("Error in pickTerrain's pickValue")
       };
+      allGrids[2].terrain = "field"
+      if (totalGrids == 16) {
+        allGrids[14].terrain = "field"
+      } else if (totalGrids == 25) {
+        allGrids[22].terrain = "field"
+      };
+      console.log(totalGrids);
       // console.log("pickTerrain is functioning.");
     };
     pickTerrain();
