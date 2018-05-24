@@ -187,12 +187,12 @@ body {
   body .unitButton {
     cursor: pointer; }
   body .blueButton {
-    margin: 0 5% 10px 5%;
+    margin: 5px 5% 5px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white; }
   body .redButton {
-    margin: 0 5% 10px 5%;
+    margin: 5px 5% 5px 5%;
     border-radius: 10px;
     font-size: 3rem;
     color: white; }
