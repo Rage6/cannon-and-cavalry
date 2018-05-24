@@ -24,6 +24,13 @@ $(() =>{
   var startClick = true;
   var fourByFour = true;
 
+  // This will set the height of the shades over the background when going through the opening options
+  const setHeight= () =>{
+    var docHeight = $(document).height();
+    $("#openPage").css('height',docHeight);
+  };
+  setHeight();
+
   // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
     // rowOneColumnOne
@@ -593,7 +600,14 @@ $(() =>{
     blueTeam.teamName = $("#blueArmy").val();
     blueTeam.teamName = blueTeam.teamName.toUpperCase();
     if (blueTeam.teamName != "") {
+      $("#blueStatus").text(blueTeam.playerName);
+    } else {
+      $("#blueStatus").text("Grant");
+    };
+    if (blueTeam.teamName != "") {
       $("#blueStatus").text(blueTeam.teamName);
+    } else {
+      $("#blueStatus").text("Blue");
     };
     $("#openOneName").css("display","none");
     $("#openPage").css("display","none");
@@ -617,10 +631,18 @@ $(() =>{
     redTeam.teamName = $("#redArmy").val();
     redTeam.teamName = redTeam.teamName.toUpperCase();
     if (redTeam.teamName != "") {
+      $("#redStatus").text(redTeam.playerName);
+    } else {
+      $("#redStatus").text("Lee");
+    };
+    if (redTeam.teamName != "") {
       $("#redStatus").text(redTeam.teamName);
+    } else {
+      $("#redStatus").text("Red");
     };
     $("#openTwoName").css("display","none");
     $("#openPage").css("display","none");
+    $(".openBox").css("display","none");
   };
   $("#submitRed").click(submitRedPlayer);
 
@@ -2798,6 +2820,13 @@ $(() =>{
       } else {
         console.log("Error in pickTerrain's pickValue")
       };
+      allGrids[2].terrain = "field"
+      if (totalGrids == 16) {
+        allGrids[14].terrain = "field"
+      } else if (totalGrids == 25) {
+        allGrids[22].terrain = "field"
+      };
+      console.log(totalGrids);
       // console.log("pickTerrain is functioning.");
     };
     pickTerrain();
