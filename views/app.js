@@ -360,12 +360,12 @@ $(() =>{
         name: "4-8",
         type: "IN",
         active: true,
-        health: 10,
+        health: 2,
         attack: false,
         direction: "center",
         nextDirection: "center",
         xValue: 3,
-        yValue: 4,
+        yValue: 2,
         fullName: "4th Battalion, 9th Regiment"
       }
     ],
@@ -599,16 +599,13 @@ $(() =>{
     blueTeam.playerName = $("#blueLeader").val();
     blueTeam.teamName = $("#blueArmy").val();
     blueTeam.teamName = blueTeam.teamName.toUpperCase();
-    if (blueTeam.teamName != "") {
-      $("#blueStatus").text(blueTeam.playerName);
-    } else {
-      $("#blueStatus").text("Grant");
+    if (blueTeam.playerName == "") {
+      blueTeam.playerName = "Grant";
     };
-    if (blueTeam.teamName != "") {
-      $("#blueStatus").text(blueTeam.teamName);
-    } else {
-      $("#blueStatus").text("Blue");
+    if (blueTeam.teamName == "") {
+      blueTeam.teamName = "USA";
     };
+    $("#blueStatus").text(blueTeam.teamName);
     $("#openOneName").css("display","none");
     $("#openPage").css("display","none");
     if (numOfPlayers == 2) {
@@ -630,16 +627,13 @@ $(() =>{
     redTeam.playerName = $("#redLeader").val();
     redTeam.teamName = $("#redArmy").val();
     redTeam.teamName = redTeam.teamName.toUpperCase();
-    if (redTeam.teamName != "") {
-      $("#redStatus").text(redTeam.playerName);
-    } else {
-      $("#redStatus").text("Lee");
+    if (redTeam.playerName == "") {
+      redTeam.playerName = "Lee";
     };
-    if (redTeam.teamName != "") {
-      $("#redStatus").text(redTeam.teamName);
-    } else {
-      $("#redStatus").text("Red");
+    if (redTeam.teamName == "") {
+      redTeam.teamName = "CSA";
     };
+    $("#redStatus").text(redTeam.teamName);
     $("#openTwoName").css("display","none");
     $("#openPage").css("display","none");
     $(".openBox").css("display","none");
@@ -1856,12 +1850,15 @@ $(() =>{
     } else {
       reportFacts.push("");
     };
-    console.log(reportFacts);
+    var atkChance = attackerScore / (attackerScore + defenderScore) * 100;
+    var atkPercent = atkChance.toFixed(0) + "%";
+    reportFacts.push(atkPercent);
+    console.log(reportFacts[9]);
     // ---
   }
 
   const addPoints = (thosePresent,atkTeam,defTeam,oneGrid,defLineStatus) => {
-    var finalScore = 40;
+    var finalScore = 0;
     var atkDir = [];
     var defDir = [];
     // This determines the directions that the two teams' units are facing
@@ -1872,6 +1869,9 @@ $(() =>{
       defDir.push(defTeam[b].nextDirection);
     };
     if (thosePresent == defTeam) {
+      // Each unit starts with 20 pts.
+      finalScore += defDir.length * 20;
+      console.log("Defenders start with " + finalScore);
       for (var i = 0; i < thosePresent.length; i++) {
         console.log("Defending Unit: ");
         console.log(thosePresent[i].name);
@@ -1918,6 +1918,9 @@ $(() =>{
         }
       }
     } else if (thosePresent == atkTeam) {
+      // Each unit starts with 20 pts.
+      finalScore += atkDir.length * 20;
+      console.log("Attackers start with " + finalScore);
       // add major points to attackers if no "nextDirection" opposes the attacker's "nextDirection"
       // add minor points to attacker if attacker meets "nextDirection: center"
       for (var i = 0; i < thosePresent.length; i++) {
@@ -2299,7 +2302,7 @@ $(() =>{
         console.log("Battle started.")
         battleSequence(battlefield);
         battleOccur = true;
-        allBattles.push("<li>A " + reportFacts[8] + "battle took place in the " + reportFacts[0] + reportFacts[1] + ". " + reportFacts[2] + " forces, composed of the " + reportFacts[4] + ", attacked the " + reportFacts[3] + "'s " + reportFacts[5] + ". During the fight, " + reportFacts[7] + " attacks and counter-attacks took place. Ultimately, " + reportFacts[6] + " forces controlled the battlefield</li>");
+        allBattles.push("<li>A " + reportFacts[8] + "battle took place in the " + reportFacts[0] + reportFacts[1] + ". The attacking forces had a " + reportFacts[9] + " chance of success. " + reportFacts[2] + " forces, composed of the " + reportFacts[4] + ", attacked the " + reportFacts[3] + "'s " + reportFacts[5] + ". During the fight, " + reportFacts[7] + " attacks and counter-attacks took place. Ultimately, " + reportFacts[6] + " forces controlled the battlefield</li>");
         console.log("allBattles: ");
         console.log(allBattles);
       };
@@ -2345,12 +2348,14 @@ $(() =>{
     var redUnitsLeft = redCavLeft + redInLeft + redArLeft;
     if (blueUnitsLeft <= 0) {
       $("#openPage").css('display','block');
-      $("#openClose").css('display','block')
+      $(".openBox").css('display','block');
+      $("#openClose").css('display','block');
       $("#winName").text(redTeam.playerName);
       $("#winArmy").text(redTeam.teamName);
     } else if (redUnitsLeft <= 0) {
       $("#openPage").css('display','block');
-      $("#openClose").css('display','block')
+      $(".openBox").css('display','block');
+      $("#openClose").css('display','block');
       $("#winName").text(blueTeam.playerName);
       $("#winArmy").text(blueTeam.teamName);
     } else {
@@ -2826,7 +2831,6 @@ $(() =>{
       } else if (totalGrids == 25) {
         allGrids[22].terrain = "field"
       };
-      console.log(totalGrids);
       // console.log("pickTerrain is functioning.");
     };
     pickTerrain();
