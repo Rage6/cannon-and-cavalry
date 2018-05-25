@@ -360,12 +360,12 @@ $(() =>{
         name: "4-8",
         type: "IN",
         active: true,
-        health: 2,
+        health: 10,
         attack: false,
         direction: "center",
         nextDirection: "center",
         xValue: 3,
-        yValue: 2,
+        yValue: 4,
         fullName: "4th Battalion, 9th Regiment"
       }
     ],
@@ -600,10 +600,10 @@ $(() =>{
     blueTeam.teamName = $("#blueArmy").val();
     blueTeam.teamName = blueTeam.teamName.toUpperCase();
     if (blueTeam.playerName == "") {
-      blueTeam.playerName = "Grant";
+      blueTeam.playerName = "Player1";
     };
     if (blueTeam.teamName == "") {
-      blueTeam.teamName = "USA";
+      blueTeam.teamName = "ONE";
     };
     $("#blueStatus").text(blueTeam.teamName);
     $("#openOneName").css("display","none");
@@ -628,10 +628,10 @@ $(() =>{
     redTeam.teamName = $("#redArmy").val();
     redTeam.teamName = redTeam.teamName.toUpperCase();
     if (redTeam.playerName == "") {
-      redTeam.playerName = "Lee";
+      redTeam.playerName = "Player2";
     };
     if (redTeam.teamName == "") {
-      redTeam.teamName = "CSA";
+      redTeam.teamName = "TWO";
     };
     $("#redStatus").text(redTeam.teamName);
     $("#openTwoName").css("display","none");
