@@ -1,6 +1,10 @@
 // VARIABLES
+
 $min: 361px;
 $max: 375px;
+
+$firstWidth: 700px;
+$firstHeight: 700px;
 
 // MIXINS
 
@@ -22,9 +26,9 @@ $max: 375px;
 html {
 
   body {
-    // @media only screen and (min-width: $min) and (max-width: $max) {
-    //   border: 5px solid red;
-    // };
+    @media only screen and (min-width: $min) and (max-width: $max) {
+      border: 5px solid red;
+    };
     #openPage {
 
     }
@@ -335,7 +339,7 @@ html {
 
           // The box where the reporst come in
           #completeReport {
-            @media only screen and (min-width: $min) and (max-width: $max) {
+            @media only screen and (min-width: $min) {
               color: red;
             }
             .battleTitle {
@@ -368,15 +372,7 @@ html {
         }
       }
       #ordersButton {
-        margin: 0px auto 20px auto;
-        border: 2px solid black;
-        border-radius: 20px;
-        padding: 5px;
-        font-size: 4rem;
-        text-align: center;
-        color: white;
-        background-color: orange;
-        width: 50%;
+
       }
     }
   }

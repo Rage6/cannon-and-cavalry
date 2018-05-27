@@ -1,6 +1,9 @@
 // VARIABLES
 
+$max: 360px;
 
+$firstWidth: 200px;
+$firstHeight: 200px;
 
 // MIXINS
 
@@ -22,12 +25,12 @@
 html {
 
   body {
-    margin: 0;
+    margin: 0px;
     font-size: 16px;
     font-family: 'Stylish', sans-serif;
     background-image: url('images/gettysburg.jpg');
     background-size: cover;
-
+    width: $max;
     #openPage {
       margin: 0;
       position: absolute;
@@ -36,11 +39,11 @@ html {
       background-color: black;
       opacity: 0.5;
       height: 100%;
-      width: 100%;
+      width: $max;
     }
 
     .openBox {
-      margin: 0 10%;
+      // margin: 0 10%;
       border: 2px solid white;
       border-radius: 40px;
       position: absolute;
@@ -51,11 +54,12 @@ html {
       font-family: 'Stylish', sans-serif;
       font-size: 4.7rem;
       text-align: center;
+      width: $max;
       #openIntro {
         display: block;
         #openTitle {
           font-family: 'Black Ops One', cursive;
-          font-size: 6rem;
+          font-size: 4rem;
         }
         .openButton {
           margin: 30px 5%;
@@ -298,13 +302,6 @@ html {
       color: white;
     }
 
-    // #mainTitle {
-    //   margin: 20px 10% 40px 10%;
-    //   font-size: 4.5em;
-    //   background-color: lightgrey;
-    //   @include divWidth(80%);
-    // }
-
     #terrain {
       margin: 30px auto;
       border: 2px solid black;
@@ -312,8 +309,8 @@ html {
       padding: 20px;
       background-image: url('images/slate.jpg');
       background-size: cover;
-      @include divWidth(700px);
-      @include divHeight(700px);
+      @include divWidth($firstWidth);
+      @include divHeight($firstHeight);
     }
 
     #ground {
@@ -601,6 +598,7 @@ html {
       }
     }
   }
-  // IMPORTS
-  // @import '_375px';
 }
+
+// IMPORTS
+@import '_375px';

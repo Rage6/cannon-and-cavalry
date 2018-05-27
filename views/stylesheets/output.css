@@ -1,9 +1,10 @@
 html body {
-  margin: 0;
+  margin: 0px;
   font-size: 16px;
   font-family: 'Stylish', sans-serif;
   background-image: url("images/gettysburg.jpg");
-  background-size: cover; }
+  background-size: cover;
+  width: 360px; }
   html body #openPage {
     margin: 0;
     position: absolute;
@@ -12,9 +13,8 @@ html body {
     background-color: black;
     opacity: 0.5;
     height: 100%;
-    width: 100%; }
+    width: 360px; }
   html body .openBox {
-    margin: 0 10%;
     border: 2px solid white;
     border-radius: 40px;
     position: absolute;
@@ -24,12 +24,13 @@ html body {
     color: white;
     font-family: 'Stylish', sans-serif;
     font-size: 4.7rem;
-    text-align: center; }
+    text-align: center;
+    width: 360px; }
     html body .openBox #openIntro {
       display: block; }
       html body .openBox #openIntro #openTitle {
         font-family: 'Black Ops One', cursive;
-        font-size: 6rem; }
+        font-size: 4rem; }
       html body .openBox #openIntro .openButton {
         margin: 30px 5%;
         border: 5px solid white;
@@ -203,14 +204,14 @@ html body {
     padding: 20px;
     background-image: url("images/slate.jpg");
     background-size: cover;
-    -webkit-width: 700px;
-    -moz-width: 700px;
-    -ms-width: 700px;
-    width: 700px;
-    -webkit-height: 700px;
-    -moz-height: 700px;
-    -ms-height: 700px;
-    height: 700px; }
+    -webkit-width: 200px;
+    -moz-width: 200px;
+    -ms-width: 200px;
+    width: 200px;
+    -webkit-height: 200px;
+    -moz-height: 200px;
+    -ms-height: 200px;
+    height: 200px; }
   html body #ground {
     display: flex;
     flex-direction: row;
@@ -447,5 +448,12 @@ html body {
       color: white;
       background-color: orange;
       width: 50%; }
+
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+  html body {
+    border: 5px solid red; } }
+@media only screen and (min-width: 361px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport {
+    color: red; } }
 
 /*# sourceMappingURL=output.css.map */
