@@ -159,7 +159,7 @@ html {
         display: none;
       }
       .closeButton {
-        margin: 40px 0;
+        margin: 20px 0 5px 0;
         border-radius: 25px;
         background-color: white;
         color: brown;
@@ -171,13 +171,13 @@ html {
       .explainBox {
         border: 1px solid yellow;
         padding: 30px 5%;
-        font-size: 2.8rem;
+        font-size: 1.5rem;
         text-align: left;
         overflow-y: scroll;
-        height: 1000px;
+        height: 300px;
         .explainSubTitle {
           margin: 10px 0 30px 0;
-          font-size: 3.2rem;
+          font-size: 2rem;
           text-align: center;
         }
         table {
@@ -191,7 +191,7 @@ html {
           }
           .settingCells {
             border: 3px solid white;
-            font-size: 4rem;
+            font-size: 2rem;
             text-align: center;
           }
           #fourGrids {
@@ -206,11 +206,11 @@ html {
           margin-bottom: 50px;
           border: 2px solid white;
           padding: 20px 5%;
-          font-size: 2.5rem;
+          font-size: 1.5rem;
           .mapTitle {
             margin-bottom: 30px;
             text-align: center;
-            font-size: 3rem;
+            font-size: 2rem;
           }
         }
         .explainContent {
@@ -247,12 +247,26 @@ html {
             }
             .glossTitle {
               margin: 15px 0 30px 0;
-              font-size: 3.5rem;
+              font-size: 2.5rem;
               text-align: center;
             }
             .glossDescribe {
               margin-bottom: 100px;
-              font-size: 2.8rem;
+              font-size: 1.5rem;
+              table {
+                margin-top: 20px;
+                font-size: 1rem;
+                border-collapse: collapse;
+                tbody {
+
+                  tr {
+                    margin: 0;
+                    td {
+
+                    }
+                  }
+                }
+              }
             }
           }
           .aboutPara {
@@ -559,14 +573,16 @@ html {
             margin: 0 5%;
             border: 1px solid black;
             padding: 5%;
-            // font-size: 1rem;
             height: 64%;
             overflow: scroll;
             .battleTitle {
               text-align: center;
             }
-            #orderList {
+            ul {
+              padding-left: 15px;
+              li {
 
+              }
             }
             #resultList {
 

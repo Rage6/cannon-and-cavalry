@@ -282,7 +282,7 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        fullName: "1st Battalion, 5th Regiment"
+        fullName: "1st BN, 5th RGT"
       },
       {
         name: "1-24",
@@ -296,7 +296,7 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        fullName: "1st Battalion, 24th Regiment"
+        fullName: "1st BN, 24th RGT"
       }
     ],
     cavalry: [
@@ -316,7 +316,7 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
-        fullName: "5th Squadron, 1st Regiment"
+        fullName: "5th SQD, 1st RGT"
       }
     ],
     artillery: [
@@ -333,7 +333,7 @@ $(() =>{
         nextXvalue: null,
         nextYvalue: null,
         inPlace: true,
-        fullName: "2nd Battalion, 8th Regiment"
+        fullName: "2nd BN, 8th RGT"
       }
     ]
   };
@@ -354,7 +354,7 @@ $(() =>{
         nextDirection: "center",
         xValue: 3,
         yValue: 4,
-        fullName: "2nd Battalion, 5th Regiment"
+        fullName: "2nd BN, 5th RGT"
       },
       {
         name: "4-8",
@@ -366,7 +366,7 @@ $(() =>{
         nextDirection: "center",
         xValue: 3,
         yValue: 4,
-        fullName: "4th Battalion, 9th Regiment"
+        fullName: "4th BN, 9th RGT"
       }
     ],
     cavalry: [
@@ -384,7 +384,7 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
-        fullName: "3rd Regiment"
+        fullName: "3rd RGT"
       }
     ],
     artillery: [
@@ -651,7 +651,7 @@ $(() =>{
   const howToStop = () => {
     $("#openIntro").css('display','block');
     $("#openHowTo").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeHowTo").click(howToStop);
 
@@ -670,7 +670,7 @@ $(() =>{
   const glossaryStop = () => {
     $("#openIntro").css('display','block');
     $("#openGlossary").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeGlossary").click(glossaryStop);
 
@@ -685,7 +685,7 @@ $(() =>{
   const settingsStop = () => {
     $("#openIntro").css('display','block');
     $("#openSettings").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeSettings").click(settingsStop);
 
@@ -704,7 +704,7 @@ $(() =>{
   const aboutStop = () => {
     $("#openIntro").css('display','block');
     $("#openAbout").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeAbout").click(aboutStop);
 

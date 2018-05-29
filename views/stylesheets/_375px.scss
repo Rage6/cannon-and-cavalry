@@ -3,8 +3,8 @@
 $min: 361px;
 $max: 375px;
 
-$firstWidth: 700px;
-$firstHeight: 700px;
+$firstWidth: 214px;
+$firstHeight: 214px;
 
 // MIXINS
 
@@ -26,9 +26,7 @@ $firstHeight: 700px;
 html {
 
   body {
-    @media only screen and (min-width: $min) and (max-width: $max) {
-      border: 5px solid red;
-    };
+
     #openPage {
 
     }
@@ -81,6 +79,15 @@ html {
         }
       }
       .submitButton {
+
+      }
+      .leadInput {
+
+      }
+      .lengthNote {
+
+      }
+      .actualInput {
 
       }
       #openOneName {
@@ -136,11 +143,13 @@ html {
         .explainContent {
 
           ol {
+
             li {
 
             }
           }
           .glossBox {
+
             .glossImg {
 
               img {
@@ -164,6 +173,18 @@ html {
             }
             .glossDescribe {
 
+              table {
+
+                tbody {
+
+                  tr {
+
+                    td {
+
+                    }
+                  }
+                }
+              }
             }
           }
           .aboutPara {
@@ -297,8 +318,6 @@ html {
 
               #health {
 
-                #healthReading {
-
                 }
               }
               #arrows {
@@ -339,9 +358,7 @@ html {
 
           // The box where the reporst come in
           #completeReport {
-            @media only screen and (min-width: $min) {
-              color: red;
-            }
+
             .battleTitle {
 
             }
@@ -358,8 +375,10 @@ html {
 
             .unitColumn {
 
-              img {
+              div {
+                img {
 
+                }
               }
             }
           }
@@ -376,4 +395,4 @@ html {
       }
     }
   }
-}
+// }
