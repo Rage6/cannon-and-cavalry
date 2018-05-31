@@ -1,6 +1,10 @@
 // VARIABLES
+
 $min: 361px;
 $max: 375px;
+
+$firstWidth: 214px;
+$firstHeight: 214px;
 
 // MIXINS
 
@@ -21,581 +25,374 @@ $max: 375px;
 // MAIN CODE
 html {
 
-body {
-  margin: 0;
-  font-size: 16px;
-  font-family: 'Stylish', sans-serif;
-  background-image: url('images/gettysburg.jpg');
-  background-size: cover;
+  body {
 
-  #openPage {
-    margin: 0;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    background-color: black;
-    opacity: 0.5;
-    height: 100%;
-    width: 100%;
-  }
+    #openPage {
 
-  .openBox {
-    margin: 0 10%;
-    border: 2px solid white;
-    border-radius: 40px;
-    position: absolute;
-    top: 200px;
-    z-index: 2;
-    background-color: brown;
-    color: white;
-    font-family: 'Stylish', sans-serif;
-    font-size: 4.7rem;
-    text-align: center;
-    #openIntro {
-      display: block;
-      #openTitle {
-        font-family: 'Black Ops One', cursive;
-        font-size: 6rem;
-      }
-      .openButton {
-        margin: 30px 5%;
-        border: 5px solid white;
-        border-radius: 25px;
-        cursor: pointer;
-      }
-      #onePlayer {
-        text-decoration: line-through;
-      }
-      #onePlayer:hover {
-        background-color: white;
-        color: brown;
-      }
-      #twoPlayer {
+    }
 
-      }
-      #twoPlayer:hover {
-        background-color: white;
-        color: brown;
-      }
-      #howTo {
+    .openBox {
 
-      }
-      #howTo:hover {
-        background-color: white;
-        color: brown;
-      }
-      #glossary {
+      #openIntro {
 
-      }
-      #glossary:hover {
-        background-color: white;
-        color: brown;
-      }
-      #settings {
+        #openTitle {
 
-      }
-      #settings:hover {
-        background-color: white;
-        color: brown;
-      }
-      #about {
-
-      }
-      #about:hover {
-        background-color: white;
-        color: brown;
-      }
-    }
-    .submitButton {
-      margin: 40px 20%;
-      border: 8px solid white;
-      border-radius: 20px;
-      padding: 10px 0;
-    }
-    #openOneName {
-      border-radius: 40px;
-      padding: 20px 10%;
-      display: none;
-      background-color: blue;
-    }
-    #openTwoName {
-      border-radius: 40px;
-      padding: 20px 10%;
-      display: none;
-      background-color: red;
-    }
-    #openHowTo {
-      padding: 20px 10%;
-      display: none;
-    }
-    #openGlossary {
-      padding: 20px 10%;
-      display: none;
-    }
-    #openSettings {
-      padding: 20px 10%;
-      display: none;
-    }
-    #openAbout {
-      padding: 20px 10%;
-      display: none;
-    }
-    .closeButton {
-      margin: 40px 0;
-      border-radius: 25px;
-      background-color: white;
-      color: brown;
-    }
-    .explainTitle {
-      margin: 30px 0;
-      text-decoration: underline;
-    }
-    .explainBox {
-      border: 1px solid yellow;
-      padding: 30px 5%;
-      font-size: 2.8rem;
-      text-align: left;
-      overflow-y: scroll;
-      height: 1000px;
-      .explainSubTitle {
-        margin: 10px 0 30px 0;
-        font-size: 3.2rem;
-        text-align: center;
-      }
-      table {
-        margin-bottom: 70px;
-        width: 100%;
-        border-spacing: 20px;
-        .glossaryCells {
-          border: 3px solid white;
-          text-align: center;
-          padding: 10px;
         }
-        .settingCells {
-          border: 3px solid white;
-          font-size: 4rem;
-          text-align: center;
+        .openButton {
+
         }
-        #fourGrids {
-          color: brown;
-          background-color: white;
+        #onePlayer {
+
         }
-        #fiveGrids {
+        #onePlayer:hover {
+
+        }
+        #twoPlayer {
+
+        }
+        #twoPlayer:hover {
+
+        }
+        #howTo {
+
+        }
+        #howTo:hover {
+
+        }
+        #glossary {
+
+        }
+        #glossary:hover {
+
+        }
+        #settings {
+
+        }
+        #settings:hover {
+
+        }
+        #about {
+
+        }
+        #about:hover {
 
         }
       }
-      .pickMap {
-        margin-bottom: 50px;
-        border: 2px solid white;
-        padding: 20px 5%;
-        font-size: 2.5rem;
-        .mapTitle {
-          margin-bottom: 30px;
-          text-align: center;
-          font-size: 3rem;
-        }
+      .submitButton {
+
       }
-      .explainContent {
-        margin-bottom: 60px;
-        ol {
-          li {
-            margin: 10px 0;
+      .leadInput {
+
+      }
+      .lengthNote {
+
+      }
+      .actualInput {
+
+      }
+      #openOneName {
+
+      }
+      #openTwoName {
+
+      }
+      #openHowTo {
+
+      }
+      #openGlossary {
+
+      }
+      #openSettings {
+
+      }
+      #openAbout {
+
+      }
+      .closeButton {
+
+      }
+      .explainTitle {
+
+      }
+      .explainBox {
+
+        .explainSubTitle {
+
+        }
+        table {
+
+          .glossaryCells {
+
+          }
+          .settingCells {
+
+          }
+          #fourGrids {
+
+          }
+          #fiveGrids {
+
           }
         }
-        .glossBox {
-          .glossImg {
-            border-radius: 25px;
-            padding: 10px 0;
-            background-color: white;
-            img {
-              margin: 0 25%;
-              width: 50%;
+        .pickMap {
+
+          .mapTitle {
+
+          }
+        }
+        .explainContent {
+
+          ol {
+
+            li {
+
             }
           }
-          #thickConceal {
-            background-color: darkgreen;
-            height: 150px;
-          }
-          #someConceal {
-            background-color: lightgreen;
-            height: 150px;
-          }
-          #noConceal {
-            background-color: orange;
-            height: 150px;
-          }
-          .glossUnit {
-            background-color: black;
-          }
-          .glossTitle {
-            margin: 15px 0 30px 0;
-            font-size: 3.5rem;
-            text-align: center;
-          }
-          .glossDescribe {
-            margin-bottom: 100px;
-            font-size: 2.8rem;
-          }
-        }
-        .aboutPara {
-          margin: 50px 0;
-          font-size: 2.7rem;
-        }
-        .aboutImg {
-          width: 100%;
-        }
-      }
-    }
-    input {
-      font-size: 4rem;
-      color: white;
-      background-color: black;
-      width: 100%;
-    }
-    #openClose {
-      padding: 40px 7%;
-      display: none;
-      #finalButtons {
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        #reset {
-          border: 5px solid white;
-          border-radius: 25px;
-          padding: 10px 5%;
-          color: black;
-          background-color: orange;
-          width: 30%;
-        }
-        #quit {
-          color: white;
-          background-color: red;
-        }
-      }
-    }
-  }
+          .glossBox {
 
-  div.title {
-    text-align: center;
-  }
+            .glossImg {
 
-  .unitButton {
-    cursor: pointer;
-  }
+              img {
 
-  .blueButton {
-    margin: 5px 5% 5px 5%;
-    border-radius: 10px;
-    font-size: 3rem;
-    color: white;
-  }
-
-  .redButton {
-    margin: 5px 5% 5px 5%;
-    border-radius: 10px;
-    font-size: 3rem;
-    color: white;
-  }
-
-  // #mainTitle {
-  //   margin: 20px 10% 40px 10%;
-  //   font-size: 4.5em;
-  //   background-color: lightgrey;
-  //   @include divWidth(80%);
-  // }
-
-  #terrain {
-    margin: 30px auto;
-    border: 2px solid black;
-    border-radius: 15px;
-    padding: 20px;
-    background-image: url('images/slate.jpg');
-    background-size: cover;
-    @include divWidth(700px);
-    @include divHeight(700px);
-  }
-
-  #ground {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: space-around;
-    background-color: black;
-    @include divWidth(100%);
-    @include divHeight(100%);
-  }
-
-  // The set-up of a grid square
-  .gridSquare {
-    margin: auto;
-    border: solid black 1px;
-    text-align: center;
-    font-size: 2rem;
-    background-color: lightgreen;
-    background-size: cover;
-    // @include divWidth(24%);
-    // @include divHeight(24%);
-    width: 24%;
-    height: 24%;
-    .topLine {
-      margin: 0 20%;
-      border-radius: 20px 20px 0 0;
-      height: 20%;
-      img {
-        height: 100%;
-      }
-    }
-    .centerLine {
-      margin: 0;
-      display: flex;
-      height: 60%;
-      .centerLeft {
-        border-radius: 20px 0 0 20px;
-        width: 20%;
-        .helper {
-          display: inline-block;
-          vertical-align: middle;
-          height: 100%;
-        }
-        img {
-          display: inline-block;
-          vertical-align: middle;
-          width: 100%;
-        }
-      }
-      .centerMiddle {
-        border-radius: 25px;
-        width: 60%;
-        background-size: 100% 100%;
-        .helper {
-          display: inline-block;
-          vertical-align: middle;
-          height: 100%;
-        }
-        img {
-          display: inline-block;
-          vertical-align: middle;
-          width: 100%;
-        }
-      }
-      .centerRight {
-        border-radius: 0 20px 20px 0;
-        width: 20%;
-        .helper {
-          display: inline-block;
-          vertical-align: middle;
-          height: 100%;
-        }
-        img {
-          display: inline-block;
-          vertical-align: middle;
-          width: 100%;
-          transform: rotate(180deg);
-        }
-        // .textRight {
-        //   border: 1px solid red;
-        //   // transform: rotate(90%);
-        // }
-      }
-    }
-    .bottomLine {
-      margin: 0 20%;
-      border-radius: 0 0 20px 20px;
-      height: 20%;
-      .helper {
-        display: inline-block;
-        vertical-align: middle;
-        height: 100%;
-      }
-      img {
-        display: inline-block;
-        vertical-align: middle;
-        height: 100%;
-        // transform: rotate(180deg);
-      }
-    }
-  }
-
-  // The four boxes (unit, report, team one, team two)
-  #allOptions {
-    margin: 0px auto 0px auto;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-image: url('images/slate.jpg');
-    background-size: cover;
-    @include divWidth(90%);
-    .turnBoxes {
-      margin: 0 auto;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      @include divWidth(90%);
-      .indivBox {
-        margin: 20px 0;
-        // background-color: white;
-        background-image: url('images/parchment.jpg');
-        background-size: cover;
-
-        @include divWidth(48%);
-        @include divHeight(360px);
-        .title {
-          margin-bottom: 20px;
-          border: solid black;
-          border-width: 3px 0 0 3px;
-          display: block;
-          font-size: 3rem;
-          text-align: center;
-        }
-
-        // The box for selecting directions and modes
-        #unitBox {
-          #attackDefendBox {
-            margin-top: 25px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            .attackDefendButton {
-              margin: 0 5%;
-              border: 5px solid;
-              font-size: 2.5rem;
-              text-align: center;
-              cursor: pointer;
-              @include divWidth(45%);
-            }
-            #attackButton {
-              border-color: blue;
-              color: black;
-              background-color: none;
-            }
-            #defendButton {
-              border-color: red;
-              color: black;
-              background-color: none;
-            }
-          }
-          #unitName {
-            margin: 20px 0;
-            font-size: 2rem;
-            text-align: center;
-          }
-          #healthAndArrowBox {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            #health {
-              padding: 20px;
-              // border: 2px solid green;
-              font-size: 3rem;
-              text-align: center;
-              @include divWidth(48%);
-              #healthReading {
-                // margin: 0 10%;
-                border: 2px solid black;
-                font-size: 4rem;
               }
             }
-            #arrows {
-              display: flex;
-              flex-wrap: wrap;
-              @include divWidth(48%);
-              .arrowBox {
-                font-size: 2.5rem;
-                text-align: center;
-                @include divWidth(30%);
-                img {
-                  margin-top: 10%;
-                  height: 80%;
-                  width: 80%;
+            #thickConceal {
+
+            }
+            #someConceal {
+
+            }
+            #noConceal {
+
+            }
+            .glossUnit {
+
+            }
+            .glossTitle {
+
+            }
+            .glossDescribe {
+
+              table {
+
+                tbody {
+
+                  tr {
+
+                    td {
+
+                    }
+                  }
                 }
               }
-              #northWest {
-                border: 1px solid black;
-                border-radius: 25px 0 0 0;
-                background-color: black;
-              }
-              #north {
-                border: 1px solid black;
-              }
-              #northEast {
-                border: 1px solid black;
-                border-radius: 0 25px 0 0;
-                background-color: black;
-              }
-              #east {
-                border: 1px solid black;
-              }
-              #southEast {
-                border: 1px solid black;
-                border-radius: 0 0 25px 0;
-                background-color: black;
-              }
-              #south {
-                border: 1px solid black;
-              }
-              #southWest {
-                border: 1px solid black;
-                border-radius: 0 0 0 25px;
-                background-color: black;
-              }
-              #west {
-                border: 1px solid black;
-              }
             }
           }
-        }
-
-        // The box where the reporst come in
-        #completeReport {
-          @media only screen and (min-width: $min) and (max-width: $max) {
-            border: 3px solid yellow;
-          }
-          .battleTitle {
-            text-align: center;
-          }
-          #orderList {
+          .aboutPara {
 
           }
-          #resultList {
+          .aboutImg {
 
           }
         }
+      }
+      input {
 
-        // The boxes for selecting a player's units
-        .allUnitColumns {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          .unitColumn {
-            margin: 0;
-            font-size: 2.5rem;
-            text-align: center;
-            @include divWidth(30%);
-            img {
-              padding: 5px 0;
-              height: 50px;
-            }
+      }
+      #openClose {
+
+        #finalButtons {
+
+          #reset {
+
+          }
+          #quit {
+
           }
         }
-        #teamOne {
+      }
+    }
+
+    div.title {
+
+    }
+
+    .unitButton {
+
+    }
+
+    .blueButton {
+
+    }
+
+    .redButton {
+
+    }
+
+    #terrain {
+
+    }
+
+    #ground {
+
+    }
+
+    // The set-up of a grid square
+    .gridSquare {
+
+      .topLine {
+
+        img {
 
         }
-        #teamTwo {
+      }
+      .centerLine {
+
+        .centerLeft {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerMiddle {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerRight {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+      }
+      .bottomLine {
+
+        .helper {
+
+        }
+        img {
 
         }
       }
     }
-    #ordersButton {
-      margin: 0px auto 20px auto;
-      border: 2px solid black;
-      border-radius: 20px;
-      padding: 5px;
-      font-size: 4rem;
-      text-align: center;
-      color: white;
-      background-color: orange;
-      width: 50%;
+
+    // The four boxes (unit, report, team one, team two)
+    #allOptions {
+
+      .turnBoxes {
+
+        .indivBox {
+
+          .title {
+
+          }
+
+          // The box for selecting directions and modes
+          #unitBox {
+            #attackDefendBox {
+
+              .attackDefendButton {
+
+              }
+              #attackButton {
+
+              }
+              #defendButton {
+
+              }
+            }
+            #unitName {
+
+            }
+            #healthAndArrowBox {
+
+              #health {
+
+                }
+              }
+              #arrows {
+
+                .arrowBox {
+
+                  img {
+
+                  }
+                }
+                #northWest {
+
+                }
+                #north {
+
+                }
+                #northEast {
+
+                }
+                #east {
+
+                }
+                #southEast {
+
+                }
+                #south {
+
+                }
+                #southWest {
+
+                }
+                #west {
+
+                }
+              }
+            }
+          }
+
+          // The box where the reporst come in
+          #completeReport {
+
+            .battleTitle {
+
+            }
+            #orderList {
+
+            }
+            #resultList {
+
+            }
+          }
+
+          // The boxes for selecting a player's units
+          .allUnitColumns {
+
+            .unitColumn {
+
+              div {
+                img {
+
+                }
+              }
+            }
+          }
+          #teamOne {
+
+          }
+          #teamTwo {
+
+          }
+        }
+      }
+      #ordersButton {
+
+      }
     }
   }
-}
-}
+// }

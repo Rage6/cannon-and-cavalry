@@ -282,7 +282,7 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        fullName: "1st Battalion, 5th Regiment"
+        fullName: "1st BN, 5th RGT"
       },
       {
         name: "1-24",
@@ -296,7 +296,7 @@ $(() =>{
         yValue: 1,
         nextXvalue: null,
         nextYvalue: null,
-        fullName: "1st Battalion, 24th Regiment"
+        fullName: "1st BN, 24th RGT"
       }
     ],
     cavalry: [
@@ -316,7 +316,7 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
-        fullName: "5th Squadron, 1st Regiment"
+        fullName: "5th SQD, 1st RGT"
       }
     ],
     artillery: [
@@ -333,7 +333,7 @@ $(() =>{
         nextXvalue: null,
         nextYvalue: null,
         inPlace: true,
-        fullName: "2nd Battalion, 8th Regiment"
+        fullName: "2nd BN, 8th RGT"
       }
     ]
   };
@@ -354,7 +354,7 @@ $(() =>{
         nextDirection: "center",
         xValue: 3,
         yValue: 4,
-        fullName: "2nd Battalion, 5th Regiment"
+        fullName: "2nd BN, 5th RGT"
       },
       {
         name: "4-8",
@@ -366,7 +366,7 @@ $(() =>{
         nextDirection: "center",
         xValue: 3,
         yValue: 4,
-        fullName: "4th Battalion, 9th Regiment"
+        fullName: "4th BN, 9th RGT"
       }
     ],
     cavalry: [
@@ -384,7 +384,7 @@ $(() =>{
         twoSquaresE: null,
         twoSquaresS: null,
         twoSquaresW: null,
-        fullName: "3rd Regiment"
+        fullName: "3rd RGT"
       }
     ],
     artillery: [
@@ -651,7 +651,7 @@ $(() =>{
   const howToStop = () => {
     $("#openIntro").css('display','block');
     $("#openHowTo").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeHowTo").click(howToStop);
 
@@ -670,7 +670,7 @@ $(() =>{
   const glossaryStop = () => {
     $("#openIntro").css('display','block');
     $("#openGlossary").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeGlossary").click(glossaryStop);
 
@@ -685,7 +685,7 @@ $(() =>{
   const settingsStop = () => {
     $("#openIntro").css('display','block');
     $("#openSettings").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeSettings").click(settingsStop);
 
@@ -704,14 +704,14 @@ $(() =>{
   const aboutStop = () => {
     $("#openIntro").css('display','block');
     $("#openAbout").css('display','none');
-    $(".openBox").css("margin","0 10%");
+    $(".openBox").css({"margin":"0 10%","width":"80%"});
   }
   $("#closeAbout").click(aboutStop);
 
   // To highlight the current player in their status box
   const showCurrentPlayer = () => {
     if (currentPlayer == blueTeam) {
-      $("#blueTitle").css("background-color","yellow").css("border","5px 5px 0 5px solid black");
+      $("#blueTitle").css("background-color","yellow").css("border","1px 1px 0 1px solid black");
       $("#redTitle").css("background-color","transparent");
     } else if (currentPlayer == redTeam) {
       $("#blueTitle").css("background-color","transparent");
@@ -1039,7 +1039,7 @@ $(() =>{
         $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_north";
-        $(targetID).css("border","5px solid yellow").css("border-bottom","none");;
+        $(targetID).css("border","2px solid yellow").css("border-bottom","none");;
       };
       // console.log(selectedUnit);
     } else if (selectedUnit.nextDirection == "east") {
@@ -1082,7 +1082,7 @@ $(() =>{
         $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_east";
-        $(targetID).css("border","5px solid yellow").css("border-left","none");;
+        $(targetID).css("border","2px solid yellow").css("border-left","none");
       };
     } else if (selectedUnit.nextDirection == "south") {
       if (selectedUnit.type == "CAV") {
@@ -1124,7 +1124,7 @@ $(() =>{
         $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_south";
-        $(targetID).css("border","5px solid yellow").css("border-top","none");;
+        $(targetID).css("border","2px solid yellow").css("border-top","none");
       };
     } else if (selectedUnit.nextDirection == "west") {
       if (selectedUnit.type == "CAV") {
@@ -1166,7 +1166,7 @@ $(() =>{
         $(notTargetID).css("border","none");
       } else if (selectedUnit.attack == false) {
         var targetID = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_west";
-        $(targetID).css("border","5px solid yellow").css("border-right","none");
+        $(targetID).css("border","2px solid yellow").css("border-right","none");
       };
     } else if (selectedUnit.nextDirection == "northWest") {
       if (selectedUnit.attack == true && selectedUnit.xValue > 1 && selectedUnit.yValue > 1) {
@@ -1344,11 +1344,11 @@ $(() =>{
   }
   // To choose which border color for the next potential grid
   // Note: These used to switch from blue to red, but it makes it difficult to see the borders when entering the same unit with allies
-  var targetBorder = "5px solid yellow";
+  var targetBorder = "2px solid yellow";
   const borderColor = () => {
-    targetBorder = "5px solid yellow";
+    targetBorder = "2px solid yellow";
     if (currentPlayer == redTeam) {
-      targetBorder = "5px solid yellow";
+      targetBorder = "2px solid yellow";
     };
     return targetBorder
   };
@@ -2468,14 +2468,14 @@ $(() =>{
     selectedUnit = currentPlayer.infantry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css("border","5px solid yellow");
+    $(gridAndDirection).css("border","2px solid yellow");
     selectedValues();
   };
 
   const borderBlueInColumn = () => {
     for (var k = 0; k < currentPlayer.infantry.length; k++) {
       if (currentPlayer.infantry[k].columnNum == selectedUnit.columnNum) {
-        $("#blueIn" + k).css("border","5px solid red")
+        $("#blueIn" + k).css("border","2px solid red")
       } else {
         $("#blueIn" + k).css("border","none")
       };
@@ -2504,7 +2504,7 @@ $(() =>{
   const borderRedInColumn = () => {
     for (var k = 0; k < currentPlayer.infantry.length; k++) {
       if (currentPlayer.infantry[k].columnNum == selectedUnit.columnNum) {
-        $("#redIn" + k).css("border","5px solid blue")
+        $("#redIn" + k).css("border","2px solid blue")
       } else {
         $("#redIn" + k).css("border","none")
       };
@@ -2541,14 +2541,14 @@ $(() =>{
     selectedUnit = currentPlayer.cavalry[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css("border","5px solid yellow");
+    $(gridAndDirection).css("border","2px solid yellow");
     selectedValues();
   };
 
   const borderBlueCavColumn = () => {
     for (var k = 0; k < currentPlayer.cavalry.length; k++) {
       if (currentPlayer.cavalry[k].columnNum == selectedUnit.columnNum) {
-        $("#blueCav" + k).css("border","5px solid red")
+        $("#blueCav" + k).css("border","2px solid red")
       } else {
         $("#blueCav" + k).css("border","none")
       };
@@ -2577,7 +2577,7 @@ $(() =>{
   const borderRedCavColumn = () => {
     for (var k = 0; k < currentPlayer.cavalry.length; k++) {
       if (currentPlayer.cavalry[k].columnNum == selectedUnit.columnNum) {
-        $("#redCav" + k).css("border","5px solid blue")
+        $("#redCav" + k).css("border","2px solid blue")
       } else {
         $("#redCav" + k).css("border","none")
       };
@@ -2614,14 +2614,14 @@ $(() =>{
     selectedUnit = currentPlayer.artillery[clickNum];
     removeAllColors();
     gridAndDirection = "#x" + selectedUnit.xValue + "y" + selectedUnit.yValue + "_" + selectedUnit.direction;
-    $(gridAndDirection).css("border","5px solid yellow");
+    $(gridAndDirection).css("border","2px solid yellow");
     selectedValues();
   };
 
   const borderBlueArColumn = () => {
     for (var k = 0; k < currentPlayer.artillery.length; k++) {
       if (currentPlayer.artillery[k].columnNum == selectedUnit.columnNum) {
-        $("#blueAr" + k).css("border","5px solid red")
+        $("#blueAr" + k).css("border","2px solid red")
       } else {
         $("#blueAr" + k).css("border","none")
       };
@@ -2650,7 +2650,7 @@ $(() =>{
   const borderRedArColumn = () => {
     for (var k = 0; k < currentPlayer.artillery.length; k++) {
       if (currentPlayer.artillery[k].columnNum == selectedUnit.columnNum) {
-        $("#redAr" + k).css("border","5px solid blue")
+        $("#redAr" + k).css("border","2px solid blue")
       } else {
         $("#redAr" + k).css("border","none")
       };
