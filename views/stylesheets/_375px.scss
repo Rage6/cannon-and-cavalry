@@ -1,0 +1,398 @@
+// VARIABLES
+
+$min: 361px;
+$max: 375px;
+
+$firstWidth: 214px;
+$firstHeight: 214px;
+
+// MIXINS
+
+@mixin divWidth($width) {
+  -webkit-width: $width;
+  -moz-width: $width;
+  -ms-width: $width;
+  width: $width;
+}
+
+@mixin divHeight($height) {
+  -webkit-height: $height;
+  -moz-height: $height;
+  -ms-height: $height;
+  height: $height;
+}
+
+// MAIN CODE
+html {
+
+  body {
+
+    #openPage {
+
+    }
+
+    .openBox {
+
+      #openIntro {
+
+        #openTitle {
+
+        }
+        .openButton {
+
+        }
+        #onePlayer {
+
+        }
+        #onePlayer:hover {
+
+        }
+        #twoPlayer {
+
+        }
+        #twoPlayer:hover {
+
+        }
+        #howTo {
+
+        }
+        #howTo:hover {
+
+        }
+        #glossary {
+
+        }
+        #glossary:hover {
+
+        }
+        #settings {
+
+        }
+        #settings:hover {
+
+        }
+        #about {
+
+        }
+        #about:hover {
+
+        }
+      }
+      .submitButton {
+
+      }
+      .leadInput {
+
+      }
+      .lengthNote {
+
+      }
+      .actualInput {
+
+      }
+      #openOneName {
+
+      }
+      #openTwoName {
+
+      }
+      #openHowTo {
+
+      }
+      #openGlossary {
+
+      }
+      #openSettings {
+
+      }
+      #openAbout {
+
+      }
+      .closeButton {
+
+      }
+      .explainTitle {
+
+      }
+      .explainBox {
+
+        .explainSubTitle {
+
+        }
+        table {
+
+          .glossaryCells {
+
+          }
+          .settingCells {
+
+          }
+          #fourGrids {
+
+          }
+          #fiveGrids {
+
+          }
+        }
+        .pickMap {
+
+          .mapTitle {
+
+          }
+        }
+        .explainContent {
+
+          ol {
+
+            li {
+
+            }
+          }
+          .glossBox {
+
+            .glossImg {
+
+              img {
+
+              }
+            }
+            #thickConceal {
+
+            }
+            #someConceal {
+
+            }
+            #noConceal {
+
+            }
+            .glossUnit {
+
+            }
+            .glossTitle {
+
+            }
+            .glossDescribe {
+
+              table {
+
+                tbody {
+
+                  tr {
+
+                    td {
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .aboutPara {
+
+          }
+          .aboutImg {
+
+          }
+        }
+      }
+      input {
+
+      }
+      #openClose {
+
+        #finalButtons {
+
+          #reset {
+
+          }
+          #quit {
+
+          }
+        }
+      }
+    }
+
+    div.title {
+
+    }
+
+    .unitButton {
+
+    }
+
+    .blueButton {
+
+    }
+
+    .redButton {
+
+    }
+
+    #terrain {
+
+    }
+
+    #ground {
+
+    }
+
+    // The set-up of a grid square
+    .gridSquare {
+
+      .topLine {
+
+        img {
+
+        }
+      }
+      .centerLine {
+
+        .centerLeft {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerMiddle {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerRight {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+      }
+      .bottomLine {
+
+        .helper {
+
+        }
+        img {
+
+        }
+      }
+    }
+
+    // The four boxes (unit, report, team one, team two)
+    #allOptions {
+
+      .turnBoxes {
+
+        .indivBox {
+
+          .title {
+
+          }
+
+          // The box for selecting directions and modes
+          #unitBox {
+            #attackDefendBox {
+
+              .attackDefendButton {
+
+              }
+              #attackButton {
+
+              }
+              #defendButton {
+
+              }
+            }
+            #unitName {
+
+            }
+            #healthAndArrowBox {
+
+              #health {
+
+                }
+              }
+              #arrows {
+
+                .arrowBox {
+
+                  img {
+
+                  }
+                }
+                #northWest {
+
+                }
+                #north {
+
+                }
+                #northEast {
+
+                }
+                #east {
+
+                }
+                #southEast {
+
+                }
+                #south {
+
+                }
+                #southWest {
+
+                }
+                #west {
+
+                }
+              }
+            }
+          }
+
+          // The box where the reporst come in
+          #completeReport {
+
+            .battleTitle {
+
+            }
+            #orderList {
+
+            }
+            #resultList {
+
+            }
+          }
+
+          // The boxes for selecting a player's units
+          .allUnitColumns {
+
+            .unitColumn {
+
+              div {
+                img {
+
+                }
+              }
+            }
+          }
+          #teamOne {
+
+          }
+          #teamTwo {
+
+          }
+        }
+      }
+      #ordersButton {
+
+      }
+    }
+  }
+// }

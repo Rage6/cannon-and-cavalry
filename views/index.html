@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Hold Your Ground!</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
@@ -28,24 +29,24 @@
         <p>
           Enter your name and your country's name, and then hit 'Submit'.
         </p>
-        <div>Commander:</div>
+        <div class="leadInput">Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
-        <input type="text" maxlength="15" id="blueLeader">
-        <div>Nation:</div>
+        <input class="actualInput" type="text" maxlength="15" id="blueLeader">
+        <div class="leadInput">Nation:</div>
         <div class="lengthNote">(Max length: 3)</div>
-        <input type="text" maxlength="3" id="blueArmy">
+        <input class="actualInput" type="text" maxlength="3" id="blueArmy">
         <div class="submitButton" id="submitBlue">Submit</div>
       </div>
       <div id="openTwoName">
         <p>
           Enter your name and your country's name, and then hit 'Submit'.
         </p>
-        <div>Commander:</div>
+        <div class="leadInput">Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
-        <input type="text" maxlength="15" id="redLeader">
-        <div>Nation :</div>
+        <input class="actualInput" type="text" maxlength="15" id="redLeader">
+        <div class="leadInput">Nation :</div>
         <div class="lengthNote">(Max length: 3)</div>
-        <input type="text" maxlength="3" id="redArmy">
+        <input class="actualInput" type="text" maxlength="3" id="redArmy">
         <div class="submitButton" id="submitRed">Submit</div>
       </div>
       <div id="openHowTo">
@@ -120,7 +121,7 @@
         </div>
         <div class="explainBox">
           <div class="explainSubTitle">
-            Terrain
+            <i>Terrain</i>
           </div>
           <div class="explainContent">
             <div class="glossBox">
@@ -158,7 +159,7 @@
             </div>
           </div>
           <div class="explainSubTitle">
-            Cover
+            <i>Cover</i>
           </div>
           <div class="explainContent">
             <div class="glossBox">
@@ -196,7 +197,7 @@
             </div>
           </div>
           <div class="explainSubTitle">
-            Unit Types
+            <i>Unit Types</i>
           </div>
           <div class="explainContent">
             <div class="glossBox">
@@ -207,7 +208,7 @@
                 Infantry
               </div>
               <div class="glossDescribe">
-                Infantry soldiers are the "foot soldiers" first thought of when discussing an army. They're skills include marching anywhere, riflemanship, and high number.
+                Infantry soldiers are the "foot soldiers" that are mentioned whenever discussing an army. They're skills include marching anywhere, riflemanship, and large numbers of soldiers.
                 <table>
                   <tr>
                     <td class="glossaryCells">Health</td>
@@ -578,7 +579,7 @@
                   <img src="stylesheets/images/arrow-left.png" alt="W">
                 </div>
                 <div class="arrowBox unitButton" id="center">
-                  <img src="stylesheets/images/circle.png"alt="Circle">
+                  <img src="stylesheets/images/circle.png" alt="Circle">
                 </div>
                 <div class="arrowBox unitButton" id="east">
                   <img src="stylesheets/images/arrow-right.png" alt="E">
@@ -690,7 +691,7 @@
           </div>
         </div>
       </div>
-      <div class="unitButton" id="ordersButton">
+      <div id="ordersButton">
         GIVE ORDERS
       </div>
     </div>

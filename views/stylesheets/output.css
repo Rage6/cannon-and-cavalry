@@ -1,10 +1,11 @@
-body {
-  margin: 0;
+html body {
+  margin: 0px;
   font-size: 16px;
   font-family: 'Stylish', sans-serif;
   background-image: url("images/gettysburg.jpg");
-  background-size: cover; }
-  body #openPage {
+  background-size: cover;
+  width: 360px; }
+  html body #openPage {
     margin: 0;
     position: absolute;
     top: 0;
@@ -12,206 +13,223 @@ body {
     background-color: black;
     opacity: 0.5;
     height: 100%;
-    width: 100%; }
-  body .openBox {
+    width: 360px; }
+  html body .openBox {
     margin: 0 10%;
     border: 2px solid white;
     border-radius: 40px;
     position: absolute;
-    top: 200px;
+    top: 30px;
     z-index: 2;
     background-color: brown;
     color: white;
     font-family: 'Stylish', sans-serif;
-    font-size: 4.7rem;
-    text-align: center; }
-    body .openBox #openIntro {
+    font-size: 2.1rem;
+    text-align: center;
+    width: 80%; }
+    html body .openBox #openIntro {
       display: block; }
-      body .openBox #openIntro #openTitle {
+      html body .openBox #openIntro #openTitle {
+        padding: 20px 5% 0 5%;
         font-family: 'Black Ops One', cursive;
-        font-size: 6rem; }
-      body .openBox #openIntro .openButton {
+        font-size: 2.5rem; }
+      html body .openBox #openIntro .openButton {
         margin: 30px 5%;
         border: 5px solid white;
         border-radius: 25px;
         cursor: pointer; }
-      body .openBox #openIntro #onePlayer {
+      html body .openBox #openIntro #onePlayer {
         text-decoration: line-through; }
-      body .openBox #openIntro #onePlayer:hover {
+      html body .openBox #openIntro #onePlayer:hover {
         background-color: white;
         color: brown; }
-      body .openBox #openIntro #twoPlayer:hover {
+      html body .openBox #openIntro #twoPlayer:hover {
         background-color: white;
         color: brown; }
-      body .openBox #openIntro #howTo:hover {
+      html body .openBox #openIntro #howTo:hover {
         background-color: white;
         color: brown; }
-      body .openBox #openIntro #glossary:hover {
+      html body .openBox #openIntro #glossary:hover {
         background-color: white;
         color: brown; }
-      body .openBox #openIntro #settings:hover {
+      html body .openBox #openIntro #settings:hover {
         background-color: white;
         color: brown; }
-      body .openBox #openIntro #about:hover {
+      html body .openBox #openIntro #about:hover {
         background-color: white;
         color: brown; }
-    body .openBox .submitButton {
-      margin: 40px 20%;
+    html body .openBox .submitButton {
+      margin: 20px 20%;
       border: 8px solid white;
       border-radius: 20px;
       padding: 10px 0; }
-    body .openBox #openOneName {
+    html body .openBox .leadInput {
+      margin: 0;
+      font-size: 2.3rem;
+      line-height: 1; }
+    html body .openBox .lengthNote {
+      font-size: 1.2rem; }
+    html body .openBox .actualInput {
+      height: 40px; }
+    html body .openBox #openOneName {
       border-radius: 40px;
-      padding: 20px 10%;
+      padding: 1px 10%;
+      font-size: 1.7rem;
       display: none;
       background-color: blue; }
-    body .openBox #openTwoName {
+    html body .openBox #openTwoName {
       border-radius: 40px;
-      padding: 20px 10%;
+      padding: 1px 10%;
+      font-size: 1.7rem;
       display: none;
       background-color: red; }
-    body .openBox #openHowTo {
+    html body .openBox #openHowTo {
       padding: 20px 10%;
       display: none; }
-    body .openBox #openGlossary {
+    html body .openBox #openGlossary {
       padding: 20px 10%;
       display: none; }
-    body .openBox #openSettings {
+    html body .openBox #openSettings {
       padding: 20px 10%;
       display: none; }
-    body .openBox #openAbout {
+    html body .openBox #openAbout {
       padding: 20px 10%;
       display: none; }
-    body .openBox .closeButton {
-      margin: 40px 0;
+    html body .openBox .closeButton {
+      margin: 20px 0 5px 0;
       border-radius: 25px;
       background-color: white;
       color: brown; }
-    body .openBox .explainTitle {
+    html body .openBox .explainTitle {
       margin: 30px 0;
       text-decoration: underline; }
-    body .openBox .explainBox {
+    html body .openBox .explainBox {
       border: 1px solid yellow;
       padding: 30px 5%;
-      font-size: 2.8rem;
+      font-size: 1.5rem;
       text-align: left;
       overflow-y: scroll;
-      height: 1000px; }
-      body .openBox .explainBox .explainSubTitle {
+      height: 300px; }
+      html body .openBox .explainBox .explainSubTitle {
         margin: 10px 0 30px 0;
-        font-size: 3.2rem;
+        font-size: 2rem;
         text-align: center; }
-      body .openBox .explainBox table {
+      html body .openBox .explainBox table {
         margin-bottom: 70px;
         width: 100%;
         border-spacing: 20px; }
-        body .openBox .explainBox table .glossaryCells {
+        html body .openBox .explainBox table .glossaryCells {
           border: 3px solid white;
           text-align: center;
           padding: 10px; }
-        body .openBox .explainBox table .settingCells {
+        html body .openBox .explainBox table .settingCells {
           border: 3px solid white;
-          font-size: 4rem;
+          font-size: 2rem;
           text-align: center; }
-        body .openBox .explainBox table #fourGrids {
+        html body .openBox .explainBox table #fourGrids {
           color: brown;
           background-color: white; }
-      body .openBox .explainBox .pickMap {
+      html body .openBox .explainBox .pickMap {
         margin-bottom: 50px;
         border: 2px solid white;
         padding: 20px 5%;
-        font-size: 2.5rem; }
-        body .openBox .explainBox .pickMap .mapTitle {
+        font-size: 1.5rem; }
+        html body .openBox .explainBox .pickMap .mapTitle {
           margin-bottom: 30px;
           text-align: center;
-          font-size: 3rem; }
-      body .openBox .explainBox .explainContent {
+          font-size: 2rem; }
+      html body .openBox .explainBox .explainContent {
         margin-bottom: 60px; }
-        body .openBox .explainBox .explainContent ol li {
+        html body .openBox .explainBox .explainContent ol li {
           margin: 10px 0; }
-        body .openBox .explainBox .explainContent .glossBox .glossImg {
+        html body .openBox .explainBox .explainContent .glossBox .glossImg {
           border-radius: 25px;
           padding: 10px 0;
           background-color: white; }
-          body .openBox .explainBox .explainContent .glossBox .glossImg img {
+          html body .openBox .explainBox .explainContent .glossBox .glossImg img {
             margin: 0 25%;
             width: 50%; }
-        body .openBox .explainBox .explainContent .glossBox #thickConceal {
+        html body .openBox .explainBox .explainContent .glossBox #thickConceal {
           background-color: darkgreen;
           height: 150px; }
-        body .openBox .explainBox .explainContent .glossBox #someConceal {
+        html body .openBox .explainBox .explainContent .glossBox #someConceal {
           background-color: lightgreen;
           height: 150px; }
-        body .openBox .explainBox .explainContent .glossBox #noConceal {
+        html body .openBox .explainBox .explainContent .glossBox #noConceal {
           background-color: orange;
           height: 150px; }
-        body .openBox .explainBox .explainContent .glossBox .glossUnit {
+        html body .openBox .explainBox .explainContent .glossBox .glossUnit {
           background-color: black; }
-        body .openBox .explainBox .explainContent .glossBox .glossTitle {
+        html body .openBox .explainBox .explainContent .glossBox .glossTitle {
           margin: 15px 0 30px 0;
-          font-size: 3.5rem;
+          font-size: 2.5rem;
           text-align: center; }
-        body .openBox .explainBox .explainContent .glossBox .glossDescribe {
+        html body .openBox .explainBox .explainContent .glossBox .glossDescribe {
           margin-bottom: 100px;
-          font-size: 2.8rem; }
-        body .openBox .explainBox .explainContent .aboutPara {
+          font-size: 1.5rem; }
+          html body .openBox .explainBox .explainContent .glossBox .glossDescribe table {
+            margin-top: 20px;
+            font-size: 1rem;
+            border-collapse: collapse; }
+            html body .openBox .explainBox .explainContent .glossBox .glossDescribe table tbody tr {
+              margin: 0; }
+        html body .openBox .explainBox .explainContent .aboutPara {
           margin: 50px 0;
           font-size: 2.7rem; }
-        body .openBox .explainBox .explainContent .aboutImg {
+        html body .openBox .explainBox .explainContent .aboutImg {
           width: 100%; }
-    body .openBox input {
+    html body .openBox input {
       font-size: 4rem;
       color: white;
       background-color: black;
       width: 100%; }
-    body .openBox #openClose {
+    html body .openBox #openClose {
       padding: 40px 7%;
       display: none; }
-      body .openBox #openClose #finalButtons {
+      html body .openBox #openClose #finalButtons {
         margin-top: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-around; }
-        body .openBox #openClose #finalButtons #reset {
+        html body .openBox #openClose #finalButtons #reset {
           border: 5px solid white;
           border-radius: 25px;
           padding: 10px 5%;
           color: black;
           background-color: orange;
           width: 30%; }
-        body .openBox #openClose #finalButtons #quit {
+        html body .openBox #openClose #finalButtons #quit {
           color: white;
           background-color: red; }
-  body div.title {
+  html body div.title {
     text-align: center; }
-  body .unitButton {
+  html body .unitButton {
+    font-size: 1.2rem;
     cursor: pointer; }
-  body .blueButton {
-    margin: 5px 5% 5px 5%;
-    border-radius: 10px;
-    font-size: 3rem;
+  html body .blueButton {
+    margin: 2px 5%;
+    border-radius: 5px;
     color: white; }
-  body .redButton {
-    margin: 5px 5% 5px 5%;
-    border-radius: 10px;
-    font-size: 3rem;
+  html body .redButton {
+    margin: 2px 5%;
+    border-radius: 5px;
     color: white; }
-  body #terrain {
-    margin: 30px auto;
+  html body #terrain {
+    margin: 10px auto;
     border: 2px solid black;
     border-radius: 15px;
-    padding: 20px;
+    padding: 10px;
     background-image: url("images/slate.jpg");
     background-size: cover;
-    -webkit-width: 700px;
-    -moz-width: 700px;
-    -ms-width: 700px;
-    width: 700px;
-    -webkit-height: 700px;
-    -moz-height: 700px;
-    -ms-height: 700px;
-    height: 700px; }
-  body #ground {
+    -webkit-width: 214px;
+    -moz-width: 214px;
+    -ms-width: 214px;
+    width: 214px;
+    -webkit-height: 214px;
+    -moz-height: 214px;
+    -ms-height: 214px;
+    height: 214px; }
+  html body #ground {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -225,7 +243,7 @@ body {
     -moz-height: 100%;
     -ms-height: 100%;
     height: 100%; }
-  body .gridSquare {
+  html body .gridSquare {
     margin: auto;
     border: solid black 1px;
     text-align: center;
@@ -234,64 +252,66 @@ body {
     background-size: cover;
     width: 24%;
     height: 24%; }
-    body .gridSquare .topLine {
+    html body .gridSquare .topLine {
       margin: 0 20%;
-      border-radius: 20px 20px 0 0;
+      border-radius: 10px 10px 0 0;
       height: 20%; }
-      body .gridSquare .topLine img {
+      html body .gridSquare .topLine img {
         height: 100%; }
-    body .gridSquare .centerLine {
+    html body .gridSquare .centerLine {
       margin: 0;
       display: flex;
       height: 60%; }
-      body .gridSquare .centerLine .centerLeft {
-        border-radius: 20px 0 0 20px;
+      html body .gridSquare .centerLine .centerLeft {
+        border-radius: 10px 0 0 10px;
         width: 20%; }
-        body .gridSquare .centerLine .centerLeft .helper {
+        html body .gridSquare .centerLine .centerLeft .helper {
           display: inline-block;
           vertical-align: middle;
           height: 100%; }
-        body .gridSquare .centerLine .centerLeft img {
+        html body .gridSquare .centerLine .centerLeft img {
           display: inline-block;
           vertical-align: middle;
           width: 100%; }
-      body .gridSquare .centerLine .centerMiddle {
-        border-radius: 25px;
+      html body .gridSquare .centerLine .centerMiddle {
+        border-radius: 10px;
         width: 60%;
         background-size: 100% 100%; }
-        body .gridSquare .centerLine .centerMiddle .helper {
+        html body .gridSquare .centerLine .centerMiddle .helper {
           display: inline-block;
           vertical-align: middle;
           height: 100%; }
-        body .gridSquare .centerLine .centerMiddle img {
+        html body .gridSquare .centerLine .centerMiddle img {
+          position: relative;
+          bottom: 5px;
           display: inline-block;
           vertical-align: middle;
           width: 100%; }
-      body .gridSquare .centerLine .centerRight {
-        border-radius: 0 20px 20px 0;
+      html body .gridSquare .centerLine .centerRight {
+        border-radius: 0 10px 10px 0;
         width: 20%; }
-        body .gridSquare .centerLine .centerRight .helper {
+        html body .gridSquare .centerLine .centerRight .helper {
           display: inline-block;
           vertical-align: middle;
           height: 100%; }
-        body .gridSquare .centerLine .centerRight img {
+        html body .gridSquare .centerLine .centerRight img {
           display: inline-block;
           vertical-align: middle;
           width: 100%;
           transform: rotate(180deg); }
-    body .gridSquare .bottomLine {
+    html body .gridSquare .bottomLine {
       margin: 0 20%;
-      border-radius: 0 0 20px 20px;
+      border-radius: 0 0 10px 10px;
       height: 20%; }
-      body .gridSquare .bottomLine .helper {
+      html body .gridSquare .bottomLine .helper {
         display: inline-block;
         vertical-align: middle;
         height: 100%; }
-      body .gridSquare .bottomLine img {
+      html body .gridSquare .bottomLine img {
         display: inline-block;
         vertical-align: middle;
         height: 100%; }
-  body #allOptions {
+  html body #allOptions {
     margin: 0px auto 0px auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -301,7 +321,7 @@ body {
     -moz-width: 90%;
     -ms-width: 90%;
     width: 90%; }
-    body #allOptions .turnBoxes {
+    html body #allOptions .turnBoxes {
       margin: 0 auto;
       display: flex;
       flex-direction: row;
@@ -310,123 +330,122 @@ body {
       -moz-width: 90%;
       -ms-width: 90%;
       width: 90%; }
-      body #allOptions .turnBoxes .indivBox {
-        margin: 20px 0;
+      html body #allOptions .turnBoxes .indivBox {
+        margin: 7px 0;
         background-image: url("images/parchment.jpg");
         background-size: cover;
         -webkit-width: 48%;
         -moz-width: 48%;
         -ms-width: 48%;
         width: 48%;
-        -webkit-height: 360px;
-        -moz-height: 360px;
-        -ms-height: 360px;
-        height: 360px; }
-        body #allOptions .turnBoxes .indivBox .title {
-          margin-bottom: 20px;
+        -webkit-height: 146px;
+        -moz-height: 146px;
+        -ms-height: 146px;
+        height: 146px; }
+        html body #allOptions .turnBoxes .indivBox .title {
+          margin-bottom: 1px;
           border: solid black;
           border-width: 3px 0 0 3px;
           display: block;
-          font-size: 3rem;
+          font-size: 1.3rem;
           text-align: center; }
-        body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
-          margin-top: 25px;
+        html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox {
+          margin-top: 10px;
           display: flex;
           flex-direction: row;
           justify-content: space-around; }
-          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
-            margin: 0 5%;
-            border: 5px solid;
-            font-size: 2.5rem;
+          html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+            margin: 0;
+            border: 2px solid;
+            font-size: 1rem;
             text-align: center;
             cursor: pointer;
-            -webkit-width: 45%;
-            -moz-width: 45%;
-            -ms-width: 45%;
-            width: 45%; }
-          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
+            -webkit-width: 40%;
+            -moz-width: 40%;
+            -ms-width: 40%;
+            width: 40%; }
+          html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #attackButton {
             border-color: blue;
             color: black;
             background-color: none; }
-          body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
+          html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox #defendButton {
             border-color: red;
             color: black;
             background-color: none; }
-        body #allOptions .turnBoxes .indivBox #unitBox #unitName {
-          margin: 20px 0;
-          font-size: 2rem;
+        html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+          margin: 7px 0;
+          font-size: 1rem;
           text-align: center; }
-        body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox {
+        html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox {
           display: flex;
           flex-direction: row;
           justify-content: space-around; }
-          body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
-            padding: 20px;
-            font-size: 3rem;
+          html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+            font-size: 1.1rem;
             text-align: center;
             -webkit-width: 48%;
             -moz-width: 48%;
             -ms-width: 48%;
             width: 48%; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
               border: 2px solid black;
-              font-size: 4rem; }
-          body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+              font-size: 2rem; }
+          html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
             display: flex;
             flex-wrap: wrap;
             -webkit-width: 48%;
             -moz-width: 48%;
             -ms-width: 48%;
             width: 48%; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox {
-              font-size: 2.5rem;
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox {
               text-align: center;
               -webkit-width: 30%;
               -moz-width: 30%;
               -ms-width: 30%;
               width: 30%; }
-              body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox img {
+              html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows .arrowBox img {
                 margin-top: 10%;
                 height: 80%;
                 width: 80%; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northWest {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northWest {
               border: 1px solid black;
-              border-radius: 25px 0 0 0;
+              border-radius: 7px 0 0 0;
               background-color: black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #north {
               border: 1px solid black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northEast {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #northEast {
               border: 1px solid black;
-              border-radius: 0 25px 0 0;
+              border-radius: 0 7px 0 0;
               background-color: black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #east {
               border: 1px solid black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southEast {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southEast {
               border: 1px solid black;
-              border-radius: 0 0 25px 0;
+              border-radius: 0 0 7px 0;
               background-color: black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #south {
               border: 1px solid black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southWest {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #southWest {
               border: 1px solid black;
-              border-radius: 0 0 0 25px;
+              border-radius: 0 0 0 7px;
               background-color: black; }
-            body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
+            html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows #west {
               border: 1px solid black; }
-        body #allOptions .turnBoxes .indivBox #completeReport {
+        html body #allOptions .turnBoxes .indivBox #completeReport {
           margin: 0 5%;
           border: 1px solid black;
           padding: 5%;
-          font-size: 2rem;
-          height: 60%;
+          height: 64%;
           overflow: scroll; }
-          body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+          html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
             text-align: center; }
-        body #allOptions .turnBoxes .indivBox .allUnitColumns {
+          html body #allOptions .turnBoxes .indivBox #completeReport ul {
+            padding-left: 15px; }
+        html body #allOptions .turnBoxes .indivBox .allUnitColumns {
           display: flex;
           flex-direction: row;
           justify-content: space-around; }
-          body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn {
+          html body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn {
             margin: 0;
             font-size: 2.5rem;
             text-align: center;
@@ -434,18 +453,19 @@ body {
             -moz-width: 30%;
             -ms-width: 30%;
             width: 30%; }
-            body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn img {
-              padding: 5px 0;
-              height: 50px; }
-    body #allOptions #ordersButton {
-      margin: 0px auto 20px auto;
+            html body #allOptions .turnBoxes .indivBox .allUnitColumns .unitColumn div img {
+              padding: 5px 2%;
+              width: 96%; }
+    html body #allOptions #ordersButton {
+      margin: 0px auto 5px auto;
       border: 2px solid black;
       border-radius: 20px;
       padding: 5px;
-      font-size: 4rem;
+      font-size: 1.7rem;
       text-align: center;
       color: white;
       background-color: orange;
-      width: 50%; }
+      width: 50%;
+      cursor: pointer; }
 
 /*# sourceMappingURL=output.css.map */
