@@ -30,16 +30,16 @@ html {
     font-family: 'Stylish', sans-serif;
     background-image: url('images/gettysburg.jpg');
     background-size: cover;
-    width: $max;
+    width: 100%;
     #openPage {
       margin: 0;
       position: absolute;
       top: 0;
-      z-index: 1;
+      z-index: 2;
       background-color: black;
       opacity: 0.5;
       height: 100%;
-      width: $max;
+      width: 100%;
     }
 
     .openBox {
@@ -48,7 +48,7 @@ html {
       border-radius: 40px;
       position: absolute;
       top: 30px;
-      z-index: 2;
+      z-index: 3;
       background-color: brown;
       color: white;
       font-family: 'Stylish', sans-serif;
@@ -107,6 +107,13 @@ html {
 
         }
         #about:hover {
+          background-color: white;
+          color: brown;
+        }
+        #return {
+          display: none;
+        }
+        #return:hover {
           background-color: white;
           color: brown;
         }
@@ -279,7 +286,7 @@ html {
         }
       }
       input {
-        font-size: 4rem;
+        font-size: 2rem;
         color: white;
         background-color: black;
         width: 100%;
@@ -306,6 +313,31 @@ html {
           }
         }
       }
+    }
+    .mainButtons {
+      border: 2px solid white;
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      text-align: center;
+      font-size: 2rem;
+      color: white;
+      background-color: brown;
+      width: 10%;
+      .imgButton {
+        margin-top: 20%;
+        height: 60%;
+        width: 60%;
+      }
+    }
+    #menuButton {
+      left: 0;
+      border-radius: 0 0 10px 0;
+    }
+
+    #soundButton {
+      right: 0;
+      border-radius: 0 0 0 10px;
     }
 
     div.title {
@@ -633,3 +665,4 @@ html {
 
 // IMPORTS
 @import '_375px';
+@import '_414px';

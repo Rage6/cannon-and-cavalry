@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Hold Your Ground!</title>
+    <title>Cannon & Cavalry</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Stylish" rel="stylesheet">
@@ -13,17 +13,27 @@
     <script src="app.js"></script>
   </head>
   <body>
+    <audio id="themeSong" loop>
+      <source type="audio/mpeg" src="stylesheets/audio/Two_Steps_From_Hell_-_Protectors_of_the_Earth.mp3">
+    </audio>
+    <div class="mainButtons" id="menuButton">
+      <img class="imgButton" src="stylesheets/images/menu.png">
+    </div>
+    <div class="mainButtons" id="soundButton">
+      <img class="imgButton" id="soundImg" src="stylesheets/images/play-button.png">
+    </div>
     <div id="openPage">
     </div>
     <div class="openBox">
       <div id="openIntro">
-        <div id="openTitle">HOLD YOUR GROUND!</div>
+        <div id="openTitle">CANNON & CAVALRY</div>
         <!-- <div class="openButton" id="onePlayer">One Player</div> -->
         <div class="openButton" id="twoPlayer">Two Player</div>
         <div class="openButton" id="howTo">How To Play</div>
         <div class="openButton" id="glossary">Glossary</div>
         <div class="openButton" id="settings">Settings</div>
         <div class="openButton" id="about">About</div>
+        <div class="openButton" id="return">Return To Game</div>
       </div>
       <div id="openOneName">
         <p>
@@ -260,6 +270,10 @@
               <div class="glossDescribe">
                 Artillery units are responsible for the cannons that can fire devastating cannon balls over long distances. This means that they can do damage before a battle even takes place.
                 <table>
+                  <tr>
+                    <td class="glossaryCells">Health</td>
+                    <td class="glossaryCells">6</td>
+                  </tr>
                   <tr>
                     <td class="glossaryCells">Advantages</td>
                     <td class="glossaryCells">Can take away 2 health points from an enemy within 2 grid squares (NOTE: best chance of hitting an enemy is when the cannon faces the enemy from close distance)</td>
