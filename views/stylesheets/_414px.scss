@@ -1,10 +1,10 @@
 // VARIABLES
 
-$min: 361px;
-$max: 375px;
+$min: 376px;
+$max: 414px;
 
-$secondWidth: 237px;
-$secondHeight: 237px;
+$secondWidth: 300px;
+$secondHeight: 300px;
 
 // MIXINS
 
@@ -210,17 +210,6 @@ html {
           }
         }
       }
-    }
-
-    .mainButtons {
-      
-    }
-    #menuButton {
-
-    }
-
-    #soundButton {
-
     }
 
     div.title {

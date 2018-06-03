@@ -23,10 +23,13 @@ $(() =>{
   var lastClickUnit = null;
   var startClick = true;
   var fourByFour = true;
+  var gameStarted = false;
+  var musicStarted = false;
 
   // This will set the height of the shades over the background when going through the opening options
   const setHeight= () =>{
     var docHeight = $(document).height();
+    $("body").css('height',docHeight);
     $("#openPage").css('height',docHeight);
   };
   setHeight();
@@ -575,6 +578,41 @@ $(() =>{
     }
   };
 
+  // This will allow people only see Glossary, How To Play, and About in the middle of a game
+  const clickMenu = () => {
+    if (gameStarted == true) {
+      $("#twoPlayer").css('display','none');
+      $("#settings").css('display','none');
+      $("#return").css('display','block');
+    };
+    $("#openPage").css('display','block');
+    $(".openBox").css('display','block');
+    $("#openIntro").css('display','block');
+  };
+  $("#menuButton").click(clickMenu);
+
+  // This will then close the openBox again with "Return To Game" buttons
+  const closeMenu = () => {
+    $("#openPage").css('display','none');
+    $(".openBox").css('display','none');
+    $("#openIntro").css('display','none');
+  };
+  $("#return").click(closeMenu);
+
+  // 'Play' and 'pause' the sound
+  const triggerMusic = () => {
+    if (musicStarted == true) {
+      document.getElementById("themeSong").pause();
+      musicStarted = false;
+      $("#soundImg").attr('src','stylesheets/images/play-button.png');
+    } else {
+      document.getElementById("themeSong").play();
+      musicStarted = true;
+      $("#soundImg").attr('src','stylesheets/images/pause.png');
+    };
+  }
+  $("#soundButton").click(triggerMusic);
+
   // Now that one grid can recieve one present units, this function can carry that out for ALL of the grids
   const unitsInAllGrids = () =>{
     for (var i = 0; i < allGrids.length; i++) {
@@ -612,6 +650,7 @@ $(() =>{
       $("#openPage").css("display","block");
       $("#openTwoName").css("display","block");
     }
+    gameStarted = true;
   };
   $("#submitBlue").click(submitBluePlayer);
 

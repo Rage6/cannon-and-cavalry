@@ -4,23 +4,23 @@ html body {
   font-family: 'Stylish', sans-serif;
   background-image: url("images/gettysburg.jpg");
   background-size: cover;
-  width: 360px; }
+  width: 100%; }
   html body #openPage {
     margin: 0;
     position: absolute;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: black;
     opacity: 0.5;
     height: 100%;
-    width: 360px; }
+    width: 100%; }
   html body .openBox {
     margin: 0 10%;
     border: 2px solid white;
     border-radius: 40px;
     position: absolute;
     top: 30px;
-    z-index: 2;
+    z-index: 3;
     background-color: brown;
     color: white;
     font-family: 'Stylish', sans-serif;
@@ -58,6 +58,11 @@ html body {
       html body .openBox #openIntro #about:hover {
         background-color: white;
         color: brown; }
+      html body .openBox #openIntro #return {
+        display: none; }
+      html body .openBox #openIntro #return:hover {
+        background-color: white;
+        color: brown; }
     html body .openBox .submitButton {
       margin: 20px 20%;
       border: 8px solid white;
@@ -74,13 +79,13 @@ html body {
     html body .openBox #openOneName {
       border-radius: 40px;
       padding: 1px 10%;
-      font-size: 1.7rem;
+      font-size: 2.5rem;
       display: none;
       background-color: blue; }
     html body .openBox #openTwoName {
       border-radius: 40px;
       padding: 1px 10%;
-      font-size: 1.7rem;
+      font-size: 2.5rem;
       display: none;
       background-color: red; }
     html body .openBox #openHowTo {
@@ -104,7 +109,7 @@ html body {
       margin: 30px 0;
       text-decoration: underline; }
     html body .openBox .explainBox {
-      border: 1px solid yellow;
+      border: 1px solid white;
       padding: 30px 5%;
       font-size: 1.5rem;
       text-align: left;
@@ -151,13 +156,13 @@ html body {
             width: 50%; }
         html body .openBox .explainBox .explainContent .glossBox #thickConceal {
           background-color: darkgreen;
-          height: 150px; }
+          height: 70px; }
         html body .openBox .explainBox .explainContent .glossBox #someConceal {
           background-color: lightgreen;
-          height: 150px; }
+          height: 70px; }
         html body .openBox .explainBox .explainContent .glossBox #noConceal {
           background-color: orange;
-          height: 150px; }
+          height: 70px; }
         html body .openBox .explainBox .explainContent .glossBox .glossUnit {
           background-color: black; }
         html body .openBox .explainBox .explainContent .glossBox .glossTitle {
@@ -175,11 +180,11 @@ html body {
               margin: 0; }
         html body .openBox .explainBox .explainContent .aboutPara {
           margin: 50px 0;
-          font-size: 2.7rem; }
+          font-size: 1.5rem; }
         html body .openBox .explainBox .explainContent .aboutImg {
           width: 100%; }
     html body .openBox input {
-      font-size: 4rem;
+      font-size: 2rem;
       color: white;
       background-color: black;
       width: 100%; }
@@ -201,6 +206,30 @@ html body {
         html body .openBox #openClose #finalButtons #quit {
           color: white;
           background-color: red; }
+  html body .mainButtons {
+    border: 2px solid white;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    background-color: brown;
+    width: 10%; }
+    html body .mainButtons .imgButton {
+      margin-top: 20%;
+      height: 60%;
+      width: 60%; }
+  html body #menuButton {
+    left: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0 0 10px 0; }
+  html body #soundButton {
+    right: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0 0 0 10px; }
   html body div.title {
     text-align: center; }
   html body .unitButton {
@@ -467,5 +496,89 @@ html body {
       background-color: orange;
       width: 50%;
       cursor: pointer; }
+
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+  html body #terrain {
+    -webkit-width: 237px;
+    -moz-width: 237px;
+    -ms-width: 237px;
+    width: 237px;
+    -webkit-height: 237px;
+    -moz-height: 237px;
+    -ms-height: 237px;
+    height: 237px; } }
+
+@media only screen and (min-width: 376px) and (max-width: 414px) {
+  html body #terrain {
+    -webkit-width: 300px;
+    -moz-width: 300px;
+    -ms-width: 300px;
+    width: 300px;
+    -webkit-height: 300px;
+    -moz-height: 300px;
+    -ms-height: 300px;
+    height: 300px; } }
+
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body .openBox {
+    top: 125px;
+    font-size: 3rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body .openBox #openIntro #openTitle {
+    font-size: 4.5rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body .openBox .explainBox {
+    height: 466px; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body .unitButton {
+    margin-bottom: 5px;
+    font-size: 1.8rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #terrain {
+    -webkit-width: 420px;
+    -moz-width: 420px;
+    -ms-width: 420px;
+    width: 420px;
+    -webkit-height: 420px;
+    -moz-height: 420px;
+    -ms-height: 420px;
+    height: 420px; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox {
+    height: 210px; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox .title {
+    font-size: 2.1rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox .armyTitle {
+    margin-bottom: 10px; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+    border: 4px solid;
+    font-size: 1.7rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+    font-size: 3.3rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+    width: 37%; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport {
+    height: 60%; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .listFont {
+    font-size: 1.2rem; } }
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  html body #allOptions #ordersButton {
+    font-size: 3rem; } }
 
 /*# sourceMappingURL=output.css.map */
