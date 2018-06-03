@@ -29,6 +29,7 @@ $(() =>{
   // This will set the height of the shades over the background when going through the opening options
   const setHeight= () =>{
     var docHeight = $(document).height();
+    $("body").css('height',docHeight);
     $("#openPage").css('height',docHeight);
   };
   setHeight();

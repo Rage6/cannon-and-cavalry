@@ -54,7 +54,7 @@
         <div class="leadInput">Commander:</div>
         <div class="lengthNote">(Max length: 15)</div>
         <input class="actualInput" type="text" maxlength="15" id="redLeader">
-        <div class="leadInput">Nation :</div>
+        <div class="leadInput">Nation:</div>
         <div class="lengthNote">(Max length: 3)</div>
         <input class="actualInput" type="text" maxlength="3" id="redArmy">
         <div class="submitButton" id="submitRed">Submit</div>
@@ -74,7 +74,7 @@
             A. OVERVIEW
           </div>
           <div class="explainContent">
-            "Hold Your Ground!" is a turn-based war game that will test your tactics and strategies. In addition to your oppenent's abilities, you will also be by the battlefield's tough terrain and your own troops' strengths/weaknesses. If this is your first time playing, you are encouraged to read to below instructions and the <b><span id="seeGlossary">"<u>Glossary</u>"</span></b> for details.
+            "Cannon & Cavalry" is a turn-based war game that will test your tactics and strategies. In addition to your oppenent's abilities, you will also be by the battlefield's tough terrain and your own troops' strengths/weaknesses. If this is your first time playing, you are encouraged to read to below instructions and the <b><span id="seeGlossary">"<u>Glossary</u>"</span></b> for details.
           </div>
           <div class="explainSubTitle">
             B. RULES
@@ -339,7 +339,7 @@
                 <u>Battle of Gettysburg</u>
               </div>
               <div>
-                This strategic and political turning point of the American Civil War took place in Gettysburg, Pennsylvania in 1864.
+                This famous turning point of the American Civil War took place in Gettysburg, Pennsylvania in 1864.
               </div>
             </li>
             <li class="pickMap">
@@ -390,7 +390,7 @@
             </div>
             <img class="aboutImg" src="stylesheets/images/web-dev-joke.jpg">
             <div class="aboutPara">
-              <u>WHO</u>: My name is Nicholas Vogt, and I am the sole developer of "Hold Your Ground!". You can see my previous works or read my story on <a style="color:white" href="www.nicholasvogt.info">my portfolio</a>. I graduated from the United States Military Academy in 2010 and, following my medical retirement, jumped into the website developer world in 2017 after completing my training from <a style="color:white" href="https://generalassemb.ly">General Assembly</a>. For my job history, check out my <a style="color:white" href="https://www.linkedin.com/in/nvogt10/">LinkedIn profile</a>.
+              <u>WHO</u>: My name is Nicholas Vogt, and I am the sole developer of "Cannon & Cavalry". You can see my previous works or read my story on <a style="color:white" href="www.nicholasvogt.info">my portfolio</a>. I graduated from the United States Military Academy in 2010 and, following my medical retirement, jumped into the website developer world in 2017 after completing my training from <a style="color:white" href="https://generalassemb.ly">General Assembly</a>. For my job history, check out my <a style="color:white" href="https://www.linkedin.com/in/nvogt10/">LinkedIn profile</a>.
             </div>
             <img class="aboutImg" src="stylesheets/images/nick-vogt-2.jpg">
           </div>
@@ -583,25 +583,26 @@
                 <div class="arrowBox" id="northWest">
                   <img src="stylesheets/images/northWest.png" alt="NW">
                 </div>
-                <div class="arrowBox unitButton" id="north">
+                <!-- I used to have .unitButton in the center, north, east, south and west buttons -->
+                <div class="arrowBox" id="north">
                   <img src="stylesheets/images/arrow-up.png" alt="N">
                 </div>
                 <div class="arrowBox" id="northEast">
                   <img src="stylesheets/images/northEast.png" alt="NE">
                 </div>
-                <div class="arrowBox unitButton" id="west">
+                <div class="arrowBox" id="west">
                   <img src="stylesheets/images/arrow-left.png" alt="W">
                 </div>
-                <div class="arrowBox unitButton" id="center">
+                <div class="arrowBox" id="center">
                   <img src="stylesheets/images/circle.png" alt="Circle">
                 </div>
-                <div class="arrowBox unitButton" id="east">
+                <div class="arrowBox" id="east">
                   <img src="stylesheets/images/arrow-right.png" alt="E">
                 </div>
                 <div class="arrowBox" id="southWest">
                   <img src="stylesheets/images/southWest.png" alt="SW">
                 </div>
-                <div class="arrowBox unitButton" id="south">
+                <div class="arrowBox" id="south">
                   <img src="stylesheets/images/arrow-down.png" alt="S">
                 </div>
                 <div class="arrowBox" id="southEast">
@@ -612,16 +613,16 @@
           </div>
         </div>
         <div class="indivBox" id="repBox">
-          <div class="title armyTitle">
+          <div class="title">
             <u>Battle Report:</u>
           </div>
           <div id="completeReport">
             <div class="battleTitle">** ORDERS **</div>
-            <ul id="orderList"></ul>
+            <ul class="listFont" id="orderList"></ul>
             <div class="battleTitle">** RESULTS **</div>
-            <ul id="resultList"></ul>
+            <ul class="listFont" id="resultList"></ul>
             <div class="battleTitle">** BATTLES **</div>
-            <ul id="battleList"></ul>
+            <ul class="listFont" id="battleList"></ul>
           </div>
         </div>
       </div>

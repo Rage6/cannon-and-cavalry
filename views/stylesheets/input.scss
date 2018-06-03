@@ -138,14 +138,14 @@ html {
       #openOneName {
         border-radius: 40px;
         padding: 1px 10%;
-        font-size: 1.7rem;
+        font-size: 2.5rem;
         display: none;
         background-color: blue;
       }
       #openTwoName {
         border-radius: 40px;
         padding: 1px 10%;
-        font-size: 1.7rem;
+        font-size: 2.5rem;
         display: none;
         background-color: red;
       }
@@ -176,7 +176,7 @@ html {
         text-decoration: underline;
       }
       .explainBox {
-        border: 1px solid yellow;
+        border: 1px solid white;
         padding: 30px 5%;
         font-size: 1.5rem;
         text-align: left;
@@ -239,15 +239,15 @@ html {
             }
             #thickConceal {
               background-color: darkgreen;
-              height: 150px;
+              height: 70px;
             }
             #someConceal {
               background-color: lightgreen;
-              height: 150px;
+              height: 70px;
             }
             #noConceal {
               background-color: orange;
-              height: 150px;
+              height: 70px;
             }
             .glossUnit {
               background-color: black;
@@ -278,7 +278,7 @@ html {
           }
           .aboutPara {
             margin: 50px 0;
-            font-size: 2.7rem;
+            font-size: 1.5rem;
           }
           .aboutImg {
             width: 100%;
@@ -332,11 +332,15 @@ html {
     }
     #menuButton {
       left: 0;
+      border-left: 0;
+      border-top: 0;
       border-radius: 0 0 10px 0;
     }
 
     #soundButton {
       right: 0;
+      border-right: 0;
+      border-top: 0;
       border-radius: 0 0 0 10px;
     }
 
@@ -666,3 +670,4 @@ html {
 // IMPORTS
 @import '_375px';
 @import '_414px';
+@import '_768px';
