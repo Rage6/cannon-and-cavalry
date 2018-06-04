@@ -34,6 +34,12 @@ $(() =>{
   };
   setHeight();
 
+  // To set the theme song at the correct time
+  const setAudioTime = (afterZero) => {
+    document.getElementById("themeSong").currentTime = afterZero;
+  }
+  setAudioTime(10);
+
   // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
     // rowOneColumnOne

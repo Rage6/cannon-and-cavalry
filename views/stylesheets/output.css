@@ -581,4 +581,132 @@ html body {
   html body #allOptions #ordersButton {
     font-size: 3rem; } }
 
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body .mainButtons {
+    width: 6%; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body .openBox {
+    margin: 0 30%;
+    top: 65px;
+    width: 40%; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body .openBox #openIntro #openTitle {
+    font-size: 4.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body .openBox .explainBox {
+    height: 466px; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body .unitButton {
+    margin-bottom: 5px;
+    font-size: 1.8rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #terrain {
+    -webkit-width: 420px;
+    -moz-width: 420px;
+    -ms-width: 420px;
+    width: 420px;
+    -webkit-height: 420px;
+    -moz-height: 420px;
+    -ms-height: 420px;
+    height: 420px; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox {
+    height: 210px; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox .title {
+    font-size: 2.1rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox .armyTitle {
+    margin-bottom: 10px; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+    border: 4px solid;
+    font-size: 1.7rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+    font-size: 3.3rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+    width: 37%; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport {
+    height: 60%; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .listFont {
+    font-size: 1.2rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  html body #allOptions #ordersButton {
+    font-size: 3rem; } }
+
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body .openBox {
+    top: 125px;
+    font-size: 3rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body .openBox #openIntro #openTitle {
+    font-size: 4.5rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body .openBox .explainBox {
+    height: 466px; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body .unitButton {
+    margin-bottom: 5px;
+    font-size: 1.8rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #terrain {
+    -webkit-width: 420px;
+    -moz-width: 420px;
+    -ms-width: 420px;
+    width: 420px;
+    -webkit-height: 420px;
+    -moz-height: 420px;
+    -ms-height: 420px;
+    height: 420px; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox {
+    height: 210px; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox .title {
+    font-size: 2.1rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox .armyTitle {
+    margin-bottom: 10px; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+    border: 4px solid;
+    font-size: 1.7rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+    font-size: 3.3rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+    width: 37%; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport {
+    height: 60%; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .listFont {
+    font-size: 1.2rem; } }
+@media only screen and (min-width: 1367px) and (max-width: 1366px) {
+  html body #allOptions #ordersButton {
+    font-size: 3rem; } }
+
 /*# sourceMappingURL=output.css.map */
