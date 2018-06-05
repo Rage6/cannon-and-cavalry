@@ -1,0 +1,476 @@
+// For 1920px by 1080px screens
+
+$min: 1367px;
+
+$fifthWidth: 650px;
+$fifthHeight: 650px;
+
+// MIXINS
+
+@mixin divWidth($width) {
+  -webkit-width: $width;
+  -moz-width: $width;
+  -ms-width: $width;
+  width: $width;
+}
+
+@mixin divHeight($height) {
+  -webkit-height: $height;
+  -moz-height: $height;
+  -ms-height: $height;
+  height: $height;
+}
+
+// MAIN CODE
+html {
+  @media only screen and (min-width: $min) {
+    background-color: tan;
+  };
+  body {
+    @media only screen and (min-width: $min) {
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      width: 1367px;
+    };
+    .mainButtons {
+      @media only screen and (min-width: $min) {
+        width: 6%;
+      };
+      .imgButton {
+
+      }
+    }
+    #menuButton {
+
+    }
+    #soundButton {
+
+    }
+
+    #openPage {
+      @media only screen and (min-width: $min) {
+        width: 1367px;
+      }
+    }
+
+    .openBox {
+      @media only screen and (min-width: $min) {
+        margin: 0 383px;
+        top: 220px;
+        width: 600px;
+      }
+      #openIntro {
+
+        #openTitle {
+          @media only screen and (min-width: $min) {
+            font-size: 4.5rem;
+          }
+        }
+        .openButton {
+
+        }
+        #onePlayer {
+
+        }
+        #onePlayer:hover {
+
+        }
+        #twoPlayer {
+
+        }
+        #twoPlayer:hover {
+
+        }
+        #howTo {
+
+        }
+        #howTo:hover {
+
+        }
+        #glossary {
+
+        }
+        #glossary:hover {
+
+        }
+        #settings {
+
+        }
+        #settings:hover {
+
+        }
+        #about {
+
+        }
+        #about:hover {
+
+        }
+      }
+      .submitButton {
+
+      }
+      .leadInput {
+
+      }
+      .lengthNote {
+
+      }
+      .actualInput {
+
+      }
+      #openOneName {
+
+      }
+      #openTwoName {
+
+      }
+      #openHowTo {
+
+      }
+      #openGlossary {
+
+      }
+      #openSettings {
+
+      }
+      #openAbout {
+
+      }
+      .closeButton {
+
+      }
+      .explainTitle {
+
+      }
+      .explainBox {
+        @media only screen and (min-width: $min) {
+          height: 370px;
+        }
+        .explainSubTitle {
+
+        }
+        table {
+
+          .glossaryCells {
+
+          }
+          .settingCells {
+
+          }
+          #fourGrids {
+
+          }
+          #fiveGrids {
+
+          }
+        }
+        .pickMap {
+
+          .mapTitle {
+
+          }
+        }
+        .explainContent {
+
+          ol {
+
+            li {
+
+            }
+          }
+          .glossBox {
+
+            .glossImg {
+
+              img {
+
+              }
+            }
+            #thickConceal {
+
+            }
+            #someConceal {
+
+            }
+            #noConceal {
+
+            }
+            .glossUnit {
+
+            }
+            .glossTitle {
+
+            }
+            .glossDescribe {
+
+              table {
+
+                tbody {
+
+                  tr {
+
+                    td {
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .aboutPara {
+
+          }
+          .aboutImg {
+
+          }
+        }
+      }
+      input {
+
+      }
+      #openClose {
+
+        #finalButtons {
+
+          #reset {
+
+          }
+          #quit {
+
+          }
+        }
+      }
+    }
+
+    div.title {
+
+    }
+
+    .unitButton {
+      @media only screen and (min-width: $min) {
+        margin-bottom: 5px;
+        font-size: 1.8rem;
+      }
+    }
+
+    .blueButton {
+
+    }
+
+    .redButton {
+
+    }
+
+    #terrain {
+      @media only screen and (min-width: $min) {
+        @include divWidth($fifthWidth);
+        @include divHeight($fifthHeight);
+      }
+    }
+
+    #ground {
+
+    }
+
+    // The set-up of a grid square
+    .gridSquare {
+
+      .topLine {
+
+        img {
+
+        }
+      }
+      .centerLine {
+
+        .centerLeft {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerMiddle {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+        .centerRight {
+
+          .helper {
+
+          }
+          img {
+
+          }
+        }
+      }
+      .bottomLine {
+
+        .helper {
+
+        }
+        img {
+
+        }
+      }
+    }
+
+  // The four boxes (unit, report, team one, team two)
+  #allOptions {
+    @media only screen and (min-width: $min) {
+      @include divWidth(40%);
+    }
+    .turnBoxes {
+      @media only screen and (min-width: $min) {
+        margin: 30px auto;
+      }
+      .indivBox {
+        @media only screen and (min-width: $min) {
+          height: 210px;
+        }
+        .title {
+          @media only screen and (min-width: $min) {
+            font-size: 2.1rem;
+          }
+        }
+        .armyTitle {
+          @media only screen and (min-width: $min) {
+            margin-bottom: 10px;
+          }
+        }
+        // The box for selecting directions and modes
+        #unitBox {
+          #attackDefendBox {
+
+            .attackDefendButton {
+              @media only screen and (min-width: $min) {
+                border: 4px solid;
+                font-size: 1.7rem;
+              }
+            }
+            #attackButton {
+
+            }
+            #defendButton {
+
+            }
+          }
+          #unitName {
+            @media only screen and (min-width: $min) {
+              font-size: 1.5rem;
+            }
+          }
+          #healthAndArrowBox {
+
+            #health {
+              @media only screen and (min-width: $min) {
+                font-size: 1.5rem;
+              }
+              #healthReading {
+                @media only screen and (min-width: $min) {
+                  font-size: 3.3rem;
+                }
+              }
+            }
+            #arrows {
+              @media only screen and (min-width: $min) {
+                width: 37%;
+              }
+              .arrowBox {
+
+                img {
+
+                }
+              }
+              #northWest {
+
+              }
+              #north {
+
+              }
+              #northEast {
+
+              }
+              #east {
+
+              }
+              #southEast {
+
+              }
+              #south {
+
+              }
+              #southWest {
+
+              }
+              #west {
+
+              }
+            }
+          }
+        }
+
+        // The box where the reporst come in
+        #completeReport {
+          @media only screen and (min-width: $min) and (max-width: $max) {
+            height: 60%;
+          }
+          .battleTitle {
+            @media only screen and (min-width: $min) {
+              font-size: 1.5rem;
+            }
+          }
+          .listFont {
+            @media only screen and (min-width: $min) {
+              font-size: 1.2rem;
+            }
+          }
+          #orderList {
+
+          }
+          #resultList {
+
+          }
+          #battleList {
+
+          }
+        }
+      }
+
+        // The boxes for selecting a player's units
+        .allUnitColumns {
+
+          .unitColumn {
+
+            div {
+              img {
+
+              }
+            }
+          }
+        }
+        #teamOne {
+
+        }
+        #teamTwo {
+
+        }
+      }
+
+      #ordersButton {
+        @media only screen and (min-width: $min) {
+          margin-bottom: 30px;
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+}
