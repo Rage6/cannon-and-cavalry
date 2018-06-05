@@ -25,6 +25,13 @@ $(() =>{
   var fourByFour = true;
   var gameStarted = false;
   var musicStarted = false;
+  var viewWidth = 0;
+
+  // To set the .openBox widths, this finds the browser's width
+  const findWidth = () => {
+    viewWidth = $("body").width();
+  };
+  findWidth();
 
   // This will set the height of the shades over the background when going through the opening options
   const setHeight= () =>{
@@ -33,6 +40,12 @@ $(() =>{
     $("#openPage").css('height',docHeight);
   };
   setHeight();
+
+  // To set the theme song at the correct time
+  const setAudioTime = (afterZero) => {
+    document.getElementById("themeSong").currentTime = afterZero;
+  }
+  setAudioTime(10);
 
   // This array contains the grid squares and their values for the default, 4x4 map
   const allGrids = [
@@ -683,14 +696,20 @@ $(() =>{
   const howToRun = () => {
     $("#openIntro").css('display','none');
     $("#openHowTo").css('display','block');
-    $(".openBox").css({"margin":"0 5%","width":"90%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 5%","width":"90%"});
+    }
   }
   $("#howTo").click(howToRun);
 
   const howToStop = () => {
     $("#openIntro").css('display','block');
     $("#openHowTo").css('display','none');
-    $(".openBox").css({"margin":"0 10%","width":"80%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 10%","width":"80%"});
+    }
   }
   $("#closeHowTo").click(howToStop);
 
@@ -698,7 +717,10 @@ $(() =>{
   const glossaryRun = () => {
     $("#openIntro").css('display','none');
     $("#openGlossary").css('display','block');
-    $(".openBox").css({"margin":"0 5%","width":"90%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 5%","width":"90%"});
+    }
   }
   $("#glossary").click(glossaryRun);
   $("#seeGlossary").click(()=>{
@@ -709,7 +731,10 @@ $(() =>{
   const glossaryStop = () => {
     $("#openIntro").css('display','block');
     $("#openGlossary").css('display','none');
-    $(".openBox").css({"margin":"0 10%","width":"80%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 10%","width":"80%"});
+    }
   }
   $("#closeGlossary").click(glossaryStop);
 
@@ -717,14 +742,20 @@ $(() =>{
   const settingsRun = () => {
     $("#openIntro").css('display','none');
     $("#openSettings").css('display','block');
-    $(".openBox").css({"margin":"0 5%","width":"90%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 5%","width":"90%"});
+    }
   }
   $("#settings").click(settingsRun);
 
   const settingsStop = () => {
     $("#openIntro").css('display','block');
     $("#openSettings").css('display','none');
-    $(".openBox").css({"margin":"0 10%","width":"80%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 10%","width":"80%"});
+    }
   }
   $("#closeSettings").click(settingsStop);
 
@@ -732,7 +763,10 @@ $(() =>{
   const aboutRun = () => {
     $("#openIntro").css('display','none');
     $("#openAbout").css('display','block');
-    $(".openBox").css({"margin":"0 5%","width":"90%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 5%","width":"90%"});
+    }
   }
   $("#about").click(aboutRun);
   $("#seeAbout").click(()=>{
@@ -743,7 +777,10 @@ $(() =>{
   const aboutStop = () => {
     $("#openIntro").css('display','block');
     $("#openAbout").css('display','none');
-    $(".openBox").css({"margin":"0 10%","width":"80%"});
+    findWidth();
+    if (viewWidth < 1366) {
+      $(".openBox").css({"margin":"0 10%","width":"80%"});
+    }
   }
   $("#closeAbout").click(aboutStop);
 

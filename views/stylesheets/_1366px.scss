@@ -1,10 +1,10 @@
-// VARIABLES
+// For 1366px by 768px screens
 
-$min: 415px;
-$max: 768px;
+$min: 769px;
+$max: 1366px;
 
-$thirdWidth: 420px;
-$thirdHeight: 420px;
+$fourthWidth: 650px;
+$fourthHeight: 650px;
 
 // MIXINS
 
@@ -26,15 +26,34 @@ $thirdHeight: 420px;
 html {
 
   body {
-    
+    @media only screen and (min-width: $min) and (max-width: $max) {
+      display: flex;
+      align-items: center;
+    };
+    .mainButtons {
+      @media only screen and (min-width: $min) and (max-width: $max) {
+        width: 6%;
+      };
+      .imgButton {
+
+      }
+    }
+    #menuButton {
+
+    }
+    #soundButton {
+
+    }
+
     #openPage {
 
     }
 
     .openBox {
       @media only screen and (min-width: $min) and (max-width: $max) {
-        top: 125px;
-        font-size: 3rem;
+        margin: 0 30%;
+        top: 65px;
+        width: 40%;
       }
       #openIntro {
 
@@ -121,7 +140,7 @@ html {
       }
       .explainBox {
         @media only screen and (min-width: $min) and (max-width: $max) {
-          height: 466px;
+          height: 370px;
         }
         .explainSubTitle {
 
@@ -240,8 +259,8 @@ html {
 
     #terrain {
       @media only screen and (min-width: $min) and (max-width: $max) {
-        @include divWidth($thirdWidth);
-        @include divHeight($thirdHeight);
+        @include divWidth($fourthWidth);
+        @include divHeight($fourthHeight);
       }
     }
 
@@ -301,9 +320,13 @@ html {
 
   // The four boxes (unit, report, team one, team two)
   #allOptions {
-
+    @media only screen and (min-width: $min) and (max-width: $max) {
+      @include divWidth(40%);
+    }
     .turnBoxes {
-
+      @media only screen and (min-width: $min) and (max-width: $max) {
+        margin: 30px auto;
+      }
       .indivBox {
         @media only screen and (min-width: $min) and (max-width: $max) {
           height: 210px;
@@ -439,6 +462,7 @@ html {
 
       #ordersButton {
         @media only screen and (min-width: $min) and (max-width: $max) {
+          margin-bottom: 30px;
           font-size: 3rem;
         }
       }
