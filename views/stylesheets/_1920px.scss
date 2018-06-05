@@ -23,9 +23,12 @@ $fifthHeight: 650px;
 
 // MAIN CODE
 html {
-
+  @media only screen and (min-width: $min) {
+    background-color: tan;
+  };
   body {
     @media only screen and (min-width: $min) {
+      margin: 0 auto;
       display: flex;
       align-items: center;
       width: 1367px;
@@ -46,14 +49,16 @@ html {
     }
 
     #openPage {
-
+      @media only screen and (min-width: $min) {
+        width: 1367px;
+      }
     }
 
     .openBox {
       @media only screen and (min-width: $min) {
-        margin: 0 30%;
-        top: 65px;
-        width: 40%;
+        margin: 0 383px;
+        top: 220px;
+        width: 600px;
       }
       #openIntro {
 

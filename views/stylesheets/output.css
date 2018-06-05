@@ -662,7 +662,11 @@ html body {
     font-size: 3rem; } }
 
 @media only screen and (min-width: 1367px) {
+  html {
+    background-color: tan; } }
+@media only screen and (min-width: 1367px) {
   html body {
+    margin: 0 auto;
     display: flex;
     align-items: center;
     width: 1367px; } }
@@ -670,10 +674,13 @@ html body {
   html body .mainButtons {
     width: 6%; } }
 @media only screen and (min-width: 1367px) {
+  html body #openPage {
+    width: 1367px; } }
+@media only screen and (min-width: 1367px) {
   html body .openBox {
-    margin: 0 30%;
-    top: 65px;
-    width: 40%; } }
+    margin: 0 383px;
+    top: 220px;
+    width: 600px; } }
 @media only screen and (min-width: 1367px) {
   html body .openBox #openIntro #openTitle {
     font-size: 4.5rem; } }
