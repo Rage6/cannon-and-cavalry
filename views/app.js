@@ -1765,7 +1765,7 @@ $(() =>{
           selectedUnit.nextYvalue = currentGrid.yValue;
           completedPresent.push(selectedUnit.name + ": completed");
         }
-        showBattleReport(selectedUnit);
+        showBattleReport(selectedUnit);    
       } else {
         console.log("An error occurred in issueOneOrder.");
       };
