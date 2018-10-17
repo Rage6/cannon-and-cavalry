@@ -27,4 +27,20 @@ With the main game layout...
   <li>
     Battlefield: a 4x4 or 5x5 grid square with different colors and terrain. This is where the locations of each player's units are on the battlefield. Units along the side of a grid square are <b>defending in that particular direction</b>. If <b>multiple units</b> from the same team are in the center of the same grid square, a flag image will replace their usual image
   </li>
+  <li>
+    Unit Box: in the upper left corner of the large, grey box beneath the battlefield. When a player selects one of their units (which will be described later), that unit's statistics and options displayed.
+    <ul>
+      <li>
+        Their current health (infantry starts with 10, cavalry 8, and artillery 6) is in the box beneath the 'Health' title.
+      </li>
+      <li>
+        The color grey covers their current direction among the arrow, or it covers the circle in the center if that unit doesn't have a specific direction. Clicking on an arrow/circle covers it with yellow and chooses that unit's new direction. Only <b>infantry units</u> can move diagonally, so diagonal arrows only appear when an infantry unit is selected.
+      </li>
+      <li>
+        The <b>ATTACK</b> button causes a unit to move in their new (aka yellow) direction. Only <b>cavalry units</b> can move two grid squares in one turn. A unit is at ATTACK mode if this button's text color is white and its background color is red. When a cavalry is selected and ATTACK mode is on, clicking on an arrows multiple times will alternate between moving them one or two grid squares. <u>NOTE</u>: Being in ATTACK mode gives you a slight disadvantage in comparison to DEFEND mode, so it is best to leave a unit in DEFEND mode if they are not going to move anyways
+      </li>
+      <li>
+        The <b>DEFEND</b> button strengthens a unit in its current location, but cannot move. A unit is in DEFEND mode if that button's text color is white and its background color is blue. If a unit is defending a particular side of a grid square, then that unit's chance of victory is greatly increased against if their enemy is attacking against that side. <b>HOWEVER</b>, if an enemy attacks an undefended side, then the <i>enemy unit's</u> chance of victory is greatly increased. Defending from the center of a grid square slightly increases the defender's chance no matter which side the attacker comes from.
+      </li>
+  </li>
 </ol>
