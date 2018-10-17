@@ -581,29 +581,91 @@ html body {
   html body #allOptions #ordersButton {
     font-size: 3rem; } }
 
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body .openBox {
+    top: 125px;
+    font-size: 3rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body .openBox #openIntro #openTitle {
+    font-size: 4.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body .openBox .explainBox {
+    height: 466px; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body .unitButton {
+    margin-bottom: 5px;
+    font-size: 1.8rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #terrain {
+    -webkit-width: 400px;
+    -moz-width: 400px;
+    -ms-width: 400px;
+    width: 400px;
+    -webkit-height: 400px;
+    -moz-height: 400px;
+    -ms-height: 400px;
+    height: 400px; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox {
+    height: 255px; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox .title {
+    font-size: 2.1rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox .armyTitle {
+    margin-bottom: 10px; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+    border: 4px solid;
+    font-size: 1.7rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
+    font-size: 3.3rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
+    width: 37%; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport {
+    height: 60%; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
+    font-size: 1.5rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions .turnBoxes .indivBox #completeReport .listFont {
+    font-size: 1.2rem; } }
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  html body #allOptions #ordersButton {
+    font-size: 3rem; } }
+
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body {
     display: flex;
     align-items: center; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body .mainButtons {
     width: 6%; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body .openBox {
     margin: 0 30%;
     top: 65px;
     width: 40%; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body .openBox #openIntro #openTitle {
     font-size: 4.5rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body .openBox .explainBox {
     height: 370px; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body .unitButton {
     margin-bottom: 5px;
     font-size: 1.8rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #terrain {
     -webkit-width: 650px;
     -moz-width: 650px;
@@ -613,50 +675,55 @@ html body {
     -moz-height: 650px;
     -ms-height: 650px;
     height: 650px; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions {
     -webkit-width: 40%;
     -moz-width: 40%;
     -ms-width: 40%;
     width: 40%; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes {
     margin: 30px auto; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox {
     height: 210px; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox .title {
     font-size: 2.1rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox .armyTitle {
     margin-bottom: 10px; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
-    border: 4px solid;
+    border: 4px solid; } }
+@media only screen and (min-width: 1151px) and (max-width: 1300px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
+    font-size: 1.3rem; } }
+@media only screen and (min-width: 1301px) and (max-width: 1366px) {
+  html body #allOptions .turnBoxes .indivBox #unitBox #attackDefendBox .attackDefendButton {
     font-size: 1.7rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #unitBox #unitName {
     font-size: 1.5rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health {
     font-size: 1.5rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #health #healthReading {
     font-size: 3.3rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #unitBox #healthAndArrowBox #arrows {
     width: 37%; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #completeReport {
     height: 60%; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #completeReport .battleTitle {
     font-size: 1.5rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions .turnBoxes .indivBox #completeReport .listFont {
     font-size: 1.2rem; } }
-@media only screen and (min-width: 769px) and (max-width: 1366px) {
+@media only screen and (min-width: 1151px) and (max-width: 1366px) {
   html body #allOptions #ordersButton {
     margin-bottom: 30px;
     font-size: 3rem; } }
@@ -679,7 +746,7 @@ html body {
 @media only screen and (min-width: 1367px) {
   html body .openBox {
     margin: 0 383px;
-    top: 220px;
+    top: 100px;
     width: 600px; } }
 @media only screen and (min-width: 1367px) {
   html body .openBox #openIntro #openTitle {
