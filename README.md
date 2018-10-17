@@ -59,6 +59,28 @@ With the main game layout...
     </ul>
   </li>
   <li>
-    Army Boxes: two boxes on the bottom of the grey box with blue and red colors, respectively. Player 1's units are in blue while player 2's units are red. Each nation's name is at the title of their box. Within an Army Box, there are three columns that contain their existing infanty (left column with "soldier" img above), artillery (center column with "cannon" img above), and cavalry (right column with "horse" img above) units.
+    Army Boxes: two boxes on the bottom of the grey box with blue and red colors, respectively. 
+    <ul>
+      <li>
+        Player 1's units are in blue while player 2's units are red. Each nation's name is at the title of their box.
+      </li>
+      <li>
+        Within an Army Box, there are three columns that contain their existing infanty (left column), artillery (center column), and cavalry (right column) units.
+      </li>
+      <li>
+        To <b>select a unit</b>, the player simply clicks that unit's ID. For example, the "1st Battalion, 5th Regiment" has an ID like "1-5".
+      </li>
+    </ul>
+  </li>
+  <li>
+    GIVE ORDERS button: orange button at the very bottom. Once clicked, all of the changes that had been set up for the current team's units are carried out. 
+    <ul>
+      <li>
+        If a moving unit enters the grid square with an enemy unit, a battle automatically takes place.
+      </li>
+      <li>
+        All existing artillery units (for both player 1 and 2) fire upon any enemy units within their range.
+      </li>
+    </ul>
   </li>
 </ol>
