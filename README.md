@@ -25,7 +25,21 @@ With the main game layout...
     Audio button: to play or pause the looping music
   </li>
   <li>
-    Battlefield: a 4x4 or 5x5 grid square with different colors and terrain. This is where the locations of each player's units are on the battlefield. Units along the side of a grid square are <b>defending in that particular direction</b>. If <b>multiple units</b> from the same team are in the center of the same grid square, a flag image will replace their usual image
+    Battlefield: a 4x4 or 5x5 grid square with different colors and terrain. 
+      <ul>
+        <li>
+          This is where the locations of each player's units are on the battlefield.
+        </li>
+        <li>
+          The selected unit (see "Army Boxes") will be surrounded by a <b>yellow border</b>
+        </li>
+        <li>
+          Units along the side of a grid square are <b>defending in that particular direction</b>.
+        </li>
+        <li>
+          If <b>multiple units</b> from the same team are in the center of the same grid square, a flag image will replace their usual image.
+        </li>
+      </ul>
   </li>
   <li>
     Unit Box: in the upper left corner of the large, grey box beneath the battlefield. When a player selects one of their units (see "Army Boxes" below), that unit's statistics and options displayed.
