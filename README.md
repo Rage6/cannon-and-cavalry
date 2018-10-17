@@ -15,8 +15,9 @@ In the beginning of the game...
 - At any time, a player can read the the advantages/disadvantages of the different terrain, vegetation, or unit types at any point by clicking on the "Menu" button (upper left) and then clicking on "Glossary"
 - In a similar way, players can learn how to play the game by clicking on "How To Play" within the Menu
 - After clicking on "Two Players", the first player entrs their commander name and a 3-character long name for their army's nation in the BLUE box. For example, the commander can be "Washington" and with the nation "USA". The second player does the same in their RED box.
-  
+
 With the main game layout...
+<img src="view/stysheets/images/can_and_cav_layout.png">
 <ol>
   <li>
     Menu button: found on the upper left corner with a 'list' symbol. Players can find "How To Play", "Glossary", "About" (which describes the game's origin and the developer), and "Return To Game".
