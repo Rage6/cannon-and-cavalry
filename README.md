@@ -28,7 +28,7 @@ With the main game layout...
     Battlefield: a 4x4 or 5x5 grid square with different colors and terrain. This is where the locations of each player's units are on the battlefield. Units along the side of a grid square are <b>defending in that particular direction</b>. If <b>multiple units</b> from the same team are in the center of the same grid square, a flag image will replace their usual image
   </li>
   <li>
-    Unit Box: in the upper left corner of the large, grey box beneath the battlefield. When a player selects one of their units (which will be described later), that unit's statistics and options displayed.
+    Unit Box: in the upper left corner of the large, grey box beneath the battlefield. When a player selects one of their units (see "Army Boxes" below), that unit's statistics and options displayed.
     <ul>
       <li>
         Their current health (infantry starts with 10, cavalry 8, and artillery 6) is in the box beneath the 'Health' title.
@@ -42,5 +42,23 @@ With the main game layout...
       <li>
         The <b>DEFEND</b> button strengthens a unit in its current location, but cannot move. A unit is in DEFEND mode if that button's text color is white and its background color is blue. If a unit is defending a particular side of a grid square, then that unit's chance of victory is greatly increased against if their enemy is attacking against that side. <b>HOWEVER</b>, if an enemy attacks an undefended side, then the <i>enemy unit's</i> chance of victory is greatly increased. Defending from the center of a grid square slightly increases the defender's chance no matter which side the attacker comes from.
       </li>
+    </ul>
+  </li>
+  <li>
+    Battle Report Box: After a player issues their orders (see "Give Orders" below) and their turn ends, their battle report is shown here.
+    <ul>
+      <li>
+        ORDERS: reminds what you told your units to do
+      </li>
+      <li>
+        RESULTS: reports whather each unit was able to carry out your orders or not. For example, an infantry or artillery unit cannot move into a body of water, and this will be reported in the "Results" list.
+      </li>
+      <li>
+        BATTLES: reports the outcome of any battles or cannon barrage when the player's orders were carried out. <b>Artillery units</b> will automatically fire on any enemy within their range. See "Artillery" in the game's Glossary to learn more.
+      </li>
+    </ul>
+  </li>
+  <li>
+    Army Boxes: two boxes on the bottom of the grey box with blue and red colors, respectively. Player 1's units are in blue while player 2's units are red. Each nation's name is at the title of their box. Within an Army Box, there are three columns that contain their existing infanty (left column with "soldier" img above), artillery (center column with "cannon" img above), and cavalry (right column with "horse" img above) units.
   </li>
 </ol>
