@@ -1033,7 +1033,7 @@ $(() =>{
       $("#south").css('background-color','transparent');
       $("#west").css('background-color','transparent');
       $("#center").css('background-color','transparent');
-      $("#northEast").css('background-color','transparent');
+      $("#northEast").css('background-color','black');
       $("#southEast").css('background-color','transparent');
       $("#southWest").css('background-color','transparent');
       $("#northWest").css('background-color','transparent');
@@ -1765,7 +1765,7 @@ $(() =>{
           selectedUnit.nextYvalue = currentGrid.yValue;
           completedPresent.push(selectedUnit.name + ": completed");
         }
-        showBattleReport(selectedUnit);    
+        showBattleReport(selectedUnit);
       } else {
         console.log("An error occurred in issueOneOrder.");
       };
@@ -2465,6 +2465,19 @@ $(() =>{
     if (selectedUnit.attack == true) {
       $("#attackButton").css('color','white').css('background-color','blue');
       $("#defendButton").css('color','black').css('background-color','transparent');
+      // if (selectedUnit.type == "IN") {
+      //   $("#northEast").css('background-color','transparent');
+      //   $("#northEast").css('background-color','transparent');
+      //   $("#northEast").css('background-color','transparent');
+      //   $("#northEast").css('background-color','transparent');
+      //   console.log("this works");
+      // } else {
+      //   $("#northEast").css('background-color','black');
+      //   $("#northEast").css('background-color','black');
+      //   $("#northEast").css('background-color','black');
+      //   $("#northEast").css('background-color','black');
+      //   console.log("that works");
+      // }
     } else {
       $("#attackButton").css('color','black').css('background-color','transparent');
       $("#defendButton").css('color','white').css('background-color','red');
