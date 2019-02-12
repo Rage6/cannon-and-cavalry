@@ -10,11 +10,13 @@ This is a turn-based strategy game that is designed for two players using the sa
 - A song ("Heart of Courage" by Two Steps From Hell) can be played or paused during the game
 
 ## <i>Layout:</i>
-In the beginning of the game...
+
+### In the beginning of the game...
 - The site begins with the Menu options in a <div> element that is over the actual game layout, both separated by another, semi-transparent <div>. This is done by using the z-index attribute in CSS
 - At any time, a player can read the the advantages/disadvantages of the different terrain, vegetation, or unit types at any point by clicking on the "Menu" button (upper left) and then clicking on "Glossary"
 - In a similar way, players can learn how to play the game by clicking on "How To Play" within the Menu
 - After clicking on "Two Players", the first player entrs their commander name and a 3-character long name for their army's nation in the BLUE box. For example, the commander can be "Washington" and with the nation "USA". The second player does the same in their RED box.
+
 
 With the main game layout...
 <img src="views/stylesheets/images/can_and_cav_layout.png">
