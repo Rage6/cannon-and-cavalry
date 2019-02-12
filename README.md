@@ -17,7 +17,7 @@ In the beginning of the game...
 - After clicking on "Two Players", the first player entrs their commander name and a 3-character long name for their army's nation in the BLUE box. For example, the commander can be "Washington" and with the nation "USA". The second player does the same in their RED box.
 
 With the main game layout...
-<img src="view/stysheets/images/can_and_cav_layout.png">
+<img src="views/stysheets/images/can_and_cav_layout.png">
 <ol>
   <li>
     Menu button: found on the upper left corner with a 'list' symbol. Players can find "How To Play", "Glossary", "About" (which describes the game's origin and the developer), and "Return To Game".
@@ -26,7 +26,7 @@ With the main game layout...
     Audio button: to play or pause the looping music
   </li>
   <li>
-    Battlefield: a 4x4 or 5x5 grid square with different colors and terrain. 
+    Battlefield: a 4x4 or 5x5 grid square with different colors and terrain.
       <ul>
         <li>
           This is where the locations of each player's units are on the battlefield.
@@ -74,7 +74,7 @@ With the main game layout...
     </ul>
   </li>
   <li>
-    Army Boxes: two boxes on the bottom of the grey box with blue and red colors, respectively. 
+    Army Boxes: two boxes on the bottom of the grey box with blue and red colors, respectively.
     <ul>
       <li>
         Player 1's units are in blue while player 2's units are red. Each nation's name is at the title of their box.
@@ -88,7 +88,7 @@ With the main game layout...
     </ul>
   </li>
   <li>
-    GIVE ORDERS button: orange button at the very bottom. Once clicked, all of the changes that had been set up for the current team's units are carried out. 
+    GIVE ORDERS button: orange button at the very bottom. Once clicked, all of the changes that had been set up for the current team's units are carried out.
     <ul>
       <li>
         If a moving unit enters the grid square with an enemy unit, a battle automatically takes place.
