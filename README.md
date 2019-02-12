@@ -17,7 +17,7 @@ In the beginning of the game...
 - After clicking on "Two Players", the first player entrs their commander name and a 3-character long name for their army's nation in the BLUE box. For example, the commander can be "Washington" and with the nation "USA". The second player does the same in their RED box.
 
 With the main game layout...
-<img src="views/stysheets/images/can_and_cav_layout.png">
+<img src="views/stylesheets/images/can_and_cav_layout.png">
 <ol>
   <li>
     Menu button: found on the upper left corner with a 'list' symbol. Players can find "How To Play", "Glossary", "About" (which describes the game's origin and the developer), and "Return To Game".
